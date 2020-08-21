@@ -1,0 +1,23 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-streetteamreact-dev-02431-authRole",
+            "UnauthRoleArn": "arn:aws:iam::479344151713:role/amplify-streetteamreact-dev-02431-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::479344151713:role/amplify-streetteamreact-dev-02431-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-streetteamreact-dev-02431-deployment",
+            "UnauthRoleName": "amplify-streetteamreact-dev-02431-unauthRole",
+            "StackName": "amplify-streetteamreact-dev-02431",
+            "StackId": "arn:aws:cloudformation:us-east-1:479344151713:stack/amplify-streetteamreact-dev-02431/98fc7110-e36e-11ea-95d1-0a54954134e7",
+            "AmplifyAppId": "d1xd55smr9p6eq"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d1xd55smr9p6eq",
+                    "type": "cicd"
+                }
+            }
+        }
+    }
+}
