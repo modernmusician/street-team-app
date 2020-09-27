@@ -28,7 +28,7 @@ function EmailForm () {
                 </p>
               </div>
               <div className="button-points-box dark">
-                  <h1 class ="points-total subtle-center dark"> +20 </h1>
+                  <h1 className="points-total subtle-center dark"> +20 </h1>
                   <h5 className="countdown-label dark" > points </h5>
               </div>
             </Button>
