@@ -63,21 +63,21 @@ class Timer extends Component {
     return (
     <div>
       <div className="countdown-container">
-        <div class="countdown-column">
-            <h1 class="countdown-number"> {days} </h1>
-            <h5 class="fade-light countdown-label">Days</h5>
+        <div className="countdown-column">
+            <h1 className="countdown-number"> {days} </h1>
+            <h5 className="fade-light countdown-label">Days</h5>
         </div>
-        <div class="countdown-column">
-            <h1 class="countdown-number"> {hours} </h1>
-            <h5 class="fade-light countdown-label">Hours</h5>
+        <div className="countdown-column">
+            <h1 className="countdown-number"> {hours} </h1>
+            <h5 className="fade-light countdown-label">Hours</h5>
         </div>
-        <div class="countdown-column">
-            <h1 class="countdown-number"> {minutes} </h1>
-            <h5 class="fade-light countdown-label">Minutes</h5>
+        <div className="countdown-column">
+            <h1 className="countdown-number"> {minutes} </h1>
+            <h5 className="fade-light countdown-label">Minutes</h5>
         </div>
-        <div class="countdown-column">
-            <h1 class="countdown-number"> {seconds} </h1>
-            <h5 class="fade-light countdown-label">Seconds</h5>
+        <div className="countdown-column">
+            <h1 className="countdown-number"> {seconds} </h1>
+            <h5 className="fade-light countdown-label">Seconds</h5>
         </div>
       </div>
      </div>
