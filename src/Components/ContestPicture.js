@@ -1,11 +1,7 @@
-import React from "react"
+import React from 'react';
 
 function ContestPicture() {
-    return(
-        <div>
-        
-        </div>
-        )
+  return <div />;
 }
 
-export default ContestPicture
+export default ContestPicture;

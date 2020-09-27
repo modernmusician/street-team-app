@@ -159,6 +159,21 @@ h1 {
   color: white;
 }
 
+h3 {
+  font-family: "Open Sans";
+  margin-block-start: 5px;
+  margin-block-end: 5px;
+  font-size: 18px;
+}
+
+h4 {
+  font-family: "Open Sans";
+  margin-block-start: 5px;
+  margin-block-end: 5px;
+  font-size: 14px;
+  font-weight: 635;
+}
+
 h5 {
   font-family: "Open Sans";
   color: white;
@@ -166,6 +181,11 @@ h5 {
   font-weight: normal;
   font-size: 14px;
   margin-bottom: -10px;
+}
+
+hr {
+  margin-block-start: 5px;
+  margin-block-end: 5px;
 }
 
 p {
@@ -186,6 +206,9 @@ Button {
   font-size: 30px;
   font-weight: 700;
   outline: none;
+  padding: 0;
+  cursor: pointer;
+
 }
 
 Button:hover {
@@ -200,16 +223,56 @@ Button:hover {
   border: none;
 }
 
+.btn-mm {
+  font-family: 'Oswald', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  transition: all 0.3s ease-in-out;
+  text-transform: capitalize;
+  background-color: #FED93E;
+  border: none;
+  color: #121212;
+}
+
 .btn.active.btn-default {
-  color: #42DCA3;
-  background-color: transparent;
+  color: #121212;
+  /*background-color: transparent;*/
+  /*height: 75px;*/
 }
 
 .btn.active.btn-default:focus, .btn.active.btn-default:hover {
-  color: white;
-  background-color: #FFFFFF;
+  filter: brightness(1.1) drop-shadow(5px 9px 8px #0000002E);
+  cursor: pointer;
 }
 
+.facebook-registration-button.btn-default {
+  font-size: 75%;
+  color: white;
+  font-family: "Open Sans";
+  text-align: left;
+}
+
+.email-registration-button.btn-default {
+  font-size: 75%;
+  color: white;
+  background-color: #393838;
+  font-family: "Open Sans";
+  text-align: left;
+}
+
+.complete-registration-button.btn-default {
+  font-size: 75%;
+  color: white;
+  background-color: #FED93E;
+  font-family: "Open Sans";
+  text-align: left;
+}
+
+.email-color {
+  background: rgb(64,64,64);
+}
+
+.email-color-gradient {
+  background: linear-gradient(90deg, rgba(64,64,64,1) 0%, rgba(57,56,56,1) 80%, rgba(54,54,54,1) 100%);
+}
 
 .bold {
   font-weight: bold;
@@ -226,9 +289,67 @@ Button:hover {
     position:absolute;
     width:100%;
     height:100%;
+    /*padding: 100px;*/
+}
+
+.button-color-email {
+  
+}
+
+.button-container {
+  display: flex;
+  margin: 15px 0;
+  width: 100%;
+}
+
+.button-text-box {
+  display: flex;
+  flex: 8;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height:100%;
+  padding: 10px 0;
+}
+
+.button-points-box {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  height:100%;
+  min-width:80px;
+  padding: 10px 0;
+  /*width:100%;*/
+  justify-content: center;
+  align-items: center;
 }
 
 
+.button-icon {
+  height: 100%;
+}
+
+.button-icon > svg {
+  flex: 2;
+  min-width: 35px;
+  height: 100%;
+  width: 100%;
+  padding: 0 12px;
+}
+
+.button-text {
+  flex: 6;
+  /*flex-wrap: wrap;*/
+  padding-right: 100px;
+  padding-left:20px;
+  /*padding-top: 10px;*/
+  min-width: 100px;
+  margin: 0;
+  /*max-width: 200px;*/
+  /*align-self: flex-start;*/
+  /*margin-block-end: 0;*/
+  /*margin-block-start: 0;*/
+}
 
 .bright-logo
 {
@@ -243,41 +364,148 @@ right: 20px;
 z-index: 5;
 }
 
-.card-container{
+.card-container-text{
   background-color: #1F1F1F;
-  width: 468px;
+  /*max-width: 468px;*/
+  /*width: 50%;*/
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
+  margin-top: -3px;
+  /*border: 5px solid red;*/
+  box-sizing: border-box;
+  /*padding-top: 10px;*/
+  padding: 25px 35px;
+  font-size: 20px;
+  font-family: "Open Sans";
+}
+
+.card-container-text .points-container {
+  padding: 0;
+}
+
+.card-container-button{
+  /*width: 468px;*/
   margin-left: auto;
   margin-right: auto;
-  margin-top: -10px;
   box-sizing: border-box;
+  /*padding-top: 10px;*/
+  padding: 0 50px;
+}
+
+.card-image-top {
+  
 }
 
 .card-text{
-  font-size: 18px;
-  font-family: "Open Sans";
-  padding-left: 40px;
-  padding-right: 40px;
+  /*font-size: 18px;*/
+  /*font-family: "Open Sans";*/
+  /*padding: 10px 40px;*/
 }
 
 
 .center-box{
-position: absolute;
-padding-top: 100px;
-width: 100%;
+display: flex;
+flex-direction: column;
+/*margin-top: 1000px;*/
+max-width: 468px;
+  margin-left: auto;
+  margin-right: auto;
 text-align: center;
-filter: drop-shadow(3px 7px 6px #0000002E) ;
+filter: drop-shadow(3px 7px 6px #0000002E);
+padding-top: 100px;
+/*border: 5px solid red;*/
+}
+
+.complete-registration-color {
+background: rgb(254,217,62);
+}
+
+.complete-registration-color-gradient {
+background: rgb(254,217,62);
+background: linear-gradient(90deg, rgba(254,217,62,1) 0%, rgba(250,213,58,1) 89%, rgba(224,190,49,1) 100%);
+}
+
+.countdown-container {
+  display: flex;
+  /*width: 70%;*/
+  justify-content: space-around;
+  padding: 0 0 25px 0;
+  /*border: 3px solid red;*/
+}
+
+.countdown-container > div {
+  /*flex: 1;*/
+}
+
+.countdown-column {
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  font-size: 20px;
+  margin-top: 15px;
+  /*border: 3px solid red;*/
+}
+
+.countdown-label {
+  padding: 0 10px;
+  margin-top: 5px;
+  font-size: 65%;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.countdown-number {
+ margin-bottom: 5px;
+ font-size: 100%;
 }
 
 .cta-button{
   color: #FED93E;
 }
 
+.dark {
+  color: #1E1E1E;
+}
+
+.deadline-number {
+  padding: 0 10px;
+}
+
+.email-registration-button {
+  font-size: 50px;
+}
+
+.facebook-registration-button {
+  font-size: 50px;
+}
+
+.facebook-color-gradient {
+  background: rgb(59,89,152);
+  background: linear-gradient(90deg, rgba(59,89,152,1) 0%, rgba(48,85,162,1) 80%, rgba(45,76,146,1) 100%);
+}
+
+.facebook-color {
+  background: #3B5998;
+}
+
 .fade-light {
   opacity: 0.7;
 }
 
+.fade-medium {
+  opacity: 0.4;
+}
+
+.contest-terms {
+  font-size: 70%;
+  text-align: left;
+  text-decoration: underline;
+  margin-top: 20px;
+}
+
 .footer-links{
-  position: relative;
+  /*display: flex;*/
+  justify-content: center;
+  /*position: relative;*/
   opacity: .75;
   list-style-type: none;
   padding: 0;
@@ -292,9 +520,141 @@ filter: drop-shadow(3px 7px 6px #0000002E) ;
   text-transform: uppercase;
 }
 
+.form-group {
+  text-align: left;
+  color: white;
+  font-family: "Open Sans";
+}
+
+.link-button {
+  color: transparent;
+  cursor: pointer;
+  flex: 1;
+  display: flex;
+  width: 100%;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.light {
+  color: white;
+}
+
+.headline-top {
+  font-family: Oswald;
+  margin-bottom: -10px;
+  color: white;
+}
+
+.points-total {
+  font-size: 25px;
+  align-items: center;
+  margin-block-end: 0;
+  margin-block-start: 0;
+}
+
+.points-container {
+  display: flex;
+  /*flex: 1;*/
+  /*padding: 20px 0;*/
+  width: 100%;
+  height: 90px;
+  margin-top: -14px;
+}
+
+.points-number-box {
+  /*grid-column-start: 1;*/
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#6D47D5, #593CA8);
+  font-family: "Oswald";
+  color: white;
+  /*height: 50%;*/
+  /*background-color: #6D47D5;*/
+}
+
+.points-number-box .countdown-label {
+  font-weight: 500;
+}
+
+.points-info-box {
+  /*grid-column-start: 5;*/
+  flex: 5;
+  background: #393939;
+}
+
+.points-info-text {
+  margin: 0;
+  padding: 0 20px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  height: 100%;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: .8;
+  text-align: left;
+  width: 65%;
+}
+
+.shrink-width {
+  width: 75%;
+  margin: 0 auto;
+  /*display: flex;*/
+  /*justify-content: center;*/
+}
+
+.subtle-center {
+  margin-left: -5px;
+}
+
+.text-small {
+  font-size: 60%;
+}
+
+.top-headline-padding {
+  margin-left: 30px;
+}
+
+.top-countdown .countdown-column {
+  font-size: 80%;
+  opacity: 1;
+}
+
+.top-countdown .countdown-label {
+  font-weight: 500;
+  opacity: 1;
+}
+
+.top-countdown {
+  margin-top: -12px;
+}
+
+.register-button-box {
+  margin-top: 20px;
+}
+
+.register-headline {
+  text-align: left;
+  font-family: "Oswald";
+  color: white;
+  /*padding-top: 20px;*/
+}
+
+.register-subheadline
+
 /*#opt-in-button {*/
 /*  border: none;*/
 /*}*/
+
+#countdown-smaller {
+  justify-content: flex-start;
+}
 
 
 /* Character Styles */

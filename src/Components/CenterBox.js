@@ -1,14 +1,15 @@
-import React from "react"
-import OptinCard from "./OptinCard"
-import FooterLinks from "./FooterLinks"
+import React from 'react';
 
-function CenterBox() {
-    return(
-        <div className="center-box">
-            <OptinCard />
-            <FooterLinks />
-        </div>
-        )
+import FooterLinks from './FooterLinks';
+// import OptinCard from './Cards/1_OptinCard';
+
+function CenterBox({boxContent}) {
+  return (
+    <div className="center-box">
+      {boxContent}
+      <FooterLinks />
+    </div>
+  );
 }
 
-export default CenterBox
+export default CenterBox;
