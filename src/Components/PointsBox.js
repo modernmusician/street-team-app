@@ -13,7 +13,7 @@ function PointsBox({totalPoints}) {
     return(
         <div className="points-container">
             <div className="points-number-box">
-                <h1 class ="points-total"> {totalPoints} </h1>
+                <h1 className="points-total"> {totalPoints} </h1>
                 <h5 className="countdown-label" > points </h5>
             </div>
             <div className="points-info-box">
