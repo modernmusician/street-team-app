@@ -19,22 +19,22 @@ function RegistrationCard({contestHeadline,contestDescription,buttonText,contest
   return (
     <div>
       <Card>
-        <div class="headline-top">
-          <div class= "left-align top-headline-padding">
+        <div className="headline-top">
+          <div className= "left-align top-headline-padding">
             {contestHeadline}
           </div>
-          <div class="top-countdown">
+          <div className="top-countdown">
           <ReactDeadline startDate={contestDeadline} />
           </div>
         </div>
         <Card.Body>
-          <div class="card-container-text">
+          <div className="card-container-text">
             <Card.Title className="register-headline">
               <h3> Register </h3>
               <hr width="18%" align="left" margin-top="0"/>
               <h4> How can we reach you? </h4>
             </Card.Title>
-          <div class="register-button-box">
+          <div className="register-button-box">
             <ActionPointsButton 
             text="Register by Connecting With Facebook" 
             icon={FaFacebook}
@@ -55,7 +55,7 @@ function RegistrationCard({contestHeadline,contestDescription,buttonText,contest
             />
           </div>
               <hr />
-            <Card.Text class="contest-terms">
+            <Card.Text className="contest-terms">
               By entering this contest, I acknowledge that I have reviewed and agreed to our Terms of Use, Contest Rules, and Privacy Policy.
             </Card.Text>
           </div>

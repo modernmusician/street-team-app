@@ -19,7 +19,7 @@ function OptinCard({contestHeadline,contestDescription,buttonText,contestDeadlin
       <Card>
         <Card.Img variant="top" src={contestImg} />
         <Card.Body>
-          <div class="card-container-text">
+          <div className="card-container-text">
             <Card.Title className="headline-paragraph-text">
               {contestHeadline}
             </Card.Title>
@@ -27,7 +27,7 @@ function OptinCard({contestHeadline,contestDescription,buttonText,contestDeadlin
               {contestDescription}
             </Card.Text>
             <h5 className="fade-light"> Contest Ends In </h5>
-            <div class="shrink-width">
+            <div className="shrink-width">
             <ReactDeadline startDate={contestDeadline} />
             </div>
           </div>

@@ -6,30 +6,30 @@ function EmailForm () {
     return(
         <div> 
             <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1"></label>
-                <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Your Full Name..."/>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1"></label>
+                <input type="name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Your Full Name..."/>
               </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1"></label>
-                <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Your Email Address..." />
+              <div className="form-group">
+                <label htmlFor="exampleInputPassword1"></label>
+                <input type="email" className="form-control" id="exampleInputPassword1" placeholder="Your Email Address..." />
               </div>
-              <div class="form-group">
-                <label for="exampleInputPhone1"></label>
-                <input type="phone" class="form-control" id="exampleInputPhone1" placeholder="Your Phone Number..." />
+              <div className="form-group">
+                <label htmlFor="exampleInputPhone1"></label>
+                <input type="phone" className="form-control" id="exampleInputPhone1" placeholder="Your Phone Number..." />
               </div>
             <Button type="Submit" className="btn-default complete-registration-button button-text-box">
-              <div class= "button-text-box dark">
-                <div class="button-icon">
+              <div className= "button-text-box dark">
+                <div className="button-icon">
                     <IoIosCheckbox />
                 </div>
-                <p class="button-text dark">
+                <p className="button-text dark">
                   Complete Registration
                 </p>
               </div>
-              <div class="button-points-box dark">
+              <div className="button-points-box dark">
                   <h1 class ="points-total subtle-center dark"> +20 </h1>
-                  <h5 class="countdown-label dark" > points </h5>
+                  <h5 className="countdown-label dark" > points </h5>
               </div>
             </Button>
             </form>

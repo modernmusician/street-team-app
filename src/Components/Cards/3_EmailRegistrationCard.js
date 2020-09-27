@@ -19,25 +19,25 @@ function EmailRegistrationCard({contestHeadline,contestDescription,buttonText,co
   return (
     <div>
       <Card>
-        <div class="headline-top">
-          <div class= "left-align top-headline-padding">
+        <div className="headline-top">
+          <div className= "left-align top-headline-padding">
             {contestHeadline}
           </div>
-          <div class="top-countdown">
+          <div className="top-countdown">
           <ReactDeadline startDate={contestDeadline} />
           </div>
         </div>
         <Card.Body>
-          <div class="card-container-text">
+          <div className="card-container-text">
             <Card.Title className="register-headline">
               <h3> Register </h3>
               <hr width="18%" align="left" margin-top="0"/>
               <h4> How can we reach you if you win? </h4>
             </Card.Title>
-          <div class="register-button-box">
+          <div className="register-button-box">
           <EmailForm />
           </div>
-            <Card.Text class="text-small fade-light">
+            <Card.Text className="text-small fade-light">
               *We promise to keep your privacy safe.
             </Card.Text>
           </div>
