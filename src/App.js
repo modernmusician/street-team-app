@@ -45,9 +45,9 @@ function App() {
 
   return (
     <Router>
-      <Landing path="/register-email" />
+      <Landing path="/" />
       <Registration path="/registration" />
-      <EmailRegistration path="/" />
+      <EmailRegistration path="/register-email" />
       
     </Router>
     // <div>

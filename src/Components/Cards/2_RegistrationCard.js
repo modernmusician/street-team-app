@@ -42,16 +42,18 @@ function RegistrationCard({contestHeadline,contestDescription,buttonText,contest
             points="40"
             textBoxColor="facebook-color-gradient"
             pointsBoxColor="facebook-color"
+            buttonStyle="light"
             
             />
           <p> or </p>
             <ActionPointsButton 
               text="Register With Email" 
               icon={HiOutlineMail}
-              path="/registration"
+              path="/register-email"
               points={20}
               textBoxColor="email-color-gradient"
               pointsBoxColor="email-color"
+              buttonStyle="light"
             />
           </div>
               <hr />

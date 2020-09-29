@@ -5,9 +5,9 @@ function PointsBox({totalPoints}) {
     const pointsInfoText = ""
     
     if (totalPoints === 0){
-    return(
-        pointsInfoText = "omg it worked!"
-        )
+    return({
+        pointsInfoText: "omg it worked!"
+        })
     }
     
     return(

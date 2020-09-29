@@ -5,8 +5,8 @@ function FooterLinks() {
     <nav className="footer-links">
       <div>
         <ul>
-          <li> Privacy Policy </li>
           <li> Contest Rules </li>
+          <li> Privacy Policy </li>
           <li> Terms </li>
         </ul>
       </div>

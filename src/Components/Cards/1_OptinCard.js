@@ -34,7 +34,7 @@ function OptinCard({contestHeadline,contestDescription,buttonText,contestDeadlin
           {/* todo -- card could be reusable for more than just the opt in if we had the link passed into this component*/}
           <Link className="link-button" to="/registration">
    
-            <Button className="btn active btn-default card-container-button">
+            <Button className="btn active btn-default card-container-button button-opt-in">
               {buttonText} 
             </Button>
          

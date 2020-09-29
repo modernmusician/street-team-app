@@ -19,12 +19,14 @@ function EmailRegistrationCard({contestHeadline,contestDescription,buttonText,co
   return (
     <div>
       <Card>
-        <div className="headline-top">
-          <div className= "left-align top-headline-padding">
-            {contestHeadline}
-          </div>
-          <div className="top-countdown">
-          <ReactDeadline startDate={contestDeadline} />
+        <div className="headline-top margin-reset">
+          <div class="flex-top-headline">
+            <div className= "left-align top-left-headline">
+              {contestHeadline}
+            </div>
+            <div className="top-right-countdown">
+            <ReactDeadline startDate={contestDeadline} />
+            </div>
           </div>
         </div>
         <Card.Body>
