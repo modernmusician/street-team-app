@@ -61,7 +61,7 @@ function RegistrationCard({contestHeadline,contestDescription,buttonText,contest
               By entering this contest, I acknowledge that I have reviewed and agreed to our Terms of Use, Contest Rules, and Privacy Policy.
             </Card.Text>
           </div>
-          <PointsBox totalPoints="0" />
+          <PointsBox totalPoints={0} includeText={false} />
         </Card.Body>
       </Card>
     </div>

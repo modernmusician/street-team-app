@@ -1,14 +1,24 @@
-import React from "react"
+import React, { useState } from "react"
 
-function PointsBox({totalPoints}) {
+function PointsBox({totalPoints,includeText}) {
     
-    const pointsInfoText = ""
+    let pointsInfoText = "";
     
-    if (totalPoints === 0){
-    return({
-        pointsInfoText: "omg it worked!"
-        })
-    }
+    if(includeText){
+        if (totalPoints === 0){
+            pointsInfoText="Register now and start earning points towards your entry.";
+        }
+            
+            else if (totalPoints > 0 && totalPoints < 10000) {
+                
+                pointsInfoText="wow you're doing great pal!"
+            }
+            
+            else if (totalPoints >= 10000) {
+                pointsInfoText="you're totally gonna win"
+            }
+    }    
+    
     
     return(
         <div className="points-container">
