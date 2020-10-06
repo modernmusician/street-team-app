@@ -1,6 +1,6 @@
 // import '.../App.css';
 
-import { Link} from '@reach/router';
+import { Link } from '@reach/router';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -11,11 +11,27 @@ import Countdown from '../Countdown';
 import ReactDeadline from '../ReactDeadline';
 import PointsBox from "../PointsBox"
 import ActionPointsButton from "../ActionPointsButton"
-import { IoIosCheckbox } from "react-icons/io"
 import EmailForm from "../EmailForm";
+import ProgressBox from "../ProgressBox"
+import SpotifyPlayBox from "../SpotifyPlayBox"
 
 
-function EmailRegistrationCard({contestHeadline,contestDescription,buttonText,contestDeadline,contestImg}) {
+import { IoIosCheckbox } from "react-icons/io";
+import { FaSpotify } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
+import { MdLibraryMusic } from "react-icons/md";
+
+
+
+function ContestPage1Card({contestHeadline,contestDescription,buttonText,contestDeadline,contestImg}) {
+  
+  const [showSpotifyBox, setDisplay] = useState(false);
+  const [buttonClickedSpotifyPlay, setClickedSpotifyPlay] = useState(false);
+  const [buttonClickedSpotifyFollow, setClickedSpotifyFollow] = useState(false);
+  const [buttonClickedSpotifySave, setClickedSpotifySave] = useState(false);
+  const [buttonClickedJoinStreetTeam, setClickedJoinStreetTeam] = useState(false);
+  
   return (
     <div>
       <Card>
@@ -29,25 +45,103 @@ function EmailRegistrationCard({contestHeadline,contestDescription,buttonText,co
             </div>
           </div>
         </div>
+        
+        <div> 
+          <ProgressBox progressStep={3} />
+        </div>
+        
         <Card.Body>
           <div className="card-container-text">
             <Card.Title className="register-headline">
-              <h3> Register </h3>
-              <hr width="18%" align="left" margin-top="0"/>
-              <h4> How can we reach you if you win? </h4>
+              <h3> Increase Your Chances of Winning </h3>
+              <hr width="76%" align="left" margin-top="0" font-weight="bold"/>
+              <h4> Get to the top of the list by completing the following supportive actions </h4>
             </Card.Title>
           <div className="register-button-box">
-          <EmailForm />
+            <div onClick={() => { setDisplay(!showSpotifyBox); }}>
+              <ActionPointsButton 
+                text={buttonClickedSpotifyPlay ? "Played on Spotify" : "Play on Spotify"} 
+                icon={buttonClickedSpotifyPlay ? FaCheckCircle : FaSpotify}
+                path= ""
+                points={20}
+                textBoxColor={buttonClickedSpotifyPlay ? "spotify-color-gradient clicked" : "spotify-color-gradient"}
+                pointsBoxColor={buttonClickedSpotifyPlay ? "spotify-color clicked" : "spotify-color"}
+                buttonTextStyle={buttonClickedSpotifyPlay ? "light clicked-text " : "light "}
+                buttonIconStyle={buttonClickedSpotifyPlay ? "light clicked-text " : "light "}
+                heightClass="button-small-height"
+                pointsSize="button-points-total-action"
+              />
+            </div>
+            
+            {showSpotifyBox ? <div onClick={() => { setClickedSpotifyPlay(true); }}> <SpotifyPlayBox /> </div> : null}
+            
+            <div onClick={() => { setClickedSpotifyFollow(true); }}>
+              <ActionPointsButton 
+                text={buttonClickedSpotifyFollow ? "Followed on Spotify" : "Follow on Spotify"} 
+                icon={buttonClickedSpotifyFollow ? FaCheckCircle : FaSpotify}
+                path= ""
+                points={50}
+                textBoxColor={buttonClickedSpotifyFollow ? "spotify-color-gradient clicked" : "spotify-color-gradient"}
+                pointsBoxColor={buttonClickedSpotifyFollow ? "spotify-color clicked" : "spotify-color"}
+                buttonTextStyle={buttonClickedSpotifyFollow ? "light clicked-text " : "light "}
+                buttonIconStyle={buttonClickedSpotifyFollow ? "light clicked-text " : "light "}
+                heightClass="button-small-height"
+                pointsSize="button-points-total-action"
+              />
+            </div>
+            
+            <div onClick={() => { setClickedSpotifySave(true); }}>
+              <ActionPointsButton 
+                text={buttonClickedSpotifySave ? "Saved on Spotify" : "Save on Spotify"} 
+                icon={buttonClickedSpotifySave ? FaCheckCircle : FaSpotify}
+                path= ""
+                points={50}
+                textBoxColor={buttonClickedSpotifySave ? "spotify-color-gradient clicked" : "spotify-color-gradient"}
+                pointsBoxColor={buttonClickedSpotifySave ? "spotify-color clicked" : "spotify-color"}
+                buttonTextStyle={buttonClickedSpotifySave ? "light clicked-text " : "light "}
+                buttonIconStyle={buttonClickedSpotifySave ? "light clicked-text " : "light "}
+                heightClass="button-small-height"
+                pointsSize="button-points-total-action"
+              />
+            </div>
+            
+            <div onClick={() => { setClickedJoinStreetTeam(true); }}>
+              <ActionPointsButton 
+                text={buttonClickedJoinStreetTeam ? "Joined Street Team" : "Join Street Team"} 
+                icon={buttonClickedJoinStreetTeam ? FaCheckCircle : MdLibraryMusic}
+                path= ""
+                points={100}
+                textBoxColor={buttonClickedJoinStreetTeam ? "complete-registration-color-gradient clicked" : "complete-registration-color-gradient"}
+                pointsBoxColor={buttonClickedJoinStreetTeam ? "complete-registration-color clicked" : "complete-registration-color"}
+                buttonTextStyle={buttonClickedJoinStreetTeam ? "light clicked-text " : "dark "}
+                buttonIconStyle={buttonClickedJoinStreetTeam ? "light clicked-text " : "dark "}
+                heightClass="button-small-height"
+                pointsSize="button-points-total-action"
+              />
+            </div>
           </div>
-            <Card.Text className="text-small fade-light">
-              *We promise to keep your privacy safe.
-            </Card.Text>
+            <hr class="fade-light" />
+            
+          <Link className="link-button" to="/referral">
+   
+            <Button className="btn active btn-default card-container-button button-continue">
+              {buttonText} 
+            </Button>
+         
+          </Link>
+
           </div>
-          <PointsBox totalPoints={0} includeText={true} />
+          <PointsBox 
+          totalPoints={40} 
+          includeText={true}
+          userName="Michael Walker"
+          totalReferrals={0}
+          bonusPoints={0}
+          />
         </Card.Body>
       </Card>
     </div>
   );
 }
 
-export default EmailRegistrationCard;
+export default ContestPage1Card;

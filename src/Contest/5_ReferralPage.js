@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 import Background from '../Components/Background';
 import CenterBox from '../Components/CenterBox';
-import ContestPage1Card from '../Components/Cards/4ContestPage1';
+import ContestPage1Card from '../Components/Cards/5ReferralCard';
 
-function ContestPage1() {
+function ReferralPage() {
   return (
     <div>
       <div>
@@ -29,4 +29,4 @@ function ContestPage1() {
   );
 }
 
-export default ContestPage1;
+export default ReferralPage;

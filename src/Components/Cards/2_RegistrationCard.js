@@ -42,7 +42,8 @@ function RegistrationCard({contestHeadline,contestDescription,buttonText,contest
             points="40"
             textBoxColor="facebook-color-gradient"
             pointsBoxColor="facebook-color"
-            buttonStyle="light"
+            buttonTextStyle="light"
+            pointsSize="button-points-total-registration"
             
             />
           <p> or </p>
@@ -53,7 +54,8 @@ function RegistrationCard({contestHeadline,contestDescription,buttonText,contest
               points={20}
               textBoxColor="email-color-gradient"
               pointsBoxColor="email-color"
-              buttonStyle="light"
+              buttonTextStyle="light"
+              pointsSize="button-points-total-registration"
             />
           </div>
               <hr />

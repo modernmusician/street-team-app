@@ -1,6 +1,7 @@
 import React from "react"
 import Button from 'react-bootstrap/Button';
 import { IoIosCheckbox } from "react-icons/io"
+import { Link } from '@reach/router';
 
 function EmailForm () {
   
@@ -25,6 +26,7 @@ function EmailForm () {
                 <input type="phone" className="form-control" id="exampleInputPhone1" placeholder="Your Phone Number..." />
               </div>
               <div class="button-container">
+                <Link class="link-button" to="/contest-page-1">
                 <Button type="Submit" className="btn-default complete-registration-button button-text-box">
                   <div className= "complete-registration-color-gradient button-text-box dark">
                     <div className="complete-registration-button-icon">
@@ -35,10 +37,11 @@ function EmailForm () {
                     </p>
                   </div>
                   <div className="complete-registration-color button-points-box dark">
-                      <h1 className="button-points-total subtle-center dark"> +20 </h1>
+                      <h1 className="button-points-total-action subtle-center dark"> +20 </h1>
                       <h5 className="countdown-label dark points-label" > points </h5>
                   </div>
                 </Button>
+                </Link>
               </div>
             </form>
         </div>
