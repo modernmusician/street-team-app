@@ -4,13 +4,13 @@ import { IoIosCheckbox } from "react-icons/io"
 import { FaCopy } from "react-icons/fa"
 import { Link } from '@reach/router';
 import { FaClipboardCheck } from "react-icons/fa"
-import CopyText from "./CopyText"
-import Alert from 'react-bootstrap/Alert'
+// import CopyText from "./CopyText"
+// import Alert from 'react-bootstrap/Alert'
 
 import useClipboard from "react-use-clipboard";
-import Toast from 'react-bootstrap/Toast'
-import ToastBody from 'react-bootstrap/ToastBody'
-import ToastHeader from 'react-bootstrap/ToastHeader'
+// import Toast from 'react-bootstrap/Toast'
+// import ToastBody from 'react-bootstrap/ToastBody'
+// import ToastHeader from 'react-bootstrap/ToastHeader'
 
 function ReferralForm ({refUrl}) {
 
