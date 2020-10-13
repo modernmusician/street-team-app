@@ -8,8 +8,7 @@
 
 > cd street-team-app
 
-(this line is optional if you're just working with the frontend react)
-> amplify init ## follow the prompts
+> amplify init ## follow the prompts (this line is optional if you're just working with the frontend react)
 
 > npm install
 
