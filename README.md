@@ -7,7 +7,8 @@
 > git clone https://github.com/spencer-modern-musician/street-team-app.git
 
 > cd street-team-app
-// this is optional if you're just working with the frontend react
+
+(this line is optional if you're just working with the frontend react)
 > amplify init ## follow the prompts
 
 > npm install
