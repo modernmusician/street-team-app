@@ -6,10 +6,9 @@
             "output": {
                 "authConfig": {
                     "defaultAuthentication": {
-                        "authenticationType": "API_KEY",
-                        "apiKeyConfig": {
-                            "apiKeyExpirationDays": 7,
-                            "description": "provide a valid api key"
+                        "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+                        "userPoolConfig": {
+                            "userPoolId": "authstreetteamreactfb6b4a8a"
                         }
                     },
                     "additionalAuthenticationProviders": []
@@ -21,6 +20,13 @@
         "amplifyhosting": {
             "service": "amplifyhosting",
             "type": "cicd"
+        }
+    },
+    "auth": {
+        "streetteamreactfb6b4a8a": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": []
         }
     }
 }

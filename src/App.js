@@ -5,9 +5,12 @@ import React, { useState } from 'react';
 
 import Registration from './Contest/2_Registration';
 import Landing from './Contest/1_Landing';
-import EmailRegistration from './Contest/3_EmailRegistration'
-import ContestPage1 from './Contest/4_ContestPage1'
-import ReferralPage from './Contest/5_ReferralPage'
+import EmailRegistration from './Contest/3_EmailRegistration';
+import ContestPage1 from './Contest/4_ContestPage1';
+import ReferralPage from './Contest/5_ReferralPage';
+import LoginView from './Contest/cognito-test';
+import GraphQLApp from './Contest/graphql-test';
+
 // import { API, graphqlOperation } from "aws-amplify";
 // import { createTodo } from "./graphql/mutations";
 // import { listTodos } from "./graphql/queries";
@@ -41,13 +44,15 @@ function App() {
   // counter items
 
   return (
-      <Router>
-        <Landing path="/" />
-        <Registration path="/registration" />
-        <EmailRegistration path="/register-email" />
-        <ContestPage1 path="/contest-page-1" />
-        <ReferralPage path="/referral"/>
-      </Router>
+    <Router>
+      <Landing path="/" />
+      <LoginView path="/login" />
+      <Registration path="/registration" />
+      <EmailRegistration path="/register-email" />
+      <ContestPage1 path="/contest-page-1" />
+      <ReferralPage path="/referral" />
+      <GraphQLApp path="/graphQL" />
+    </Router>
     // <div>
     //   <div>
     //   <Background />

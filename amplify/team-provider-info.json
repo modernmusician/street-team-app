@@ -17,6 +17,13 @@
                     "appId": "d1xd55smr9p6eq",
                     "type": "cicd"
                 }
+            },
+            "auth": {
+                "streetteamreactfb6b4a8a": {
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"674030226824129\",\"client_secret\":\"1a3d9509471cb343f05808a33bfde377\"},{\"ProviderName\":\"Google\",\"client_id\":\"913352085547-e71dim69kfmsi9ngqrsicd13f3od1irf.apps.googleusercontent.com\",\"client_secret\":\"7Js8SpnvI9CRLMLdf8xDxx04\"}]",
+                    "facebookAppId": "674030226824129",
+                    "googleClientId": "913352085547-e71dim69kfmsi9ngqrsicd13f3od1irf.apps.googleusercontent.com"
+                }
             }
         }
     }
