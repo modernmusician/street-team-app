@@ -1,0 +1,46 @@
+type Artist @model {
+  id: ID!
+  name: String!
+  contests: [Contest] @connection(keyName: "byArtist", fields: ["id"])
+}
+
+type Contest @model @key(name: "byArtist", fields: ["artistID"]) {
+  id: ID!
+  headline: String!
+  description: String
+  landingButtonText: String!
+  deadline: String
+  artistID: ID!
+  artist: Artist @connection(fields: ["artistID"])
+  actions: [ContestAction] @connection(keyName: "byContest", fields: ["id"])
+  picture: Picture
+}
+
+type ContestAction
+  @model
+  @key(name: "byContest", fields: ["contestID", "content"]) {
+  id: ID!
+  contestID: ID!
+  contest: Contest @connection(fields: ["contestID"])
+  content: String!
+}
+
+type Picture @model {
+  id: ID!
+  name: String
+  owner: String
+  visibility: Visibility
+  createdAt: String
+  file: S3Object
+}
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
+enum Visibility {
+  public
+  private
+}

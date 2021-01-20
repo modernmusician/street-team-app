@@ -10,11 +10,14 @@ import ContestPage1 from './Contest/4_ContestPage1';
 import ReferralPage from './Contest/5_ReferralPage';
 import LoginView from './Contest/cognito-test';
 import GraphQLApp from './Contest/graphql-test';
+import DisplayArtist from './Components/displayArtists';
+import DisplayContest from './Components/displayContests';
+import DeleteContest from './Components/deleteContest';
 
 // import { API, graphqlOperation } from "aws-amplify";
 // import { createTodo } from "./graphql/mutations";
 // import { listTodos } from "./graphql/queries";
-import sum from './sum';
+import { deleteContest } from './graphql/mutations';
 
 function App() {
   // const [todoName, setTodoName] = useState('')
@@ -52,6 +55,9 @@ function App() {
       <ContestPage1 path="/contest-page-1" />
       <ReferralPage path="/referral" />
       <GraphQLApp path="/graphQL" />
+      <DisplayArtist path="/artists" />
+      <DeleteContest path="/delete-contest" />
+      <DisplayContest path="/contests" />
     </Router>
     // <div>
     //   <div>

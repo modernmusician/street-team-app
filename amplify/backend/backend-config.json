@@ -1,32 +1,21 @@
 {
+    "auth": {},
     "api": {
-        "streetteamreact": {
+        "awsgraphqlreact": {
             "service": "AppSync",
             "providerPlugin": "awscloudformation",
             "output": {
                 "authConfig": {
                     "defaultAuthentication": {
-                        "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-                        "userPoolConfig": {
-                            "userPoolId": "authstreetteamreactfb6b4a8a"
+                        "authenticationType": "API_KEY",
+                        "apiKeyConfig": {
+                            "apiKeyExpirationDays": 7,
+                            "description": ""
                         }
                     },
                     "additionalAuthenticationProviders": []
                 }
             }
-        }
-    },
-    "hosting": {
-        "amplifyhosting": {
-            "service": "amplifyhosting",
-            "type": "cicd"
-        }
-    },
-    "auth": {
-        "streetteamreactfb6b4a8a": {
-            "service": "Cognito",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": []
         }
     }
 }
