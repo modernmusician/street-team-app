@@ -8,7 +8,7 @@ import OptinCard from '../Components/Cards/1_OptinCard'
 function Landing() {
   return (
     <div>
-      <Background />
+      <Background myClass="background-wrapper" />
       <div>
         <CenterBox 
         boxContent=
@@ -17,10 +17,11 @@ function Landing() {
             contestHeadline="Win a Baby"
             contestDescription="Enter for a chance to win a happy, healthy baby girl!"
             buttonText="Enter to Win >"
-            contestDeadline="12/27/2020"
+            contestDeadline="4/13/2021"
             contestImg="../baby.png"
           />
         }
+        displayFooter={true}
         />
       </div>
     </div>

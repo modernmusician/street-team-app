@@ -9,7 +9,7 @@ function Registration() {
   return (
     <div>
       <div>
-        <Background />
+        <Background myClass="background-wrapper" />
       </div>
       <div>
         <CenterBox 
@@ -23,6 +23,7 @@ function Registration() {
             contestImg="../baby.png"
           />
         }
+        displayFooter={true}
         />
       </div>
     </div>

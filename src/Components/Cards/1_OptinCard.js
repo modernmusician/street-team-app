@@ -14,8 +14,11 @@ import ReactDeadline from '../ReactDeadline';
 
 
 function OptinCard({contestHeadline,contestDescription,buttonText,contestDeadline,contestImg}) {
+  
+ contestHeadline= (contestHeadline=="") ? "Win a Baby" : contestHeadline;
+  
   return (
-    <div>
+    <div class="card-default">
       <Card>
         <Card.Img variant="top" src={contestImg} />
         <Card.Body>
