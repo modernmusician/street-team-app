@@ -65,8 +65,10 @@ export const getContest = /* GraphQL */ `
       actions {
         items {
           id
-          contestID
           content
+          pointValue
+          contestID
+          url
           createdAt
           updatedAt
         }
@@ -132,6 +134,8 @@ export const getContestAction = /* GraphQL */ `
   query GetContestAction($id: ID!) {
     getContestAction(id: $id) {
       id
+      content
+      pointValue
       contestID
       contest {
         id
@@ -160,7 +164,22 @@ export const getContestAction = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      content
+      enduserActions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      actionType {
+        id
+        value
+        createdAt
+        updatedAt
+      }
+      url
       createdAt
       updatedAt
     }
@@ -175,6 +194,8 @@ export const listContestActions = /* GraphQL */ `
     listContestActions(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        content
+        pointValue
         contestID
         contest {
           id
@@ -186,7 +207,161 @@ export const listContestActions = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        enduserActions {
+          nextToken
+        }
+        actionType {
+          id
+          value
+          createdAt
+          updatedAt
+        }
+        url
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getActionType = /* GraphQL */ `
+  query GetActionType($id: ID!) {
+    getActionType(id: $id) {
+      id
+      value
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listActionTypes = /* GraphQL */ `
+  query ListActionTypes(
+    $filter: ModelActionTypeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listActionTypes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        value
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getEnduser = /* GraphQL */ `
+  query GetEnduser($id: ID!) {
+    getEnduser(id: $id) {
+      id
+      username
+      actions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listEndusers = /* GraphQL */ `
+  query ListEndusers(
+    $filter: ModelEnduserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEndusers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        actions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getEnduserActions = /* GraphQL */ `
+  query GetEnduserActions($id: ID!) {
+    getEnduserActions(id: $id) {
+      enduserID
+      enduser {
+        id
+        username
+        actions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      actionID
+      action {
+        id
         content
+        pointValue
+        contestID
+        contest {
+          id
+          headline
+          description
+          landingButtonText
+          deadline
+          artistID
+          createdAt
+          updatedAt
+        }
+        enduserActions {
+          nextToken
+        }
+        actionType {
+          id
+          value
+          createdAt
+          updatedAt
+        }
+        url
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listEnduserActionss = /* GraphQL */ `
+  query ListEnduserActionss(
+    $filter: ModelEnduserActionsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEnduserActionss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        enduserID
+        enduser {
+          id
+          username
+          createdAt
+          updatedAt
+        }
+        actionID
+        action {
+          id
+          content
+          pointValue
+          contestID
+          url
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }

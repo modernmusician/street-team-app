@@ -4,7 +4,7 @@ type Artist @model {
   contests: [Contest] @connection(keyName: "byArtist", fields: ["id"])
 }
 
-type Contest @model @key(name: "byArtist", fields: ["artistID"]) {
+type Contest @model @key(name: "byArtist", fields: ["artistID", "headline"]) {
   id: ID!
   headline: String!
   description: String
@@ -20,9 +20,36 @@ type ContestAction
   @model
   @key(name: "byContest", fields: ["contestID", "content"]) {
   id: ID!
+  content: String!
+  pointValue: Int
   contestID: ID!
   contest: Contest @connection(fields: ["contestID"])
-  content: String!
+  enduserActions: [EnduserActions]
+    @connection(keyName: "byAction", fields: ["id"])
+  actionType: ActionType
+  url: String!
+}
+
+type ActionType @model {
+  id: ID!
+  value: String
+}
+
+type Enduser @model {
+  id: ID!
+  username: String!
+  actions: [EnduserActions] @connection(keyName: "byEnduser", fields: ["id"])
+}
+
+type EnduserActions
+  @model
+  @key(name: "byAction", fields: ["actionID"])
+  @key(name: "byEnduser", fields: ["enduserID"]) {
+  enduserID: ID!
+  enduser: Enduser!
+  actionID: ID!
+  action: ContestAction!
+  createdAt: String
 }
 
 type Picture @model {

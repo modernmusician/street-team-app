@@ -91,8 +91,10 @@ export const onCreateContest = /* GraphQL */ `
       actions {
         items {
           id
-          contestID
           content
+          pointValue
+          contestID
+          url
           createdAt
           updatedAt
         }
@@ -137,8 +139,10 @@ export const onUpdateContest = /* GraphQL */ `
       actions {
         items {
           id
-          contestID
           content
+          pointValue
+          contestID
+          url
           createdAt
           updatedAt
         }
@@ -183,8 +187,10 @@ export const onDeleteContest = /* GraphQL */ `
       actions {
         items {
           id
-          contestID
           content
+          pointValue
+          contestID
+          url
           createdAt
           updatedAt
         }
@@ -212,6 +218,8 @@ export const onCreateContestAction = /* GraphQL */ `
   subscription OnCreateContestAction {
     onCreateContestAction {
       id
+      content
+      pointValue
       contestID
       contest {
         id
@@ -240,7 +248,22 @@ export const onCreateContestAction = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      content
+      enduserActions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      actionType {
+        id
+        value
+        createdAt
+        updatedAt
+      }
+      url
       createdAt
       updatedAt
     }
@@ -250,6 +273,8 @@ export const onUpdateContestAction = /* GraphQL */ `
   subscription OnUpdateContestAction {
     onUpdateContestAction {
       id
+      content
+      pointValue
       contestID
       contest {
         id
@@ -278,7 +303,22 @@ export const onUpdateContestAction = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      content
+      enduserActions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      actionType {
+        id
+        value
+        createdAt
+        updatedAt
+      }
+      url
       createdAt
       updatedAt
     }
@@ -288,6 +328,8 @@ export const onDeleteContestAction = /* GraphQL */ `
   subscription OnDeleteContestAction {
     onDeleteContestAction {
       id
+      content
+      pointValue
       contestID
       contest {
         id
@@ -316,7 +358,250 @@ export const onDeleteContestAction = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      content
+      enduserActions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      actionType {
+        id
+        value
+        createdAt
+        updatedAt
+      }
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateActionType = /* GraphQL */ `
+  subscription OnCreateActionType {
+    onCreateActionType {
+      id
+      value
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateActionType = /* GraphQL */ `
+  subscription OnUpdateActionType {
+    onUpdateActionType {
+      id
+      value
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteActionType = /* GraphQL */ `
+  subscription OnDeleteActionType {
+    onDeleteActionType {
+      id
+      value
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateEnduser = /* GraphQL */ `
+  subscription OnCreateEnduser {
+    onCreateEnduser {
+      id
+      username
+      actions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateEnduser = /* GraphQL */ `
+  subscription OnUpdateEnduser {
+    onUpdateEnduser {
+      id
+      username
+      actions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteEnduser = /* GraphQL */ `
+  subscription OnDeleteEnduser {
+    onDeleteEnduser {
+      id
+      username
+      actions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateEnduserActions = /* GraphQL */ `
+  subscription OnCreateEnduserActions {
+    onCreateEnduserActions {
+      enduserID
+      enduser {
+        id
+        username
+        actions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      actionID
+      action {
+        id
+        content
+        pointValue
+        contestID
+        contest {
+          id
+          headline
+          description
+          landingButtonText
+          deadline
+          artistID
+          createdAt
+          updatedAt
+        }
+        enduserActions {
+          nextToken
+        }
+        actionType {
+          id
+          value
+          createdAt
+          updatedAt
+        }
+        url
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateEnduserActions = /* GraphQL */ `
+  subscription OnUpdateEnduserActions {
+    onUpdateEnduserActions {
+      enduserID
+      enduser {
+        id
+        username
+        actions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      actionID
+      action {
+        id
+        content
+        pointValue
+        contestID
+        contest {
+          id
+          headline
+          description
+          landingButtonText
+          deadline
+          artistID
+          createdAt
+          updatedAt
+        }
+        enduserActions {
+          nextToken
+        }
+        actionType {
+          id
+          value
+          createdAt
+          updatedAt
+        }
+        url
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteEnduserActions = /* GraphQL */ `
+  subscription OnDeleteEnduserActions {
+    onDeleteEnduserActions {
+      enduserID
+      enduser {
+        id
+        username
+        actions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      actionID
+      action {
+        id
+        content
+        pointValue
+        contestID
+        contest {
+          id
+          headline
+          description
+          landingButtonText
+          deadline
+          artistID
+          createdAt
+          updatedAt
+        }
+        enduserActions {
+          nextToken
+        }
+        actionType {
+          id
+          value
+          createdAt
+          updatedAt
+        }
+        url
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

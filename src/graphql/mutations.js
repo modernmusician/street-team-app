@@ -103,8 +103,10 @@ export const createContest = /* GraphQL */ `
       actions {
         items {
           id
-          contestID
           content
+          pointValue
+          contestID
+          url
           createdAt
           updatedAt
         }
@@ -152,8 +154,10 @@ export const updateContest = /* GraphQL */ `
       actions {
         items {
           id
-          contestID
           content
+          pointValue
+          contestID
+          url
           createdAt
           updatedAt
         }
@@ -201,8 +205,10 @@ export const deleteContest = /* GraphQL */ `
       actions {
         items {
           id
-          contestID
           content
+          pointValue
+          contestID
+          url
           createdAt
           updatedAt
         }
@@ -233,6 +239,8 @@ export const createContestAction = /* GraphQL */ `
   ) {
     createContestAction(input: $input, condition: $condition) {
       id
+      content
+      pointValue
       contestID
       contest {
         id
@@ -261,7 +269,22 @@ export const createContestAction = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      content
+      enduserActions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      actionType {
+        id
+        value
+        createdAt
+        updatedAt
+      }
+      url
       createdAt
       updatedAt
     }
@@ -274,6 +297,8 @@ export const updateContestAction = /* GraphQL */ `
   ) {
     updateContestAction(input: $input, condition: $condition) {
       id
+      content
+      pointValue
       contestID
       contest {
         id
@@ -302,7 +327,22 @@ export const updateContestAction = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      content
+      enduserActions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      actionType {
+        id
+        value
+        createdAt
+        updatedAt
+      }
+      url
       createdAt
       updatedAt
     }
@@ -315,6 +355,8 @@ export const deleteContestAction = /* GraphQL */ `
   ) {
     deleteContestAction(input: $input, condition: $condition) {
       id
+      content
+      pointValue
       contestID
       contest {
         id
@@ -343,7 +385,277 @@ export const deleteContestAction = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      content
+      enduserActions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      actionType {
+        id
+        value
+        createdAt
+        updatedAt
+      }
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createActionType = /* GraphQL */ `
+  mutation CreateActionType(
+    $input: CreateActionTypeInput!
+    $condition: ModelActionTypeConditionInput
+  ) {
+    createActionType(input: $input, condition: $condition) {
+      id
+      value
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateActionType = /* GraphQL */ `
+  mutation UpdateActionType(
+    $input: UpdateActionTypeInput!
+    $condition: ModelActionTypeConditionInput
+  ) {
+    updateActionType(input: $input, condition: $condition) {
+      id
+      value
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteActionType = /* GraphQL */ `
+  mutation DeleteActionType(
+    $input: DeleteActionTypeInput!
+    $condition: ModelActionTypeConditionInput
+  ) {
+    deleteActionType(input: $input, condition: $condition) {
+      id
+      value
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createEnduser = /* GraphQL */ `
+  mutation CreateEnduser(
+    $input: CreateEnduserInput!
+    $condition: ModelEnduserConditionInput
+  ) {
+    createEnduser(input: $input, condition: $condition) {
+      id
+      username
+      actions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateEnduser = /* GraphQL */ `
+  mutation UpdateEnduser(
+    $input: UpdateEnduserInput!
+    $condition: ModelEnduserConditionInput
+  ) {
+    updateEnduser(input: $input, condition: $condition) {
+      id
+      username
+      actions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteEnduser = /* GraphQL */ `
+  mutation DeleteEnduser(
+    $input: DeleteEnduserInput!
+    $condition: ModelEnduserConditionInput
+  ) {
+    deleteEnduser(input: $input, condition: $condition) {
+      id
+      username
+      actions {
+        items {
+          enduserID
+          actionID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createEnduserActions = /* GraphQL */ `
+  mutation CreateEnduserActions(
+    $input: CreateEnduserActionsInput!
+    $condition: ModelEnduserActionsConditionInput
+  ) {
+    createEnduserActions(input: $input, condition: $condition) {
+      enduserID
+      enduser {
+        id
+        username
+        actions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      actionID
+      action {
+        id
+        content
+        pointValue
+        contestID
+        contest {
+          id
+          headline
+          description
+          landingButtonText
+          deadline
+          artistID
+          createdAt
+          updatedAt
+        }
+        enduserActions {
+          nextToken
+        }
+        actionType {
+          id
+          value
+          createdAt
+          updatedAt
+        }
+        url
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateEnduserActions = /* GraphQL */ `
+  mutation UpdateEnduserActions(
+    $input: UpdateEnduserActionsInput!
+    $condition: ModelEnduserActionsConditionInput
+  ) {
+    updateEnduserActions(input: $input, condition: $condition) {
+      enduserID
+      enduser {
+        id
+        username
+        actions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      actionID
+      action {
+        id
+        content
+        pointValue
+        contestID
+        contest {
+          id
+          headline
+          description
+          landingButtonText
+          deadline
+          artistID
+          createdAt
+          updatedAt
+        }
+        enduserActions {
+          nextToken
+        }
+        actionType {
+          id
+          value
+          createdAt
+          updatedAt
+        }
+        url
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteEnduserActions = /* GraphQL */ `
+  mutation DeleteEnduserActions(
+    $input: DeleteEnduserActionsInput!
+    $condition: ModelEnduserActionsConditionInput
+  ) {
+    deleteEnduserActions(input: $input, condition: $condition) {
+      enduserID
+      enduser {
+        id
+        username
+        actions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      actionID
+      action {
+        id
+        content
+        pointValue
+        contestID
+        contest {
+          id
+          headline
+          description
+          landingButtonText
+          deadline
+          artistID
+          createdAt
+          updatedAt
+        }
+        enduserActions {
+          nextToken
+        }
+        actionType {
+          id
+          value
+          createdAt
+          updatedAt
+        }
+        url
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

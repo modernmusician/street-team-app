@@ -4,22 +4,52 @@ import { listArtists } from '../graphql/queries';
 import { onCreateArtist } from '../graphql/subscriptions';
 // import gql from 'graphql-tag';
 import Artist from './artist';
-import { gql, useQuery } from '@apollo/react-hooks';
+import { gql, useQuery, useMutation } from '@apollo/react-hooks';
+import { createArtist } from '../graphql/mutations';
+import NewArtist from './newArtist';
 
 export default function DisplayArtist() {
+  const [modal, setModal] = useState(false);
   const { data, loading, error } = useQuery(gql(listArtists));
+  const [createNewArtist, { newArtist }] = useMutation(gql(createArtist));
+  console.log(data);
+
+  const onSubmit = formInput => {
+    console.log(formInput);
+    setModal(false);
+    createNewArtist({ variables: { input: formInput } });
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
   if (error) {
     return <p>Error: ${error.message}</p>;
   }
+
+  if (modal) {
+    return (
+      <div className="row center-xs">
+        <div className="col-xs-8">
+          <NewArtist onSubmit={onSubmit} onCancel={() => setModal(false)} />
+        </div>
+      </div>
+    );
+  }
   console.log(data);
   return (
-    <Artist
-      data={data}
-      // subscribeToMore={() => this.subscribeNewArtist(subscribeToMore)}
-    />
+    <div>
+      <div className="col-xs-10">
+        <h1>Artist List</h1>
+      </div>
+      <div className="col-xs-2">
+        <button onClick={() => setModal(true)}>new artist</button>
+      </div>
+      <Artist
+        data={data}
+        // subscribeToMore={() => this.subscribeNewArtist(subscribeToMore)}
+      />
+    </div>
   );
 }
 
