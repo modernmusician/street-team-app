@@ -3,10 +3,10 @@ import React from 'react';
 import ContestPicture from './ContestPicture';
 import Logo from './Logo';
 
-function Background() {
+function Background({myClass}) {
   return (
     <div>
-      <div className="background-wrapper">
+      <div className={myClass}>
         <ContestPicture />
       </div>
       <div>

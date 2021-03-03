@@ -2,9 +2,10 @@ import './App.css';
 
 import { Router } from '@reach/router';
 import React, { useState } from 'react';
-
+import axios from 'axios';
 import Registration from './Contest/2_Registration';
 import Landing from './Contest/1_Landing';
+<<<<<<< HEAD
 import EmailRegistration from './Contest/3_EmailRegistration';
 import ContestPage1 from './Contest/4_ContestPage1';
 import ReferralPage from './Contest/5_ReferralPage';
@@ -14,6 +15,20 @@ import DisplayArtist from './Components/displayArtists';
 import DisplayContest from './Components/displayContests';
 import DeleteContest from './Components/deleteContest';
 
+||||||| 4ecc5a1
+import EmailRegistration from './Contest/3_EmailRegistration'
+import ContestPage1 from './Contest/4_ContestPage1'
+import ReferralPage from './Contest/5_ReferralPage'
+=======
+import EmailRegistration from './Contest/3_EmailRegistration';
+import ContestPage1 from './Contest/4_ContestPage1';
+import ReferralPage from './Contest/5_ReferralPage';
+import SpotifyFollowArtist from './Contest/6_SpotifyFollowArtist';
+import SpotifySaveSong from './Contest/7_SpotifySaveSong';
+import Login from "./Contest/A1_Login";
+import CreateContestPage from './Contest/A2_CreateContest';
+
+>>>>>>> dev
 // import { API, graphqlOperation } from "aws-amplify";
 // import { createTodo } from "./graphql/mutations";
 // import { listTodos } from "./graphql/queries";
@@ -47,18 +62,17 @@ function App() {
   // counter items
 
   return (
-    <Router>
-      <Landing path="/" />
-      <LoginView path="/login" />
-      <Registration path="/registration" />
-      <EmailRegistration path="/register-email" />
-      <ContestPage1 path="/contest-page-1" />
-      <ReferralPage path="/referral" />
-      <GraphQLApp path="/graphQL" />
-      <DisplayArtist path="/artists" />
-      <DeleteContest path="/delete-contest" />
-      <DisplayContest path="/contests" />
-    </Router>
+      <Router>
+        <Landing path="/landingpage" />
+        <Registration path="/registration" />
+        <EmailRegistration path="/register-email" />
+        <ContestPage1 path="/contest" />
+        <ReferralPage path="/referral"/>
+        <Login path="/login" />
+        <CreateContestPage path="/" />
+        <SpotifyFollowArtist path="/spotify-follow-artist"/>
+        <SpotifySaveSong path="/spotify-save-song"/>
+      </Router>
     // <div>
     //   <div>
     //   <Background />

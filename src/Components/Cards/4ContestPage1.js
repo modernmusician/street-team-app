@@ -1,7 +1,8 @@
 // import '.../App.css';
 
+
 import { Link } from '@reach/router';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import styled from 'styled-components';
@@ -31,6 +32,27 @@ function ContestPage1Card({contestHeadline,contestDescription,buttonText,contest
   const [buttonClickedSpotifyFollow, setClickedSpotifyFollow] = useState(false);
   const [buttonClickedSpotifySave, setClickedSpotifySave] = useState(false);
   const [buttonClickedJoinStreetTeam, setClickedJoinStreetTeam] = useState(false);
+  //The following code was put in my drew for the spotify play on an iframe from spotify
+  /*const Component = React.createClass({
+  iframe: function () {
+    return {
+      __html: this.props.iframe
+    }
+  },
+
+  render: function() {
+    return (
+      <div>
+        <div dangerouslySetInnerHTML={ this.iframe() } />
+      </div>
+    );
+  }
+});
+  const iframe = '<iframe src="https://open.spotify.com/embed/playlist/1tyu56QrbQUOYDYTVt5YeQ" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>'; 
+  ReactDOM.render(
+  <Component iframe={iframe} />,
+  document.getElementById('container')
+);*/
   
   return (
     <div>
@@ -58,8 +80,16 @@ function ContestPage1Card({contestHeadline,contestDescription,buttonText,contest
               <h4> Get to the top of the list by completing the following supportive actions </h4>
             </Card.Title>
           <div className="register-button-box">
+          {/*
+            Now we need to engineer the playing of the song and it returning a number that says it was played by this person,
+            and the way for this to be accomplished is to have spotify go and pull recently played with the api call.
+            
+          */}
+          
+          {/* Not sure how this will work, but we need to make sure that the path doesn't change the URL when the spotify play button is selected.*/}
             <div onClick={() => { setDisplay(!showSpotifyBox); }}>
               <ActionPointsButton 
+                
                 text={buttonClickedSpotifyPlay ? "Played on Spotify" : "Play on Spotify"} 
                 icon={buttonClickedSpotifyPlay ? FaCheckCircle : FaSpotify}
                 path= ""
@@ -73,13 +103,14 @@ function ContestPage1Card({contestHeadline,contestDescription,buttonText,contest
               />
             </div>
             
+            
             {showSpotifyBox ? <div onClick={() => { setClickedSpotifyPlay(true); }}> <SpotifyPlayBox /> </div> : null}
             
             <div onClick={() => { setClickedSpotifyFollow(true); }}>
               <ActionPointsButton 
                 text={buttonClickedSpotifyFollow ? "Followed on Spotify" : "Follow on Spotify"} 
                 icon={buttonClickedSpotifyFollow ? FaCheckCircle : FaSpotify}
-                path= ""
+                path= "/spotify-follow-artist"
                 points={50}
                 textBoxColor={buttonClickedSpotifyFollow ? "spotify-color-gradient clicked" : "spotify-color-gradient"}
                 pointsBoxColor={buttonClickedSpotifyFollow ? "spotify-color clicked" : "spotify-color"}
@@ -94,7 +125,7 @@ function ContestPage1Card({contestHeadline,contestDescription,buttonText,contest
               <ActionPointsButton 
                 text={buttonClickedSpotifySave ? "Saved on Spotify" : "Save on Spotify"} 
                 icon={buttonClickedSpotifySave ? FaCheckCircle : FaSpotify}
-                path= ""
+                path= "/spotify-save-song"
                 points={50}
                 textBoxColor={buttonClickedSpotifySave ? "spotify-color-gradient clicked" : "spotify-color-gradient"}
                 pointsBoxColor={buttonClickedSpotifySave ? "spotify-color clicked" : "spotify-color"}
