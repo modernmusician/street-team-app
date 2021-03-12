@@ -25,34 +25,29 @@ import { MdLibraryMusic } from "react-icons/md";
 
 
 
-function ContestPage1Card({contestHeadline,contestDescription,buttonText,contestDeadline,contestImg}) {
+function ContestPage1Card({contestHeadline,contestDescription,buttonText,contestDeadline,contestImg,actionSpotifyPlay,actionSpotifyFollow,actionSpotifySave,actionStreetTeam}) {
+  
+  
+ contestHeadline= (contestHeadline=="") ? "Win a Baby" : contestHeadline;
+ contestDescription= (contestDescription=="") ? "Enter for a chance to win a happy, healthy baby girl!" : contestDescription;
+ buttonText= (buttonText=="") ? "Enter to Win >" : buttonText;
+contestDeadline= (contestDeadline=="") ? "4/13/2021" : contestDeadline;
+contestImg= (contestImg=="") ? "../baby.png" : contestImg;
   
   const [showSpotifyBox, setDisplay] = useState(false);
   const [buttonClickedSpotifyPlay, setClickedSpotifyPlay] = useState(false);
   const [buttonClickedSpotifyFollow, setClickedSpotifyFollow] = useState(false);
   const [buttonClickedSpotifySave, setClickedSpotifySave] = useState(false);
   const [buttonClickedJoinStreetTeam, setClickedJoinStreetTeam] = useState(false);
-  //The following code was put in my drew for the spotify play on an iframe from spotify
-  /*const Component = React.createClass({
-  iframe: function () {
-    return {
-      __html: this.props.iframe
-    }
-  },
-
-  render: function() {
-    return (
-      <div>
-        <div dangerouslySetInnerHTML={ this.iframe() } />
-      </div>
-    );
-  }
-});
-  const iframe = '<iframe src="https://open.spotify.com/embed/playlist/1tyu56QrbQUOYDYTVt5YeQ" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>'; 
-  ReactDOM.render(
-  <Component iframe={iframe} />,
-  document.getElementById('container')
-);*/
+  
+  const spotifyPlayButton = actionSpotifyPlay ? null : "hide";
+  const spotifyFollowButton = actionSpotifyFollow ? null : "hide";
+  const spotifySaveButton = actionSpotifySave ? null : "hide";
+  const streetTeamButton = actionStreetTeam ? null : "hide";
+  
+    const search1 = window.location.href;
+    const a1 = search1.search("#");
+    const first1 = search1.substr(a1);
   
   return (
     <div>
@@ -62,7 +57,7 @@ function ContestPage1Card({contestHeadline,contestDescription,buttonText,contest
             <div className= "left-align top-left-headline">
               {contestHeadline}
             </div>
-            <div className="top-right-countdown">
+            <div className="top-right-countdown center">
             <ReactDeadline startDate={contestDeadline} />
             </div>
           </div>
@@ -86,13 +81,13 @@ function ContestPage1Card({contestHeadline,contestDescription,buttonText,contest
             
           */}
           
-          {/* Not sure how this will work, but we need to make sure that the path doesn't change the URL when the spotify play button is selected.*/}
-            <div onClick={() => { setDisplay(!showSpotifyBox); }}>
+          {/*TODO: We need to implement the api calls to run as the spotify play box is beginning to start playing.*/}
+            <div class={spotifyPlayButton} onClick={() => { setDisplay(!showSpotifyBox); }}>
               <ActionPointsButton 
                 
                 text={buttonClickedSpotifyPlay ? "Played on Spotify" : "Play on Spotify"} 
                 icon={buttonClickedSpotifyPlay ? FaCheckCircle : FaSpotify}
-                path= ""
+                path= {first1}
                 points={20}
                 textBoxColor={buttonClickedSpotifyPlay ? "spotify-color-gradient clicked" : "spotify-color-gradient"}
                 pointsBoxColor={buttonClickedSpotifyPlay ? "spotify-color clicked" : "spotify-color"}
@@ -106,7 +101,7 @@ function ContestPage1Card({contestHeadline,contestDescription,buttonText,contest
             
             {showSpotifyBox ? <div onClick={() => { setClickedSpotifyPlay(true); }}> <SpotifyPlayBox /> </div> : null}
             
-            <div onClick={() => { setClickedSpotifyFollow(true); }}>
+            <div class={spotifyFollowButton} onClick={() => { setClickedSpotifyFollow(true); }}>
               <ActionPointsButton 
                 text={buttonClickedSpotifyFollow ? "Followed on Spotify" : "Follow on Spotify"} 
                 icon={buttonClickedSpotifyFollow ? FaCheckCircle : FaSpotify}
@@ -121,7 +116,7 @@ function ContestPage1Card({contestHeadline,contestDescription,buttonText,contest
               />
             </div>
             
-            <div onClick={() => { setClickedSpotifySave(true); }}>
+            <div class={spotifySaveButton} onClick={() => { setClickedSpotifySave(true); }}>
               <ActionPointsButton 
                 text={buttonClickedSpotifySave ? "Saved on Spotify" : "Save on Spotify"} 
                 icon={buttonClickedSpotifySave ? FaCheckCircle : FaSpotify}
@@ -136,7 +131,7 @@ function ContestPage1Card({contestHeadline,contestDescription,buttonText,contest
               />
             </div>
             
-            <div onClick={() => { setClickedJoinStreetTeam(true); }}>
+            <div class={streetTeamButton} onClick={() => { setClickedJoinStreetTeam(true); }}>
               <ActionPointsButton 
                 text={buttonClickedJoinStreetTeam ? "Joined Street Team" : "Join Street Team"} 
                 icon={buttonClickedJoinStreetTeam ? FaCheckCircle : MdLibraryMusic}

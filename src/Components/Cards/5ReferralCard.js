@@ -53,8 +53,8 @@ function ReferralCard({contestHeadline,contestDescription,buttonText,contestDead
               <hr width="46%" align="left" margin-top="0" font-weight="bold"/>
               <Text family="Open Sans" base="14" color="white">
               <p>
-              Explode your points and multiply your chances of winning 
-              for every friend you sign up. Earn <Text weight="bold" color="white" base="14"> 3x bonus points for every point they earn 
+              Explode your points and multiply your chances of winning with 
+              every friend you sign up. Earn <Text weight="bold" color="white" base="14"> 3x bonus points for every point they earn 
               and 2x </Text> of the friends they sign up.
               </p>
               </Text>

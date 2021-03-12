@@ -19,7 +19,7 @@ function ReferralPage() {
             contestHeadline="Win a Baby"
             contestDescription="Enter for a chance to win a happy, healthy baby girl!"
             buttonText="CONTINUE"
-            contestDeadline="12/27/2020"
+            contestDeadline="4/1/2021"
             contestImg="../baby.png"
           />
         }

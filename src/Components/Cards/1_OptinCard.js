@@ -16,6 +16,12 @@ import ReactDeadline from '../ReactDeadline';
 function OptinCard({contestHeadline,contestDescription,buttonText,contestDeadline,contestImg}) {
   
  contestHeadline= (contestHeadline=="") ? "Win a Baby" : contestHeadline;
+ contestDescription= (contestDescription=="") ? "Enter for a chance to win a happy, healthy baby girl!" : contestDescription;
+ buttonText= (buttonText=="") ? "Enter to Win >" : buttonText;
+contestDeadline= (contestDeadline=="") ? "4/13/2021" : contestDeadline;
+contestImg= (contestImg=="") ? "../baby.png" : contestImg;
+
+
   
   return (
     <div class="card-default">
