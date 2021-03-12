@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import { deleteContest } from '../graphql/mutations';
+import { deleteContest } from '../../graphql/mutations';
 import gql from 'graphql-tag';
-import { listContests } from '../graphql/queries';
+import { listContests } from '../../graphql/queries';
 
 class DeleteContest extends Component {
   handleDelete = deleteContest => {

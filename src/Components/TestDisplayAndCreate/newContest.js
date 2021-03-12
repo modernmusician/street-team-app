@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { getContest, listArtists, listContests } from '../graphql/queries';
+import { listArtists } from '../../graphql/queries';
 import { gql, useQuery } from '@apollo/react-hooks';
 
 const options = [
@@ -13,6 +13,7 @@ export default function NewContest({ onSubmit, onCancel }) {
   const [description, setDescription] = useState('');
   const [landingButtonText, setLandingButtonText] = useState('');
   const [artistID, setArtist] = useState('');
+  const [pictureID, setPicture] = useState('');
 
   const artistList = useQuery(gql(listArtists));
 
@@ -74,6 +75,15 @@ export default function NewContest({ onSubmit, onCancel }) {
             placeholder="contest landing button text"
             value={landingButtonText}
             onChange={e => setLandingButtonText(e.target.value)}
+            required
+          />
+
+          <input
+            className="input"
+            type="text"
+            placeholder="Picture ID"
+            value={pictureID}
+            onChange={e => setPicture(e.target.value)}
             required
           />
 

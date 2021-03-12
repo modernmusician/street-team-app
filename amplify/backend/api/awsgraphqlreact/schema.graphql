@@ -8,19 +8,24 @@ type Contest @model @key(name: "byArtist", fields: ["artistID", "headline"]) {
   id: ID!
   headline: String!
   description: String
+  encouragementHeadline: String
+  encouragementDescription: String
   landingButtonText: String!
   deadline: String
   artistID: ID!
   artist: Artist @connection(fields: ["artistID"])
   actions: [ContestAction] @connection(keyName: "byContest", fields: ["id"])
-  picture: Picture
+  pictureID: ID!
+  picture: Picture @connection(fields: ["pictureID"])
+  testPictureUrl: String
 }
 
 type ContestAction
   @model
-  @key(name: "byContest", fields: ["contestID", "content"]) {
+  @key(name: "byContest", fields: ["contestID", "url"]) {
   id: ID!
-  content: String!
+  preActionText: String
+  postActionText: String
   pointValue: Int
   contestID: ID!
   contest: Contest @connection(fields: ["contestID"])
@@ -49,11 +54,13 @@ type EnduserActions
   enduser: Enduser!
   actionID: ID!
   action: ContestAction!
+  status: String
   createdAt: String
 }
 
 type Picture @model {
   id: ID!
+  publicUrl: String
   name: String
   owner: String
   visibility: Visibility

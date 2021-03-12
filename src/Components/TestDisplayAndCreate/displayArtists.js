@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 // import { Query } from 'react-apollo';
-import { listArtists } from '../graphql/queries';
-import { onCreateArtist } from '../graphql/subscriptions';
+import { listArtists } from '../../graphql/queries';
+// import { onCreateArtist } from '../graphql/subscriptions';
 // import gql from 'graphql-tag';
 import Artist from './artist';
 import { gql, useQuery, useMutation } from '@apollo/react-hooks';
-import { createArtist } from '../graphql/mutations';
+import { createArtist } from '../../graphql/mutations';
 import NewArtist from './newArtist';
 
 export default function DisplayArtist() {
   const [modal, setModal] = useState(false);
   const { data, loading, error } = useQuery(gql(listArtists));
-  const [createNewArtist, { newArtist }] = useMutation(gql(createArtist));
+  const [createNewArtist] = useMutation(gql(createArtist));
   console.log(data);
 
   const onSubmit = formInput => {

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 // import { Query } from 'react-apollo';
-import { getContest, listArtists, listContests } from '../graphql/queries';
-import { createContest } from '../graphql/mutations';
-import { onCreateArtist, onCreateContest } from '../graphql/subscriptions';
+import { listContests } from '../../graphql/queries';
+import { createContest } from '../../graphql/mutations';
+// import { onCreateArtist, onCreateContest } from '../graphql/subscriptions';
 
 import NewContest from './newContest';
 // import gql from 'graphql-tag';
@@ -12,7 +12,8 @@ import { gql, useQuery, useMutation } from '@apollo/react-hooks';
 export default function DisplayContest() {
   const [modal, setModal] = useState(false);
   const { data, loading, error } = useQuery(gql(listContests));
-  const [createNewContest, { newContest }] = useMutation(gql(createContest));
+  const [createNewContest] = useMutation(gql(createContest));
+
   console.log(data);
 
   const onSubmit = formInput => {

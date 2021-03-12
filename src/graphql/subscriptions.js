@@ -11,9 +11,13 @@ export const onCreateArtist = /* GraphQL */ `
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -34,9 +38,13 @@ export const onUpdateArtist = /* GraphQL */ `
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -57,9 +65,13 @@ export const onDeleteArtist = /* GraphQL */ `
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -76,6 +88,8 @@ export const onCreateContest = /* GraphQL */ `
       id
       headline
       description
+      encouragementHeadline
+      encouragementDescription
       landingButtonText
       deadline
       artistID
@@ -91,7 +105,8 @@ export const onCreateContest = /* GraphQL */ `
       actions {
         items {
           id
-          content
+          preActionText
+          postActionText
           pointValue
           contestID
           url
@@ -100,8 +115,10 @@ export const onCreateContest = /* GraphQL */ `
         }
         nextToken
       }
+      pictureID
       picture {
         id
+        publicUrl
         name
         owner
         visibility
@@ -113,6 +130,7 @@ export const onCreateContest = /* GraphQL */ `
         }
         updatedAt
       }
+      testPictureUrl
       createdAt
       updatedAt
     }
@@ -124,6 +142,8 @@ export const onUpdateContest = /* GraphQL */ `
       id
       headline
       description
+      encouragementHeadline
+      encouragementDescription
       landingButtonText
       deadline
       artistID
@@ -139,7 +159,8 @@ export const onUpdateContest = /* GraphQL */ `
       actions {
         items {
           id
-          content
+          preActionText
+          postActionText
           pointValue
           contestID
           url
@@ -148,8 +169,10 @@ export const onUpdateContest = /* GraphQL */ `
         }
         nextToken
       }
+      pictureID
       picture {
         id
+        publicUrl
         name
         owner
         visibility
@@ -161,6 +184,7 @@ export const onUpdateContest = /* GraphQL */ `
         }
         updatedAt
       }
+      testPictureUrl
       createdAt
       updatedAt
     }
@@ -172,6 +196,8 @@ export const onDeleteContest = /* GraphQL */ `
       id
       headline
       description
+      encouragementHeadline
+      encouragementDescription
       landingButtonText
       deadline
       artistID
@@ -187,7 +213,8 @@ export const onDeleteContest = /* GraphQL */ `
       actions {
         items {
           id
-          content
+          preActionText
+          postActionText
           pointValue
           contestID
           url
@@ -196,8 +223,10 @@ export const onDeleteContest = /* GraphQL */ `
         }
         nextToken
       }
+      pictureID
       picture {
         id
+        publicUrl
         name
         owner
         visibility
@@ -209,6 +238,7 @@ export const onDeleteContest = /* GraphQL */ `
         }
         updatedAt
       }
+      testPictureUrl
       createdAt
       updatedAt
     }
@@ -218,13 +248,16 @@ export const onCreateContestAction = /* GraphQL */ `
   subscription OnCreateContestAction {
     onCreateContestAction {
       id
-      content
+      preActionText
+      postActionText
       pointValue
       contestID
       contest {
         id
         headline
         description
+        encouragementHeadline
+        encouragementDescription
         landingButtonText
         deadline
         artistID
@@ -237,14 +270,17 @@ export const onCreateContestAction = /* GraphQL */ `
         actions {
           nextToken
         }
+        pictureID
         picture {
           id
+          publicUrl
           name
           owner
           visibility
           createdAt
           updatedAt
         }
+        testPictureUrl
         createdAt
         updatedAt
       }
@@ -273,13 +309,16 @@ export const onUpdateContestAction = /* GraphQL */ `
   subscription OnUpdateContestAction {
     onUpdateContestAction {
       id
-      content
+      preActionText
+      postActionText
       pointValue
       contestID
       contest {
         id
         headline
         description
+        encouragementHeadline
+        encouragementDescription
         landingButtonText
         deadline
         artistID
@@ -292,14 +331,17 @@ export const onUpdateContestAction = /* GraphQL */ `
         actions {
           nextToken
         }
+        pictureID
         picture {
           id
+          publicUrl
           name
           owner
           visibility
           createdAt
           updatedAt
         }
+        testPictureUrl
         createdAt
         updatedAt
       }
@@ -328,13 +370,16 @@ export const onDeleteContestAction = /* GraphQL */ `
   subscription OnDeleteContestAction {
     onDeleteContestAction {
       id
-      content
+      preActionText
+      postActionText
       pointValue
       contestID
       contest {
         id
         headline
         description
+        encouragementHeadline
+        encouragementDescription
         landingButtonText
         deadline
         artistID
@@ -347,14 +392,17 @@ export const onDeleteContestAction = /* GraphQL */ `
         actions {
           nextToken
         }
+        pictureID
         picture {
           id
+          publicUrl
           name
           owner
           visibility
           createdAt
           updatedAt
         }
+        testPictureUrl
         createdAt
         updatedAt
       }
@@ -482,16 +530,21 @@ export const onCreateEnduserActions = /* GraphQL */ `
       actionID
       action {
         id
-        content
+        preActionText
+        postActionText
         pointValue
         contestID
         contest {
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -529,16 +582,21 @@ export const onUpdateEnduserActions = /* GraphQL */ `
       actionID
       action {
         id
-        content
+        preActionText
+        postActionText
         pointValue
         contestID
         contest {
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -576,16 +634,21 @@ export const onDeleteEnduserActions = /* GraphQL */ `
       actionID
       action {
         id
-        content
+        preActionText
+        postActionText
         pointValue
         contestID
         contest {
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -611,6 +674,7 @@ export const onCreatePicture = /* GraphQL */ `
   subscription OnCreatePicture {
     onCreatePicture {
       id
+      publicUrl
       name
       owner
       visibility
@@ -628,6 +692,7 @@ export const onUpdatePicture = /* GraphQL */ `
   subscription OnUpdatePicture {
     onUpdatePicture {
       id
+      publicUrl
       name
       owner
       visibility
@@ -645,6 +710,7 @@ export const onDeletePicture = /* GraphQL */ `
   subscription OnDeletePicture {
     onDeletePicture {
       id
+      publicUrl
       name
       owner
       visibility

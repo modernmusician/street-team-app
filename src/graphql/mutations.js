@@ -14,9 +14,13 @@ export const createArtist = /* GraphQL */ `
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -40,9 +44,13 @@ export const updateArtist = /* GraphQL */ `
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -66,9 +74,13 @@ export const deleteArtist = /* GraphQL */ `
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -88,6 +100,8 @@ export const createContest = /* GraphQL */ `
       id
       headline
       description
+      encouragementHeadline
+      encouragementDescription
       landingButtonText
       deadline
       artistID
@@ -103,7 +117,8 @@ export const createContest = /* GraphQL */ `
       actions {
         items {
           id
-          content
+          preActionText
+          postActionText
           pointValue
           contestID
           url
@@ -112,8 +127,10 @@ export const createContest = /* GraphQL */ `
         }
         nextToken
       }
+      pictureID
       picture {
         id
+        publicUrl
         name
         owner
         visibility
@@ -125,6 +142,7 @@ export const createContest = /* GraphQL */ `
         }
         updatedAt
       }
+      testPictureUrl
       createdAt
       updatedAt
     }
@@ -139,6 +157,8 @@ export const updateContest = /* GraphQL */ `
       id
       headline
       description
+      encouragementHeadline
+      encouragementDescription
       landingButtonText
       deadline
       artistID
@@ -154,7 +174,8 @@ export const updateContest = /* GraphQL */ `
       actions {
         items {
           id
-          content
+          preActionText
+          postActionText
           pointValue
           contestID
           url
@@ -163,8 +184,10 @@ export const updateContest = /* GraphQL */ `
         }
         nextToken
       }
+      pictureID
       picture {
         id
+        publicUrl
         name
         owner
         visibility
@@ -176,6 +199,7 @@ export const updateContest = /* GraphQL */ `
         }
         updatedAt
       }
+      testPictureUrl
       createdAt
       updatedAt
     }
@@ -190,6 +214,8 @@ export const deleteContest = /* GraphQL */ `
       id
       headline
       description
+      encouragementHeadline
+      encouragementDescription
       landingButtonText
       deadline
       artistID
@@ -205,7 +231,8 @@ export const deleteContest = /* GraphQL */ `
       actions {
         items {
           id
-          content
+          preActionText
+          postActionText
           pointValue
           contestID
           url
@@ -214,8 +241,10 @@ export const deleteContest = /* GraphQL */ `
         }
         nextToken
       }
+      pictureID
       picture {
         id
+        publicUrl
         name
         owner
         visibility
@@ -227,6 +256,7 @@ export const deleteContest = /* GraphQL */ `
         }
         updatedAt
       }
+      testPictureUrl
       createdAt
       updatedAt
     }
@@ -239,13 +269,16 @@ export const createContestAction = /* GraphQL */ `
   ) {
     createContestAction(input: $input, condition: $condition) {
       id
-      content
+      preActionText
+      postActionText
       pointValue
       contestID
       contest {
         id
         headline
         description
+        encouragementHeadline
+        encouragementDescription
         landingButtonText
         deadline
         artistID
@@ -258,14 +291,17 @@ export const createContestAction = /* GraphQL */ `
         actions {
           nextToken
         }
+        pictureID
         picture {
           id
+          publicUrl
           name
           owner
           visibility
           createdAt
           updatedAt
         }
+        testPictureUrl
         createdAt
         updatedAt
       }
@@ -297,13 +333,16 @@ export const updateContestAction = /* GraphQL */ `
   ) {
     updateContestAction(input: $input, condition: $condition) {
       id
-      content
+      preActionText
+      postActionText
       pointValue
       contestID
       contest {
         id
         headline
         description
+        encouragementHeadline
+        encouragementDescription
         landingButtonText
         deadline
         artistID
@@ -316,14 +355,17 @@ export const updateContestAction = /* GraphQL */ `
         actions {
           nextToken
         }
+        pictureID
         picture {
           id
+          publicUrl
           name
           owner
           visibility
           createdAt
           updatedAt
         }
+        testPictureUrl
         createdAt
         updatedAt
       }
@@ -355,13 +397,16 @@ export const deleteContestAction = /* GraphQL */ `
   ) {
     deleteContestAction(input: $input, condition: $condition) {
       id
-      content
+      preActionText
+      postActionText
       pointValue
       contestID
       contest {
         id
         headline
         description
+        encouragementHeadline
+        encouragementDescription
         landingButtonText
         deadline
         artistID
@@ -374,14 +419,17 @@ export const deleteContestAction = /* GraphQL */ `
         actions {
           nextToken
         }
+        pictureID
         picture {
           id
+          publicUrl
           name
           owner
           visibility
           createdAt
           updatedAt
         }
+        testPictureUrl
         createdAt
         updatedAt
       }
@@ -530,16 +578,21 @@ export const createEnduserActions = /* GraphQL */ `
       actionID
       action {
         id
-        content
+        preActionText
+        postActionText
         pointValue
         contestID
         contest {
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -580,16 +633,21 @@ export const updateEnduserActions = /* GraphQL */ `
       actionID
       action {
         id
-        content
+        preActionText
+        postActionText
         pointValue
         contestID
         contest {
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -630,16 +688,21 @@ export const deleteEnduserActions = /* GraphQL */ `
       actionID
       action {
         id
-        content
+        preActionText
+        postActionText
         pointValue
         contestID
         contest {
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -668,6 +731,7 @@ export const createPicture = /* GraphQL */ `
   ) {
     createPicture(input: $input, condition: $condition) {
       id
+      publicUrl
       name
       owner
       visibility
@@ -688,6 +752,7 @@ export const updatePicture = /* GraphQL */ `
   ) {
     updatePicture(input: $input, condition: $condition) {
       id
+      publicUrl
       name
       owner
       visibility
@@ -708,6 +773,7 @@ export const deletePicture = /* GraphQL */ `
   ) {
     deletePicture(input: $input, condition: $condition) {
       id
+      publicUrl
       name
       owner
       visibility

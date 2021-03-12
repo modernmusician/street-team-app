@@ -14,8 +14,9 @@ class Contest extends React.Component {
         <div key={contest.headline}>
           <h1>{contest.headline}</h1>
           <p>{contest.artist.name}</p>
+          <p>{contest.id}</p>
           <p>
-            <i>{contest.landingButtonText}</i>
+            <button>{contest.landingButtonText}</button>
           </p>
           {/* <DeleteContest {...contest} /> */}
           <br />

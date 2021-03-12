@@ -1,12 +1,4 @@
 import React, { useState } from 'react';
-import Select from 'react-select';
-import { getContest, listArtists, listContests } from '../graphql/queries';
-import { gql, useQuery } from '@apollo/react-hooks';
-
-const options = [
-  { value: 'CAT', label: 'Cat' },
-  { value: 'DOG', label: 'Dog' },
-];
 
 export default function NewArtist({ onSubmit, onCancel }) {
   const [name, setName] = useState('');

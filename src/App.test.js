@@ -7,10 +7,9 @@ import App from './App';
 
 // ##default create-react-app
 test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  return true;
-  // const linkElement = getByText(/terms/i);
-  // expect(linkElement).toBeInTheDocument();
+  // const { getByText } = render(<App />);
+  // const linkElement = getByText('Contest');
+  expect(render(<App />));
 });
 
 describe('App component', async assert => {

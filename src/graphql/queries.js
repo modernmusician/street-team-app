@@ -11,9 +11,13 @@ export const getArtist = /* GraphQL */ `
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -50,6 +54,8 @@ export const getContest = /* GraphQL */ `
       id
       headline
       description
+      encouragementHeadline
+      encouragementDescription
       landingButtonText
       deadline
       artistID
@@ -65,7 +71,8 @@ export const getContest = /* GraphQL */ `
       actions {
         items {
           id
-          content
+          preActionText
+          postActionText
           pointValue
           contestID
           url
@@ -74,8 +81,10 @@ export const getContest = /* GraphQL */ `
         }
         nextToken
       }
+      pictureID
       picture {
         id
+        publicUrl
         name
         owner
         visibility
@@ -87,6 +96,7 @@ export const getContest = /* GraphQL */ `
         }
         updatedAt
       }
+      testPictureUrl
       createdAt
       updatedAt
     }
@@ -103,6 +113,8 @@ export const listContests = /* GraphQL */ `
         id
         headline
         description
+        encouragementHeadline
+        encouragementDescription
         landingButtonText
         deadline
         artistID
@@ -115,14 +127,17 @@ export const listContests = /* GraphQL */ `
         actions {
           nextToken
         }
+        pictureID
         picture {
           id
+          publicUrl
           name
           owner
           visibility
           createdAt
           updatedAt
         }
+        testPictureUrl
         createdAt
         updatedAt
       }
@@ -134,13 +149,16 @@ export const getContestAction = /* GraphQL */ `
   query GetContestAction($id: ID!) {
     getContestAction(id: $id) {
       id
-      content
+      preActionText
+      postActionText
       pointValue
       contestID
       contest {
         id
         headline
         description
+        encouragementHeadline
+        encouragementDescription
         landingButtonText
         deadline
         artistID
@@ -153,14 +171,17 @@ export const getContestAction = /* GraphQL */ `
         actions {
           nextToken
         }
+        pictureID
         picture {
           id
+          publicUrl
           name
           owner
           visibility
           createdAt
           updatedAt
         }
+        testPictureUrl
         createdAt
         updatedAt
       }
@@ -194,16 +215,21 @@ export const listContestActions = /* GraphQL */ `
     listContestActions(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        content
+        preActionText
+        postActionText
         pointValue
         contestID
         contest {
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -306,16 +332,21 @@ export const getEnduserActions = /* GraphQL */ `
       actionID
       action {
         id
-        content
+        preActionText
+        postActionText
         pointValue
         contestID
         contest {
           id
           headline
           description
+          encouragementHeadline
+          encouragementDescription
           landingButtonText
           deadline
           artistID
+          pictureID
+          testPictureUrl
           createdAt
           updatedAt
         }
@@ -355,7 +386,8 @@ export const listEnduserActionss = /* GraphQL */ `
         actionID
         action {
           id
-          content
+          preActionText
+          postActionText
           pointValue
           contestID
           url
@@ -373,6 +405,7 @@ export const getPicture = /* GraphQL */ `
   query GetPicture($id: ID!) {
     getPicture(id: $id) {
       id
+      publicUrl
       name
       owner
       visibility
@@ -395,6 +428,7 @@ export const listPictures = /* GraphQL */ `
     listPictures(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        publicUrl
         name
         owner
         visibility
