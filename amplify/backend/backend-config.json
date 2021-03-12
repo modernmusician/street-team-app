@@ -1,6 +1,7 @@
 {
+    "auth": {},
     "api": {
-        "streetteamreact": {
+        "awsgraphqlreact": {
             "service": "AppSync",
             "providerPlugin": "awscloudformation",
             "output": {
@@ -9,18 +10,12 @@
                         "authenticationType": "API_KEY",
                         "apiKeyConfig": {
                             "apiKeyExpirationDays": 7,
-                            "description": "provide a valid api key"
+                            "description": ""
                         }
                     },
                     "additionalAuthenticationProviders": []
                 }
             }
-        }
-    },
-    "hosting": {
-        "amplifyhosting": {
-            "service": "amplifyhosting",
-            "type": "cicd"
         }
     }
 }
