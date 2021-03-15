@@ -1,48 +1,33 @@
-import React from 'react';
+import React, {useState} from "react"
 import { Link } from '@reach/router';
 import Button from 'react-bootstrap/Button';
+import SpotifyPlayBox from "./SpotifyPlayBox"
 
-function ActionPointsButton({
-  path,
-  text,
-  icon,
-  points,
-  textBoxColor,
-  pointsBoxColor,
-  buttonIconStyle,
-  buttonTextStyle,
-  heightClass,
-  pointsSize,
-}) {
-  return (
-    <div className="button-container">
-      <Link className="link-button" to={path}>
-        <Button
-          className={
-            'btn-default facebook-registration-button button-text-box ' +
-            heightClass
-          }
-        >
-          <div className={'button-text-box ' + textBoxColor}>
-            <div className={'button-icon ' + buttonIconStyle}>
-              {React.createElement(icon)}
-            </div>
-            <p className={'button-text ' + buttonTextStyle}>{text}</p>
-          </div>
-          <div className={'button-points-box ' + pointsBoxColor}>
-            <h1 className={pointsSize + ' subtle-center ' + buttonTextStyle}>
-              {' '}
-              +{points}{' '}
-            </h1>
-            <h5 className={'countdown-label points-label ' + buttonTextStyle}>
-              {' '}
-              points{' '}
-            </h5>
-          </div>
-        </Button>
-      </Link>
-    </div>
-  );
+
+function ActionPointsButton({path,text,icon,points,textBoxColor,pointsBoxColor,buttonIconStyle,buttonTextStyle,heightClass,pointsSize}) {
+    
+    return(
+        <div class="button-container">
+          <Link className="link-button" to={path}>
+            <Button
+            className={"btn-default facebook-registration-button button-text-box " + heightClass}
+            >
+              <div class= {"button-text-box " + textBoxColor}>
+                <div class={"button-icon " + buttonIconStyle}>
+                    {React.createElement(icon)}
+                </div>
+                <p class={"button-text " + buttonTextStyle}>
+                  {text}
+                </p>
+              </div>
+              <div class={"button-points-box " + pointsBoxColor}>
+                  <h1 class ={pointsSize + " subtle-center " + buttonTextStyle}> +{points} </h1>
+                  <h5 class={"countdown-label points-label " + buttonTextStyle} > points </h5>
+              </div>
+            </Button>
+          </Link>
+        </div>
+        )
 }
 
-export default ActionPointsButton;
+export default ActionPointsButton

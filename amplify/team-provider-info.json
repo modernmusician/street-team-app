@@ -1,26 +1,4 @@
 {
-    "staging": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-amplify610d1764f1074-staging-50902-authRole",
-            "UnauthRoleArn": "arn:aws:iam::479344151713:role/amplify-amplify610d1764f1074-staging-50902-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::479344151713:role/amplify-amplify610d1764f1074-staging-50902-authRole",
-            "Region": "us-east-1",
-            "DeploymentBucketName": "amplify-amplify610d1764f1074-staging-50902-deployment",
-            "UnauthRoleName": "amplify-amplify610d1764f1074-staging-50902-unauthRole",
-            "StackName": "amplify-amplify610d1764f1074-staging-50902",
-            "StackId": "arn:aws:cloudformation:us-east-1:479344151713:stack/amplify-amplify610d1764f1074-staging-50902/20b0ccd0-4f14-11eb-baa6-122e54527a47",
-            "AmplifyAppId": "d1xd55smr9p6eq"
-        },
-        "categories": {
-            "auth": {
-                "streetteamreact266700ac": {
-                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"674030226824129\",\"client_secret\":\"1a3d9509471cb343f05808a33bfde377\"},{\"ProviderName\":\"Google\",\"client_id\":\"913352085547-e71dim69kfmsi9ngqrsicd13f3od1irf.apps.googleusercontent.com\",\"client_secret\":\"7Js8SpnvI9CRLMLdf8xDxx04\"}]",
-                    "facebookAppId": "674030226824129",
-                    "googleClientId": "913352085547-e71dim69kfmsi9ngqrsicd13f3od1irf.apps.googleusercontent.com"
-                }
-            }
-        }
-    },
     "dev": {
         "awscloudformation": {
             "AuthRoleName": "amplify-streetteamreact-dev-02431-authRole",
@@ -40,19 +18,6 @@
                     "type": "cicd"
                 }
             }
-        }
-    },
-    "spencer": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-streetteamreact-spencer-05051-authRole",
-            "UnauthRoleArn": "arn:aws:iam::479344151713:role/amplify-streetteamreact-spencer-05051-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::479344151713:role/amplify-streetteamreact-spencer-05051-authRole",
-            "Region": "us-east-1",
-            "DeploymentBucketName": "amplify-streetteamreact-spencer-05051-deployment",
-            "UnauthRoleName": "amplify-streetteamreact-spencer-05051-unauthRole",
-            "StackName": "amplify-streetteamreact-spencer-05051",
-            "StackId": "arn:aws:cloudformation:us-east-1:479344151713:stack/amplify-streetteamreact-spencer-05051/26ffe490-6aa3-11eb-b3c1-0aa33d1fad97",
-            "AmplifyAppId": "d1xd55smr9p6eq"
         }
     }
 }

@@ -1,47 +1,27 @@
-import React from 'react';
+import React from "react"
 import { Link } from '@reach/router';
-import { FaAngleRight } from 'react-icons/fa';
+import { FaAngleRight } from "react-icons/fa";
 
 function ArtistNavbar() {
-  return (
-    <nav className="navbar-container">
-      <div className="navbar-row">
-        <div className="navbar-block-left">
-          <div className="navbar-image-box">
-            <img
-              src="../mm_square_bright.png"
-              className="navbar-image"
-              alt="modern music logo"
-            />
-          </div>
-          <div className="navbar-right-divider">
-            {' '}
-            <FaAngleRight />{' '}
-          </div>
-          <div>
-            {' '}
-            <p className="navbar-contest-title"> Create a Contest </p>{' '}
-          </div>
-        </div>
-        <div className="navbar-block-right">
-          <Link className="link-button" to="/login">
-            <div className="navbar-item">
-              {' '}
-              <p className="navbar-contest-title"> Logout </p>{' '}
+    return(
+        <nav class="navbar-container">
+            <div class="navbar-row"> 
+                <div class="navbar-block-left"> 
+                    <div class="navbar-image-box">
+                        <img src="../mm_square_bright.png" class="navbar-image" />
+                    </div>
+                    <div class="navbar-right-divider"> <FaAngleRight /> </div>
+                    <div> <p class="navbar-contest-title"> Create a Contest </p> </div>
+                </div>
+                <div class="navbar-block-right"> 
+                    <Link class="link-button" to="/login">
+                    <div class="navbar-item"> <p class="navbar-contest-title"> Logout </p> </div>
+                    </Link>
+                    <div class="navbar-item"> <img src="../mj_lights.png" class="navbar-image"/> </div>
+                </div>
             </div>
-          </Link>
-          <div className="navbar-item">
-            {' '}
-            <img
-              src="../mj_lights.png"
-              className="navbar-image"
-              alt="artist-logo"
-            />{' '}
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
+        </nav>
+        )
 }
 
-export default ArtistNavbar;
+export default ArtistNavbar

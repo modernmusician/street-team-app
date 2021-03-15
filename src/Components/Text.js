@@ -1,37 +1,34 @@
-// import React from 'react'
-import createStyledElement from 'create-styled-element';
-import { parseToRgb } from 'polished';
-import { createTone } from 'tonality';
-import directionalStyles from './directional-styles';
+import React from 'react'
+import createStyledElement from 'create-styled-element'
+import { parseToRgb } from 'polished'
+import { createTone } from 'tonality'
+import directionalStyles from './directional-styles'
 // get "directionalStyles" here: https://gist.github.com/souporserious/54f9e56ebac4fc4dab603c4212f2ec2e
 
-// const systemFonts =
-//   '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+const systemFonts =
+  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
 
 function parseColor(color, pseudo) {
-  const parsedColor =
-    typeof color === 'object'
-      ? pseudo
-        ? { ...color[pseudo] }
-        : { ...color }
-      : color;
+  const parsedColor = typeof color === 'object'
+    ? pseudo ? { ...color[pseudo] } : { ...color }
+    : color
 
   // if we are styling a pseudo state use the base color if it was not provided
   if (!parsedColor.base && pseudo) {
-    parsedColor.base = color.base;
+    parsedColor.base = color.base
   }
 
   // adjust the tone of the base color
   if (parsedColor.tone) {
-    parsedColor.base = createTone(parsedColor.base)(parsedColor.tone);
+    parsedColor.base = createTone(parsedColor.base)(parsedColor.tone)
   }
 
   // determine if we need to adjust the alpha channel or not
   if (parsedColor.alpha) {
-    const { red, green, blue } = parseToRgb(parsedColor.base);
-    return `rgba(${red}, ${green}, ${blue}, ${parsedColor.alpha})`;
+    const { red, green, blue } = parseToRgb(parsedColor.base)
+    return `rgba(${red}, ${green}, ${blue}, ${parsedColor.alpha})`
   } else {
-    return parsedColor.base || parsedColor;
+    return parsedColor.base || parsedColor
   }
 }
 
@@ -57,48 +54,46 @@ function Text({
     fontFamily: family,
     textDecoration: underline ? 'underline' : 'none',
     transition: transition,
-  };
-
+  }
+  
   if (weight) {
-    styles.fontWeight = weight;
+    styles.fontWeight = weight
   }
 
   if (contrast) {
-    if (base) {
-      styles.fontSize = contrast * base;
-    }
+    styles.fontSize = contrast * base
   }
 
   if (lineHeight) {
-    styles.lineHeight = `${lineHeight}`;
+    styles.lineHeight = `${lineHeight}`
   }
 
   if (uppercase) {
-    styles.transform = 'uppercase';
-    styles.letterSpacing = '0.05em';
+    styles.transform = 'uppercase'
+    styles.letterSpacing = '0.05em'
   }
 
   if (align) {
-    styles.textAlign = align;
+    styles.textAlign = align
   }
-
+  
   if (opacity) {
-    styles.opacity = opacity;
+    styles.opacity = opacity
   }
-
+  
   if (family) {
-    styles.family = family;
+    styles.family = family
   }
-
+  
   if (color) {
-    styles.color = parseColor(color);
+    styles.color = parseColor(color)
   }
 
   if (truncate) {
-    styles.display = 'block';
-    styles.whiteSpace = 'nowrap';
-    styles.overflow = 'hidden';
-    styles.textOverflow = 'ellipsis';
+    styles.display = 'block'
+    styles.whiteSpace = 'nowrap'
+    styles.overflow = 'hidden'
+    styles.textOverflow = 'ellipsis'
   }
 
   // if (color.base) {
@@ -121,10 +116,10 @@ function Text({
     styles = {
       ...styles,
       ...directionalStyles(margin, { prefix: 'margin', spacing: base }),
-    };
+    }
   }
 
-  return createStyledElement(component, props)(styles);
+  return createStyledElement(component, props)(styles)
 }
 
-export default Text;
+export default Text

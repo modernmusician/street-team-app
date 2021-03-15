@@ -3,16 +3,10 @@ import React from 'react';
 import ContestPicture from './ContestPicture';
 import Logo from './Logo';
 
-function Background({ myClass, contestPictureUrl }) {
+function Background({myClass}) {
   return (
     <div>
-      <div
-        className={myClass}
-        // style="background-image="{contestPictureUrl} //TODO need to use contestPictureUrl somehow here
-        style={{
-          backgroundImage: `url(${contestPictureUrl})`,
-        }}
-      >
+      <div className={myClass}>
         <ContestPicture />
       </div>
       <div>
