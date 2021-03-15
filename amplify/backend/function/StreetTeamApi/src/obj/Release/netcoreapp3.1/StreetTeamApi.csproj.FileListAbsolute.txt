@@ -10,3 +10,15 @@
 /home/ec2-user/environment/street-team-app/amplify/backend/function/StreetTeamApi/src/obj/Release/netcoreapp3.1/StreetTeamApi.dll
 /home/ec2-user/environment/street-team-app/amplify/backend/function/StreetTeamApi/src/obj/Release/netcoreapp3.1/StreetTeamApi.pdb
 /home/ec2-user/environment/street-team-app/amplify/backend/function/StreetTeamApi/src/obj/Release/netcoreapp3.1/StreetTeamApi.genruntimeconfig.cache
+/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/bin/Release/netcoreapp3.1/StreetTeamApi.deps.json
+/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/bin/Release/netcoreapp3.1/StreetTeamApi.runtimeconfig.json
+/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/bin/Release/netcoreapp3.1/StreetTeamApi.runtimeconfig.dev.json
+/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/bin/Release/netcoreapp3.1/StreetTeamApi.dll
+/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/bin/Release/netcoreapp3.1/StreetTeamApi.pdb
+/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/obj/Release/netcoreapp3.1/StreetTeamApi.csprojAssemblyReference.cache
+/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/obj/Release/netcoreapp3.1/StreetTeamApi.AssemblyInfoInputs.cache
+/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/obj/Release/netcoreapp3.1/StreetTeamApi.AssemblyInfo.cs
+/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/obj/Release/netcoreapp3.1/StreetTeamApi.csproj.CoreCompileInputs.cache
+/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/obj/Release/netcoreapp3.1/StreetTeamApi.dll
+/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/obj/Release/netcoreapp3.1/StreetTeamApi.pdb
+/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/obj/Release/netcoreapp3.1/StreetTeamApi.genruntimeconfig.cache

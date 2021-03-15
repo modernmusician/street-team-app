@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/ec2-user/environment/street-team-app/amplify/backend/function/StreetTeamApi/src/StreetTeamApi.csproj": {}
+    "/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/StreetTeamApi.csproj": {}
   },
   "projects": {
-    "/home/ec2-user/environment/street-team-app/amplify/backend/function/StreetTeamApi/src/StreetTeamApi.csproj": {
+    "/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/StreetTeamApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ec2-user/environment/street-team-app/amplify/backend/function/StreetTeamApi/src/StreetTeamApi.csproj",
+        "projectUniqueName": "/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/StreetTeamApi.csproj",
         "projectName": "StreetTeamApi",
-        "projectPath": "/home/ec2-user/environment/street-team-app/amplify/backend/function/StreetTeamApi/src/StreetTeamApi.csproj",
-        "packagesPath": "/home/ec2-user/.nuget/packages/",
-        "outputPath": "/home/ec2-user/environment/street-team-app/amplify/backend/function/StreetTeamApi/src/obj/",
+        "projectPath": "/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/StreetTeamApi.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/codebuild/output/src322218388/src/street-team-app/amplify/backend/function/StreetTeamApi/src/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ec2-user/.nuget/NuGet/NuGet.Config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -64,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/ec2-user/.dotnet/sdk/3.1.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
