@@ -25,6 +25,11 @@ function ContestPage1() {
             actionSpotifyFollow={true}
             actionSpotifySave={true}
             actionStreetTeam={true}
+            streetTeamUrl="www.modern-musician.com"
+            spotifyPlayUrl="www.modern-musician.com"
+            spotifyFollowPlaylistUrl="www.modern-musician.com"
+            spotifyFollowArtistUrl="www.modern-musician.com"
+            spotifySaveUrl="www.modern-musician.com"
           />
         }
         displayFooter={true}

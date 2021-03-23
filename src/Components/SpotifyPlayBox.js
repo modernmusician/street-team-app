@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const baseURL ='https://accounts.spotify.com/authorize';
 const clientID = 'e3d73c4d578b49f185a95fb5dbb09385';
-const redirect_uri = 'https:%2F%2Ff1bf79aaf3f3461a991df7b204943be0.vfs.cloud9.us-west-2.amazonaws.com%2F';
+const redirect_uri = 'https:%2F%2Ff1bf79aaf3f3461a991df7b204943be0.vfs.cloud9.us-west-2.amazonaws.com%2Fcontest';
 const url1 = baseURL + '?client_id='+ clientID + '&redirect_uri=' + redirect_uri + '&scope=user-follow-modify%20user-library-modify%20user-read-recently-played&response_type=token&state=alfalfa111333';
 const ArtistID = "74ASZWbe4lXaubB36ztrGX";
 let content = null;
@@ -23,8 +23,12 @@ function SpotifyPlayBox() {
    const b = first.search("&token_type");
    const token1 = first.substr(1,(b-1));
    
+   console.log(search);
+   console.log(a);
+   console.log(first);
+   console.log(b);
    console.log(token1);
-   
+   alert("pause");
     if (token1) {
       
       SpotifyHook(token1);
@@ -121,6 +125,7 @@ function SpotifyPlayBox() {
     return () => clearInterval(interval);
     }, []);
   };
+  
 
 
 

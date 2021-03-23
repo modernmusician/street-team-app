@@ -12,6 +12,7 @@ import Countdown from '../Countdown';
 import ReactDeadline from '../ReactDeadline';
 import PointsBox from "../PointsBox"
 import ActionPointsButton from "../ActionPointsButton"
+import ActionPointsButtonTyped from "../ActionPointsButtonTyped"
 import EmailForm from "../EmailForm";
 import ProgressBox from "../ProgressBox"
 import SpotifyPlayBox from "../SpotifyPlayBox"
@@ -23,9 +24,9 @@ import { FaCheckCircle } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { MdLibraryMusic } from "react-icons/md";
 
-
-
-function ContestPage1Card({contestHeadline,contestDescription,buttonText,contestDeadline,contestImg,actionSpotifyPlay,actionSpotifyFollow,actionSpotifySave,actionStreetTeam}) {
+let pointSetter = 0;
+let totalPoints = 0;
+function ContestPage1Card({contestHeadline,contestDescription,buttonText,contestDeadline,contestImg,streetTeamUrl,spotifyPlayUrl,spotifyFollowArtistUrl,spotifyFollowPlaylistUrl,spotifySaveUrl,actionSpotifyPlay,actionSpotifyFollow,actionSpotifySave,actionStreetTeam}) {
   
   
  contestHeadline= (contestHeadline=="") ? "Win a Baby" : contestHeadline;
@@ -40,6 +41,8 @@ contestImg= (contestImg=="") ? "../baby.png" : contestImg;
   const [buttonClickedSpotifySave, setClickedSpotifySave] = useState(false);
   const [buttonClickedJoinStreetTeam, setClickedJoinStreetTeam] = useState(false);
   
+  const [completed, setCompleted] = useState(false);
+  
   const spotifyPlayButton = actionSpotifyPlay ? null : "hide";
   const spotifyFollowButton = actionSpotifyFollow ? null : "hide";
   const spotifySaveButton = actionSpotifySave ? null : "hide";
@@ -48,6 +51,8 @@ contestImg= (contestImg=="") ? "../baby.png" : contestImg;
     const search1 = window.location.href;
     const a1 = search1.search("#");
     const first1 = search1.substr(a1);
+    
+    spotifySaveUrl = first1;
   
   return (
     <div>
@@ -82,67 +87,50 @@ contestImg= (contestImg=="") ? "../baby.png" : contestImg;
           */}
           
           {/*TODO: We need to implement the api calls to run as the spotify play box is beginning to start playing.*/}
-            <div class={spotifyPlayButton} onClick={() => { setDisplay(!showSpotifyBox); }}>
-              <ActionPointsButton 
-                
-                text={buttonClickedSpotifyPlay ? "Played on Spotify" : "Play on Spotify"} 
-                icon={buttonClickedSpotifyPlay ? FaCheckCircle : FaSpotify}
-                path= {first1}
-                points={20}
-                textBoxColor={buttonClickedSpotifyPlay ? "spotify-color-gradient clicked" : "spotify-color-gradient"}
-                pointsBoxColor={buttonClickedSpotifyPlay ? "spotify-color clicked" : "spotify-color"}
-                buttonTextStyle={buttonClickedSpotifyPlay ? "light clicked-text " : "light "}
-                buttonIconStyle={buttonClickedSpotifyPlay ? "light clicked-text " : "light "}
-                heightClass="button-small-height"
-                pointsSize="button-points-total-action"
+            <div class={spotifyPlayButton} onClick={() => { setDisplay(!showSpotifyBox); incrementPoints(20); }}>
+              <ActionPointsButtonTyped 
+                preActionText="Play on Spotify"
+                postActionText="Played on Spotify"
+                actionType="spotifyPlay"
+                pointValue={20}
+                url= {spotifySaveUrl}
+                completed={buttonClickedSpotifyPlay}
               />
             </div>
             
             
             {showSpotifyBox ? <div onClick={() => { setClickedSpotifyPlay(true); }}> <SpotifyPlayBox /> </div> : null}
             
-            <div class={spotifyFollowButton} onClick={() => { setClickedSpotifyFollow(true); }}>
-              <ActionPointsButton 
-                text={buttonClickedSpotifyFollow ? "Followed on Spotify" : "Follow on Spotify"} 
-                icon={buttonClickedSpotifyFollow ? FaCheckCircle : FaSpotify}
-                path= "/spotify-follow-artist"
-                points={50}
-                textBoxColor={buttonClickedSpotifyFollow ? "spotify-color-gradient clicked" : "spotify-color-gradient"}
-                pointsBoxColor={buttonClickedSpotifyFollow ? "spotify-color clicked" : "spotify-color"}
-                buttonTextStyle={buttonClickedSpotifyFollow ? "light clicked-text " : "light "}
-                buttonIconStyle={buttonClickedSpotifyFollow ? "light clicked-text " : "light "}
-                heightClass="button-small-height"
-                pointsSize="button-points-total-action"
+            <div class={spotifyFollowButton} onClick={() => { setClickedSpotifyFollow(true); incrementPoints(50); }}>
+              <ActionPointsButtonTyped 
+                preActionText="Follow on Spotify"
+                postActionText="Followed on Spotify"
+                actionType="spotifyFollow"
+                pointValue={50}
+                url= {spotifyFollowArtistUrl}
+                completed={buttonClickedSpotifyFollow}
               />
             </div>
             
-            <div class={spotifySaveButton} onClick={() => { setClickedSpotifySave(true); }}>
-              <ActionPointsButton 
-                text={buttonClickedSpotifySave ? "Saved on Spotify" : "Save on Spotify"} 
-                icon={buttonClickedSpotifySave ? FaCheckCircle : FaSpotify}
-                path= "/spotify-save-song"
-                points={50}
-                textBoxColor={buttonClickedSpotifySave ? "spotify-color-gradient clicked" : "spotify-color-gradient"}
-                pointsBoxColor={buttonClickedSpotifySave ? "spotify-color clicked" : "spotify-color"}
-                buttonTextStyle={buttonClickedSpotifySave ? "light clicked-text " : "light "}
-                buttonIconStyle={buttonClickedSpotifySave ? "light clicked-text " : "light "}
-                heightClass="button-small-height"
-                pointsSize="button-points-total-action"
+            <div class={spotifySaveButton} onClick={() => { setClickedSpotifySave(true); incrementPoints(50); }}>
+              <ActionPointsButtonTyped 
+                preActionText="Save on Spotify"
+                postActionText="Saved on Spotify"
+                actionType="spotifySave"
+                pointValue={50}
+                url= {spotifySaveUrl}
+                completed={buttonClickedSpotifySave}
               />
             </div>
             
-            <div class={streetTeamButton} onClick={() => { setClickedJoinStreetTeam(true); }}>
-              <ActionPointsButton 
-                text={buttonClickedJoinStreetTeam ? "Joined Street Team" : "Join Street Team"} 
-                icon={buttonClickedJoinStreetTeam ? FaCheckCircle : MdLibraryMusic}
-                path= ""
-                points={100}
-                textBoxColor={buttonClickedJoinStreetTeam ? "complete-registration-color-gradient clicked" : "complete-registration-color-gradient"}
-                pointsBoxColor={buttonClickedJoinStreetTeam ? "complete-registration-color clicked" : "complete-registration-color"}
-                buttonTextStyle={buttonClickedJoinStreetTeam ? "light clicked-text " : "dark "}
-                buttonIconStyle={buttonClickedJoinStreetTeam ? "light clicked-text " : "dark "}
-                heightClass="button-small-height"
-                pointsSize="button-points-total-action"
+            <div class={streetTeamButton} onClick={() => { setClickedJoinStreetTeam(true); incrementPoints(100) }}>
+              <ActionPointsButtonTyped 
+                preActionText="Join Street Team"
+                postActionText="Joined Street Team"
+                actionType="streetTeamJoin"
+                pointValue={100}
+                url= {streetTeamUrl}
+                completed={buttonClickedJoinStreetTeam}
               />
             </div>
           </div>
@@ -158,7 +146,7 @@ contestImg= (contestImg=="") ? "../baby.png" : contestImg;
 
           </div>
           <PointsBox 
-          totalPoints={40} 
+          totalPoints={totalPoints} 
           includeText={true}
           userName="Michael Walker"
           totalReferrals={0}
@@ -168,6 +156,13 @@ contestImg= (contestImg=="") ? "../baby.png" : contestImg;
       </Card>
     </div>
   );
+}
+function incrementPoints(pointSetter){
+  
+  totalPoints = totalPoints + pointSetter;
+  // if(pointSetter == 20){
+    
+  // }
 }
 
 export default ContestPage1Card;

@@ -37,6 +37,11 @@ function FanActions() {
     buttonText: '',
     contestDeadline: '',
     contestImg: '',
+    streetTeamUrl: '',
+    spotifyPlayUrl: '',
+    spotifyFollowPlaylistUrl: '',
+    spotifyFollowArtistUrl: '',
+    spotifySaveUrl: '',
   });
 
 const handleOnChange = event => {
@@ -70,7 +75,7 @@ const handleAuthenticated = () => setAuthenticated(true);
     <ToggleActionButton
       label="Play on Spotify"
       icon={FaSpotify}
-      id="actionSpotifyPlay"
+      actionType="spotifyPlay"
       value={actionSpotifyPlay}
       setSave={setActionSpotifyPlay}
       onChange={e => setActionSpotifyPlay(e.target.checked)}
@@ -78,12 +83,14 @@ const handleAuthenticated = () => setAuthenticated(true);
       authenticated={authenticated}
       setAuthenticated={setAuthenticated}
       handleAuthenticated={handleAuthenticated}
+      inputValues={inputValues}
+      setInputValues={setInputValues}
     />
     
     <ToggleActionButton
       label="Follow on Spotify"
       icon={FaSpotify}
-      id="actionSpotifyFollow"
+      actionType="spotifyFollow"
       value={actionSpotifyFollow}
       setSave={setActionSpotifyFollow}
       onChange={e => setActionSpotifyFollow(e.target.checked)}
@@ -91,12 +98,14 @@ const handleAuthenticated = () => setAuthenticated(true);
       authenticated={authenticated}
       setAuthenticated={setAuthenticated}
       handleAuthenticated={handleAuthenticated}
+      inputValues={inputValues}
+      setInputValues={setInputValues}
     />
     
     <ToggleActionButton
       label="Save on Spotify"
       icon={FaSpotify}
-      id="actionSpotifySave"
+      actionType="spotifySave"
       value={actionSpotifySave}
       setSave={setActionSpotifySave}
       onChange={e => setActionSpotifySave(e.target.checked)}
@@ -104,16 +113,21 @@ const handleAuthenticated = () => setAuthenticated(true);
       authenticated={authenticated}
       setAuthenticated={setAuthenticated}
       handleAuthenticated={handleAuthenticated}
+      inputValues={inputValues}
+      setInputValues={setInputValues}
     />
     
     <ToggleActionButton
       label="Join Street Team"
       icon={ MdLibraryMusic }
-      id="actionStreetTeam"
+      actionType="streetTeamJoin"
       value={actionStreetTeam}
       onChange={e => setActionStreetTeam(e.target.checked)}
       description="Get more email & text subscribers..."
       authenticated={true}
+      inputValues={inputValues}
+      setInputValues={setInputValues}
+      handleOnChange={handleOnChange}
     />
               
               <div class="button-container">
@@ -139,6 +153,11 @@ const handleAuthenticated = () => setAuthenticated(true);
                     buttonText={inputValues.buttonText}
                     contestDeadline={inputValues.contestDeadline}
                     contestImg={inputValues.contestImg}
+                    streetTeamUrl={inputValues.streetTeamUrl}
+                    spotifyPlayUrl={inputValues.spotifyPlayUrl}
+                    spotifyFollowPlaylistUrl={inputValues.spotifyFollowPlaylistUrl}
+                    spotifyFollowArtistUrl={inputValues.spotifyFollowArtistUrl}
+                    spotifySaveUrl={inputValues.spotifySaveUrl}
                     actionSpotifyPlay= {actionSpotifyPlay}
                     actionSpotifyFollow={actionSpotifyFollow}
                     actionSpotifySave={actionSpotifySave}

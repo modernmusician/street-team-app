@@ -19,10 +19,11 @@ import styled from 'styled-components';
 import NavbarSteps from './NavbarSteps';
 
 import Checkfield from "./../Checkfield";
+import ToggleActionExtraBox from "./ToggleActionExtraBox";
 
 const ToggleActionButton = ({
       label,
-      id,
+      actionType,
       value,
       setSave,
       onChange,
@@ -32,25 +33,15 @@ const ToggleActionButton = ({
       authenticated,
       setAuthenticated,
       handleAuthenticated,
+      inputValues,
+      setInputValues,
+      handleOnChange,
 }) => {
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
-  const [inputValues, setInputValues] = useState({
-    contestHeadline: '', 
-    contestDescription: '',
-    buttonText: '',
-    contestDeadline: '',
-    contestImg: '',
-  });
-
-const handleOnChange = event => {
-  const { name, value } = event.target;
-  setInputValues({ ...inputValues, [name]: value });
-};
 
     return(
     <div className="form-group" >
@@ -66,7 +57,6 @@ const handleOnChange = event => {
                 style={{ marginRight: 20 }}
                 className="form-check-input"
                 type="checkbox"
-                id={id}
                 value={value}
                 setSave={setSave}
                 onChange={onChange}
@@ -94,21 +84,12 @@ const handleOnChange = event => {
           </label>
           {value ? 
           
-          <div className="form-action-toggle toggle-action-inputs" >
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1"></label>
-                <input 
-                type="email"
-                name="contestDescription"
-                value={inputValues.contestDescription}
-                onChange={handleOnChange}
-                className="form-control" 
-                id="exampleInputEmail1" 
-                placeholder="Enter Spotify Track URL" 
-                />
-              </div>
-          
-          </div>
+          <ToggleActionExtraBox
+          inputValues={inputValues}
+          setInputValues={setInputValues}
+          handleOnChange={handleOnChange}
+          actionType={actionType}
+          />
           
           :
           
