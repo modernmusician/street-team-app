@@ -1,6 +1,7 @@
 {
+	"auth": {},
 	"api": {
-		"streetteamreact": {
+		"awsgraphqlreact": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
@@ -9,40 +10,28 @@
 						"authenticationType": "API_KEY",
 						"apiKeyConfig": {
 							"apiKeyExpirationDays": 7,
-							"description": "provide a valid api key"
+							"description": ""
 						}
 					},
 					"additionalAuthenticationProviders": []
 				}
 			}
 		},
-		"StreetTeamAPI": {
-			"service": "API Gateway",
+		"streetteamreact": {
+			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
-			"dependsOn": [
-				{
-					"category": "function",
-					"resourceName": "StreetTeamApi",
-					"attributes": [
-						"Name",
-						"Arn"
-					]
+			"output": {
+				"authConfig": {
+					"defaultAuthentication": {
+						"authenticationType": "API_KEY",
+						"apiKeyConfig": {
+							"apiKeyExpirationDays": 365,
+							"description": "apikey"
+						}
+					},
+					"additionalAuthenticationProviders": []
 				}
-			]
-		}
-	},
-	"hosting": {
-		"amplifyhosting": {
-			"service": "amplifyhosting",
-			"type": "cicd"
-		}
-	},
-	"function": {
-		"StreetTeamApi": {
-			"build": true,
-			"providerPlugin": "awscloudformation",
-			"service": "Lambda",
-			"dependsOn": []
+			}
 		}
 	}
 }

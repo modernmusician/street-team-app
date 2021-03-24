@@ -1,5 +1,95 @@
-type Todo @model {
+type Artist @model {
   id: ID!
   name: String!
+  contests: [Contest] @connection(keyName: "byArtist", fields: ["id"])
+}
+
+type Contest @model @key(name: "byArtist", fields: ["artistID", "headline"]) {
+  id: ID!
+  headline: String!
   description: String
+  encouragementHeadline: String
+  encouragementDescription: String
+  landingButtonText: String!
+  deadline: String
+  artistID: ID!
+  artist: Artist @connection(fields: ["artistID"])
+  actions: [ContestAction] @connection(keyName: "byContest", fields: ["id"])
+  pictureID: ID!
+  picture: Picture @connection(fields: ["pictureID"])
+  testPictureUrl: String
+  subscribers: [ContestSubscription]
+    @connection(keyName: "byContest", fields: ["id"])
+}
+
+type ContestAction
+  @model
+  @key(name: "byContest", fields: ["contestID", "url"]) {
+  id: ID!
+  preActionText: String
+  postActionText: String
+  pointValue: Int
+  contestID: ID!
+  contest: Contest @connection(fields: ["contestID"])
+  enduserActions: [EnduserActions]
+    @connection(keyName: "byAction", fields: ["id"])
+  actionType: ActionType
+  url: String!
+}
+
+type ActionType @model {
+  id: ID!
+  value: String
+}
+
+type ContestSubscription
+  @model(queries: null)
+  @key(name: "byContest", fields: ["contestID", "enduserID"])
+  @key(name: "byEnduser", fields: ["enduserID", "contestID"]) {
+  id: ID!
+  contestID: ID!
+  enduserID: ID!
+  contest: Contest! @connection(fields: ["contestID"])
+  enduser: Enduser! @connection(fields: ["enduserID"])
+}
+
+type Enduser @model {
+  id: ID!
+  username: String!
+  actions: [EnduserActions] @connection(keyName: "byEnduser", fields: ["id"])
+  subscriptions: [ContestSubscription]
+    @connection(keyName: "byEnduser", fields: ["id"])
+}
+
+type EnduserActions
+  @model
+  @key(name: "byAction", fields: ["actionID"])
+  @key(name: "byEnduser", fields: ["enduserID"]) {
+  enduserID: ID!
+  enduser: Enduser!
+  actionID: ID!
+  action: ContestAction!
+  status: String
+  createdAt: String
+}
+
+type Picture @model {
+  id: ID!
+  publicUrl: String
+  name: String
+  owner: String
+  visibility: Visibility
+  createdAt: String
+  file: S3Object
+}
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
+enum Visibility {
+  public
+  private
 }
