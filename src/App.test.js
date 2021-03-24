@@ -6,9 +6,11 @@ import App from './App';
 // import render from 'riteway/render-component';
 
 // ##default create-react-app
-test('renders learn react link', () => {
+test('renders app', () => {
   // const { getByText } = render(<App />);
-  // const linkElement = getByText('Contest');
+
+  // const linkElement = getByText(/terms/i);
+  // expect(linkElement).toBeInTheDocument();
   expect(render(<App />));
 });
 
