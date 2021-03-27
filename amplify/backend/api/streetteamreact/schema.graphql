@@ -20,6 +20,11 @@ type Contest @model @key(name: "byArtist", fields: ["artistID", "headline"]) {
   testPictureUrl: String
   subscribers: [ContestSubscription]
     @connection(keyName: "byContest", fields: ["id"])
+  streetTeamUrl: String
+  spotifyPlayUrl: String
+  spotifyFollowPlaylistUrl: String
+  spotifyFollowArtistUrl: String
+  spotifySaveUrl: String
 }
 
 type ContestAction
@@ -43,19 +48,30 @@ type ActionType @model {
 }
 
 type ContestSubscription
-  @model(queries: null)
+  @model
   @key(name: "byContest", fields: ["contestID", "enduserID"])
   @key(name: "byEnduser", fields: ["enduserID", "contestID"]) {
   id: ID!
   contestID: ID!
   enduserID: ID!
+  enduserPoints: Int
+  """
+  These Booleans will eventually be stored on the EnduserActions type instead
+  For the MVP we're storing them here
+  """
+  completeStreetTeamJoin: Boolean
+  completeSpotifyFollow: Boolean
+  completeSpotifySave: Boolean
+  completeSpotifyPlay: Boolean
   contest: Contest! @connection(fields: ["contestID"])
   enduser: Enduser! @connection(fields: ["enduserID"])
 }
 
 type Enduser @model {
   id: ID!
-  username: String!
+  username: String
+  firstName: String
+  lastName: String
   actions: [EnduserActions] @connection(keyName: "byEnduser", fields: ["id"])
   subscriptions: [ContestSubscription]
     @connection(keyName: "byEnduser", fields: ["id"])

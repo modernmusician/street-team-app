@@ -10,7 +10,8 @@ import { getContest, getEnduser } from '../graphql/queries';
 
 function ContestPage1() {
   // this needs to use the contest id, which right now hard coded, going to be from the incoming path eventually will be from a subdomain or something
-  const contestId = '762be373-ae1d-45e2-aef2-08aebac72c75';
+  // const contestId = '762be373-ae1d-45e2-aef2-08aebac72c75';
+  const contestId = 'little-contest'
   const enduserId = '762be373';
   // console.log(contestID);
   // const id = contestID;
@@ -31,7 +32,7 @@ function ContestPage1() {
   });
 
   if (contestLoading || enduserLoading) {
-    return <p>Loading...</p>;
+    return <div><p>Loading...</p></div>;
   }
   if (contestError || enduserError) {
     return (
@@ -46,97 +47,61 @@ function ContestPage1() {
   const contestInfo = contestData.getContest;
   console.log(enduserData);
   const enduserInfo = enduserData.getEnduser;
+  
+  const formattedDeadline = contestInfo.deadline.replace(/-/g, "/");
 
-  // const enduserData = {
-  //   id: 'someenduserID',
-  //   actions: {
-  //     items: [
-  //       {
-  //         id: 'asdf8asdf0jad',
-  //         content: 'actionText1',
-  //         pointValue: '1',
-  //         contestID: 'somecontestid',
-  //         url: 'https://google.com',
-  //         // createdAt
-  //         // updatedAt
-  //       },
-  //     ],
-  //     nextToken: 'somenextactiontoken',
-  //   },
-  // };
-
-  //// this needs to use the contest id, which right now hard coded, going to be from the incoming path eventually will be from a subdomain or something
-  // const contestData = {
-  //   id: 'somecontestid',
-  //   headline: 'THIS IS A HEADLINE',
-  //   description: 'this is a description',
-  //   landingButtonText: 'btn TEXT',
-  //   deadline: '3/4/2021 18:00:00',
-  //   encouragementHeadline: 'Increase Your Chances of Winning Today',
-  //   encouragementDescription:
-  //     'Get to the top of the list by completing the following supportive actions',
-  //   // "artistID"
-  //   artist: {
-  //     id: 'artistID',
-  //     name: 'BIGFAT JAMBAND',
-  //     contests: {
-  //       nextToken: 'sometoken',
-  //     },
-  //   },
-  //   actions: {
-  //     items: {
-  //       id: 'anitemid',
-  //       content: 'actionText1',
-  //       pointValue: '1',
-  //       contestID: 'somecontestid',
-  //       url: 'https://google.com',
-  //       // createdAt
-  //       // updatedAt
-  //     },
-  //     nextToken: 'somenextactiontoken',
-  //   },
-  //   //need to build a URL from this picture. Why not just use the public S3 URL?
-  //   picture: {
-  //     publicUrl: '../logo192.png',
-  //     // id
-  //     // name
-  //     // owner
-  //     // visibility
-  //     // createdAt
-  //     // file {
-  //     //   bucket
-  //     //   region
-  //     //   key
-  //     // }
-  //     // updatedAt
-  //   },
-  //   // createdAt
-  //   // updatedAt
-  // };
+  // const spotifyPlayAction = contestInfo.actions.spotifyPlay ? contestInfo.actions.spotifyPlay : 
+  
+  const enduserContestInfo = enduserInfo.subscriptions.items.find(element => element.contestID == contestId)
 
   return (
     <div>
       <div>
-        <Background myClass="background-wrapper" />
+        <Background myclassName="background-wrapper" />
       </div>
       <div>
         <CenterBox
           boxContent={
             <ContestPage1Card
-              contestHeadline="Win a Baby"
-              contestDescription="Enter for a chance to win a happy, healthy baby girl!"
-              buttonText="CONTINUE"
-              contestDeadline="4/1/2021"
-              contestImg="../baby.png"
+              // contestHeadline="Win a Baby"
+              // contestDescription="Enter for a chance to win a happy, healthy baby girl!"
+              // buttonText="CONTINUE"
+              // contestDeadline="4/1/2021"
+              // contestImg="../baby.png"
+              contestHeadline={contestInfo.headline}
+              contestDescription={contestInfo.description}
+              buttonText={contestInfo.contestButtonText ? contestInfo.contestButtonText : "CONTINUE"}
+              contestDeadline={formattedDeadline} //TODO deadline needs to be UTC
+              contestImg={contestInfo.picture.publicUrl}
               actionSpotifyPlay={true}
               actionSpotifyFollow={true}
               actionSpotifySave={true}
               actionStreetTeam={true}
-              streetTeamUrl="www.modern-musician.com"
-              spotifyPlayUrl="www.modern-musician.com"
-              spotifyFollowPlaylistUrl="www.modern-musician.com"
-              spotifyFollowArtistUrl="www.modern-musician.com"
-              spotifySaveUrl="www.modern-musician.com"
+              // actionSpotifyPlay={contestInfo.actions.spotifyPlay}
+              // actionSpotifyFollow={contestInfo.actions.spotifyFollow}
+              // actionSpotifySave={contestInfo.actions.spotifySave}
+              // actionStreetTeam={contestInfo.actions.streetTeamJoin}
+              // streetTeamUrl={contestInfo.actions.streetTeamJoin.Url}
+              // spotifyPlayUrl={contestInfo.actions.spotifyPlay.Url}
+              // spotifyFollowPlaylistUrl={contestInfo.actions.spotifyFollowPlaylist.Url}
+              // spotifyFollowArtistUrl={contestInfo.actions.spotifyFollowArtist.Url}
+              // spotifySaveUrl={contestInfo.actions.spotifySave.Url}
+              streetTeamUrl={contestInfo.streetTeamUrl || "https://www.modern-musician.com"}
+              spotifyPlayUrl={contestInfo.spotifyPlayUrl}
+              spotifyFollowPlaylistUrl={contestInfo.spotifyFollowPlaylistUrl}
+              spotifyFollowArtistUrl={contestInfo.spotifyFollowArtistUrl}
+              spotifySaveUrl={contestInfo.spotifySaveUrl}
+              userFirstName={enduserInfo.firstName || "Michael"}
+              userLastName={enduserInfo.lastName || "Walker"}
+              totalPoints={enduserContestInfo.enduserPoints || 30}
+              enduserContestID={enduserContestInfo.id}
+              // TODO need to leverage the following in the ContestPage1Card
+              /*
+              enduserContestInfo.completedSpotifyPlay
+              enduserContestInfo.completedSpotifyFollow
+              enduserContestInfo.completedSpotifySave
+              enduserContestInfo.completedJoinStreetTeam
+              */
             />
           }
           displayFooter={true}

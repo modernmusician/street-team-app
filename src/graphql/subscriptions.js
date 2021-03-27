@@ -18,6 +18,11 @@ export const onCreateArtist = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
         }
@@ -45,6 +50,11 @@ export const onUpdateArtist = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
         }
@@ -72,6 +82,11 @@ export const onDeleteArtist = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
         }
@@ -136,11 +151,21 @@ export const onCreateContest = /* GraphQL */ `
           id
           contestID
           enduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
           createdAt
           updatedAt
         }
         nextToken
       }
+      streetTeamUrl
+      spotifyPlayUrl
+      spotifyFollowPlaylistUrl
+      spotifyFollowArtistUrl
+      spotifySaveUrl
       createdAt
       updatedAt
     }
@@ -200,11 +225,21 @@ export const onUpdateContest = /* GraphQL */ `
           id
           contestID
           enduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
           createdAt
           updatedAt
         }
         nextToken
       }
+      streetTeamUrl
+      spotifyPlayUrl
+      spotifyFollowPlaylistUrl
+      spotifyFollowArtistUrl
+      spotifySaveUrl
       createdAt
       updatedAt
     }
@@ -264,11 +299,21 @@ export const onDeleteContest = /* GraphQL */ `
           id
           contestID
           enduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
           createdAt
           updatedAt
         }
         nextToken
       }
+      streetTeamUrl
+      spotifyPlayUrl
+      spotifyFollowPlaylistUrl
+      spotifyFollowArtistUrl
+      spotifySaveUrl
       createdAt
       updatedAt
     }
@@ -314,6 +359,11 @@ export const onCreateContestAction = /* GraphQL */ `
         subscribers {
           nextToken
         }
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
         createdAt
         updatedAt
       }
@@ -379,6 +429,11 @@ export const onUpdateContestAction = /* GraphQL */ `
         subscribers {
           nextToken
         }
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
         createdAt
         updatedAt
       }
@@ -444,6 +499,11 @@ export const onDeleteContestAction = /* GraphQL */ `
         subscribers {
           nextToken
         }
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
         createdAt
         updatedAt
       }
@@ -505,6 +565,11 @@ export const onCreateContestSubscription = /* GraphQL */ `
       id
       contestID
       enduserID
+      enduserPoints
+      completeStreetTeamJoin
+      completeSpotifyFollow
+      completeSpotifySave
+      completeSpotifyPlay
       contest {
         id
         headline
@@ -537,12 +602,19 @@ export const onCreateContestSubscription = /* GraphQL */ `
         subscribers {
           nextToken
         }
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
         createdAt
         updatedAt
       }
       enduser {
         id
         username
+        firstName
+        lastName
         actions {
           nextToken
         }
@@ -563,6 +635,11 @@ export const onUpdateContestSubscription = /* GraphQL */ `
       id
       contestID
       enduserID
+      enduserPoints
+      completeStreetTeamJoin
+      completeSpotifyFollow
+      completeSpotifySave
+      completeSpotifyPlay
       contest {
         id
         headline
@@ -595,12 +672,19 @@ export const onUpdateContestSubscription = /* GraphQL */ `
         subscribers {
           nextToken
         }
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
         createdAt
         updatedAt
       }
       enduser {
         id
         username
+        firstName
+        lastName
         actions {
           nextToken
         }
@@ -621,6 +705,11 @@ export const onDeleteContestSubscription = /* GraphQL */ `
       id
       contestID
       enduserID
+      enduserPoints
+      completeStreetTeamJoin
+      completeSpotifyFollow
+      completeSpotifySave
+      completeSpotifyPlay
       contest {
         id
         headline
@@ -653,12 +742,19 @@ export const onDeleteContestSubscription = /* GraphQL */ `
         subscribers {
           nextToken
         }
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
         createdAt
         updatedAt
       }
       enduser {
         id
         username
+        firstName
+        lastName
         actions {
           nextToken
         }
@@ -678,6 +774,8 @@ export const onCreateEnduser = /* GraphQL */ `
     onCreateEnduser {
       id
       username
+      firstName
+      lastName
       actions {
         items {
           enduserID
@@ -693,6 +791,11 @@ export const onCreateEnduser = /* GraphQL */ `
           id
           contestID
           enduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
           createdAt
           updatedAt
         }
@@ -708,6 +811,8 @@ export const onUpdateEnduser = /* GraphQL */ `
     onUpdateEnduser {
       id
       username
+      firstName
+      lastName
       actions {
         items {
           enduserID
@@ -723,6 +828,11 @@ export const onUpdateEnduser = /* GraphQL */ `
           id
           contestID
           enduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
           createdAt
           updatedAt
         }
@@ -738,6 +848,8 @@ export const onDeleteEnduser = /* GraphQL */ `
     onDeleteEnduser {
       id
       username
+      firstName
+      lastName
       actions {
         items {
           enduserID
@@ -753,6 +865,11 @@ export const onDeleteEnduser = /* GraphQL */ `
           id
           contestID
           enduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
           createdAt
           updatedAt
         }
@@ -770,6 +887,8 @@ export const onCreateEnduserActions = /* GraphQL */ `
       enduser {
         id
         username
+        firstName
+        lastName
         actions {
           nextToken
         }
@@ -797,6 +916,11 @@ export const onCreateEnduserActions = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
         }
@@ -826,6 +950,8 @@ export const onUpdateEnduserActions = /* GraphQL */ `
       enduser {
         id
         username
+        firstName
+        lastName
         actions {
           nextToken
         }
@@ -853,6 +979,11 @@ export const onUpdateEnduserActions = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
         }
@@ -882,6 +1013,8 @@ export const onDeleteEnduserActions = /* GraphQL */ `
       enduser {
         id
         username
+        firstName
+        lastName
         actions {
           nextToken
         }
@@ -909,6 +1042,11 @@ export const onDeleteEnduserActions = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
         }

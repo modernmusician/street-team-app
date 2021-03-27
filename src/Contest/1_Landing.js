@@ -47,6 +47,9 @@ function Landing() {
   console.log(enduserData);
   const enduserInfo = enduserData.getEnduser;
 
+  const formattedDeadline = contestInfo.deadline.replace(/-/g, "/");
+  console.log(formattedDeadline);
+
   return (
     <div>
       <Background myClass="background-wrapper" />
@@ -54,11 +57,16 @@ function Landing() {
         <CenterBox
           boxContent={
             <OptinCard
-              contestHeadline="Win a Baby"
-              contestDescription="Enter for a chance to win a happy, healthy baby girl!"
-              buttonText="Enter to Win >"
-              contestDeadline="4/13/2021"
-              contestImg="../baby.png"
+              // contestHeadline="Win a Baby"
+              // contestDescription="Enter for a chance to win a happy, healthy baby girl!"
+              // buttonText="Enter to Win >"
+              // contestDeadline="4/13/2021"
+              // contestImg="../baby.png"
+              contestHeadline={contestInfo.headline}
+              contestDescription={contestInfo.description}
+              buttonText={contestInfo.landingButtonText}
+              contestDeadline={formattedDeadline} //TODO deadline needs to be UTC
+              contestImg={contestInfo.picture.publicUrl}
             />
           }
           displayFooter={true}

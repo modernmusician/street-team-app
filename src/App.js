@@ -47,13 +47,13 @@ function App() {
 
   return (
       <Router>
-        <Landing path="/landingpage" />
+        <Landing path="/landing" />
         <Registration path="/registration" />
         <EmailRegistration path="/register-email" />
-        <ContestPage1 path="/contest" />
+        <ContestPage1 path="/" />
         <ReferralPage path="/referral"/>
         <Login path="/login" />
-        <CreateContestPage path="/" />
+        <CreateContestPage path="/createcontest" />
         <SpotifyFollowArtist path="/spotify-follow-artist"/>
         <SpotifySaveSong path="/spotify-save-song"/>
       </Router>

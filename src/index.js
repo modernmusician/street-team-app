@@ -11,8 +11,8 @@ import { ApolloLink } from 'apollo-link';
 import { createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from 'apollo-link-http';
 import aws_config from './aws-exports';
-import ApolloClient from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+// import { InMemoryCache } from 'apollo-cache-inmemory';
 
 const url = aws_config.aws_appsync_graphqlEndpoint;
 const region = aws_config.aws_appsync_region;

@@ -18,6 +18,11 @@ export const getArtist = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
         }
@@ -102,11 +107,21 @@ export const getContest = /* GraphQL */ `
           id
           contestID
           enduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
           createdAt
           updatedAt
         }
         nextToken
       }
+      streetTeamUrl
+      spotifyPlayUrl
+      spotifyFollowPlaylistUrl
+      spotifyFollowArtistUrl
+      spotifySaveUrl
       createdAt
       updatedAt
     }
@@ -151,6 +166,11 @@ export const listContests = /* GraphQL */ `
         subscribers {
           nextToken
         }
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
         createdAt
         updatedAt
       }
@@ -198,6 +218,11 @@ export const getContestAction = /* GraphQL */ `
         subscribers {
           nextToken
         }
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
         createdAt
         updatedAt
       }
@@ -247,6 +272,11 @@ export const listContestActions = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
         }
@@ -294,11 +324,137 @@ export const listActionTypes = /* GraphQL */ `
     }
   }
 `;
+export const getContestSubscription = /* GraphQL */ `
+  query GetContestSubscription($id: ID!) {
+    getContestSubscription(id: $id) {
+      id
+      contestID
+      enduserID
+      enduserPoints
+      completeStreetTeamJoin
+      completeSpotifyFollow
+      completeSpotifySave
+      completeSpotifyPlay
+      contest {
+        id
+        headline
+        description
+        encouragementHeadline
+        encouragementDescription
+        landingButtonText
+        deadline
+        artistID
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        actions {
+          nextToken
+        }
+        pictureID
+        picture {
+          id
+          publicUrl
+          name
+          owner
+          visibility
+          createdAt
+          updatedAt
+        }
+        testPictureUrl
+        subscribers {
+          nextToken
+        }
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
+        createdAt
+        updatedAt
+      }
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        actions {
+          nextToken
+        }
+        subscriptions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listContestSubscriptions = /* GraphQL */ `
+  query ListContestSubscriptions(
+    $filter: ModelContestSubscriptionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listContestSubscriptions(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        contestID
+        enduserID
+        enduserPoints
+        completeStreetTeamJoin
+        completeSpotifyFollow
+        completeSpotifySave
+        completeSpotifyPlay
+        contest {
+          id
+          headline
+          description
+          encouragementHeadline
+          encouragementDescription
+          landingButtonText
+          deadline
+          artistID
+          pictureID
+          testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
+          createdAt
+          updatedAt
+        }
+        enduser {
+          id
+          username
+          firstName
+          lastName
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getEnduser = /* GraphQL */ `
   query GetEnduser($id: ID!) {
     getEnduser(id: $id) {
       id
       username
+      firstName
+      lastName
       actions {
         items {
           enduserID
@@ -314,6 +470,11 @@ export const getEnduser = /* GraphQL */ `
           id
           contestID
           enduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
           createdAt
           updatedAt
         }
@@ -334,6 +495,8 @@ export const listEndusers = /* GraphQL */ `
       items {
         id
         username
+        firstName
+        lastName
         actions {
           nextToken
         }
@@ -354,6 +517,8 @@ export const getEnduserActions = /* GraphQL */ `
       enduser {
         id
         username
+        firstName
+        lastName
         actions {
           nextToken
         }
@@ -381,6 +546,11 @@ export const getEnduserActions = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
         }
@@ -415,6 +585,8 @@ export const listEnduserActionss = /* GraphQL */ `
         enduser {
           id
           username
+          firstName
+          lastName
           createdAt
           updatedAt
         }
