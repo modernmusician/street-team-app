@@ -87,7 +87,7 @@ function ActionPointsButtonTyped({preActionText,postActionText,actionType,pointV
                 pointsBoxColor={completed ? buttonColor + " clicked" : buttonColor}
                 buttonTextStyle={completed ? "light clicked-text " : buttonTextColor}
                 buttonIconStyle={completed ? "light clicked-text " : buttonTextColor}
-                heightclassName="button-small-height"
+                heightClassName="button-small-height"
                 pointsSize="button-points-total-action"
                 completed={completed}
                 actionType={actionType}

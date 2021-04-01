@@ -53,6 +53,7 @@ function ContestPage1() {
   // const spotifyPlayAction = contestInfo.actions.spotifyPlay ? contestInfo.actions.spotifyPlay : 
   
   const enduserContestInfo = enduserInfo.subscriptions.items.find(element => element.contestID == contestId)
+  console.log(enduserContestInfo.completeStreetTeamJoin);
 
   return (
     <div>
@@ -95,13 +96,12 @@ function ContestPage1() {
               userLastName={enduserInfo.lastName || "Walker"}
               totalPoints={enduserContestInfo.enduserPoints || 30}
               enduserContestID={enduserContestInfo.id}
-              // TODO need to leverage the following in the ContestPage1Card
-              /*
-              enduserContestInfo.completedSpotifyPlay
-              enduserContestInfo.completedSpotifyFollow
-              enduserContestInfo.completedSpotifySave
-              enduserContestInfo.completedJoinStreetTeam
-              */
+              spotifyToken={enduserInfo.spotifyToken}
+              spotifyDailyPlayCount={enduserContestInfo.spotifyDailyPlayCount}
+              completedSpotifyPlay={enduserContestInfo.completeSpotifyPlay}
+              completedSpotifyFollow={enduserContestInfo.completeSpotifyFollow}
+              completedSpotifySave={enduserContestInfo.completeSpotifySave}
+              completedStreetTeamJoin={enduserContestInfo.completeStreetTeamJoin}
             />
           }
           displayFooter={true}

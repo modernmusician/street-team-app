@@ -14,37 +14,38 @@ const ArtistID = "74ASZWbe4lXaubB36ztrGX";
 let content = null;
 const getJson = null;
 const fetch = require("node-fetch");
-const token1 = "";
+const spotifyToken = "";
 //TODO: Can make a math function to make sure that the person listens to the song all the way through.
 
-function SpotifyPlayBox() {
-   const search = window.location.href;
-   const a = search.search("=");
-   const first = search.substr(a);
-   const b = first.search("&token_type");
-   const token1 = first.substr(1,(b-1));
+function SpotifyPlayBox(parsedSpotifyPlayUrl) {
+//   const search = window.location.href;
+//   const a = search.search("=");
+//   const first = search.substr(a);
+//   const b = first.search("&token_type");
+//   const spotifyToken = first.substr(1,(b-1));
    
-    if (token1) {
+    // if (spotifyToken) {
       
-      SpotifyHook(token1);
+    //   SpotifyHook(spotifyToken);
         
         
-    } else {
+    // } else {
     
+    //     SpotifyRedirect();
         
-        //TODO: Need to bring the below back out of commented.
-        SpotifyRedirect();
-        
-    }
-    //SpotifyHook(token1);
+    // }
+    //SpotifyHook(spotifyToken);
+    console.log(parsedSpotifyPlayUrl)
+ console.log("parsed Spotify Play")
+    
+    const embedUrl = "https://open.spotify.com/embed/artist/" + parsedSpotifyPlayUrl;
+    
     return(
-        
             <div>
                 <div class="spotify-play-full-container">
                     <div class="spotify-triangle-up"> </div> 
                 </div>
                 <div class="spotify-play-container">
-                </div>
                     <div class="spotify-play-box">
                         <div class="spotify-top-text-container">
                             <div class="spotify-top-left-text-box"> <p> <Text color="hsl(0, 0%, 80%, 1)"> Play <Text weight="bold"> 1x </Text> a day </Text> </p>  </div>
@@ -57,7 +58,7 @@ function SpotifyPlayBox() {
                         </div>
                         <div class="spotify-player"> 
                             <iframe 
-                                src="https://open.spotify.com/embed/artist/0jXaeFozic6yOdJRGuUcrR" 
+                                src={"https://open.spotify.com/embed/artist/" + parsedSpotifyPlayUrl.parsedSpotifyPlayUrl} 
                                 width="100%" 
                                 height="100%" 
                                 frameborder="0" 
@@ -66,6 +67,7 @@ function SpotifyPlayBox() {
                             </iframe>
                         </div>
                     </div>
+                </div>
             </div>
         )
 };
@@ -76,50 +78,54 @@ function SpotifyPlayBox() {
 
 
 
-//This will be the new and improved of what we need for API calling for the player's actual listening
+// //This will be the new and improved of what we need for API calling for the player's actual listening
 
- async function SpotifyRecentlyPlayedCall(token1) {
-    axios({
-      url: "https://api.spotify.com/v1/me/player/recently-played?limit=1",
-      method: 'get',
-      headers: { Accept: "application/json",
-                Authorization: "Bearer " + token1,
-                "Content-Type": "application/json",
-                }
-    })
-      .then(response => {
-          console.log(response.data.items);
-          console.log("This is the track ID: " + response.data.items[0].track.id);
-          console.log("This is the Artist ID: " + response.data.items[0].track.artists[0].id);
+//  async function SpotifyRecentlyPlayedCall(spotifyToken) {
+//     axios({
+//       url: "https://api.spotify.com/v1/me/player/recently-played?limit=1",
+//       method: 'get',
+//       headers: { Accept: "application/json",
+//                 Authorization: "Bearer " + spotifyToken,
+//                 "Content-Type": "application/json",
+//                 }
+//     })
+//       .then(response => {
+//           console.log(response.data.items);
+//           console.log("This is the track ID: " + response.data.items[0].track.id);
+//           console.log("This is the track ID: " + response.data.items[1].track.id);
+//           console.log("This is the Artist ID: " + response.data.items[0].track.artists[0].id);
 
-        });
-  };
-  function URLSearchForToken(){
-      const search = window.location.href;
-        const a = search.search("=");
-        const first = search.substr(a);
-        const b = first.search("&token_type");
-        const token1 = first.substr(1,(b-1));
-  };
-    function SpotifyRedirect() {
-      window.location.href = url1;
+//         });
+//   };
+//   function URLSearchForToken(){
+//       const search = window.location.href;
+//         const a = search.search("=");
+//         const first = search.substr(a);
+//         const b = first.search("&token_type");
+//         const spotifyToken = first.substr(1,(b-1));
+//   };
+//     function SpotifyRedirect() {
+//       window.location.href = url1;
     
-  };
-  function SpotifyRedirectToContest() {
-      window.location.href = "https://f1bf79aaf3f3461a991df7b204943be0.vfs.cloud9.us-west-2.amazonaws.com/contest";
+//   };
+//   function SpotifyRedirectToContest() {
+//       window.location.href = "https://f1bf79aaf3f3461a991df7b204943be0.vfs.cloud9.us-west-2.amazonaws.com/contest";
     
-  };
-  function SpotifyHook(token1){
-    const [seconds, setSeconds] = useState(0);
-        useEffect(() => {
-          const interval = setInterval(() => {
-            setSeconds(seconds => seconds + 1);
-              console.log('Interval triggered');
-              SpotifyRecentlyPlayedCall(token1);
-          }, 10000);
-    return () => clearInterval(interval);
-    }, []);
-  };
+//   };
+//   //TODO: Need to incrment the points box if the user listens to a song, effectively on the same playlist,
+//   //and with the same artist ID,(For now I feel that if we do the artist ID is the same and the old track ID is different.)
+//   //
+//   function SpotifyHook(spotifyToken){
+//     const [seconds, setSeconds] = useState(0);
+//         useEffect(() => {
+//           const interval = setInterval(() => {
+//             setSeconds(seconds => seconds + 1);
+//               console.log('Interval triggered');
+//               SpotifyRecentlyPlayedCall(spotifyToken);
+//           }, 10000);
+//     return () => clearInterval(interval);
+//     }, []);
+//   };
   
   
 

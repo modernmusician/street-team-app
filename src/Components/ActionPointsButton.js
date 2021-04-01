@@ -4,13 +4,13 @@ import Button from 'react-bootstrap/Button';
 import SpotifyPlayBox from "./SpotifyPlayBox"
 
 
-function ActionPointsButton({path,text,icon,points,textBoxColor,pointsBoxColor,buttonIconStyle,buttonTextStyle,heightClass,pointsSize,actionType}) {
+function ActionPointsButton({path,text,icon,points,textBoxColor,pointsBoxColor,buttonIconStyle,buttonTextStyle,heightClassName,pointsSize,actionType}) {
 
     return(
         <div key={actionType + "Key"} id={actionType + "ButtonDiv"} className="button-container">
           {/*<Link className="link-button" to={path}*/}
             <Button
-            className={"btn-default facebook-registration-button button-text-box " + heightClass}
+            className={"btn-default facebook-registration-button button-text-box " + heightClassName}
             >
               <div className= {"button-text-box " + textBoxColor}>
                 <div className={"button-icon " + buttonIconStyle}>
