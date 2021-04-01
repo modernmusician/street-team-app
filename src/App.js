@@ -10,8 +10,9 @@ import ContestPage1 from './Contest/4_ContestPage1';
 import ReferralPage from './Contest/5_ReferralPage';
 import SpotifyFollowArtist from './Contest/6_SpotifyFollowArtist';
 import SpotifySaveSong from './Contest/7_SpotifySaveSong';
-import Login from "./Contest/A1_Login";
+import Login from './Contest/A1_Login';
 import CreateContestPage from './Contest/A2_CreateContest';
+import Test from './Contest/Test';
 
 // import { API, graphqlOperation } from "aws-amplify";
 // import { createTodo } from "./graphql/mutations";
@@ -46,17 +47,19 @@ function App() {
   // counter items
 
   return (
-      <Router>
-        <Landing path="/landing" />
-        <Registration path="/registration" />
-        <EmailRegistration path="/register-email" />
-        <ContestPage1 path="/" />
-        <ReferralPage path="/referral"/>
-        <Login path="/login" />
-        <CreateContestPage path="/createcontest" />
-        <SpotifyFollowArtist path="/spotify-follow-artist"/>
-        <SpotifySaveSong path="/spotify-save-song"/>
-      </Router>
+    <Router>
+      <Landing path="/landing" />
+      <Registration path="/registration" />
+      <EmailRegistration path="/register-email" />
+      <ContestPage1 path="/" />
+      <ReferralPage path="/referral" />
+      <Login path="/login" />
+      <CreateContestPage path="/createcontest" />
+      <SpotifyFollowArtist path="/spotify-follow-artist" />
+      <SpotifySaveSong path="/spotify-save-song" />
+      <SpotifySaveSong path="/spotify-save-song" />
+      <Test path="/test" />
+    </Router>
     // <div>
     //   <div>
     //   <Background />
