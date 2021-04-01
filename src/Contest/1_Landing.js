@@ -10,10 +10,11 @@ import { getContest, getEnduser } from '../graphql/queries';
 
 function Landing() {
   // this needs to use the contest id, which right now hard coded, going to be from the incoming path eventually will be from a subdomain or something
-  const contestId = 'little-contest';
+  const contestId = '64d117f6-1478-4795-af85-f1e43999454d';
   const enduserId = '762be373';
-  // console.log(contestID);
+  console.log(contestId);
   // const id = contestID;
+  console.log(getContest);
   const {
     data: contestData,
     loading: contestLoading,
@@ -22,32 +23,34 @@ function Landing() {
     variables: { id: contestId },
   });
 
-  const {
-    data: enduserData,
-    loading: enduserLoading,
-    error: enduserError,
-  } = useQuery(gql(getEnduser), {
-    variables: { id: enduserId },
-  });
+  // const {
+  //   data: enduserData,
+  //   loading: enduserLoading,
+  //   error: enduserError,
+  // } = useQuery(gql(getEnduser), {
+  //   variables: { id: enduserId },
+  // });
 
-  if (contestLoading || enduserLoading) {
+  if (contestLoading) {
+    // if (contestLoading || enduserLoading) {
     return <p>Loading...</p>;
   }
-  if (contestError || enduserError) {
+  // if (contestError || enduserError) {
+  if (contestError) {
     return (
       <div>
         <p>Contest Data Error: ${contestError.message} </p>
-        <p>User Data Error: ${enduserError.message} </p>
+        {/* <p>User Data Error: ${enduserError.message} </p> */}
       </div>
     );
   }
 
   console.log(contestData);
   const contestInfo = contestData.getContest;
-  console.log(enduserData);
-  const enduserInfo = enduserData.getEnduser;
+  // console.log(enduserData);
+  // const enduserInfo = enduserData.getEnduser;
 
-  const formattedDeadline = contestInfo.deadline.replace(/-/g, "/");
+  const formattedDeadline = contestInfo.deadline.replace(/-/g, '/');
   console.log(formattedDeadline);
 
   return (

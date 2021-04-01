@@ -1,10 +1,31 @@
-type Artist @model {
+type Artist
+  @model
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
   id: ID!
   name: String!
   contests: [Contest] @connection(keyName: "byArtist", fields: ["id"])
 }
 
-type Contest @model @key(name: "byArtist", fields: ["artistID", "headline"]) {
+type Contest
+  @model
+  @key(name: "byArtist", fields: ["artistID", "headline"])
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
   id: ID!
   headline: String!
   description: String
@@ -24,12 +45,21 @@ type Contest @model @key(name: "byArtist", fields: ["artistID", "headline"]) {
   spotifyPlayUrl: String
   spotifyFollowPlaylistUrl: String
   spotifyFollowArtistUrl: String
-  spotifySaveUrl: String
+  spotifySaveUrl: String @aws_iam
 }
 
 type ContestAction
   @model
-  @key(name: "byContest", fields: ["contestID", "url"]) {
+  @key(name: "byContest", fields: ["contestID", "url"])
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
   id: ID!
   preActionText: String
   postActionText: String
@@ -42,13 +72,32 @@ type ContestAction
   url: String!
 }
 
-type ActionType @model {
+type ActionType
+  @model
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
   id: ID!
   value: String
 }
 
 type ContestSubscription
   @model
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  )
   @key(name: "byContest", fields: ["contestID", "enduserID"])
   @key(name: "byEnduser", fields: ["enduserID", "contestID"]) {
   id: ID!
@@ -67,7 +116,17 @@ type ContestSubscription
   enduser: Enduser! @connection(fields: ["enduserID"])
 }
 
-type Enduser @model {
+type Enduser
+  @model
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
   id: ID!
   username: String
   firstName: String
@@ -79,6 +138,15 @@ type Enduser @model {
 
 type EnduserActions
   @model
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  )
   @key(name: "byAction", fields: ["actionID"])
   @key(name: "byEnduser", fields: ["enduserID"]) {
   enduserID: ID!
@@ -89,7 +157,17 @@ type EnduserActions
   createdAt: String
 }
 
-type Picture @model {
+type Picture
+  @model
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
   id: ID!
   publicUrl: String
   name: String

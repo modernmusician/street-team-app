@@ -8,10 +8,12 @@ import ContestPage1Card from '../Components/Cards/4ContestPage1';
 import { gql, useQuery } from '@apollo/react-hooks';
 import { getContest, getEnduser } from '../graphql/queries';
 
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+
 function ContestPage1() {
   // this needs to use the contest id, which right now hard coded, going to be from the incoming path eventually will be from a subdomain or something
   // const contestId = '762be373-ae1d-45e2-aef2-08aebac72c75';
-  const contestId = 'little-contest'
+  const contestId = '64d117f6-1478-4795-af85-f1e43999454d';
   const enduserId = '762be373';
   // console.log(contestID);
   // const id = contestID;
@@ -32,7 +34,11 @@ function ContestPage1() {
   });
 
   if (contestLoading || enduserLoading) {
-    return <div><p>Loading...</p></div>;
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
   }
   if (contestError || enduserError) {
     return (
@@ -47,12 +53,14 @@ function ContestPage1() {
   const contestInfo = contestData.getContest;
   console.log(enduserData);
   const enduserInfo = enduserData.getEnduser;
-  
-  const formattedDeadline = contestInfo.deadline.replace(/-/g, "/");
 
-  // const spotifyPlayAction = contestInfo.actions.spotifyPlay ? contestInfo.actions.spotifyPlay : 
-  
-  const enduserContestInfo = enduserInfo.subscriptions.items.find(element => element.contestID == contestId)
+  const formattedDeadline = contestInfo.deadline.replace(/-/g, '/');
+
+  // const spotifyPlayAction = contestInfo.actions.spotifyPlay ? contestInfo.actions.spotifyPlay :
+
+  const enduserContestInfo = enduserInfo.subscriptions.items.find(
+    element => element.contestID == contestId
+  );
 
   return (
     <div>
@@ -70,7 +78,11 @@ function ContestPage1() {
               // contestImg="../baby.png"
               contestHeadline={contestInfo.headline}
               contestDescription={contestInfo.description}
-              buttonText={contestInfo.contestButtonText ? contestInfo.contestButtonText : "CONTINUE"}
+              buttonText={
+                contestInfo.contestButtonText
+                  ? contestInfo.contestButtonText
+                  : 'CONTINUE'
+              }
               contestDeadline={formattedDeadline} //TODO deadline needs to be UTC
               contestImg={contestInfo.picture.publicUrl}
               actionSpotifyPlay={true}
@@ -86,13 +98,15 @@ function ContestPage1() {
               // spotifyFollowPlaylistUrl={contestInfo.actions.spotifyFollowPlaylist.Url}
               // spotifyFollowArtistUrl={contestInfo.actions.spotifyFollowArtist.Url}
               // spotifySaveUrl={contestInfo.actions.spotifySave.Url}
-              streetTeamUrl={contestInfo.streetTeamUrl || "https://www.modern-musician.com"}
+              streetTeamUrl={
+                contestInfo.streetTeamUrl || 'https://www.modern-musician.com'
+              }
               spotifyPlayUrl={contestInfo.spotifyPlayUrl}
               spotifyFollowPlaylistUrl={contestInfo.spotifyFollowPlaylistUrl}
               spotifyFollowArtistUrl={contestInfo.spotifyFollowArtistUrl}
               spotifySaveUrl={contestInfo.spotifySaveUrl}
-              userFirstName={enduserInfo.firstName || "Michael"}
-              userLastName={enduserInfo.lastName || "Walker"}
+              userFirstName={enduserInfo.firstName || 'Michael'}
+              userLastName={enduserInfo.lastName || 'Walker'}
               totalPoints={enduserContestInfo.enduserPoints || 30}
               enduserContestID={enduserContestInfo.id}
               // TODO need to leverage the following in the ContestPage1Card
@@ -106,9 +120,10 @@ function ContestPage1() {
           }
           displayFooter={true}
         />
+        <AmplifySignOut />
       </div>
     </div>
   );
 }
 
-export default ContestPage1;
+export default withAuthenticator(ContestPage1);
