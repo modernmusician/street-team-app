@@ -175,6 +175,10 @@ var spotifyApi = new SpotifyWebApi(credentials);
 
 // Spotify Play Functions:
 
+const [spotifyTrackListing, setSpotifyTrackListing] = useState(null);
+
+const objSpotifyTrackListing = {...spotifyTrackListing};
+
   useEffect(() => {
     if (spotifyToken) {
     spotifyApi.getArtistTopTracks(parsedSpotifyPlayUrl, 'US')
@@ -182,12 +186,21 @@ var spotifyApi = new SpotifyWebApi(credentials);
           console.log("Artist's Top 10 Tracks");
           data.body.tracks.forEach(tracks => console.log("Name: " + tracks.name + "\nArtist: " + tracks.artists[0].name + "\nDuration(ms): " + tracks.duration_ms));
           data.body.tracks.forEach(tracks => console.log(tracks));
+          console.log("data.body.tracks:");
+          console.log(data.body.tracks)
+          console.log("data.body.tracks.name:");
+          console.log(data.body.tracks)
+          setSpotifyTrackListing(data.body.tracks)
         // console.log(data.body);
         }, function(err) {
         console.log('Something went wrong!', err);
       });
   }
   }, []); // <-- empty array means 'run once'
+
+console.log(spotifyTrackListing +  " << spotifyTrackListing")
+
+console.log(objSpotifyTrackListing + " < object form");
 
 
 // HANDLE SPOTIFY BUTTONS ONCLICK
