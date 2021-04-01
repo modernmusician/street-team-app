@@ -14,7 +14,7 @@ function Test() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const contestId = '64d117f6-1478-4795-af85-f1e43999454d';
-
+  const [username, setUsername] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -104,7 +104,7 @@ function Test() {
   } else if (error) {
     return (
       <div>
-        <p>{error}</p>
+        <h1>{error}</h1>
       </div>
     );
   } else {
@@ -118,6 +118,7 @@ function Test() {
         <button onClick={query}>Query</button>
         <div>
           <p>{data.getContest.headline}</p>
+          <p>{username}</p>
         </div>
       </Fragment>
     );

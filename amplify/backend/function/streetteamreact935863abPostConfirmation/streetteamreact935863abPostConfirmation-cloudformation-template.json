@@ -67,12 +67,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "streetteamreact0990eee1PostConfirmation",
+            "streetteamreact935863abPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "streetteamreact0990eee1PostConfirmation",
+                  "streetteamreact935863abPostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -122,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "streetteamreact0990eee1PostConfirmation",
+            "streetteamreact935863abPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "streetteamreact0990eee1PostConfirmation",
+                  "streetteamreact935863abPostConfirmation",
                   "-",
                   {
                     "Ref": "env"

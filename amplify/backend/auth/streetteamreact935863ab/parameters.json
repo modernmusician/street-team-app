@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "streetteamreact0990eee1_identitypool_0990eee1",
+    "identityPoolName": "streetteamreact935863ab_identitypool_935863ab",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "street0990eee1",
-    "userPoolName": "streetteamreact0990eee1_userpool_0990eee1",
+    "resourceNameTruncated": "street935863ab",
+    "userPoolName": "streetteamreact935863ab_userpool_935863ab",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "street0990eee1_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "street935863ab_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "0990eee1",
-    "resourceName": "streetteamreact0990eee1",
+    "sharedId": "935863ab",
+    "resourceName": "streetteamreact935863ab",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -46,18 +46,18 @@
         ]
     },
     "useDefault": "manual",
+    "hostedUI": false,
     "usernameAttributes": [
         "email"
     ],
     "userPoolGroupList": [
-        "everyone",
-        "everything"
+        "everybody"
     ],
     "serviceName": "Cognito",
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "streetteamreact0990eee1PostConfirmation",
+            "resourceName": "streetteamreact935863abPostConfirmation",
             "triggerProvider": "Cognito",
             "attributes": [
                 "Arn",
@@ -72,7 +72,6 @@
     "userPoolGroups": true,
     "adminQueries": false,
     "triggers": "{\n  \"PostConfirmation\": [\n    \"add-to-group\"\n  ]\n}",
-    "hostedUI": false,
     "parentStack": {
         "Ref": "AWS::StackId"
     },

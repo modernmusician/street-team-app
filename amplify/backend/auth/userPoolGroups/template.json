@@ -1,23 +1,23 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Parameters": {
-        "authstreetteamreact0990eee1UserPoolId": {
+        "authstreetteamreact935863abUserPoolId": {
             "Type": "String",
-            "Default": "authstreetteamreact0990eee1UserPoolId"
+            "Default": "authstreetteamreact935863abUserPoolId"
         },
         
-        "authstreetteamreact0990eee1IdentityPoolId": {
+        "authstreetteamreact935863abIdentityPoolId": {
             "Type": "String",
-            "Default": "authstreetteamreact0990eee1IdentityPoolId"
+            "Default": "authstreetteamreact935863abIdentityPoolId"
         },
         
-        "authstreetteamreact0990eee1AppClientID": {
+        "authstreetteamreact935863abAppClientID": {
             "Type": "String",
-            "Default": "authstreetteamreact0990eee1AppClientID"
+            "Default": "authstreetteamreact935863abAppClientID"
         },
-        "authstreetteamreact0990eee1AppClientIDWeb": {
+        "authstreetteamreact935863abAppClientIDWeb": {
             "Type": "String",
-            "Default": "authstreetteamreact0990eee1AppClientIDWeb"
+            "Default": "authstreetteamreact935863abAppClientIDWeb"
         },
         "AuthRoleArn": {
             "Type": "String"
@@ -41,26 +41,26 @@
     },
     "Resources": {
     
-        "everyoneGroup": {
+        "everybodyGroup": {
           "Type" : "AWS::Cognito::UserPoolGroup",
           "Properties" : {
-              "GroupName" : "everyone",
+              "GroupName" : "everybody",
               "Precedence" : 1,
               
               "RoleArn" : {
                 "Fn::GetAtt": [
-                    "everyoneGroupRole",
+                    "everybodyGroupRole",
                     "Arn"
                 ]
               },
               
               "UserPoolId" : {
-                "Ref": "authstreetteamreact0990eee1UserPoolId"
+                "Ref": "authstreetteamreact935863abUserPoolId"
               }
             }
         },
         
-        "everyoneGroupRole": {
+        "everybodyGroupRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
                 "RoleName":{
@@ -68,9 +68,9 @@
                         "",
                         [
                           {
-                            "Ref": "authstreetteamreact0990eee1UserPoolId"
+                            "Ref": "authstreetteamreact935863abUserPoolId"
                           },
-                          "-everyoneGroupRole"
+                          "-everybodyGroupRole"
                         ]
                     ]
                 },
@@ -85,61 +85,7 @@
                             },
                             "Action": "sts:AssumeRoleWithWebIdentity",
                             "Condition": {
-                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authstreetteamreact0990eee1IdentityPoolId"}},
-                              "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-     
-    
-        "everythingGroup": {
-          "Type" : "AWS::Cognito::UserPoolGroup",
-          "Properties" : {
-              "GroupName" : "everything",
-              "Precedence" : 2,
-              
-              "RoleArn" : {
-                "Fn::GetAtt": [
-                    "everythingGroupRole",
-                    "Arn"
-                ]
-              },
-              
-              "UserPoolId" : {
-                "Ref": "authstreetteamreact0990eee1UserPoolId"
-              }
-            }
-        },
-        
-        "everythingGroupRole": {
-            "Type": "AWS::IAM::Role",
-            "Properties": {
-                "RoleName":{
-                    "Fn::Join": [
-                        "",
-                        [
-                          {
-                            "Ref": "authstreetteamreact0990eee1UserPoolId"
-                          },
-                          "-everythingGroupRole"
-                        ]
-                    ]
-                },
-                "AssumeRolePolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                        {
-                            "Sid": "",
-                            "Effect": "Allow",
-                            "Principal": {
-                                "Federated": "cognito-identity.amazonaws.com"
-                            },
-                            "Action": "sts:AssumeRoleWithWebIdentity",
-                            "Condition": {
-                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authstreetteamreact0990eee1IdentityPoolId"}},
+                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authstreetteamreact935863abIdentityPoolId"}},
                               "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
                             }
                         }
@@ -165,7 +111,7 @@
                                 "",
                                 [
 
-                                  "streetteamreact0990eee1",
+                                  "streetteamreact935863ab",
                                   "-ExecutionRole-",
                                   {
                                     "Ref": "env"
@@ -324,16 +270,16 @@
                     "Ref": "UnauthRoleArn"
                 },
                 "identityPoolId": {
-                    "Ref": "authstreetteamreact0990eee1IdentityPoolId"
+                    "Ref": "authstreetteamreact935863abIdentityPoolId"
                 },
                 "userPoolId": {
-                    "Ref": "authstreetteamreact0990eee1UserPoolId"
+                    "Ref": "authstreetteamreact935863abUserPoolId"
                 },
                 "appClientIDWeb": {
-                    "Ref": "authstreetteamreact0990eee1AppClientIDWeb"
+                    "Ref": "authstreetteamreact935863abAppClientIDWeb"
                 },
                 "appClientID": {
-                    "Ref": "authstreetteamreact0990eee1AppClientID"
+                    "Ref": "authstreetteamreact935863abAppClientID"
                 },
                 "region": {
                     "Ref": "AWS::Region"
@@ -349,21 +295,10 @@
     
     "Outputs": {
       
-        "everyoneGroupRole": {
+        "everybodyGroupRole": {
             "Value": {
                 "Fn::GetAtt": [
-                    "everyoneGroupRole",
-                    "Arn"
-                ]
-            }
-        
-        },
-        
-      
-        "everythingGroupRole": {
-            "Value": {
-                "Fn::GetAtt": [
-                    "everythingGroupRole",
+                    "everybodyGroupRole",
                     "Arn"
                 ]
             }

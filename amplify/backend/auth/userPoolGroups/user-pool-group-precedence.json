@@ -1,10 +1,6 @@
 [
   {
-    "groupName": "everyone",
+    "groupName": "everybody",
     "precedence": 1
-  },
-  {
-    "groupName": "everything",
-    "precedence": 2
   }
 ]

@@ -1,12 +1,12 @@
 {
   "auth": {
-    "streetteamreact0990eee1": {
+    "streetteamreact935863ab": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "streetteamreact0990eee1PostConfirmation",
+          "resourceName": "streetteamreact935863abPostConfirmation",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",
@@ -22,7 +22,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "streetteamreact0990eee1",
+          "resourceName": "streetteamreact935863ab",
           "attributes": [
             "UserPoolId",
             "AppClientIDWeb",
@@ -42,7 +42,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authstreetteamreact0990eee1"
+              "userPoolId": "authstreetteamreact935863ab"
             }
           },
           "additionalAuthenticationProviders": [
@@ -55,7 +55,7 @@
     }
   },
   "function": {
-    "streetteamreact0990eee1PostConfirmation": {
+    "streetteamreact935863abPostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
