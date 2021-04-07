@@ -48,9 +48,9 @@ function App() {
 
   return (
     <Router>
-      <Landing path="/landing" />
+      <Landing path="/:contestId" />
       <Registration path="/registration" />
-      <EmailRegistration path="/register-email" />
+      <EmailRegistration path="/email-registration" />
       <ContestPage1 path="/" />
       <ReferralPage path="/referral" />
       <Login path="/login" />

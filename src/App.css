@@ -51,7 +51,9 @@
 /*}*/
 
 :root {
-  
+  --amplify-primary-color: #5E30B8;
+  --amplify-primary-tint: #7857B8;
+  --amplify-primary-shade: #40207D;
 }
 
 * {

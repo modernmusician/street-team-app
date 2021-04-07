@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
 import Background from '../Components/Background';
@@ -8,13 +8,33 @@ import ContestPage1Card from '../Components/Cards/4ContestPage1';
 import { gql, useQuery } from '@apollo/react-hooks';
 import { getContest, getEnduser } from '../graphql/queries';
 
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import { Auth } from 'aws-amplify';
+
 function ContestPage1() {
   // this needs to use the contest id, which right now hard coded, going to be from the incoming path eventually will be from a subdomain or something
   // const contestId = '762be373-ae1d-45e2-aef2-08aebac72c75';
   const contestId = 'little-contest'
   const enduserId = '762be373';
+  
+  const [userId, setUserId] = useState(null);
+  const [error, setError] = useState(null);
   // console.log(contestID);
   // const id = contestID;
+  
+  // get the logged in user's ID
+  Auth.currentAuthenticatedUser({
+    bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+  })
+    .then(user => {
+      setUserId(user.username);
+      console.log(`Load additional settings for user: ${user.username}`);
+      // TBD
+    })
+    .catch(err => setError(err));
+  
+  // setUserId(enduserId);
+  
   const {
     data: contestData,
     loading: contestLoading,
@@ -28,7 +48,7 @@ function ContestPage1() {
     loading: enduserLoading,
     error: enduserError,
   } = useQuery(gql(getEnduser), {
-    variables: { id: enduserId },
+    variables: { id: userId },
   });
 
   if (contestLoading || enduserLoading) {
@@ -111,4 +131,5 @@ function ContestPage1() {
   );
 }
 
-export default ContestPage1;
+// export default withAuthenticator(ContestPage1,{initialAuthState: 'signup'},);
+export default ContestPage1

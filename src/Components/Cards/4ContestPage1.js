@@ -184,7 +184,7 @@ const objSpotifyTrackListing = {...spotifyTrackListing};
     spotifyApi.getArtistTopTracks(parsedSpotifyPlayUrl, 'US')
       .then(function(data) {
           console.log("Artist's Top 10 Tracks");
-          data.body.tracks.forEach(tracks => console.log("Name: " + tracks.name + "\nArtist: " + tracks.artists[0].name + "\nDuration(ms): " + tracks.duration_ms));
+          data.body.tracks.forEach(tracks => console.log("Track ID: " + tracks.id + "\nName: " + tracks.name + "\nArtist: " + tracks.artists[0].name + "\nDuration(ms): " + tracks.duration_ms));
           data.body.tracks.forEach(tracks => console.log(tracks));
           console.log("data.body.tracks:");
           console.log(data.body.tracks)
@@ -203,6 +203,9 @@ console.log(spotifyTrackListing +  " << spotifyTrackListing")
 console.log(objSpotifyTrackListing + " < object form");
 
 
+// Cross-reference Spotify Recently Played with Track Listing
+
+
 // HANDLE SPOTIFY BUTTONS ONCLICK
   
   const handleSpotifyPlay = () => {
@@ -213,9 +216,9 @@ console.log(objSpotifyTrackListing + " < object form");
       }).then(function(data) {
           // Output items
           console.log("Your 5 most recently played tracks are:");
-          data.body.items.forEach(item => console.log("Name: " + item.track.name + "\nArtist: " + item.track.artists[0].name + "\nDuration(ms): " + item.track.duration_ms));
+          data.body.items.forEach(item => console.log("Track ID: " + item.track.id + "\nName: " + item.track.name + "\nArtist: " + item.track.artists[0].name + "\nDuration(ms): " + item.track.duration_ms));
           data.body.items.forEach(item => console.log(item.track));
-
+          
         }, function(err) {
           console.log('Something went wrong!', err);
         });
@@ -432,6 +435,8 @@ console.log(objSpotifyTrackListing + " < object form");
           </div>
             <hr className="fade-light" />
             
+          {/* TO DO: switch to unique URL routing system */}
+          {/*<Link className="link-button" to={"/referral/" + contestId}>*/}
           <Link className="link-button" to="/referral">
    
             <Button className="btn active btn-default card-container-button button-continue">
