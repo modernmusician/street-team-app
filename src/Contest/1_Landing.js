@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Background from '../Components/Background';
 import CenterBox from '../Components/CenterBox';
 import OptinCard from '../Components/Cards/1_OptinCard';
+import PageNotFound from '../Components/NotFoundPage';
 
 import { gql, useQuery } from '@apollo/react-hooks';
 import { getContest, getEnduser, listContests } from '../graphql/queries';
@@ -16,10 +17,10 @@ Amplify.configure(awsMobile);
 // import { listTasks } from './graphql/queries';
 
 
-function Landing() {
+function Landing({ contestId }) {
   
   // this needs to use the contest id, which right now hard coded, going to be from the incoming path eventually will be from a subdomain or something
-  const contestId = 'little-contest';
+  // const contestId = 'little-contest';
   const enduserId = '762be373';
   console.log(contestId);
   // const id = contestID;
@@ -145,6 +146,9 @@ function Landing() {
   const contestInfo = data.getContest;
   // console.log(enduserData);
   // const enduserInfo = enduserData.getEnduser;
+  if (!contestInfo){
+    return(<PageNotFound/>)
+  }
 
   const formattedDeadline = contestInfo.deadline.replace(/-/g, '/');
   console.log(formattedDeadline);

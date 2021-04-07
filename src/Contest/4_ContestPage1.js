@@ -16,7 +16,7 @@ function ContestPage1() {
   // const contestId = '762be373-ae1d-45e2-aef2-08aebac72c75';
   const contestId = 'little-contest'
   const enduserId = '762be373';
-  
+  console.log(contestId);
   const [userId, setUserId] = useState(null);
   const [error, setError] = useState(null);
   // console.log(contestID);

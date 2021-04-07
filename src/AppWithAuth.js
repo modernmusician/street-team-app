@@ -4,7 +4,7 @@ import Amplify from 'aws-amplify';
 import { AmplifyAuthenticator, AmplifySignUp, AmplifySignOut } from '@aws-amplify/ui-react';
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import awsconfig from './aws-exports';
-import App from './App'
+import AuthenticatedApp from './AuthenticatedApp';
 
 Amplify.configure(awsconfig);
 
@@ -21,7 +21,7 @@ const AuthStateApp = () => {
 
   return authState === AuthState.SignedIn && userId ? (
       <div className="App">
-          <App />
+          <AuthenticatedApp />
           <AmplifySignOut />
       </div>
     ) : (
