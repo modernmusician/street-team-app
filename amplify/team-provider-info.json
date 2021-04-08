@@ -74,7 +74,7 @@
       "function": {
         "streetteamreact935863abPostConfirmation": {
           "deploymentBucketName": "amplify-streetteamreact-fbcongnito-101403-deployment",
-          "s3Key": "amplify-builds/streetteamreact935863abPostConfirmation-6a346b63694566526f61-build.zip"
+          "s3Key": "amplify-builds/streetteamreact935863abPostConfirmation-37636f69497545527439-build.zip"
         }
       }
     }

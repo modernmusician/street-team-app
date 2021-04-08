@@ -45,7 +45,7 @@ type Contest
   spotifyPlayUrl: String
   spotifyFollowPlaylistUrl: String
   spotifyFollowArtistUrl: String
-  spotifySaveUrl: String @aws_iam
+  spotifySaveUrl: String
 }
 
 type ContestAction

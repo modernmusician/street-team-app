@@ -4,7 +4,7 @@
   "Parameters": {
     "GROUP": {
       "Type": "String",
-      "Default": "everyone"
+      "Default": ""
     },
     "modules": {
       "Type": "String",
@@ -67,12 +67,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "streetteamreact935863abPostConfirmation",
+            "streetteamreact0990eee1PostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "streetteamreact935863abPostConfirmation",
+                  "streetteamreact0990eee1PostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -122,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "streetteamreact935863abPostConfirmation",
+            "streetteamreact0990eee1PostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "streetteamreact935863abPostConfirmation",
+                  "streetteamreact0990eee1PostConfirmation",
                   "-",
                   {
                     "Ref": "env"
