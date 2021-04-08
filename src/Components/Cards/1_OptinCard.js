@@ -20,7 +20,7 @@ function OptinCard({contestId,contestHeadline,contestDescription,buttonText,cont
  buttonText= (buttonText=="") ? "Enter to Win >" : buttonText;
 contestDeadline= (contestDeadline=="") ? "4/13/2021" : contestDeadline;
 contestImg= (contestImg=="") ? "../baby.png" : contestImg;
-
+const linkUrl = "/secure/contest/"+contestId;
 
   
   return (
@@ -43,7 +43,7 @@ contestImg= (contestImg=="") ? "../baby.png" : contestImg;
           {/* todo -- card could be reusable for more than just the opt in if we had the link passed into this component*/}
           {/* TO DO: switch to unique URL routing system */}
           {/*<Link className="link-button" to={"/contest/" + contestId}>*/}
-          <Link className="link-button" to="/secure/contest">
+          <Link className="link-button" to={linkUrl}>
             <Button className="btn active btn-default card-container-button button-opt-in">
               {buttonText} 
             </Button>

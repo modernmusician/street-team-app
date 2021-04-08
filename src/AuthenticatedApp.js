@@ -51,8 +51,8 @@ function AuthenticatedApp() {
     <Router>
       <Registration path="/registration" />
       <EmailRegistration path="/email-registration" />
-      <ContestPage1 path="/contest" />
-      <ReferralPage path="/referral" />
+      <ContestPage1 path="/contest/:contestId" />
+      <ReferralPage path="/referral/:contestId" />
       <Login path="/login" />
       <CreateContestPage path="/createcontest" />
       <SpotifyFollowArtist path="/spotify-follow-artist" />

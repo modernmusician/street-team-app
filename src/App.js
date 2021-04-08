@@ -54,7 +54,7 @@ function App() {
     <Router>
       <AppWithAuth path="secure/*"/>
       <Landing path="/:contestId" />
-      <Test default/>
+      <NotFoundPage default/>
     </Router>
     //Previous route for testing unauthenticated data loading
     // <Test path="/test" />
