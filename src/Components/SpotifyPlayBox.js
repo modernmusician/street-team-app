@@ -42,21 +42,21 @@ function SpotifyPlayBox(parsedSpotifyPlayUrl) {
     
     return(
             <div>
-                <div class="spotify-play-full-container">
-                    <div class="spotify-triangle-up"> </div> 
+                <div className="spotify-play-full-container">
+                    <div className="spotify-triangle-up"> </div> 
                 </div>
-                <div class="spotify-play-container">
-                    <div class="spotify-play-box">
-                        <div class="spotify-top-text-container">
-                            <div class="spotify-top-left-text-box"> <p> <Text color="hsl(0, 0%, 80%, 1)"> Play <Text weight="bold"> 1x </Text> a day </Text> </p>  </div>
-                            <div class="spotify-top-right-text-box"> <p> <Text color="hsl(0, 0%, 80%, 1)"> <Text weight="bold"> +20 </Text> each &nbsp; <span class = "spotify-vertical-line"> </span> &nbsp; &nbsp; </Text> </p> 
+                <div className="spotify-play-container">
+                    <div className="spotify-play-box">
+                        <div className="spotify-top-text-container">
+                            <div className="spotify-top-left-text-box"> <p> <Text color="hsl(0, 0%, 80%, 1)"> Play <Text weight="bold"> 1x </Text> a day </Text> </p>  </div>
+                            <div className="spotify-top-right-text-box"> <p> <Text color="hsl(0, 0%, 80%, 1)"> <Text weight="bold"> +20 </Text> each &nbsp; <span className = "spotify-vertical-line"> </span> &nbsp; &nbsp; </Text> </p> 
                             
                             <IconContext.Provider value={{ color: "hsla(141, 74%, 42%, 1)", className: "react-icons" }}>
                             <FaPlay />
                             </IconContext.Provider>
                             <p> &nbsp; <Text color="hsl(0, 0%, 80%, 1)"> <Text weight="bold"> 10 </Text>plays left </Text> </p> </div>
                         </div>
-                        <div class="spotify-player"> 
+                        <div className="spotify-player"> 
                             <iframe 
                                 src={"https://open.spotify.com/embed/artist/" + parsedSpotifyPlayUrl.parsedSpotifyPlayUrl} 
                                 width="100%" 

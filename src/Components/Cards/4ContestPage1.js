@@ -31,7 +31,6 @@ import { gql, useMutation } from '@apollo/react-hooks';
 import { updateEnduser,updateContestSubscription } from '../../graphql/mutations';
 
 import axios from 'axios';
-
 //TODO: Pass Artist ID
 //TODO: Pass Track ID
 //TODO: Pass Playlist or Album ID
@@ -56,7 +55,7 @@ let spotifyPlayCountSetter = 0;
 let pointSetter = 0;
 let totalPoints = 0;
 
-function ContestPage1Card({completedSpotifyPlay,completedSpotifyFollow,completedSpotifySave,completedStreetTeamJoin,userFirstName,userLastName,totalPoints,contestHeadline,contestDescription,buttonText,artistID,contestDeadline,contestImg,streetTeamUrl,spotifyPlayUrl,spotifyFollowArtistUrl,spotifyFollowPlaylistUrl,spotifySaveUrl,actionSpotifyPlay,actionSpotifyFollow,actionSpotifySave,actionStreetTeam,enduserContestID}) {
+function ContestPage1Card({contestId,completedSpotifyPlay,completedSpotifyFollow,completedSpotifySave,completedStreetTeamJoin,userFirstName,userLastName,totalPoints,contestHeadline,contestDescription,buttonText,artistID,contestDeadline,contestImg,streetTeamUrl,spotifyPlayUrl,spotifyFollowArtistUrl,spotifyFollowPlaylistUrl,spotifySaveUrl,actionSpotifyPlay,actionSpotifyFollow,actionSpotifySave,actionStreetTeam,enduserContestID}) {
 
 //Variables that need to be parsed:
 //spotifyFollowArtistUrl
@@ -176,15 +175,18 @@ var spotifyApi = new SpotifyWebApi(credentials);
 // Spotify Play Functions:
 
 const [spotifyTrackListing, setSpotifyTrackListing] = useState(null);
+const [spotifyRecentlyPlayedListing, setSpotifyRecentlyPlayedListing] = useState(null);
+const [RecentlyPlayedTracks, setRecentlyPlayedTracks] = useState(null);
 
 const objSpotifyTrackListing = {...spotifyTrackListing};
+const objSpotifyRecentlyPlayedListing = {...spotifyRecentlyPlayedListing};
 
   useEffect(() => {
     if (spotifyToken) {
     spotifyApi.getArtistTopTracks(parsedSpotifyPlayUrl, 'US')
       .then(function(data) {
           console.log("Artist's Top 10 Tracks");
-          data.body.tracks.forEach(tracks => console.log("Name: " + tracks.name + "\nArtist: " + tracks.artists[0].name + "\nDuration(ms): " + tracks.duration_ms));
+          data.body.tracks.forEach(tracks => console.log("Track ID: " + tracks.id + "\nName: " + tracks.name + "\nArtist: " + tracks.artists[0].name + "\nDuration(ms): " + tracks.duration_ms));
           data.body.tracks.forEach(tracks => console.log(tracks));
           console.log("data.body.tracks:");
           console.log(data.body.tracks)
@@ -199,13 +201,18 @@ const objSpotifyTrackListing = {...spotifyTrackListing};
   }, []); // <-- empty array means 'run once'
 
 console.log(spotifyTrackListing +  " << spotifyTrackListing")
-
+console.log(spotifyTrackListing)
 console.log(objSpotifyTrackListing + " < object form");
 
 
+// Cross-reference Spotify Recently Played with Track Listing
+
+
 // HANDLE SPOTIFY BUTTONS ONCLICK
+  //TODO: 
   
   const handleSpotifyPlay = () => {
+    
     if (spotifyToken) {
     setDisplay(true);
       spotifyApi.getMyRecentlyPlayedTracks({
@@ -213,9 +220,35 @@ console.log(objSpotifyTrackListing + " < object form");
       }).then(function(data) {
           // Output items
           console.log("Your 5 most recently played tracks are:");
-          data.body.items.forEach(item => console.log("Name: " + item.track.name + "\nArtist: " + item.track.artists[0].name + "\nDuration(ms): " + item.track.duration_ms));
-          data.body.items.forEach(item => console.log(item.track));
-
+          data.body.items.forEach(item => console.log("Track ID: " + item.track.id + "\nName: " + item.track.name + "\nArtist: " + item.track.artists[0].name + "\nDuration(ms): " + item.track.duration_ms));
+          //setSpotifyRecentlyPlayedListing(data.body.items);
+          //console.log(data.body.items);
+          //data.body.items.forEach(item => console.log(item.track.id));
+         
+          //TODO: 
+              //if in artists top tracks and not in our array then add to the array and increment points and set the play score down one.
+              //1)check if in the tracks array,
+          const RecentlyPlayedTrackMatches = data.body.items.filter(item => { let RecentlyPlayedTrackMatches1 = spotifyTrackListing.find(tracks => tracks.id == item.track.id)
+                                          return RecentlyPlayedTrackMatches1
+                                          });
+          
+          //Spotify()
+          console.log(RecentlyPlayedTrackMatches);
+          setSpotifyRecentlyPlayedListing(data.body.items);
+          
+              //2)check if in our array, if not in our array
+                  //can probably do the filter move again
+               //RecentlyPlayedTracks.push(RecentlyPlayedTrackMatches);
+              //3)add to array and increment points and subract one from play count.
+              //then increment if all true
+              
+              
+          
+          //RecentlyPlayedTracks = spotifyTrackListing.tracks.find(tracks => tracks.id == data.body.items.forEach(item => item.track.id)) 
+          //console.log(RecentlyPlayedTracks);
+          //enduserContestInfo = enduserInfo.subscriptions.items.find(element => element.contestID == contestId)
+          
+          
         }, function(err) {
           console.log('Something went wrong!', err);
         });
@@ -227,6 +260,7 @@ console.log(objSpotifyTrackListing + " < object form");
       window.open(authorizeURL)
       }
   }
+console.log(spotifyRecentlyPlayedListing);
 
   const handleSpotifyFollow = () => {
     if (spotifyToken) {
@@ -432,6 +466,8 @@ console.log(objSpotifyTrackListing + " < object form");
           </div>
             <hr className="fade-light" />
             
+          {/* TO DO: switch to unique URL routing system */}
+          {/*<Link className="link-button" to={"/referral/" + contestId}>*/}
           <Link className="link-button" to="/referral">
    
             <Button className="btn active btn-default card-container-button button-continue">
@@ -472,7 +508,6 @@ console.log(objSpotifyTrackListing + " < object form");
   async function SpotifySaveAPICall(spotifyToken) {
     console.log(spotifyToken);
     axios({
-      //TODO: Need to pass in the correct Track ID for the artist.
       url: "https://api.spotify.com/v1/me/tracks?ids=" + TrackID,
       method: 'put',
       headers: { Accept: "application/json",

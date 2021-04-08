@@ -15,14 +15,12 @@ import CreateContestPage from './Contest/A2_CreateContest';
 import Test from './Contest/Test';
 import NotFoundPage from './Components/NotFoundPage'
 
-import AppWithAuth from './AppWithAuth'
-
 // import { API, graphqlOperation } from "aws-amplify";
 // import { createTodo } from "./graphql/mutations";
 // import { listTodos } from "./graphql/queries";
 import sum from './sum';
 
-function App() {
+function AuthenticatedApp() {
   // const [todoName, setTodoName] = useState('')
   // const [todoItems, setTodoItems] = useState([])
 
@@ -49,17 +47,29 @@ function App() {
 
   // counter items
 
-  //note -- to add a new secure path, the route needs to be added in AuthenticatedApp.js router
   return (
     <Router>
-      <AppWithAuth path="secure/*"/>
-      <Landing path="/:contestId" />
+      <Registration path="/registration" />
+      <EmailRegistration path="/email-registration" />
+      <ContestPage1 path="/contest/:contestId" />
+      <ReferralPage path="/referral/:contestId" />
+      <Login path="/login" />
+      <CreateContestPage path="/createcontest" />
+      <SpotifyFollowArtist path="/spotify-follow-artist" />
+      <SpotifySaveSong path="/spotify-save-song" />
+      <SpotifySaveSong path="/spotify-save-song" />
+      <Test path="/test" />
       <NotFoundPage default/>
     </Router>
-    //Previous route for testing unauthenticated data loading
-    // <Test path="/test" />
-
+    // <div>
+    //   <div>
+    //   <Background />
+    //   </div>
+    //   <div>
+    //     <CenterBox />
+    //   </div>
+    // </div>
   );
 }
 
-export default App;
+export default AuthenticatedApp;

@@ -13,7 +13,7 @@ function Test() {
   const [data, setData] = useState({ getContest: {} });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const contestId = '64d117f6-1478-4795-af85-f1e43999454d';
+  const contestId = 'little-contest';
   const [username, setUsername] = useState(null);
   useEffect(() => {
     const fetchData = async () => {

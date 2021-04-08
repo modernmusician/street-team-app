@@ -8,10 +8,10 @@ import EmailRegistrationCard from '../Components/Cards/3_EmailRegistrationCard';
 import { gql, useQuery } from '@apollo/react-hooks';
 import { getContest, getEnduser } from '../graphql/queries';
 
-function EmailRegistration() {
+function EmailRegistration({contestId}) {
   
   // this needs to use the contest id, which right now hard coded, going to be from the incoming path eventually will be from a subdomain or something
-  const contestId = 'little-contest';
+  // const contestId = 'little-contest';
   const enduserId = '762be373';
   // console.log(contestID);
   // const id = contestID;
@@ -61,7 +61,8 @@ function EmailRegistration() {
         <CenterBox 
         boxContent=
         {
-          <EmailRegistrationCard 
+          <EmailRegistrationCard
+            contestId={contestId}
             contestHeadline={contestInfo.headline}
             contestDescription={contestInfo.description}
             buttonText={contestInfo.landingButtonText}
