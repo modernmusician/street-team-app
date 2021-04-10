@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Registration from './Contest/2_Registration';
 import Landing from './Contest/1_Landing';
+import RedirectLanding from './Contest/8_RedirectLanding';
 import EmailRegistration from './Contest/3_EmailRegistration';
 import ContestPage1 from './Contest/4_ContestPage1';
 import ReferralPage from './Contest/5_ReferralPage';
@@ -14,8 +15,8 @@ import Login from './Contest/A1_Login';
 import CreateContestPage from './Contest/A2_CreateContest';
 import Test from './Contest/Test';
 import NotFoundPage from './Components/NotFoundPage'
-
 import AppWithAuth from './AppWithAuth'
+import ReactSession from 'react-client-session';
 
 // import { API, graphqlOperation } from "aws-amplify";
 // import { createTodo } from "./graphql/mutations";
@@ -23,6 +24,7 @@ import AppWithAuth from './AppWithAuth'
 import sum from './sum';
 
 function App() {
+  
   // const [todoName, setTodoName] = useState('')
   // const [todoItems, setTodoItems] = useState([])
 
@@ -54,6 +56,7 @@ function App() {
     <Router>
       <AppWithAuth path="secure/*"/>
       <Landing path="/:contestId" />
+      <RedirectLanding path ="secure/contest/" />
       <NotFoundPage default/>
     </Router>
     //Previous route for testing unauthenticated data loading

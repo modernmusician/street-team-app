@@ -35,8 +35,8 @@ function SpotifyPlayBox(parsedSpotifyPlayUrl) {
         
     // }
     //SpotifyHook(spotifyToken);
-    console.log(parsedSpotifyPlayUrl)
- console.log("parsed Spotify Play")
+//     console.log(parsedSpotifyPlayUrl)
+//  console.log("parsed Spotify Play")
     
     const embedUrl = "https://open.spotify.com/embed/artist/" + parsedSpotifyPlayUrl;
     

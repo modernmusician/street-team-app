@@ -5,13 +5,12 @@ import { AmplifyAuthenticator, AmplifySignUp, AmplifySignOut } from '@aws-amplif
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import awsconfig from './aws-exports';
 import AuthenticatedApp from './AuthenticatedApp';
-
 Amplify.configure(awsconfig);
 
 const AuthStateApp = () => {
     const [authState, setAuthState] = React.useState();
     const [userId, setUserId] = React.useState();
-
+    
     React.useEffect(() => {
         return onAuthUIStateChange((nextAuthState, authData) => {
             setAuthState(nextAuthState);

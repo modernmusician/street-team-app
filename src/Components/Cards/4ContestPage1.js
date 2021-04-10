@@ -31,6 +31,8 @@ import { gql, useMutation } from '@apollo/react-hooks';
 import { updateEnduser,updateContestSubscription } from '../../graphql/mutations';
 
 import axios from 'axios';
+import SessionVariables from "../../functional-tests/SessionVariables";
+
 //TODO: Pass Artist ID
 //TODO: Pass Track ID
 //TODO: Pass Playlist or Album ID
@@ -57,12 +59,23 @@ let totalPoints = 0;
 
 function ContestPage1Card({contestId,completedSpotifyPlay,completedSpotifyFollow,completedSpotifySave,completedStreetTeamJoin,userFirstName,userLastName,totalPoints,contestHeadline,contestDescription,buttonText,artistID,contestDeadline,contestImg,streetTeamUrl,spotifyPlayUrl,spotifyFollowArtistUrl,spotifyFollowPlaylistUrl,spotifySaveUrl,actionSpotifyPlay,actionSpotifyFollow,actionSpotifySave,actionStreetTeam,enduserContestID}) {
 
+    
+    
+    
+
+    
 //Variables that need to be parsed:
 //spotifyFollowArtistUrl
 //spotifyPlayUrl
 //spotifyFollowPlaylistUrl
 //spotifySaveUrl
 
+
+// addHttpPrefix
+
+  // useEffect(() => {
+    
+  // }, []); // <-- empty array means 'run once'
 
 function addHttpPrefix(){
   
@@ -86,17 +99,22 @@ contestImg= (contestImg=="") ? "../baby.png" : contestImg;
   const streetTeamButton = actionStreetTeam ? null : "hide";
 
     // old URL parameters
-
+    //ReactSession.setStoreType("localStorage");
+        
     const search1 = window.location.href;
-    const a1 = search1.search("=");
-    const first1 = search1.substr(a1);
-    const b = first1.search("&token_type");
-    const spotifyToken = first1.substr(1,(b-1));
+    //const a1 = search1.search("=");
+    //const first1 = search1.substr(a1);
+    //const b = first1.search("&token_type");
+    //We aren't going to need this code at all.
+    //const spotifyToken = first1.substr(1,(b-1));
+    const spotifyToken = SessionVariables.getToken();
+    console.log(spotifyToken);
     
-    // new URL parameters
+    const a2 =search1.search("/contest/");
+    const clientIDtemp = search1.substr(a2+9);
     
-    // const queryString = window.location.search;
-    // console.log(queryString);
+    SessionVariables.setClientId(clientIDtemp);
+    
     // const urlParams = new URLSearchParams(queryString);
     // const spotifyToken = urlParams.get('access_token')
 
@@ -106,21 +124,8 @@ contestImg= (contestImg=="") ? "../baby.png" : contestImg;
     const parsedSpotifyPlayUrl = spotifyPlayUrl.substring(spotifyPlayUrl.lastIndexOf('/')+1);
 
 
-    console.log(parsedSpotifySaveUrl);
-    console.log("parsedSpotifySaveUrl");
-    
-    
-    // console.log(spotifySaveUrl);
-    // console.log(spotifyPlayUrl);
-    // console.log(spotifyFollowPlaylistUrl);
-    // console.log(streetTeamUrl);
-    // console.log(artistID);
-    // console.log("The above console log should display spotify Follow Artist Url.");
-    // const { data: contestData, loading: contestLoading, error: contestError,} 
-    // = useMutation(gql(updateEnduser), {
-    // variables: { id: enduserId, contestPoints:  },
-    // });
-    // spotifySaveUrl = first1;
+    // console.log(parsedSpotifySaveUrl);
+    // console.log("parsedSpotifySaveUrl");
     
   //Ooo the below is the database action.
 const [updateEnduserData] = useMutation(gql(updateEnduser))
@@ -132,10 +137,17 @@ function incrementPoints(pointSetter){
   totalPoints = (totalPoints + pointSetter);
 }
 
+console.log("Spotify Daily Playcount: ");
+console.log(spotifyDailyPlayCount);
+
+console.log("Enduser Contest ID: ");
+console.log(enduserContestID);
+
+
 function incrementSpotifyPlayCount(spotifyPlayCountSetter){
   if (spotifyDailyPlayCount<10) {
     console.log(spotifyDailyPlayCount);
-    console.log("+1 Spotify Daily Play Count");
+    console.log("updated Spotify Daily Play Count");
     incrementPoints(20);
     spotifyDailyPlayCount = (spotifyDailyPlayCount + spotifyPlayCountSetter);
     updateContestSubscriptionData({variables:{input :{
@@ -147,10 +159,90 @@ function incrementSpotifyPlayCount(spotifyPlayCountSetter){
     console.log("completed the Daily Play Count!")
     completeSpotifyPlay();
   }}
+  
+function playSpotifyTrack0 (){
+  if (!spotifyTrackCompleted0) {
+    setSpotifyTrackCompleted0(true);
+    incrementSpotifyPlayCount(1);
+    console.log("Listened to Track 1!")
+  } else return null
+}
+
+function playSpotifyTrack1 (){
+  if (!spotifyTrackCompleted1) {
+    setSpotifyTrackCompleted1(true);
+    incrementSpotifyPlayCount(1);
+    console.log("Listened to Track 1!")
+  } else return null
+}
+
+function playSpotifyTrack2 (){
+  if (!spotifyTrackCompleted2) {
+    setSpotifyTrackCompleted2(true);
+    incrementSpotifyPlayCount(1);
+    console.log("Listened to Track 2!")
+  } else return null
+}
+
+function playSpotifyTrack3 (){
+  if (!spotifyTrackCompleted3) {
+    setSpotifyTrackCompleted3(true);
+    incrementSpotifyPlayCount(1);
+    console.log("Listened to Track 3!")
+  } else return null
+}
+
+function playSpotifyTrack4 (){
+  if (!spotifyTrackCompleted4) {
+    setSpotifyTrackCompleted4(true);
+    incrementSpotifyPlayCount(1);
+    console.log("Listened to Track 4!")
+  } else return null
+}
+
+function playSpotifyTrack5 (){
+  if (!spotifyTrackCompleted5) {
+    setSpotifyTrackCompleted5(true);
+    incrementSpotifyPlayCount(1);
+    console.log("Listened to Track 5!")
+  } else return null
+}
+
+function playSpotifyTrack6 (){
+  if (!spotifyTrackCompleted6) {
+    setSpotifyTrackCompleted6(true);
+    incrementSpotifyPlayCount(1);
+    console.log("Listened to Track 6!")
+  } else return null
+}
+
+function playSpotifyTrack7 (){
+  if (!spotifyTrackCompleted7) {
+    setSpotifyTrackCompleted7(true);
+    incrementSpotifyPlayCount(1);
+    console.log("Listened to Track 7!")
+  } else return null
+}
+
+function playSpotifyTrack8 (){
+  if (!spotifyTrackCompleted8) {
+    setSpotifyTrackCompleted8(true);
+    incrementSpotifyPlayCount(1);
+    console.log("Listened to Track 8!")
+  } else return null
+}
+
+function playSpotifyTrack9 (){
+  if (!spotifyTrackCompleted9) {
+    setSpotifyTrackCompleted9(true);
+    incrementSpotifyPlayCount(1);
+    console.log("Listened to Track 9!")
+  } else return null
+}
 
 // SPOTIFY Authorization:
 
-  const authorizeURL = "https://accounts.spotify.com/authorize?client_id=e3d73c4d578b49f185a95fb5dbb09385&response_type=token&redirect_uri=https://f1bf79aaf3f3461a991df7b204943be0.vfs.cloud9.us-west-2.amazonaws.com/&scope=user-read-private%20user-read-email%20user-follow-modify%20user-library-modify%20user-read-recently-played%20user-read-playback-state%20user-modify-playback-state&state=modernmusician&show_dialog=true"
+  const authorizeURL = "https://accounts.spotify.com/authorize?client_id=e3d73c4d578b49f185a95fb5dbb09385&response_type=token&redirect_uri=https://f1bf79aaf3f3461a991df7b204943be0.vfs.cloud9.us-west-2.amazonaws.com/secure/contest/&scope=user-read-private%20user-read-email%20user-follow-modify%20user-library-modify%20user-read-recently-played%20user-read-playback-state%20user-modify-playback-state&state=modernmusician&show_dialog=true"
 
 // Get spotifyToken from URL
     const newUrl = window.location.href;
@@ -174,12 +266,88 @@ var spotifyApi = new SpotifyWebApi(credentials);
 
 // Spotify Play Functions:
 
-const [spotifyTrackListing, setSpotifyTrackListing] = useState(null);
-const [spotifyRecentlyPlayedListing, setSpotifyRecentlyPlayedListing] = useState(null);
-const [RecentlyPlayedTracks, setRecentlyPlayedTracks] = useState(null);
+const [spotifyEmbeddedTracks, setSpotifyEmbeddedTracks] = useState(null);
+const [spotifyRecentlyPlayedTracks, setSpotifyRecentlyPlayedTracks] = useState(null);
+// const [RecentlyPlayedTracks, setRecentlyPlayedTracks] = useState(null);
 
-const objSpotifyTrackListing = {...spotifyTrackListing};
-const objSpotifyRecentlyPlayedListing = {...spotifyRecentlyPlayedListing};
+const objSpotifyEmbeddedTracks = {...spotifyEmbeddedTracks};
+const objSpotifyRecentlyPlayedTracks = {...spotifyRecentlyPlayedTracks};
+
+// console.log(objSpotifyRecentlyPlayedTracks);
+
+// Cross-reference Spotify Recently Played with Track Listing
+
+const [recentlyPlayedIds, setRecentlyPlayedIds] = useState([]);
+const [embeddedTracksIds, setEmbeddedTracksIds] = useState([]);
+
+console.log("Embedded Track Ids:");
+console.log(embeddedTracksIds);
+
+console.log("Recently Played Ids:");
+console.log(recentlyPlayedIds);
+
+const findmatchedPlayCountListing = (a1, a2) => a1.filter(v => a2.includes(v)).length;
+
+// console.log(findmatchedPlayCountListing(embeddedTracksIds, recentlyPlayedIds));
+
+// const matchedPlayCountListing = findmatchedPlayCountListing(embeddedTracksIds, recentlyPlayedIds);
+
+let map = {};
+embeddedTracksIds.forEach(i => map[i] = false);
+recentlyPlayedIds.forEach(i => map[i] === false && (map[i] = true));
+let matchedPlayCountListing = Object.keys(map).map(k => ({ id: k, match: map[k] }));
+
+console.log("Matched Playcount Listing:");
+console.log(matchedPlayCountListing);
+
+const convertArrayToObject = (array, key) => {
+  const initialValue = {};
+  return array.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item[key]]: item,
+    };
+  }, initialValue);
+};
+
+// const objMatchedPlayCountListing = convertArrayToObject(matchedPlayCountListing, 'id');
+// console.log("Object Matched Playcount Listing:");
+// console.log(objMatchedPlayCountListing);
+
+const [spotifyTrackCompleted0, setSpotifyTrackCompleted0] = useState(false);
+const [spotifyTrackCompleted1, setSpotifyTrackCompleted1] = useState(false);
+const [spotifyTrackCompleted2, setSpotifyTrackCompleted2] = useState(false);
+const [spotifyTrackCompleted3, setSpotifyTrackCompleted3] = useState(false);
+const [spotifyTrackCompleted4, setSpotifyTrackCompleted4] = useState(false);
+const [spotifyTrackCompleted5, setSpotifyTrackCompleted5] = useState(false);
+const [spotifyTrackCompleted6, setSpotifyTrackCompleted6] = useState(false);
+const [spotifyTrackCompleted7, setSpotifyTrackCompleted7] = useState(false);
+const [spotifyTrackCompleted8, setSpotifyTrackCompleted8] = useState(false);
+const [spotifyTrackCompleted9, setSpotifyTrackCompleted9] = useState(false);
+
+// console.log("Has this been listened to?")
+// console.log(matchedPlayCountListing[0]);
+// if(matchedPlayCountListing[0]){
+//   console.log(matchedPlayCountListing[0].match)
+  
+// }
+
+const checkMatchedPlayCount = () => {
+  if(matchedPlayCountListing[0]){
+  // console.log("checked the Match Count!")
+  if (matchedPlayCountListing[0].match) {playSpotifyTrack0()}
+  if (matchedPlayCountListing[1].match) {playSpotifyTrack1()}
+  if (matchedPlayCountListing[2].match) {playSpotifyTrack2()}
+  if (matchedPlayCountListing[3].match) {playSpotifyTrack3()}
+  if (matchedPlayCountListing[4].match) {playSpotifyTrack4()}
+  if (matchedPlayCountListing[5].match) {playSpotifyTrack5()}
+  if (matchedPlayCountListing[6].match) {playSpotifyTrack6()}
+  if (matchedPlayCountListing[7].match) {playSpotifyTrack7()}
+  if (matchedPlayCountListing[8].match) {playSpotifyTrack8()}
+  if (matchedPlayCountListing[9].match) {playSpotifyTrack9()}
+
+  }
+}
 
   useEffect(() => {
     if (spotifyToken) {
@@ -187,54 +355,55 @@ const objSpotifyRecentlyPlayedListing = {...spotifyRecentlyPlayedListing};
       .then(function(data) {
           console.log("Artist's Top 10 Tracks");
           data.body.tracks.forEach(tracks => console.log("Track ID: " + tracks.id + "\nName: " + tracks.name + "\nArtist: " + tracks.artists[0].name + "\nDuration(ms): " + tracks.duration_ms));
-          data.body.tracks.forEach(tracks => console.log(tracks));
-          console.log("data.body.tracks:");
-          console.log(data.body.tracks)
-          console.log("data.body.tracks.name:");
-          console.log(data.body.tracks)
-          setSpotifyTrackListing(data.body.tracks)
+          // data.body.tracks.forEach(tracks => console.log(tracks));
+          setSpotifyEmbeddedTracks(data.body.tracks);
+          setEmbeddedTracksIds(data.body.tracks.map(item=> item.id));
         // console.log(data.body);
         }, function(err) {
         console.log('Something went wrong!', err);
       });
+    setInterval(checkMatchedPlayCount(), 35000);
   }
   }, []); // <-- empty array means 'run once'
 
-console.log(spotifyTrackListing +  " << spotifyTrackListing")
-console.log(spotifyTrackListing)
-console.log(objSpotifyTrackListing + " < object form");
+// console.log(spotifyEmbeddedTracks +  " << spotifyEmbeddedTracks")
+// console.log(spotifyRecentlyPlayedTracks);
+// console.log(objSpotifyEmbeddedTracks + " < object form");
 
-
-// Cross-reference Spotify Recently Played with Track Listing
-
+// const recentlyPlayedIds = spotifyRecentlyPlayedTracks.map(item => item.track.id );
+// console.log("Recently Played Ids")
+// console.log(recentlyPlayedIds)
 
 // HANDLE SPOTIFY BUTTONS ONCLICK
-  //TODO: 
+   
   
   const handleSpotifyPlay = () => {
     
     if (spotifyToken) {
     setDisplay(true);
       spotifyApi.getMyRecentlyPlayedTracks({
-        limit : 5
+        limit : 10
       }).then(function(data) {
           // Output items
-          console.log("Your 5 most recently played tracks are:");
+          console.log("Your 10 most recently played tracks are:");
           data.body.items.forEach(item => console.log("Track ID: " + item.track.id + "\nName: " + item.track.name + "\nArtist: " + item.track.artists[0].name + "\nDuration(ms): " + item.track.duration_ms));
-          //setSpotifyRecentlyPlayedListing(data.body.items);
-          //console.log(data.body.items);
-          //data.body.items.forEach(item => console.log(item.track.id));
-         
+          // data.body.items.map(item => setSpotifyRecentlyPlayedTracks(item.track.id))
+          setSpotifyRecentlyPlayedTracks(data.body.items);
+          setRecentlyPlayedIds(data.body.items.map(item => item.track.id ));
+          checkMatchedPlayCount();
+          // console.log("Was this listened to?")
+          // console.log(matchedPlayCountListing[0].match)
           //TODO: 
               //if in artists top tracks and not in our array then add to the array and increment points and set the play score down one.
               //1)check if in the tracks array,
-          const RecentlyPlayedTrackMatches = data.body.items.filter(item => { let RecentlyPlayedTrackMatches1 = spotifyTrackListing.find(tracks => tracks.id == item.track.id)
-                                          return RecentlyPlayedTrackMatches1
-                                          });
+          // const RecentlyPlayedTrackMatches = data.body.items.filter(item => { let RecentlyPlayedTrackMatches1 = spotifyEmbeddedTracks.find(tracks => tracks.id == item.track.id)
+          //                                 return RecentlyPlayedTrackMatches1
+          //                                 });
           
           //Spotify()
-          console.log(RecentlyPlayedTrackMatches);
-          setSpotifyRecentlyPlayedListing(data.body.items);
+          // console.log("RecentlyPlayedTrackMatches: " + JSON.stringify(RecentlyPlayedTrackMatches));
+          // const spotifyRecentlyPlayedTrackIds = spotifyRecentlyPlayedTracks.find(item => item.track.id == track.id);
+          // setSpotifyRecentlyPlayedTracks(data.body.items);
           
               //2)check if in our array, if not in our array
                   //can probably do the filter move again
@@ -244,7 +413,7 @@ console.log(objSpotifyTrackListing + " < object form");
               
               
           
-          //RecentlyPlayedTracks = spotifyTrackListing.tracks.find(tracks => tracks.id == data.body.items.forEach(item => item.track.id)) 
+          //RecentlyPlayedTracks = spotifyEmbeddedTracks.tracks.find(tracks => tracks.id == data.body.items.forEach(item => item.track.id)) 
           //console.log(RecentlyPlayedTracks);
           //enduserContestInfo = enduserInfo.subscriptions.items.find(element => element.contestID == contestId)
           
@@ -252,15 +421,11 @@ console.log(objSpotifyTrackListing + " < object form");
         }, function(err) {
           console.log('Something went wrong!', err);
         });
-    // incrementSpotifyPlayCount(1);
-    // console.log(spotifyDailyPlayCount);
-    // console.log("^^ Spotify Daily Play Count")
     }
     else {
       window.open(authorizeURL)
       }
   }
-console.log(spotifyRecentlyPlayedListing);
 
   const handleSpotifyFollow = () => {
     if (spotifyToken) {
@@ -268,6 +433,8 @@ console.log(spotifyRecentlyPlayedListing);
         .then(function(data) {
           console.log('Successfully followed Artist!');
           completeSpotifyFollow()
+         
+          //TODO: Hold token variable in session.
         }, function(err) {
           console.log('Something went wrong!', err);
         });
@@ -276,6 +443,8 @@ console.log(spotifyRecentlyPlayedListing);
           'public' : false
         }).then(function(data) {
            console.log('Successfully followed Playlist (privately)!');
+           
+          //TODO: Hold token variable in session.
         }, function(err) {
           console.log('Something went wrong!', err);
         });
@@ -289,6 +458,7 @@ console.log(spotifyRecentlyPlayedListing);
     spotifyApi.addToMySavedTracks(["0RvJZiIHkhOWkiqaAZnvSD"])
       .then(function(data) {
         console.log('Successfully added track!');
+        //TODO: Hold token variable in session.
         completeSpotifySave()
       }, function(err) {
         console.log('Something went wrong!', err);

@@ -5,10 +5,11 @@ import SpotifyWebApi from 'spotify-web-api-node';
 export const SpotifyAuthorizationScript = input => {
 
 // Spotify App credentials:
-
+//TODO: this is where the redirect uri is substantiated
+  //It would be great to be able to open the iframe of the spotify facebook page and then route based on that.
     var clientId = "e3d73c4d578b49f185a95fb5dbb09385";
     var clientSecret = "cc6e042fe3d74f7caea541ede2070525";
-    var redirectUri = "https://f1bf79aaf3f3461a991df7b204943be0.vfs.cloud9.us-west-2.amazonaws.com/";
+    var redirectUri = "https://f1bf79aaf3f3461a991df7b204943be0.vfs.cloud9.us-west-2.amazonaws.com/secure/contest/";
 
 var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken('myAccessToken');

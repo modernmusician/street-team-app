@@ -17,8 +17,8 @@ function ContestPage1({contestId}) {
   // this needs to use the contest id, which right now hard coded, going to be from the incoming path eventually will be from a subdomain or something
   // const contestId = '762be373-ae1d-45e2-aef2-08aebac72c75';
   // const contestId = 'little-contest'
-  const enduserId = '762be373';
-  console.log(contestId);
+  // const enduserId = 'demo-user';
+  console.log("Contest ID: "+contestId);
   const [userId, setUserId] = useState(null);
   const [enduserContestSubscription, setEnduserContestSubscription] = useState(null);
   const [subscriptionId, setSubscriptionId] = useState(null);
@@ -222,7 +222,8 @@ function ContestPage1({contestId}) {
     return <div><p>Loading New User...</p></div>;
   }
   
-console.log(enduserContestInfo.completeStreetTeamJoin);
+// console.log(enduserId);
+// console.log(enduserContestInfo.completeStreetTeamJoin);
 
   return (
     <div>
