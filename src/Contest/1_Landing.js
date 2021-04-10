@@ -12,20 +12,32 @@ import { createContest } from '../graphql/mutations';
 import Amplify from 'aws-amplify';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsMobile from '../aws-exports';
+import { useLocation } from "@reach/router"
 Amplify.configure(awsMobile);
 // import { createTask } from './graphql/mutations';
 // import { listTasks } from './graphql/queries';
 
 
-function Landing({ contestId }) {
+function Landing({ contestId}) {
   
   // this needs to use the contest id, which right now hard coded, going to be from the incoming path eventually will be from a subdomain or something
   // const contestId = 'little-contest';
   const enduserId = '762be373';
+  
   console.log(contestId);
   // const id = contestID;
   
-  ///TODO THIS NEEDS TO BE IMPLEMENTED
+  // A custom hook that builds on useLocation to parse
+  // the query string for you.
+  const useQuery = queryParam => {
+    const search = new URLSearchParams(useLocation().search);
+    return search.get(queryParam);
+  };
+  
+  const referrerId = useQuery("referrer");
+  console.log("referrer is: " + referrerId)
+  // stash the referral ID in the session
+  
   const [data, setData] = useState({ getContest: {} });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);

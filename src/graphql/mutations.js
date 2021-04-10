@@ -165,6 +165,7 @@ export const createContest = /* GraphQL */ `
           id
           contestID
           enduserID
+          referralEnduserID
           enduserPoints
           completeStreetTeamJoin
           completeSpotifyFollow
@@ -246,6 +247,7 @@ export const updateContest = /* GraphQL */ `
           id
           contestID
           enduserID
+          referralEnduserID
           enduserPoints
           completeStreetTeamJoin
           completeSpotifyFollow
@@ -327,6 +329,7 @@ export const deleteContest = /* GraphQL */ `
           id
           contestID
           enduserID
+          referralEnduserID
           enduserPoints
           completeStreetTeamJoin
           completeSpotifyFollow
@@ -643,6 +646,7 @@ export const createContestSubscription = /* GraphQL */ `
       id
       contestID
       enduserID
+      referralEnduserID
       enduserPoints
       completeStreetTeamJoin
       completeSpotifyFollow
@@ -694,6 +698,21 @@ export const createContestSubscription = /* GraphQL */ `
       }
       owner
       enduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        subscriptions {
+          nextToken
+        }
+        owner
+        actions {
+          nextToken
+        }
+      }
+      referralEnduser {
         id
         username
         firstName
@@ -720,6 +739,7 @@ export const updateContestSubscription = /* GraphQL */ `
       id
       contestID
       enduserID
+      referralEnduserID
       enduserPoints
       completeStreetTeamJoin
       completeSpotifyFollow
@@ -785,6 +805,21 @@ export const updateContestSubscription = /* GraphQL */ `
           nextToken
         }
       }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        subscriptions {
+          nextToken
+        }
+        owner
+        actions {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -797,6 +832,7 @@ export const deleteContestSubscription = /* GraphQL */ `
       id
       contestID
       enduserID
+      referralEnduserID
       enduserPoints
       completeStreetTeamJoin
       completeSpotifyFollow
@@ -848,6 +884,21 @@ export const deleteContestSubscription = /* GraphQL */ `
       }
       owner
       enduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        subscriptions {
+          nextToken
+        }
+        owner
+        actions {
+          nextToken
+        }
+      }
+      referralEnduser {
         id
         username
         firstName
@@ -882,6 +933,7 @@ export const createEnduser = /* GraphQL */ `
           id
           contestID
           enduserID
+          referralEnduserID
           enduserPoints
           completeStreetTeamJoin
           completeSpotifyFollow
@@ -926,6 +978,7 @@ export const updateEnduser = /* GraphQL */ `
           id
           contestID
           enduserID
+          referralEnduserID
           enduserPoints
           completeStreetTeamJoin
           completeSpotifyFollow
@@ -970,6 +1023,7 @@ export const deleteEnduser = /* GraphQL */ `
           id
           contestID
           enduserID
+          referralEnduserID
           enduserPoints
           completeStreetTeamJoin
           completeSpotifyFollow

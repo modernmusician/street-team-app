@@ -99,10 +99,12 @@ type ContestSubscription
     ]
   )
   @key(name: "byContest", fields: ["contestID", "enduserID"])
-  @key(name: "byEnduser", fields: ["enduserID", "contestID"]) {
+  @key(name: "byEnduser", fields: ["enduserID", "contestID"])
+  @key(name: "byReferralEnduser", fields: ["referralEnduserID", "contestID"]){
   id: ID!
   contestID: ID!
   enduserID: ID!
+  referralEnduserID: ID
   enduserPoints: Int
   """
   These Booleans will eventually be stored on the EnduserActions type instead
@@ -114,6 +116,7 @@ type ContestSubscription
   completeSpotifyPlay: Boolean
   contest: Contest! @connection(fields: ["contestID"])
   enduser: Enduser! @connection(fields: ["enduserID"])
+  referralEnduser: Enduser @connection(fields: ["referralEnduserID"])
 }
 
 type Enduser

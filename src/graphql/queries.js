@@ -159,6 +159,7 @@ export const getContest = /* GraphQL */ `
           id
           contestID
           enduserID
+          referralEnduserID
           enduserPoints
           completeStreetTeamJoin
           completeSpotifyFollow
@@ -350,6 +351,7 @@ export const getContestSubscription = /* GraphQL */ `
       id
       contestID
       enduserID
+      referralEnduserID
       enduserPoints
       completeStreetTeamJoin
       completeSpotifyFollow
@@ -415,6 +417,21 @@ export const getContestSubscription = /* GraphQL */ `
           nextToken
         }
       }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        subscriptions {
+          nextToken
+        }
+        owner
+        actions {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -433,6 +450,7 @@ export const listContestSubscriptions = /* GraphQL */ `
         id
         contestID
         enduserID
+        referralEnduserID
         enduserPoints
         completeStreetTeamJoin
         completeSpotifyFollow
@@ -462,6 +480,15 @@ export const listContestSubscriptions = /* GraphQL */ `
         }
         owner
         enduser {
+          id
+          username
+          firstName
+          lastName
+          createdAt
+          updatedAt
+          owner
+        }
+        referralEnduser {
           id
           username
           firstName
@@ -515,6 +542,7 @@ export const getEnduser = /* GraphQL */ `
           id
           contestID
           enduserID
+          referralEnduserID
           enduserPoints
           completeStreetTeamJoin
           completeSpotifyFollow

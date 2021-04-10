@@ -1887,6 +1887,17 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
+          "name" : "referralEnduserID",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "ID",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
           "name" : "enduserPoints",
           "description" : null,
           "args" : [ ],
@@ -2012,6 +2023,17 @@
           },
           "isDeprecated" : false,
           "deprecationReason" : null
+        }, {
+          "name" : "referralEnduser",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "OBJECT",
+            "name" : "Enduser",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
         } ],
         "inputFields" : null,
         "interfaces" : [ ],
@@ -2127,6 +2149,15 @@
           "defaultValue" : null
         }, {
           "name" : "enduserID",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelIDInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "referralEnduserID",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -5661,6 +5692,15 @@
           },
           "defaultValue" : null
         }, {
+          "name" : "referralEnduserID",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "ID",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
           "name" : "enduserPoints",
           "description" : null,
           "type" : {
@@ -5725,6 +5765,15 @@
           "defaultValue" : null
         }, {
           "name" : "enduserID",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelIDInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "referralEnduserID",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -5845,6 +5894,15 @@
           "defaultValue" : null
         }, {
           "name" : "enduserID",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "ID",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "referralEnduserID",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -7998,14 +8056,6 @@
         "onFragment" : false,
         "onField" : false
       }, {
-        "name" : "aws_iam",
-        "description" : "Tells the service this field/object has access authorized by sigv4 signing.",
-        "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
-        "args" : [ ],
-        "onOperation" : false,
-        "onFragment" : false,
-        "onField" : false
-      }, {
         "name" : "deprecated",
         "description" : null,
         "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
@@ -8019,6 +8069,14 @@
           },
           "defaultValue" : "\"No longer supported\""
         } ],
+        "onOperation" : false,
+        "onFragment" : false,
+        "onField" : false
+      }, {
+        "name" : "aws_iam",
+        "description" : "Tells the service this field/object has access authorized by sigv4 signing.",
+        "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
+        "args" : [ ],
         "onOperation" : false,
         "onFragment" : false,
         "onField" : false

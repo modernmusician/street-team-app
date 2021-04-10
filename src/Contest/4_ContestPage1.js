@@ -18,6 +18,8 @@ function ContestPage1({contestId}) {
   // const contestId = '762be373-ae1d-45e2-aef2-08aebac72c75';
   // const contestId = 'little-contest'
   // const enduserId = 'demo-user';
+  const referralId = 'demo-user'; //TODO -- need to get the referral ID from the session (which we should store in the session on the landing page)
+  console.log("ReferralID: "+referralId);
   console.log("Contest ID: "+contestId);
   const [userId, setUserId] = useState(null);
   const [enduserContestSubscription, setEnduserContestSubscription] = useState(null);
@@ -193,6 +195,7 @@ function ContestPage1({contestId}) {
         id:  subscriptionNewId,
         contestID: contestId,
         enduserID:userId,
+        referralEnduserID:referralId
       }
       }})
       refetchEnduserData(); //this refetch isn't updating enduserInfo for some reason
@@ -267,6 +270,7 @@ function ContestPage1({contestId}) {
               userLastName={enduserInfo.lastName || "User"}
               totalPoints={enduserContestInfo.enduserPoints || 0}
               enduserContestID={enduserContestInfo.id}
+              referralEnduserId={referralId}
               spotifyToken={enduserInfo.spotifyToken}
               spotifyDailyPlayCount={enduserContestInfo.spotifyDailyPlayCount}
               completedSpotifyPlay={enduserContestInfo.completeSpotifyPlay}

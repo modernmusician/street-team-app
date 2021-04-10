@@ -57,7 +57,7 @@ let spotifyPlayCountSetter = 0;
 let pointSetter = 0;
 let totalPoints = 0;
 
-function ContestPage1Card({contestId,completedSpotifyPlay,completedSpotifyFollow,completedSpotifySave,completedStreetTeamJoin,userFirstName,userLastName,totalPoints,contestHeadline,contestDescription,buttonText,artistID,contestDeadline,contestImg,streetTeamUrl,spotifyPlayUrl,spotifyFollowArtistUrl,spotifyFollowPlaylistUrl,spotifySaveUrl,actionSpotifyPlay,actionSpotifyFollow,actionSpotifySave,actionStreetTeam,enduserContestID}) {
+function ContestPage1Card({contestId,completedSpotifyPlay,completedSpotifyFollow,completedSpotifySave,completedStreetTeamJoin,userFirstName,userLastName,totalPoints,contestHeadline,contestDescription,buttonText,artistID,contestDeadline,contestImg,streetTeamUrl,spotifyPlayUrl,spotifyFollowArtistUrl,spotifyFollowPlaylistUrl,spotifySaveUrl,actionSpotifyPlay,actionSpotifyFollow,actionSpotifySave,actionStreetTeam,enduserContestID,referralEnduserId}) {
 
     
     
@@ -530,6 +530,7 @@ const checkMatchedPlayCount = () => {
           enduserPoints:totalPoints,
           completeStreetTeamJoin: true
         }}});
+        //because of our data structure, we need to update the referring user's points here as well
         console.log({completedStreetTeamJoin});
       }
         window.open(streetTeamUrl, '_blank');
