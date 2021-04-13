@@ -110,11 +110,18 @@ contestImg= (contestImg=="") ? "../baby.png" : contestImg;
     const spotifyToken = SessionVariables.getToken();
     console.log(spotifyToken);
     
+    
+    // Michael playing around with Session Variables
+    // SessionVariables.setCoolId(contestId);
+    // const michaelIsCoolId = SessionVariables.getCoolId();
+    
+    
     const a2 =search1.search("/contest/");
-    const clientIDtemp = search1.substr(a2+9);
+    const sessionContestIdTemp = search1.substr(a2+9);
     
-    SessionVariables.setClientId(clientIDtemp);
-    
+    SessionVariables.setSessionContestId(sessionContestIdTemp);
+    console.log(SessionVariables.getSessionContestId());
+  
     // const urlParams = new URLSearchParams(queryString);
     // const spotifyToken = urlParams.get('access_token')
 

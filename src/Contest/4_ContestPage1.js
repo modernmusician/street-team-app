@@ -8,6 +8,7 @@ import ContestPage1Card from '../Components/Cards/4ContestPage1';
 import { gql, useQuery, useMutation } from '@apollo/react-hooks';
 import { getContest, getEnduser, getContestSubscription} from '../graphql/queries';
 import { createEnduser,createContestSubscription } from '../graphql/mutations';
+import SessionVariables from '../functional-tests/SessionVariables';
 
 
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
@@ -18,7 +19,7 @@ function ContestPage1({contestId}) {
   // const contestId = '762be373-ae1d-45e2-aef2-08aebac72c75';
   // const contestId = 'little-contest'
   // const enduserId = 'demo-user';
-  const referralId = 'demo-user'; //TODO -- need to get the referral ID from the session (which we should store in the session on the landing page)
+  const referralId = SessionVariables.getReferrerId(); //get the referrer ID from the session that was stashed on landing.js
   console.log("ReferralID: "+referralId);
   console.log("Contest ID: "+contestId);
   const [userId, setUserId] = useState(null);
@@ -227,6 +228,12 @@ function ContestPage1({contestId}) {
   
 // console.log(enduserId);
 // console.log(enduserContestInfo.completeStreetTeamJoin);
+
+const enduserId = userId;
+
+  console.log("User ID: "+userId);
+  console.log("Enduser ID: "+ enduserId);
+  console.log("Subscription ID: "+enduserContestInfo.id);
 
   return (
     <div>

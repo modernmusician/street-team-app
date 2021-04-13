@@ -32,6 +32,7 @@ const AuthStateApp = () => {
         usernameAlias="email"
         formFields={[
           // { type: "username" },
+          { type: "name" },
           { type: "email" },
           { type: "password" },
           { type: "phone_number" }
