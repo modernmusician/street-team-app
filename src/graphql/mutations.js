@@ -9,6 +9,9 @@ export const createArtist = /* GraphQL */ `
     createArtist(input: $input, condition: $condition) {
       id
       name
+      createdAt
+      updatedAt
+      owner
       contests {
         items {
           id
@@ -21,13 +24,17 @@ export const createArtist = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -39,6 +46,9 @@ export const updateArtist = /* GraphQL */ `
     updateArtist(input: $input, condition: $condition) {
       id
       name
+      createdAt
+      updatedAt
+      owner
       contests {
         items {
           id
@@ -51,13 +61,17 @@ export const updateArtist = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -69,6 +83,9 @@ export const deleteArtist = /* GraphQL */ `
     deleteArtist(input: $input, condition: $condition) {
       id
       name
+      createdAt
+      updatedAt
+      owner
       contests {
         items {
           id
@@ -81,13 +98,17 @@ export const deleteArtist = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -105,15 +126,26 @@ export const createContest = /* GraphQL */ `
       landingButtonText
       deadline
       artistID
+      pictureID
+      testPictureUrl
+      streetTeamUrl
+      spotifyPlayUrl
+      spotifyFollowPlaylistUrl
+      spotifyFollowArtistUrl
+      spotifySaveUrl
+      createdAt
+      updatedAt
       artist {
         id
         name
+        createdAt
+        updatedAt
+        owner
         contests {
           nextToken
         }
-        createdAt
-        updatedAt
       }
+      owner
       actions {
         items {
           id
@@ -124,10 +156,27 @@ export const createContest = /* GraphQL */ `
           url
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      pictureID
+      subscribers {
+        items {
+          id
+          contestID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       picture {
         id
         publicUrl
@@ -142,19 +191,6 @@ export const createContest = /* GraphQL */ `
         }
         updatedAt
       }
-      testPictureUrl
-      subscribers {
-        items {
-          id
-          contestID
-          enduserID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -172,15 +208,26 @@ export const updateContest = /* GraphQL */ `
       landingButtonText
       deadline
       artistID
+      pictureID
+      testPictureUrl
+      streetTeamUrl
+      spotifyPlayUrl
+      spotifyFollowPlaylistUrl
+      spotifyFollowArtistUrl
+      spotifySaveUrl
+      createdAt
+      updatedAt
       artist {
         id
         name
+        createdAt
+        updatedAt
+        owner
         contests {
           nextToken
         }
-        createdAt
-        updatedAt
       }
+      owner
       actions {
         items {
           id
@@ -191,10 +238,27 @@ export const updateContest = /* GraphQL */ `
           url
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      pictureID
+      subscribers {
+        items {
+          id
+          contestID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       picture {
         id
         publicUrl
@@ -209,19 +273,6 @@ export const updateContest = /* GraphQL */ `
         }
         updatedAt
       }
-      testPictureUrl
-      subscribers {
-        items {
-          id
-          contestID
-          enduserID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -239,15 +290,26 @@ export const deleteContest = /* GraphQL */ `
       landingButtonText
       deadline
       artistID
+      pictureID
+      testPictureUrl
+      streetTeamUrl
+      spotifyPlayUrl
+      spotifyFollowPlaylistUrl
+      spotifyFollowArtistUrl
+      spotifySaveUrl
+      createdAt
+      updatedAt
       artist {
         id
         name
+        createdAt
+        updatedAt
+        owner
         contests {
           nextToken
         }
-        createdAt
-        updatedAt
       }
+      owner
       actions {
         items {
           id
@@ -258,10 +320,27 @@ export const deleteContest = /* GraphQL */ `
           url
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      pictureID
+      subscribers {
+        items {
+          id
+          contestID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       picture {
         id
         publicUrl
@@ -276,19 +355,6 @@ export const deleteContest = /* GraphQL */ `
         }
         updatedAt
       }
-      testPictureUrl
-      subscribers {
-        items {
-          id
-          contestID
-          enduserID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -303,6 +369,16 @@ export const createContestAction = /* GraphQL */ `
       postActionText
       pointValue
       contestID
+      actionType {
+        id
+        value
+        createdAt
+        updatedAt
+        owner
+      }
+      url
+      createdAt
+      updatedAt
       contest {
         id
         headline
@@ -312,16 +388,29 @@ export const createContestAction = /* GraphQL */ `
         landingButtonText
         deadline
         artistID
+        pictureID
+        testPictureUrl
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
+        createdAt
+        updatedAt
         artist {
           id
           name
           createdAt
           updatedAt
+          owner
         }
+        owner
         actions {
           nextToken
         }
-        pictureID
+        subscribers {
+          nextToken
+        }
         picture {
           id
           publicUrl
@@ -331,32 +420,20 @@ export const createContestAction = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        testPictureUrl
-        subscribers {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
+      owner
       enduserActions {
         items {
+          id
           enduserID
           actionID
           status
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      actionType {
-        id
-        value
-        createdAt
-        updatedAt
-      }
-      url
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -371,6 +448,16 @@ export const updateContestAction = /* GraphQL */ `
       postActionText
       pointValue
       contestID
+      actionType {
+        id
+        value
+        createdAt
+        updatedAt
+        owner
+      }
+      url
+      createdAt
+      updatedAt
       contest {
         id
         headline
@@ -380,16 +467,29 @@ export const updateContestAction = /* GraphQL */ `
         landingButtonText
         deadline
         artistID
+        pictureID
+        testPictureUrl
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
+        createdAt
+        updatedAt
         artist {
           id
           name
           createdAt
           updatedAt
+          owner
         }
+        owner
         actions {
           nextToken
         }
-        pictureID
+        subscribers {
+          nextToken
+        }
         picture {
           id
           publicUrl
@@ -399,32 +499,20 @@ export const updateContestAction = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        testPictureUrl
-        subscribers {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
+      owner
       enduserActions {
         items {
+          id
           enduserID
           actionID
           status
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      actionType {
-        id
-        value
-        createdAt
-        updatedAt
-      }
-      url
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -439,6 +527,16 @@ export const deleteContestAction = /* GraphQL */ `
       postActionText
       pointValue
       contestID
+      actionType {
+        id
+        value
+        createdAt
+        updatedAt
+        owner
+      }
+      url
+      createdAt
+      updatedAt
       contest {
         id
         headline
@@ -448,16 +546,29 @@ export const deleteContestAction = /* GraphQL */ `
         landingButtonText
         deadline
         artistID
+        pictureID
+        testPictureUrl
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
+        createdAt
+        updatedAt
         artist {
           id
           name
           createdAt
           updatedAt
+          owner
         }
+        owner
         actions {
           nextToken
         }
-        pictureID
+        subscribers {
+          nextToken
+        }
         picture {
           id
           publicUrl
@@ -467,32 +578,20 @@ export const deleteContestAction = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        testPictureUrl
-        subscribers {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
+      owner
       enduserActions {
         items {
+          id
           enduserID
           actionID
           status
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      actionType {
-        id
-        value
-        createdAt
-        updatedAt
-      }
-      url
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -506,6 +605,7 @@ export const createActionType = /* GraphQL */ `
       value
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -519,6 +619,7 @@ export const updateActionType = /* GraphQL */ `
       value
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -532,6 +633,7 @@ export const deleteActionType = /* GraphQL */ `
       value
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -544,6 +646,14 @@ export const createContestSubscription = /* GraphQL */ `
       id
       contestID
       enduserID
+      referralEnduserID
+      enduserPoints
+      completeStreetTeamJoin
+      completeSpotifyFollow
+      completeSpotifySave
+      completeSpotifyPlay
+      createdAt
+      updatedAt
       contest {
         id
         headline
@@ -553,16 +663,29 @@ export const createContestSubscription = /* GraphQL */ `
         landingButtonText
         deadline
         artistID
+        pictureID
+        testPictureUrl
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
+        createdAt
+        updatedAt
         artist {
           id
           name
           createdAt
           updatedAt
+          owner
         }
+        owner
         actions {
           nextToken
         }
-        pictureID
+        subscribers {
+          nextToken
+        }
         picture {
           id
           publicUrl
@@ -572,27 +695,38 @@ export const createContestSubscription = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        testPictureUrl
-        subscribers {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
+      owner
       enduser {
         id
         username
-        actions {
-          nextToken
-        }
+        firstName
+        lastName
+        createdAt
+        updatedAt
         subscriptions {
           nextToken
         }
+        owner
+        actions {
+          nextToken
+        }
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
         createdAt
         updatedAt
+        subscriptions {
+          nextToken
+        }
+        owner
+        actions {
+          nextToken
+        }
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -605,6 +739,14 @@ export const updateContestSubscription = /* GraphQL */ `
       id
       contestID
       enduserID
+      referralEnduserID
+      enduserPoints
+      completeStreetTeamJoin
+      completeSpotifyFollow
+      completeSpotifySave
+      completeSpotifyPlay
+      createdAt
+      updatedAt
       contest {
         id
         headline
@@ -614,16 +756,29 @@ export const updateContestSubscription = /* GraphQL */ `
         landingButtonText
         deadline
         artistID
+        pictureID
+        testPictureUrl
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
+        createdAt
+        updatedAt
         artist {
           id
           name
           createdAt
           updatedAt
+          owner
         }
+        owner
         actions {
           nextToken
         }
-        pictureID
+        subscribers {
+          nextToken
+        }
         picture {
           id
           publicUrl
@@ -633,27 +788,38 @@ export const updateContestSubscription = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        testPictureUrl
-        subscribers {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
+      owner
       enduser {
         id
         username
-        actions {
-          nextToken
-        }
+        firstName
+        lastName
+        createdAt
+        updatedAt
         subscriptions {
           nextToken
         }
+        owner
+        actions {
+          nextToken
+        }
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
         createdAt
         updatedAt
+        subscriptions {
+          nextToken
+        }
+        owner
+        actions {
+          nextToken
+        }
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -666,6 +832,14 @@ export const deleteContestSubscription = /* GraphQL */ `
       id
       contestID
       enduserID
+      referralEnduserID
+      enduserPoints
+      completeStreetTeamJoin
+      completeSpotifyFollow
+      completeSpotifySave
+      completeSpotifyPlay
+      createdAt
+      updatedAt
       contest {
         id
         headline
@@ -675,16 +849,29 @@ export const deleteContestSubscription = /* GraphQL */ `
         landingButtonText
         deadline
         artistID
+        pictureID
+        testPictureUrl
+        streetTeamUrl
+        spotifyPlayUrl
+        spotifyFollowPlaylistUrl
+        spotifyFollowArtistUrl
+        spotifySaveUrl
+        createdAt
+        updatedAt
         artist {
           id
           name
           createdAt
           updatedAt
+          owner
         }
+        owner
         actions {
           nextToken
         }
-        pictureID
+        subscribers {
+          nextToken
+        }
         picture {
           id
           publicUrl
@@ -694,27 +881,38 @@ export const deleteContestSubscription = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        testPictureUrl
-        subscribers {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
+      owner
       enduser {
         id
         username
-        actions {
-          nextToken
-        }
+        firstName
+        lastName
+        createdAt
+        updatedAt
         subscriptions {
           nextToken
         }
+        owner
+        actions {
+          nextToken
+        }
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
         createdAt
         updatedAt
+        subscriptions {
+          nextToken
+        }
+        owner
+        actions {
+          nextToken
+        }
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -726,28 +924,40 @@ export const createEnduser = /* GraphQL */ `
     createEnduser(input: $input, condition: $condition) {
       id
       username
-      actions {
-        items {
-          enduserID
-          actionID
-          status
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      firstName
+      lastName
+      createdAt
+      updatedAt
       subscriptions {
         items {
           id
           contestID
           enduserID
+          referralEnduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
+      owner
+      actions {
+        items {
+          id
+          enduserID
+          actionID
+          status
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -759,28 +969,40 @@ export const updateEnduser = /* GraphQL */ `
     updateEnduser(input: $input, condition: $condition) {
       id
       username
-      actions {
-        items {
-          enduserID
-          actionID
-          status
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      firstName
+      lastName
+      createdAt
+      updatedAt
       subscriptions {
         items {
           id
           contestID
           enduserID
+          referralEnduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
+      owner
+      actions {
+        items {
+          id
+          enduserID
+          actionID
+          status
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -792,28 +1014,40 @@ export const deleteEnduser = /* GraphQL */ `
     deleteEnduser(input: $input, condition: $condition) {
       id
       username
-      actions {
-        items {
-          enduserID
-          actionID
-          status
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      firstName
+      lastName
+      createdAt
+      updatedAt
       subscriptions {
         items {
           id
           contestID
           enduserID
+          referralEnduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
+      owner
+      actions {
+        items {
+          id
+          enduserID
+          actionID
+          status
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -823,18 +1057,22 @@ export const createEnduserActions = /* GraphQL */ `
     $condition: ModelEnduserActionsConditionInput
   ) {
     createEnduserActions(input: $input, condition: $condition) {
+      id
       enduserID
       enduser {
         id
         username
-        actions {
-          nextToken
-        }
+        firstName
+        lastName
+        createdAt
+        updatedAt
         subscriptions {
           nextToken
         }
-        createdAt
-        updatedAt
+        owner
+        actions {
+          nextToken
+        }
       }
       actionID
       action {
@@ -843,6 +1081,16 @@ export const createEnduserActions = /* GraphQL */ `
         postActionText
         pointValue
         contestID
+        actionType {
+          id
+          value
+          createdAt
+          updatedAt
+          owner
+        }
+        url
+        createdAt
+        updatedAt
         contest {
           id
           headline
@@ -854,25 +1102,24 @@ export const createEnduserActions = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
+          owner
         }
+        owner
         enduserActions {
           nextToken
         }
-        actionType {
-          id
-          value
-          createdAt
-          updatedAt
-        }
-        url
-        createdAt
-        updatedAt
       }
       status
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -882,18 +1129,22 @@ export const updateEnduserActions = /* GraphQL */ `
     $condition: ModelEnduserActionsConditionInput
   ) {
     updateEnduserActions(input: $input, condition: $condition) {
+      id
       enduserID
       enduser {
         id
         username
-        actions {
-          nextToken
-        }
+        firstName
+        lastName
+        createdAt
+        updatedAt
         subscriptions {
           nextToken
         }
-        createdAt
-        updatedAt
+        owner
+        actions {
+          nextToken
+        }
       }
       actionID
       action {
@@ -902,6 +1153,16 @@ export const updateEnduserActions = /* GraphQL */ `
         postActionText
         pointValue
         contestID
+        actionType {
+          id
+          value
+          createdAt
+          updatedAt
+          owner
+        }
+        url
+        createdAt
+        updatedAt
         contest {
           id
           headline
@@ -913,25 +1174,24 @@ export const updateEnduserActions = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
+          owner
         }
+        owner
         enduserActions {
           nextToken
         }
-        actionType {
-          id
-          value
-          createdAt
-          updatedAt
-        }
-        url
-        createdAt
-        updatedAt
       }
       status
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -941,18 +1201,22 @@ export const deleteEnduserActions = /* GraphQL */ `
     $condition: ModelEnduserActionsConditionInput
   ) {
     deleteEnduserActions(input: $input, condition: $condition) {
+      id
       enduserID
       enduser {
         id
         username
-        actions {
-          nextToken
-        }
+        firstName
+        lastName
+        createdAt
+        updatedAt
         subscriptions {
           nextToken
         }
-        createdAt
-        updatedAt
+        owner
+        actions {
+          nextToken
+        }
       }
       actionID
       action {
@@ -961,6 +1225,16 @@ export const deleteEnduserActions = /* GraphQL */ `
         postActionText
         pointValue
         contestID
+        actionType {
+          id
+          value
+          createdAt
+          updatedAt
+          owner
+        }
+        url
+        createdAt
+        updatedAt
         contest {
           id
           headline
@@ -972,25 +1246,24 @@ export const deleteEnduserActions = /* GraphQL */ `
           artistID
           pictureID
           testPictureUrl
+          streetTeamUrl
+          spotifyPlayUrl
+          spotifyFollowPlaylistUrl
+          spotifyFollowArtistUrl
+          spotifySaveUrl
           createdAt
           updatedAt
+          owner
         }
+        owner
         enduserActions {
           nextToken
         }
-        actionType {
-          id
-          value
-          createdAt
-          updatedAt
-        }
-        url
-        createdAt
-        updatedAt
       }
       status
       createdAt
       updatedAt
+      owner
     }
   }
 `;

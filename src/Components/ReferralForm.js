@@ -68,7 +68,7 @@ function ReferralForm ({refUrl}) {
               </div>
             </div>
             <div class="referral-button-points-box color"> 
-              <div class="referral-points-total nudge-left dark"> +500 </div>
+              <div class="referral-points-total nudge-left dark"> +250 </div>
               <div class="referral-points-label dark"> points </div>
             </div>
           </div>

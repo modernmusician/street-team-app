@@ -19,11 +19,11 @@ function EnterDetails() {
   return (
           <div> 
             <div class="create-contest-content-header"> Select Accounts </div>
-            <div class="create-contest-content-body"> 
+            <div class="create-contest-content-body width-75"> 
               <div class="create-contest-connect-facebook-box"> 
                 <div class="create-contest-connect-facebook-instructions">
-                  <div class="facebook-instructions-title"> inTune Process™ </div>
-                  <div class="facebook-instructions-description"> Please connect your Facebook advertising account so we can help you <Text weight="bold"> create lookalike audiences </Text> based on your highest quality fans. </div>
+                  <div class="facebook-instructions-title t-l"> inTune Process™ </div>
+                  <div class="facebook-instructions-description t-m"> Please connect your Facebook advertising account so we can help you <Text weight="bold"> create lookalike audiences </Text> based on your highest quality fans. </div>
                 </div>
                 <div class="create-contest-connect-facebook-button"> 
                   <ButtonNormal
@@ -33,7 +33,7 @@ function EnterDetails() {
                     textBoxColor="facebook-color"
                     buttonBoxStyle="connect-facebook-text-box"
                     buttonIconStyle="normal-button-icon no-margin"
-                    buttonTextStyle="normal-button-text smaller-font-1"
+                    buttonTextStyle="normal-button-text t-l"
                     heightClass="button-small-height"
                   />
                 </div>

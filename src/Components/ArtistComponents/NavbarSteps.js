@@ -17,14 +17,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import styled from 'styled-components';
 
-  const TABS = {
-    'connect-account': null,
-    'enter-details': null,
-    'fan-actions': null,
-    'add-integrations': null,
-    'review-contest': null,
-  }
-
   const TABSSTATUS = {
     "complete": "step-complete",
     "active": "step-active",
@@ -34,7 +26,7 @@ import styled from 'styled-components';
   
   //React.createElement(stepIcon)
 
-function NavbarSteps({handleOnClick,stepStatus,stepText,setStepStatus,isActive,isComplete,isInactive,isWarning, isSelected, selectedTab,stepIcon}) {
+const NavbarSteps = ({handleOnClick,stepStatus,stepText,setStepStatus,isActive,isComplete,isInactive,isWarning, isSelected, selectedTab,stepIcon}) => {
 
 const stepIconDisplayed = isComplete ? <AiOutlineCheck /> : isActive ? <AiFillEdit /> : isSelected ? <AiFillEdit /> : isWarning ? <AiFillWarning /> : null;
 const stepActive = isActive ? ' step-active ' : "";
