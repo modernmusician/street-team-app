@@ -22,10 +22,13 @@ function ContestPage1({contestId}) {
   const referralId = SessionVariables.getReferrerId(); //get the referrer ID from the session that was stashed on landing.js
   console.log("ReferralID: "+referralId);
   console.log("Contest ID: "+contestId);
+
+  
   const [userId, setUserId] = useState(null);
   const [enduserContestSubscription, setEnduserContestSubscription] = useState(null);
   const [subscriptionId, setSubscriptionId] = useState(null);
   const [firstName, setFirstName] = useState(null);
+  const [enduserFullName, setEnduserFullName] = useState(null);
   const [error, setError] = useState(null);
   const [CreateEnduser] = useMutation(gql(createEnduser))
   const [createContestSubscriptionData] = useMutation(gql(createContestSubscription));
@@ -41,8 +44,13 @@ function ContestPage1({contestId}) {
     .then(user => {
       setUserId(user.username);
       console.log(`Load additional settings for user: ${user.username}`);
+      // console.log("User Info:");
+      // console.log(user);
+      setEnduserFullName(user.attributes.name);
+      // console.log("Enduser Fullname:");
+      // console.log(user.attributes.name);
       // TBD
-      setFirstName(user.email);
+      // setFirstName(user.email);
     })
     .catch(err => setError(err));
   
@@ -156,6 +164,8 @@ function ContestPage1({contestId}) {
   const contestInfo = contestData.getContest;
   console.log(enduserData);
   const enduserInfo = enduserData.getEnduser;
+      console.log("Enduser Info:")
+      console.log(enduserInfo)
   // const CreateEnduser = () =>
   //     CreateEnduser({variables:{input :{
   //       id:userId,
@@ -238,7 +248,7 @@ const enduserId = userId;
   return (
     <div>
       <div>
-        <Background myclassName="background-wrapper" />
+        <Background contestPictureUrl={contestInfo.picture.publicUrl} myclassName="background-wrapper" />
       </div>
       <div>
         <CenterBox
@@ -273,8 +283,7 @@ const enduserId = userId;
               spotifyFollowPlaylistUrl={contestInfo.spotifyFollowPlaylistUrl}
               spotifyFollowArtistUrl={contestInfo.spotifyFollowArtistUrl}
               spotifySaveUrl={contestInfo.spotifySaveUrl}
-              userFirstName={enduserInfo.firstName || "New"}
-              userLastName={enduserInfo.lastName || "User"}
+              enduserFullName={enduserFullName || "New"}
               totalPoints={enduserContestInfo.enduserPoints || 0}
               enduserContestID={enduserContestInfo.id}
               referralEnduserId={referralId}

@@ -174,7 +174,7 @@ function Landing({ contestId}) {
 
   return (
     <div>
-      <Background myClass="background-wrapper" />
+      <Background contestPictureUrl={contestInfo.picture.publicUrl} myClass="background-wrapper" />
       <div>
         <CenterBox
           boxContent={

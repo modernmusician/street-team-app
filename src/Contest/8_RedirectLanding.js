@@ -42,8 +42,10 @@ export default RedirectLanding
       
       let sessionContestId = SessionVariables.getSessionContestId();
       
-      window.location.href = "https://f1bf79aaf3f3461a991df7b204943be0.vfs.cloud9.us-west-2.amazonaws.com/secure/contest/" + sessionContestId;
-    
+      let location  = window.location.hostname
+      
+      window.location.href = sessionContestId;
+        
   }
 
 

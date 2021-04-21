@@ -57,10 +57,10 @@ let spotifyPlayCountSetter = 0;
 let pointSetter = 0;
 let totalPoints = 0;
 
-function ContestPage1Card({contestId,completedSpotifyPlay,completedSpotifyFollow,completedSpotifySave,completedStreetTeamJoin,userFirstName,userLastName,totalPoints,contestHeadline,contestDescription,buttonText,artistID,contestDeadline,contestImg,streetTeamUrl,spotifyPlayUrl,spotifyFollowArtistUrl,spotifyFollowPlaylistUrl,spotifySaveUrl,actionSpotifyPlay,actionSpotifyFollow,actionSpotifySave,actionStreetTeam,enduserContestID,referralEnduserId}) {
+function ContestPage1Card({contestId,completedSpotifyPlay,completedSpotifyFollow,completedSpotifySave,completedStreetTeamJoin,userName,totalPoints,contestHeadline,contestDescription,buttonText,artistID,contestDeadline,contestImg,streetTeamUrl,spotifyPlayUrl,spotifyFollowArtistUrl,spotifyFollowPlaylistUrl,spotifySaveUrl,actionSpotifyPlay,actionSpotifyFollow,actionSpotifySave,actionStreetTeam,enduserContestID,referralEnduserId,enduserFullName}) {
 
     
-    
+const linkUrl = "/secure/referral/"+contestId;
     
 
     
@@ -102,6 +102,7 @@ contestImg= (contestImg=="") ? "../baby.png" : contestImg;
     //ReactSession.setStoreType("localStorage");
         
     const search1 = window.location.href;
+    
     //const a1 = search1.search("=");
     //const first1 = search1.substr(a1);
     //const b = first1.search("&token_type");
@@ -646,7 +647,7 @@ const checkMatchedPlayCount = () => {
             
           {/* TO DO: switch to unique URL routing system */}
           {/*<Link className="link-button" to={"/referral/" + contestId}>*/}
-          <Link className="link-button" to="/referral">
+          <Link className="link-button" to={linkUrl}>
    
             <Button className="btn active btn-default card-container-button button-continue">
               {buttonText} 
@@ -658,7 +659,7 @@ const checkMatchedPlayCount = () => {
           <PointsBox 
           totalPoints={totalPoints} 
           includeText={true}
-          userName={userFirstName + " " + userLastName}
+          enduserFullName={enduserFullName}
           totalReferrals={0}
           bonusPoints={0}
           />
@@ -667,6 +668,7 @@ const checkMatchedPlayCount = () => {
     </div>
   );
 }
+
   async function SpotifyFollowAPICall(spotifyToken) {
     console.log(spotifyToken);
     
