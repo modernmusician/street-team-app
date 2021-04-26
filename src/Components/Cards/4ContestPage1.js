@@ -151,6 +151,8 @@ console.log(spotifyDailyPlayCount);
 console.log("Enduser Contest ID: ");
 console.log(enduserContestID);
 
+console.log(process.env);
+
 
 function incrementSpotifyPlayCount(spotifyPlayCountSetter){
   if (spotifyDailyPlayCount<10) {
@@ -249,8 +251,10 @@ function playSpotifyTrack9 (){
 }
 
 // SPOTIFY Authorization:
-
-  const authorizeURL = "https://accounts.spotify.com/authorize?client_id=e3d73c4d578b49f185a95fb5dbb09385&response_type=token&redirect_uri=https://f1bf79aaf3f3461a991df7b204943be0.vfs.cloud9.us-west-2.amazonaws.com/secure/contest/&scope=user-read-private%20user-read-email%20user-follow-modify%20user-library-modify%20user-read-recently-played%20user-read-playback-state%20user-modify-playback-state&state=modernmusician&show_dialog=true"
+  //TODO: this below code is the issue and the issue that we cant get back to what we need. Becuase of the new api call.
+  //TODO: Its also probably why the code isnt actually creating an api call where we need it to.
+  //TODO: see if production is inside the node thing in process. yeah.
+  const authorizeURL = "https://accounts.spotify.com/authorize?client_id=e3d73c4d578b49f185a95fb5dbb09385&response_type=token&redirect_uri=https://https://app.modern-musician.com/secure/contest/&scope=user-read-private%20user-read-email%20user-follow-modify%20user-library-modify%20user-read-recently-played%20user-read-playback-state%20user-modify-playback-state&state=modernmusician&show_dialog=true"
 
 // Get spotifyToken from URL
     const newUrl = window.location.href;
@@ -307,7 +311,6 @@ let matchedPlayCountListing = Object.keys(map).map(k => ({ id: k, match: map[k] 
 
 console.log("Matched Playcount Listing:");
 console.log(matchedPlayCountListing);
-
 const convertArrayToObject = (array, key) => {
   const initialValue = {};
   return array.reduce((obj, item) => {
@@ -567,6 +570,7 @@ const checkMatchedPlayCount = () => {
             <div className= "left-align top-left-headline">
               {contestHeadline}
             </div>
+            
             <div className="top-right-countdown center">
             <ReactDeadline startDate={contestDeadline} />
             </div>
