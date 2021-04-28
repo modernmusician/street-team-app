@@ -18,6 +18,8 @@ import NotFoundPage from './Components/NotFoundPage'
 import AppWithAuth from './AppWithAuth'
 import ReactSession from 'react-client-session';
 
+import ViewActionPage from './ActionPage/ViewActionPage';
+
 // import { API, graphqlOperation } from "aws-amplify";
 // import { createTodo } from "./graphql/mutations";
 // import { listTodos } from "./graphql/queries";
@@ -55,12 +57,13 @@ function App() {
   return (
     <Router>
       <AppWithAuth path="secure/*"/>
-      <Landing path="/:contestId" />
+      <Landing path="/landing/:contestId" />
       <RedirectLanding path ="secure/contest/" />
-      <NotFoundPage default/>
+      <ViewActionPage default/>
     </Router>
     //Previous route for testing unauthenticated data loading
     // <Test path="/test" />
+    //<NotFoundPage default/>
 
   );
 }

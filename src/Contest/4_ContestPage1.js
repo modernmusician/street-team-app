@@ -193,7 +193,7 @@ function ContestPage1({contestId}) {
       refetchEnduserData();
     }
     if(enduserInfo!=null){
-      enduserContestInfo = enduserInfo.subscriptions.items.find(element => element.contestID == contestId);
+      enduserContestInfo = enduserInfo.contestSubscriptions.items.find(element => element.contestID == contestId);
       console.log(enduserContestInfo);
     }
     //if the enduser isn't already subscribed to the contest, create a record and use that one
