@@ -154,7 +154,8 @@ type ActionPageButton
   backgroundColor: String
   textColor: String
   pointValue: Int
-  targetURL: AWSURL
+  position: Int
+  targetURL: String
   """
   serviceAction should eventually be its own graphql type when we start building that feature. this is a placeholder json object
   """

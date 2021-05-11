@@ -385,6 +385,7 @@ export const onCreateActionPage = /* GraphQL */ `
           backgroundColor
           textColor
           pointValue
+          position
           targetURL
           serviceAction
           createdAt
@@ -456,6 +457,7 @@ export const onUpdateActionPage = /* GraphQL */ `
           backgroundColor
           textColor
           pointValue
+          position
           targetURL
           serviceAction
           createdAt
@@ -527,6 +529,7 @@ export const onDeleteActionPage = /* GraphQL */ `
           backgroundColor
           textColor
           pointValue
+          position
           targetURL
           serviceAction
           createdAt
@@ -801,6 +804,7 @@ export const onCreateActionPageButton = /* GraphQL */ `
       backgroundColor
       textColor
       pointValue
+      position
       targetURL
       serviceAction
       createdAt
@@ -853,6 +857,7 @@ export const onUpdateActionPageButton = /* GraphQL */ `
       backgroundColor
       textColor
       pointValue
+      position
       targetURL
       serviceAction
       createdAt
@@ -905,6 +910,7 @@ export const onDeleteActionPageButton = /* GraphQL */ `
       backgroundColor
       textColor
       pointValue
+      position
       targetURL
       serviceAction
       createdAt

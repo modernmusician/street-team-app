@@ -13,7 +13,9 @@
     },
     "categories": {
       "auth": {
-        "streetteamreact935863ab": {},
+        "streetteamreact935863ab": {
+          "facebookAppId": "1889301381171290"
+        },
         "userPoolGroups": {}
       },
       "function": {

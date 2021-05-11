@@ -20,6 +20,8 @@ import ReactSession from 'react-client-session';
 
 import ViewActionPage from './ActionPage/ViewActionPage';
 
+import TotalPointsContext from './Context/TotalPointsContext';
+
 // import { API, graphqlOperation } from "aws-amplify";
 // import { createTodo } from "./graphql/mutations";
 // import { listTodos } from "./graphql/queries";
@@ -52,19 +54,26 @@ function App() {
   // <Button> Counter +1 </Button>
 
   // counter items
-
+  const totalPointsHook = useState(0);
   //note -- to add a new secure path, the route needs to be added in AuthenticatedApp.js router
   return (
+    <TotalPointsContext>
     <Router>
+    
       <AppWithAuth path="secure/*"/>
       <Landing path="/landing/:contestId" />
-      <RedirectLanding path ="secure/contest/" />
-      <ViewActionPage default/>
+      <ContestPage1 path="/test/:contestId" />
+      <RedirectLanding path="secure/contest/" />
+      <ViewActionPage path="/:pageId"/>
+      <NotFoundPage default/>
+      
     </Router>
+    </TotalPointsContext>
     //Previous route for testing unauthenticated data loading
     // <Test path="/test" />
     //<NotFoundPage default/>
 
+    
   );
 }
 

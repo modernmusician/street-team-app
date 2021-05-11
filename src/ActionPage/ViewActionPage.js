@@ -9,11 +9,11 @@ import CenterBox from '../Components/CenterBox';
 import PageNotFound from '../Components/NotFoundPage';
 import SessionVariables from '../functional-tests/SessionVariables';
 import ActionButton from '../Components/ActionButton';
+import ViewActionPageCard from "./ViewActionPageCard";
 
 
 import { gql, useQuery } from '@apollo/react-hooks';
-import { getActionPage, getEnduser, listContests } from '../graphql/queries';
-import { createContest } from '../graphql/mutations';
+import { getActionPage, getEnduser } from '../graphql/queries';
 import Amplify from 'aws-amplify';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsMobile from '../aws-exports';
@@ -25,9 +25,7 @@ Amplify.configure(awsMobile);
 
 function ViewActionPage({pageId})  {
   
-  // this needs to use the contest id, which right now hard coded, going to be from the incoming path eventually will be from a subdomain or something
-  // const contestId = 'little-contest';
-  pageId = 'd6f1b146-9b82-4f24-9d8a-215884c84b39'; //this is hardcoded as the test page
+  // pageId = 'cue-no-ego'; //this is hardcoded as the test page
   
   console.log(pageId);
   
@@ -45,7 +43,7 @@ function ViewActionPage({pageId})  {
   SessionVariables.setReferrerId(referrerId);
   // stash the referral ID in the session
   
-  const [data, setData] = useState({ getContest: {} });
+  const [data, setData] = useState({ getActionPage: {} });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [username, setUsername] = useState(null);
@@ -74,20 +72,20 @@ function ViewActionPage({pageId})  {
   }, []);
 
   if (isLoading) {
-    // if (contestLoading || enduserLoading) {
     return <p>Loading...</p>;
   }
-  // if (contestError || enduserError) {
   if (error) {
     return (
       <div>
-        <p>Contest Data Error: ${error.message} </p>
+        <p>Data Error: ${error.message} </p>
         {/* <p>User Data Error: ${enduserError.message} </p> */}
       </div>
     );
   }
 
+  console.log("data:");
   console.log(data);
+  
   const pageData = data.getActionPage;
   // console.log(enduserData);
   // const enduserInfo = enduserData.getEnduser;
@@ -95,30 +93,32 @@ function ViewActionPage({pageId})  {
     return(<PageNotFound message={"pageId: ".concat(pageId)}/>)
   }
   
+  console.log("background picture:");
+  console.log(pageData.picture.publicUrl);
+  
   return (
+  
+  
     <div>
-        <div className="some-class">
-            <h1> {pageData.heading} </h1>
-            <h5> <i>{pageData.subheading}</i> </h5>
-        </div>
-      {pageData.actionButtons.items.length > 0 ? 
-        pageData.actionButtons.items.map((itemMapped, index) =>
-            (<div key={index}>
-                <ActionButton actionButtonConfig={itemMapped} />
-            </div>))
-      :
       <div>
-        <p>sorry... but there's no actions to take here</p>
-        <img alt="pika is sad we couldn't find any actions" 
-        src='https://www.memecreator.org/static/images/templates/804179.jpg'
-        height={100}
+        <Background backgroundPictureUrl={pageData.picture.publicUrl} myClass="background-wrapper" />
+      </div>
+      <div>
+        <CenterBox
+          boxContent={
+            <ViewActionPageCard
+              pageData={pageData}
+              // enduserFullName={enduserFullName || "New"}
+              // totalPoints={enduserpageData.enduserPoints || 0}
+              // enduseractionPageID={enduserpageData.id}
+              // referralEnduserId={referralId}
+            />
+          }
+          displayFooter={true}
         />
       </div>
-      }
-     {/*
-     <AmplifySignOut
-     */}
     </div>
+    
   );
 }
 

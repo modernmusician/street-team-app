@@ -288,6 +288,7 @@ export const getActionPage = /* GraphQL */ `
           backgroundColor
           textColor
           pointValue
+          position
           targetURL
           serviceAction
           createdAt
@@ -449,6 +450,7 @@ export const getActionPageButton = /* GraphQL */ `
       backgroundColor
       textColor
       pointValue
+      position
       targetURL
       serviceAction
       createdAt
@@ -510,6 +512,7 @@ export const listActionPageButtons = /* GraphQL */ `
         backgroundColor
         textColor
         pointValue
+        position
         targetURL
         serviceAction
         createdAt
