@@ -23,7 +23,8 @@ function ActionButton({actionButtonConfig}) {
   const handleClick = useCallback(
     (e) => {
       setCompleted(true);
-      totalPointCount.dispatch({type:'Increment',amount:10})
+      const pointValue = actionButtonConfig.pointValue ?? 10; //default value is 10 points
+      totalPointCount.dispatch({type:'Increment',amount:pointValue})
       if (actionButtonConfig.targetURL!=undefined){
         console.log(actionButtonConfig.targetURL);
         window.open(actionButtonConfig.targetURL, "_blank");
