@@ -57,10 +57,10 @@ let spotifyPlayCountSetter = 0;
 let pointSetter = 0;
 let totalPoints = 0;
 
-function ContestPage1Card({contestId,completedSpotifyPlay,completedSpotifyFollow,completedSpotifySave,completedStreetTeamJoin,userFirstName,userLastName,totalPoints,contestHeadline,contestDescription,buttonText,artistID,contestDeadline,contestImg,streetTeamUrl,spotifyPlayUrl,spotifyFollowArtistUrl,spotifyFollowPlaylistUrl,spotifySaveUrl,actionSpotifyPlay,actionSpotifyFollow,actionSpotifySave,actionStreetTeam,enduserContestID,referralEnduserId}) {
+function ContestPage1Card({contestId,completedSpotifyPlay,completedSpotifyFollow,completedSpotifySave,completedStreetTeamJoin,userName,totalPoints,contestHeadline,contestDescription,buttonText,artistID,contestDeadline,contestImg,streetTeamUrl,spotifyPlayUrl,spotifyFollowArtistUrl,spotifyFollowPlaylistUrl,spotifySaveUrl,actionSpotifyPlay,actionSpotifyFollow,actionSpotifySave,actionStreetTeam,enduserContestID,referralEnduserId,enduserFullName}) {
 
     
-    
+const linkUrl = "/secure/referral/"+contestId;
     
 
     
@@ -102,6 +102,7 @@ contestImg= (contestImg=="") ? "../baby.png" : contestImg;
     //ReactSession.setStoreType("localStorage");
         
     const search1 = window.location.href;
+    
     //const a1 = search1.search("=");
     //const first1 = search1.substr(a1);
     //const b = first1.search("&token_type");
@@ -110,11 +111,18 @@ contestImg= (contestImg=="") ? "../baby.png" : contestImg;
     const spotifyToken = SessionVariables.getToken();
     console.log(spotifyToken);
     
+    
+    // Michael playing around with Session Variables
+    // SessionVariables.setCoolId(contestId);
+    // const michaelIsCoolId = SessionVariables.getCoolId();
+    
+    
     const a2 =search1.search("/contest/");
-    const clientIDtemp = search1.substr(a2+9);
+    const sessionContestIdTemp = search1.substr(a2+9);
     
-    SessionVariables.setClientId(clientIDtemp);
-    
+    SessionVariables.setSessionContestId(sessionContestIdTemp);
+    console.log(SessionVariables.getSessionContestId());
+  
     // const urlParams = new URLSearchParams(queryString);
     // const spotifyToken = urlParams.get('access_token')
 
@@ -142,6 +150,8 @@ console.log(spotifyDailyPlayCount);
 
 console.log("Enduser Contest ID: ");
 console.log(enduserContestID);
+
+console.log(process.env);
 
 
 function incrementSpotifyPlayCount(spotifyPlayCountSetter){
@@ -241,8 +251,10 @@ function playSpotifyTrack9 (){
 }
 
 // SPOTIFY Authorization:
-
-  const authorizeURL = "https://accounts.spotify.com/authorize?client_id=e3d73c4d578b49f185a95fb5dbb09385&response_type=token&redirect_uri=https://f1bf79aaf3f3461a991df7b204943be0.vfs.cloud9.us-west-2.amazonaws.com/secure/contest/&scope=user-read-private%20user-read-email%20user-follow-modify%20user-library-modify%20user-read-recently-played%20user-read-playback-state%20user-modify-playback-state&state=modernmusician&show_dialog=true"
+  //TODO: this below code is the issue and the issue that we cant get back to what we need. Becuase of the new api call.
+  //TODO: Its also probably why the code isnt actually creating an api call where we need it to.
+  //TODO: see if production is inside the node thing in process. yeah.
+  const authorizeURL = "https://accounts.spotify.com/authorize?client_id=e3d73c4d578b49f185a95fb5dbb09385&response_type=token&redirect_uri=https://https://app.modern-musician.com/secure/contest/&scope=user-read-private%20user-read-email%20user-follow-modify%20user-library-modify%20user-read-recently-played%20user-read-playback-state%20user-modify-playback-state&state=modernmusician&show_dialog=true"
 
 // Get spotifyToken from URL
     const newUrl = window.location.href;
@@ -299,7 +311,6 @@ let matchedPlayCountListing = Object.keys(map).map(k => ({ id: k, match: map[k] 
 
 console.log("Matched Playcount Listing:");
 console.log(matchedPlayCountListing);
-
 const convertArrayToObject = (array, key) => {
   const initialValue = {};
   return array.reduce((obj, item) => {
@@ -559,6 +570,7 @@ const checkMatchedPlayCount = () => {
             <div className= "left-align top-left-headline">
               {contestHeadline}
             </div>
+            
             <div className="top-right-countdown center">
             <ReactDeadline startDate={contestDeadline} />
             </div>
@@ -639,7 +651,7 @@ const checkMatchedPlayCount = () => {
             
           {/* TO DO: switch to unique URL routing system */}
           {/*<Link className="link-button" to={"/referral/" + contestId}>*/}
-          <Link className="link-button" to="/referral">
+          <Link className="link-button" to={linkUrl}>
    
             <Button className="btn active btn-default card-container-button button-continue">
               {buttonText} 
@@ -651,7 +663,7 @@ const checkMatchedPlayCount = () => {
           <PointsBox 
           totalPoints={totalPoints} 
           includeText={true}
-          userName={userFirstName + " " + userLastName}
+          enduserFullName={enduserFullName}
           totalReferrals={0}
           bonusPoints={0}
           />
@@ -660,6 +672,7 @@ const checkMatchedPlayCount = () => {
     </div>
   );
 }
+
   async function SpotifyFollowAPICall(spotifyToken) {
     console.log(spotifyToken);
     
