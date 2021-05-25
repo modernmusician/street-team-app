@@ -1,19 +1,13 @@
 import React from 'react';
 
-import CardPicture from './ContestPicture';
+import ContestPicture from './ContestPicture';
 import Logo from './Logo';
 
-function Background({ myClass, backgroundPictureUrl }) {
+function Background({myClass}) {
   return (
     <div>
-      <div
-        className={myClass}
-        // style="background-image="{contestPictureUrl} //TODO need to use contestPictureUrl somehow here
-        style={{
-          backgroundImage: `url(${backgroundPictureUrl})`,
-        }}
-      >
-        <CardPicture />
+      <div className={myClass}>
+        <ContestPicture />
       </div>
       <div>
         <Logo />

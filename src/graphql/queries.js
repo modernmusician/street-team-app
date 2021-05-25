@@ -56,484 +56,6 @@ export const getArtist = /* GraphQL */ `
     }
   }
 `;
-export const listEndusers = /* GraphQL */ `
-  query ListEndusers(
-    $filter: ModelEnduserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listEndusers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        username
-        firstName
-        lastName
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          nextToken
-        }
-        contestSubscriptions {
-          nextToken
-        }
-        contestActions {
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const getEnduser = /* GraphQL */ `
-  query GetEnduser($id: ID!) {
-    getEnduser(id: $id) {
-      id
-      username
-      firstName
-      lastName
-      createdAt
-      updatedAt
-      owner
-      actionPageSubscriptions {
-        items {
-          id
-          actionPageID
-          enduserID
-          referralEnduserID
-          enduserPoints
-          completedActionButtonIDs
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      contestSubscriptions {
-        items {
-          id
-          contestID
-          enduserID
-          referralEnduserID
-          enduserPoints
-          completeStreetTeamJoin
-          completeSpotifyFollow
-          completeSpotifySave
-          completeSpotifyPlay
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      contestActions {
-        items {
-          id
-          enduserID
-          actionID
-          status
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const listPictures = /* GraphQL */ `
-  query ListPictures(
-    $filter: ModelPictureFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPictures(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        publicUrl
-        name
-        owner
-        visibility
-        createdAt
-        file {
-          bucket
-          region
-          key
-        }
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getPicture = /* GraphQL */ `
-  query GetPicture($id: ID!) {
-    getPicture(id: $id) {
-      id
-      publicUrl
-      name
-      owner
-      visibility
-      createdAt
-      file {
-        bucket
-        region
-        key
-      }
-      updatedAt
-    }
-  }
-`;
-export const listActionPages = /* GraphQL */ `
-  query ListActionPages(
-    $filter: ModelActionPageFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listActionPages(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        artistID
-        pictureID
-        pageTitle
-        heading
-        subheading
-        createdAt
-        updatedAt
-        artist {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        picture {
-          id
-          publicUrl
-          name
-          owner
-          visibility
-          createdAt
-          updatedAt
-        }
-        owner
-        subscribers {
-          nextToken
-        }
-        actionButtons {
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const getActionPage = /* GraphQL */ `
-  query GetActionPage($id: ID!) {
-    getActionPage(id: $id) {
-      id
-      artistID
-      pictureID
-      pageTitle
-      heading
-      subheading
-      createdAt
-      updatedAt
-      artist {
-        id
-        name
-        createdAt
-        updatedAt
-        owner
-        contests {
-          nextToken
-        }
-      }
-      picture {
-        id
-        publicUrl
-        name
-        owner
-        visibility
-        createdAt
-        file {
-          bucket
-          region
-          key
-        }
-        updatedAt
-      }
-      owner
-      subscribers {
-        items {
-          id
-          actionPageID
-          enduserID
-          referralEnduserID
-          enduserPoints
-          completedActionButtonIDs
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      actionButtons {
-        items {
-          id
-          actionPageID
-          preActionText
-          postActionText
-          buttonIcon
-          backgroundColor
-          textColor
-          pointValue
-          position
-          targetURL
-          serviceAction
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const getActionPageSubscriptions = /* GraphQL */ `
-  query GetActionPageSubscriptions($id: ID!) {
-    getActionPageSubscriptions(id: $id) {
-      id
-      actionPageID
-      enduserID
-      referralEnduserID
-      enduserPoints
-      completedActionButtonIDs
-      createdAt
-      updatedAt
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          nextToken
-        }
-        contestSubscriptions {
-          nextToken
-        }
-        contestActions {
-          nextToken
-        }
-      }
-      referralEnduser {
-        id
-        username
-        firstName
-        lastName
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          nextToken
-        }
-        contestSubscriptions {
-          nextToken
-        }
-        contestActions {
-          nextToken
-        }
-      }
-      actionPage {
-        id
-        artistID
-        pictureID
-        pageTitle
-        heading
-        subheading
-        createdAt
-        updatedAt
-        artist {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        picture {
-          id
-          publicUrl
-          name
-          owner
-          visibility
-          createdAt
-          updatedAt
-        }
-        owner
-        subscribers {
-          nextToken
-        }
-        actionButtons {
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const listActionPageSubscriptionss = /* GraphQL */ `
-  query ListActionPageSubscriptionss(
-    $filter: ModelActionPageSubscriptionsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listActionPageSubscriptionss(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        actionPageID
-        enduserID
-        referralEnduserID
-        enduserPoints
-        completedActionButtonIDs
-        createdAt
-        updatedAt
-        enduser {
-          id
-          username
-          firstName
-          lastName
-          createdAt
-          updatedAt
-          owner
-        }
-        referralEnduser {
-          id
-          username
-          firstName
-          lastName
-          createdAt
-          updatedAt
-          owner
-        }
-        actionPage {
-          id
-          artistID
-          pictureID
-          pageTitle
-          heading
-          subheading
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getActionPageButton = /* GraphQL */ `
-  query GetActionPageButton($id: ID!) {
-    getActionPageButton(id: $id) {
-      id
-      actionPageID
-      preActionText
-      postActionText
-      buttonIcon
-      backgroundColor
-      textColor
-      pointValue
-      position
-      targetURL
-      serviceAction
-      createdAt
-      updatedAt
-      actionpage {
-        id
-        artistID
-        pictureID
-        pageTitle
-        heading
-        subheading
-        createdAt
-        updatedAt
-        artist {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        picture {
-          id
-          publicUrl
-          name
-          owner
-          visibility
-          createdAt
-          updatedAt
-        }
-        owner
-        subscribers {
-          nextToken
-        }
-        actionButtons {
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const listActionPageButtons = /* GraphQL */ `
-  query ListActionPageButtons(
-    $filter: ModelActionPageButtonFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listActionPageButtons(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        actionPageID
-        preActionText
-        postActionText
-        buttonIcon
-        backgroundColor
-        textColor
-        pointValue
-        position
-        targetURL
-        serviceAction
-        createdAt
-        updatedAt
-        actionpage {
-          id
-          artistID
-          pictureID
-          pageTitle
-          heading
-          subheading
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
-      nextToken
-    }
-  }
-`;
 export const listContests = /* GraphQL */ `
   query ListContests(
     $filter: ModelContestFilterInput
@@ -566,6 +88,13 @@ export const listContests = /* GraphQL */ `
           updatedAt
           owner
         }
+        owner
+        actions {
+          nextToken
+        }
+        subscribers {
+          nextToken
+        }
         picture {
           id
           publicUrl
@@ -574,13 +103,6 @@ export const listContests = /* GraphQL */ `
           visibility
           createdAt
           updatedAt
-        }
-        owner
-        actions {
-          nextToken
-        }
-        subscribers {
-          nextToken
         }
       }
       nextToken
@@ -617,20 +139,6 @@ export const getContest = /* GraphQL */ `
           nextToken
         }
       }
-      picture {
-        id
-        publicUrl
-        name
-        owner
-        visibility
-        createdAt
-        file {
-          bucket
-          region
-          key
-        }
-        updatedAt
-      }
       owner
       actions {
         items {
@@ -662,6 +170,20 @@ export const getContest = /* GraphQL */ `
           owner
         }
         nextToken
+      }
+      picture {
+        id
+        publicUrl
+        name
+        owner
+        visibility
+        createdAt
+        file {
+          bucket
+          region
+          key
+        }
+        updatedAt
       }
     }
   }
@@ -709,6 +231,13 @@ export const getContestAction = /* GraphQL */ `
           updatedAt
           owner
         }
+        owner
+        actions {
+          nextToken
+        }
+        subscribers {
+          nextToken
+        }
         picture {
           id
           publicUrl
@@ -717,13 +246,6 @@ export const getContestAction = /* GraphQL */ `
           visibility
           createdAt
           updatedAt
-        }
-        owner
-        actions {
-          nextToken
-        }
-        subscribers {
-          nextToken
         }
       }
       owner
@@ -837,42 +359,6 @@ export const getContestSubscription = /* GraphQL */ `
       completeSpotifyPlay
       createdAt
       updatedAt
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          nextToken
-        }
-        contestSubscriptions {
-          nextToken
-        }
-        contestActions {
-          nextToken
-        }
-      }
-      referralEnduser {
-        id
-        username
-        firstName
-        lastName
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          nextToken
-        }
-        contestSubscriptions {
-          nextToken
-        }
-        contestActions {
-          nextToken
-        }
-      }
       contest {
         id
         headline
@@ -898,6 +384,13 @@ export const getContestSubscription = /* GraphQL */ `
           updatedAt
           owner
         }
+        owner
+        actions {
+          nextToken
+        }
+        subscribers {
+          nextToken
+        }
         picture {
           id
           publicUrl
@@ -907,15 +400,38 @@ export const getContestSubscription = /* GraphQL */ `
           createdAt
           updatedAt
         }
+      }
+      owner
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        subscriptions {
+          nextToken
+        }
         owner
         actions {
           nextToken
         }
-        subscribers {
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        subscriptions {
+          nextToken
+        }
+        owner
+        actions {
           nextToken
         }
       }
-      owner
     }
   }
 `;
@@ -942,24 +458,6 @@ export const listContestSubscriptions = /* GraphQL */ `
         completeSpotifyPlay
         createdAt
         updatedAt
-        enduser {
-          id
-          username
-          firstName
-          lastName
-          createdAt
-          updatedAt
-          owner
-        }
-        referralEnduser {
-          id
-          username
-          firstName
-          lastName
-          createdAt
-          updatedAt
-          owner
-        }
         contest {
           id
           headline
@@ -981,14 +479,100 @@ export const listContestSubscriptions = /* GraphQL */ `
           owner
         }
         owner
+        enduser {
+          id
+          username
+          firstName
+          lastName
+          createdAt
+          updatedAt
+          owner
+        }
+        referralEnduser {
+          id
+          username
+          firstName
+          lastName
+          createdAt
+          updatedAt
+          owner
+        }
       }
       nextToken
     }
   }
 `;
-export const getEnduserContestActions = /* GraphQL */ `
-  query GetEnduserContestActions($id: ID!) {
-    getEnduserContestActions(id: $id) {
+export const listEndusers = /* GraphQL */ `
+  query ListEndusers(
+    $filter: ModelEnduserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEndusers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        subscriptions {
+          nextToken
+        }
+        owner
+        actions {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getEnduser = /* GraphQL */ `
+  query GetEnduser($id: ID!) {
+    getEnduser(id: $id) {
+      id
+      username
+      firstName
+      lastName
+      createdAt
+      updatedAt
+      subscriptions {
+        items {
+          id
+          contestID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      owner
+      actions {
+        items {
+          id
+          enduserID
+          actionID
+          status
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const getEnduserActions = /* GraphQL */ `
+  query GetEnduserActions($id: ID!) {
+    getEnduserActions(id: $id) {
       id
       enduserID
       enduser {
@@ -998,14 +582,11 @@ export const getEnduserContestActions = /* GraphQL */ `
         lastName
         createdAt
         updatedAt
+        subscriptions {
+          nextToken
+        }
         owner
-        actionPageSubscriptions {
-          nextToken
-        }
-        contestSubscriptions {
-          nextToken
-        }
-        contestActions {
+        actions {
           nextToken
         }
       }
@@ -1058,17 +639,13 @@ export const getEnduserContestActions = /* GraphQL */ `
     }
   }
 `;
-export const listEnduserContestActionss = /* GraphQL */ `
-  query ListEnduserContestActionss(
-    $filter: ModelEnduserContestActionsFilterInput
+export const listEnduserActionss = /* GraphQL */ `
+  query ListEnduserActionss(
+    $filter: ModelEnduserActionsFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listEnduserContestActionss(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+    listEnduserActionss(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         enduserID
@@ -1099,6 +676,49 @@ export const listEnduserContestActionss = /* GraphQL */ `
         owner
       }
       nextToken
+    }
+  }
+`;
+export const listPictures = /* GraphQL */ `
+  query ListPictures(
+    $filter: ModelPictureFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPictures(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        publicUrl
+        name
+        owner
+        visibility
+        createdAt
+        file {
+          bucket
+          region
+          key
+        }
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getPicture = /* GraphQL */ `
+  query GetPicture($id: ID!) {
+    getPicture(id: $id) {
+      id
+      publicUrl
+      name
+      owner
+      visibility
+      createdAt
+      file {
+        bucket
+        region
+        key
+      }
+      updatedAt
     }
   }
 `;

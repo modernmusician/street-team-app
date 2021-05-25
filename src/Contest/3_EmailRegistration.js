@@ -55,7 +55,7 @@ function EmailRegistration({contestId}) {
   return (
     <div>
       <div>
-        <Background contestPictureUrl={contestInfo.picture.publicUrl} myClass="background-wrapper" />
+        <Background myClass="background-wrapper" />
       </div>
       <div>
         <CenterBox 

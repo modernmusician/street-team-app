@@ -5,8 +5,6 @@ import Background from '../Components/Background';
 import CenterBox from '../Components/CenterBox';
 import OptinCard from '../Components/Cards/1_OptinCard';
 import PageNotFound from '../Components/NotFoundPage';
-import SessionVariables from '../functional-tests/SessionVariables';
-
 
 import { gql, useQuery } from '@apollo/react-hooks';
 import { getContest, getEnduser, listContests } from '../graphql/queries';
@@ -31,18 +29,13 @@ function Landing({ contestId}) {
   
   // A custom hook that builds on useLocation to parse
   // the query string for you.
-  const useQuery = (queryParam) => {
+  const useQuery = queryParam => {
     const search = new URLSearchParams(useLocation().search);
     return search.get(queryParam);
   };
   
-  // const foundReferrer = useQuery("referrer");
-  // const referrerId = foundReferrer ? foundReferrer : "none";
   const referrerId = useQuery("referrer");
-  
-  
   console.log("referrer is: " + referrerId)
-  SessionVariables.setReferrerId(referrerId);
   // stash the referral ID in the session
   
   const [data, setData] = useState({ getContest: {} });
@@ -174,7 +167,7 @@ function Landing({ contestId}) {
 
   return (
     <div>
-      <Background contestPictureUrl={contestInfo.picture.publicUrl} myClass="background-wrapper" />
+      <Background myClass="background-wrapper" />
       <div>
         <CenterBox
           boxContent={

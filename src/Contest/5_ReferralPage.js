@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 
 import Background from '../Components/Background';
@@ -8,28 +8,12 @@ import ReferralCard from '../Components/Cards/5ReferralCard';
 import { gql, useQuery } from '@apollo/react-hooks';
 import { getContest, getEnduser } from '../graphql/queries';
 
-import { Auth } from 'aws-amplify';
-
-
 function ReferralPage({contestId}) {
   // this needs to use the contest id, which right now hard coded, going to be from the incoming path eventually will be from a subdomain or something
   // const contestId = 'little-contest';
   const enduserId = '762be373';
   // console.log(contestID);
   // const id = contestID;
-  const [enduserFullName, setEnduserFullName] = useState(null);
-  
-    Auth.currentAuthenticatedUser({
-    bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-  })
-    .then(user => {
-      setEnduserFullName(user.attributes.name);
-      // console.log("Enduser Fullname:");
-      // console.log(user.attributes.name);
-      // TBD
-      // setFirstName(user.email);
-    })
-    
   const {
     data: contestData,
     loading: contestLoading,
@@ -72,7 +56,7 @@ function ReferralPage({contestId}) {
   return (
     <div>
       <div>
-        <Background contestPictureUrl={contestInfo.picture.publicUrl} myClass="background-wrapper" />
+        <Background myClass="background-wrapper" />
       </div>
       <div>
         <CenterBox 
@@ -85,7 +69,8 @@ function ReferralPage({contestId}) {
             buttonText={contestInfo.landingButtonText}
             contestDeadline={formattedDeadline} //TODO deadline needs to be UTC
             contestImg={contestInfo.picture.publicUrl}
-            enduserFullName={enduserFullName}
+            userFirstName={enduserInfo.firstName || "Michael"}
+            userLastName={enduserInfo.lastName || "Walker"}
             enduserId={enduserInfo.id}
             totalPoints={enduserContestInfo.enduserPoints || 30}
             enduserContestID={enduserContestInfo.id}

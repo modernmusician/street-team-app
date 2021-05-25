@@ -8,7 +8,6 @@ import ContestPage1Card from '../Components/Cards/4ContestPage1';
 import { gql, useQuery, useMutation } from '@apollo/react-hooks';
 import { getContest, getEnduser, getContestSubscription} from '../graphql/queries';
 import { createEnduser,createContestSubscription } from '../graphql/mutations';
-import SessionVariables from '../functional-tests/SessionVariables';
 
 
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
@@ -19,16 +18,13 @@ function ContestPage1({contestId}) {
   // const contestId = '762be373-ae1d-45e2-aef2-08aebac72c75';
   // const contestId = 'little-contest'
   // const enduserId = 'demo-user';
-  const referralId = SessionVariables.getReferrerId(); //get the referrer ID from the session that was stashed on landing.js
+  const referralId = 'demo-user'; //TODO -- need to get the referral ID from the session (which we should store in the session on the landing page)
   console.log("ReferralID: "+referralId);
   console.log("Contest ID: "+contestId);
-
-  
   const [userId, setUserId] = useState(null);
   const [enduserContestSubscription, setEnduserContestSubscription] = useState(null);
   const [subscriptionId, setSubscriptionId] = useState(null);
   const [firstName, setFirstName] = useState(null);
-  const [enduserFullName, setEnduserFullName] = useState(null);
   const [error, setError] = useState(null);
   const [CreateEnduser] = useMutation(gql(createEnduser))
   const [createContestSubscriptionData] = useMutation(gql(createContestSubscription));
@@ -44,13 +40,8 @@ function ContestPage1({contestId}) {
     .then(user => {
       setUserId(user.username);
       console.log(`Load additional settings for user: ${user.username}`);
-      // console.log("User Info:");
-      // console.log(user);
-      setEnduserFullName(user.attributes.name);
-      // console.log("Enduser Fullname:");
-      // console.log(user.attributes.name);
       // TBD
-      // setFirstName(user.email);
+      setFirstName(user.email);
     })
     .catch(err => setError(err));
   
@@ -164,8 +155,6 @@ function ContestPage1({contestId}) {
   const contestInfo = contestData.getContest;
   console.log(enduserData);
   const enduserInfo = enduserData.getEnduser;
-      console.log("Enduser Info:")
-      console.log(enduserInfo)
   // const CreateEnduser = () =>
   //     CreateEnduser({variables:{input :{
   //       id:userId,
@@ -193,7 +182,7 @@ function ContestPage1({contestId}) {
       refetchEnduserData();
     }
     if(enduserInfo!=null){
-      enduserContestInfo = enduserInfo.contestSubscriptions.items.find(element => element.contestID == contestId);
+      enduserContestInfo = enduserInfo.subscriptions.items.find(element => element.contestID == contestId);
       console.log(enduserContestInfo);
     }
     //if the enduser isn't already subscribed to the contest, create a record and use that one
@@ -239,16 +228,10 @@ function ContestPage1({contestId}) {
 // console.log(enduserId);
 // console.log(enduserContestInfo.completeStreetTeamJoin);
 
-const enduserId = userId;
-
-  console.log("User ID: "+userId);
-  console.log("Enduser ID: "+ enduserId);
-  console.log("Subscription ID: "+enduserContestInfo.id);
-
   return (
     <div>
       <div>
-        <Background contestPictureUrl={contestInfo.picture.publicUrl} myclassName="background-wrapper" />
+        <Background myclassName="background-wrapper" />
       </div>
       <div>
         <CenterBox
@@ -283,7 +266,8 @@ const enduserId = userId;
               spotifyFollowPlaylistUrl={contestInfo.spotifyFollowPlaylistUrl}
               spotifyFollowArtistUrl={contestInfo.spotifyFollowArtistUrl}
               spotifySaveUrl={contestInfo.spotifySaveUrl}
-              enduserFullName={enduserFullName || "New"}
+              userFirstName={enduserInfo.firstName || "New"}
+              userLastName={enduserInfo.lastName || "User"}
               totalPoints={enduserContestInfo.enduserPoints || 0}
               enduserContestID={enduserContestInfo.id}
               referralEnduserId={referralId}

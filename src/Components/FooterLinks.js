@@ -2,12 +2,14 @@ import React from 'react';
 
 function FooterLinks() {
   return (
-    <nav>
-        <ul className="footer-links">
+    <nav className="footer-links">
+      <div>
+        <ul>
           <li> Contest Rules </li>
           <li> Privacy Policy </li>
           <li> Terms </li>
         </ul>
+      </div>
     </nav>
   );
 }
