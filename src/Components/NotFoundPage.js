@@ -1,10 +1,11 @@
 import React from 'react';
 import { AmplifyAuthenticator, AmplifySignUp, AmplifySignOut } from '@aws-amplify/ui-react';
 
-function NotFoundPage() {
+function NotFoundPage({message}) {
   return (
     <div>
       <p>Sorry we couldn't find this page...</p>
+      {message} && <p>{message}</p>
      {/*
      <AmplifySignOut
      */}

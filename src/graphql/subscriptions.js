@@ -103,6 +103,855 @@ export const onDeleteArtist = /* GraphQL */ `
     }
   }
 `;
+export const onCreateEnduser = /* GraphQL */ `
+  subscription OnCreateEnduser($owner: String) {
+    onCreateEnduser(owner: $owner) {
+      id
+      username
+      firstName
+      lastName
+      createdAt
+      updatedAt
+      owner
+      actionPageSubscriptions {
+        items {
+          id
+          actionPageID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completedActionButtonIDs
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      contestSubscriptions {
+        items {
+          id
+          contestID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      contestActions {
+        items {
+          id
+          enduserID
+          actionID
+          status
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateEnduser = /* GraphQL */ `
+  subscription OnUpdateEnduser($owner: String) {
+    onUpdateEnduser(owner: $owner) {
+      id
+      username
+      firstName
+      lastName
+      createdAt
+      updatedAt
+      owner
+      actionPageSubscriptions {
+        items {
+          id
+          actionPageID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completedActionButtonIDs
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      contestSubscriptions {
+        items {
+          id
+          contestID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      contestActions {
+        items {
+          id
+          enduserID
+          actionID
+          status
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteEnduser = /* GraphQL */ `
+  subscription OnDeleteEnduser($owner: String) {
+    onDeleteEnduser(owner: $owner) {
+      id
+      username
+      firstName
+      lastName
+      createdAt
+      updatedAt
+      owner
+      actionPageSubscriptions {
+        items {
+          id
+          actionPageID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completedActionButtonIDs
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      contestSubscriptions {
+        items {
+          id
+          contestID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completeStreetTeamJoin
+          completeSpotifyFollow
+          completeSpotifySave
+          completeSpotifyPlay
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      contestActions {
+        items {
+          id
+          enduserID
+          actionID
+          status
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreatePicture = /* GraphQL */ `
+  subscription OnCreatePicture($owner: String) {
+    onCreatePicture(owner: $owner) {
+      id
+      publicUrl
+      name
+      owner
+      visibility
+      createdAt
+      file {
+        bucket
+        region
+        key
+      }
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePicture = /* GraphQL */ `
+  subscription OnUpdatePicture($owner: String) {
+    onUpdatePicture(owner: $owner) {
+      id
+      publicUrl
+      name
+      owner
+      visibility
+      createdAt
+      file {
+        bucket
+        region
+        key
+      }
+      updatedAt
+    }
+  }
+`;
+export const onDeletePicture = /* GraphQL */ `
+  subscription OnDeletePicture($owner: String) {
+    onDeletePicture(owner: $owner) {
+      id
+      publicUrl
+      name
+      owner
+      visibility
+      createdAt
+      file {
+        bucket
+        region
+        key
+      }
+      updatedAt
+    }
+  }
+`;
+export const onCreateActionPage = /* GraphQL */ `
+  subscription OnCreateActionPage($owner: String) {
+    onCreateActionPage(owner: $owner) {
+      id
+      artistID
+      pictureID
+      pageTitle
+      heading
+      subheading
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        createdAt
+        updatedAt
+        owner
+        contests {
+          nextToken
+        }
+      }
+      picture {
+        id
+        publicUrl
+        name
+        owner
+        visibility
+        createdAt
+        file {
+          bucket
+          region
+          key
+        }
+        updatedAt
+      }
+      owner
+      subscribers {
+        items {
+          id
+          actionPageID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completedActionButtonIDs
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      actionButtons {
+        items {
+          id
+          actionPageID
+          preActionText
+          postActionText
+          buttonIcon
+          backgroundColor
+          textColor
+          pointValue
+          position
+          targetURL
+          serviceAction
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateActionPage = /* GraphQL */ `
+  subscription OnUpdateActionPage($owner: String) {
+    onUpdateActionPage(owner: $owner) {
+      id
+      artistID
+      pictureID
+      pageTitle
+      heading
+      subheading
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        createdAt
+        updatedAt
+        owner
+        contests {
+          nextToken
+        }
+      }
+      picture {
+        id
+        publicUrl
+        name
+        owner
+        visibility
+        createdAt
+        file {
+          bucket
+          region
+          key
+        }
+        updatedAt
+      }
+      owner
+      subscribers {
+        items {
+          id
+          actionPageID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completedActionButtonIDs
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      actionButtons {
+        items {
+          id
+          actionPageID
+          preActionText
+          postActionText
+          buttonIcon
+          backgroundColor
+          textColor
+          pointValue
+          position
+          targetURL
+          serviceAction
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteActionPage = /* GraphQL */ `
+  subscription OnDeleteActionPage($owner: String) {
+    onDeleteActionPage(owner: $owner) {
+      id
+      artistID
+      pictureID
+      pageTitle
+      heading
+      subheading
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        createdAt
+        updatedAt
+        owner
+        contests {
+          nextToken
+        }
+      }
+      picture {
+        id
+        publicUrl
+        name
+        owner
+        visibility
+        createdAt
+        file {
+          bucket
+          region
+          key
+        }
+        updatedAt
+      }
+      owner
+      subscribers {
+        items {
+          id
+          actionPageID
+          enduserID
+          referralEnduserID
+          enduserPoints
+          completedActionButtonIDs
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      actionButtons {
+        items {
+          id
+          actionPageID
+          preActionText
+          postActionText
+          buttonIcon
+          backgroundColor
+          textColor
+          pointValue
+          position
+          targetURL
+          serviceAction
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateActionPageSubscriptions = /* GraphQL */ `
+  subscription OnCreateActionPageSubscriptions($owner: String) {
+    onCreateActionPageSubscriptions(owner: $owner) {
+      id
+      actionPageID
+      enduserID
+      referralEnduserID
+      enduserPoints
+      completedActionButtonIDs
+      createdAt
+      updatedAt
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        owner
+        actionPageSubscriptions {
+          nextToken
+        }
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
+          nextToken
+        }
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        owner
+        actionPageSubscriptions {
+          nextToken
+        }
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
+          nextToken
+        }
+      }
+      actionPage {
+        id
+        artistID
+        pictureID
+        pageTitle
+        heading
+        subheading
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        picture {
+          id
+          publicUrl
+          name
+          owner
+          visibility
+          createdAt
+          updatedAt
+        }
+        owner
+        subscribers {
+          nextToken
+        }
+        actionButtons {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateActionPageSubscriptions = /* GraphQL */ `
+  subscription OnUpdateActionPageSubscriptions($owner: String) {
+    onUpdateActionPageSubscriptions(owner: $owner) {
+      id
+      actionPageID
+      enduserID
+      referralEnduserID
+      enduserPoints
+      completedActionButtonIDs
+      createdAt
+      updatedAt
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        owner
+        actionPageSubscriptions {
+          nextToken
+        }
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
+          nextToken
+        }
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        owner
+        actionPageSubscriptions {
+          nextToken
+        }
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
+          nextToken
+        }
+      }
+      actionPage {
+        id
+        artistID
+        pictureID
+        pageTitle
+        heading
+        subheading
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        picture {
+          id
+          publicUrl
+          name
+          owner
+          visibility
+          createdAt
+          updatedAt
+        }
+        owner
+        subscribers {
+          nextToken
+        }
+        actionButtons {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteActionPageSubscriptions = /* GraphQL */ `
+  subscription OnDeleteActionPageSubscriptions($owner: String) {
+    onDeleteActionPageSubscriptions(owner: $owner) {
+      id
+      actionPageID
+      enduserID
+      referralEnduserID
+      enduserPoints
+      completedActionButtonIDs
+      createdAt
+      updatedAt
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        owner
+        actionPageSubscriptions {
+          nextToken
+        }
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
+          nextToken
+        }
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        owner
+        actionPageSubscriptions {
+          nextToken
+        }
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
+          nextToken
+        }
+      }
+      actionPage {
+        id
+        artistID
+        pictureID
+        pageTitle
+        heading
+        subheading
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        picture {
+          id
+          publicUrl
+          name
+          owner
+          visibility
+          createdAt
+          updatedAt
+        }
+        owner
+        subscribers {
+          nextToken
+        }
+        actionButtons {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onCreateActionPageButton = /* GraphQL */ `
+  subscription OnCreateActionPageButton($owner: String) {
+    onCreateActionPageButton(owner: $owner) {
+      id
+      actionPageID
+      preActionText
+      postActionText
+      buttonIcon
+      backgroundColor
+      textColor
+      pointValue
+      position
+      targetURL
+      serviceAction
+      createdAt
+      updatedAt
+      actionpage {
+        id
+        artistID
+        pictureID
+        pageTitle
+        heading
+        subheading
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        picture {
+          id
+          publicUrl
+          name
+          owner
+          visibility
+          createdAt
+          updatedAt
+        }
+        owner
+        subscribers {
+          nextToken
+        }
+        actionButtons {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateActionPageButton = /* GraphQL */ `
+  subscription OnUpdateActionPageButton($owner: String) {
+    onUpdateActionPageButton(owner: $owner) {
+      id
+      actionPageID
+      preActionText
+      postActionText
+      buttonIcon
+      backgroundColor
+      textColor
+      pointValue
+      position
+      targetURL
+      serviceAction
+      createdAt
+      updatedAt
+      actionpage {
+        id
+        artistID
+        pictureID
+        pageTitle
+        heading
+        subheading
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        picture {
+          id
+          publicUrl
+          name
+          owner
+          visibility
+          createdAt
+          updatedAt
+        }
+        owner
+        subscribers {
+          nextToken
+        }
+        actionButtons {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteActionPageButton = /* GraphQL */ `
+  subscription OnDeleteActionPageButton($owner: String) {
+    onDeleteActionPageButton(owner: $owner) {
+      id
+      actionPageID
+      preActionText
+      postActionText
+      buttonIcon
+      backgroundColor
+      textColor
+      pointValue
+      position
+      targetURL
+      serviceAction
+      createdAt
+      updatedAt
+      actionpage {
+        id
+        artistID
+        pictureID
+        pageTitle
+        heading
+        subheading
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        picture {
+          id
+          publicUrl
+          name
+          owner
+          visibility
+          createdAt
+          updatedAt
+        }
+        owner
+        subscribers {
+          nextToken
+        }
+        actionButtons {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
 export const onCreateContest = /* GraphQL */ `
   subscription OnCreateContest($owner: String) {
     onCreateContest(owner: $owner) {
@@ -132,6 +981,20 @@ export const onCreateContest = /* GraphQL */ `
         contests {
           nextToken
         }
+      }
+      picture {
+        id
+        publicUrl
+        name
+        owner
+        visibility
+        createdAt
+        file {
+          bucket
+          region
+          key
+        }
+        updatedAt
       }
       owner
       actions {
@@ -164,20 +1027,6 @@ export const onCreateContest = /* GraphQL */ `
           owner
         }
         nextToken
-      }
-      picture {
-        id
-        publicUrl
-        name
-        owner
-        visibility
-        createdAt
-        file {
-          bucket
-          region
-          key
-        }
-        updatedAt
       }
     }
   }
@@ -212,6 +1061,20 @@ export const onUpdateContest = /* GraphQL */ `
           nextToken
         }
       }
+      picture {
+        id
+        publicUrl
+        name
+        owner
+        visibility
+        createdAt
+        file {
+          bucket
+          region
+          key
+        }
+        updatedAt
+      }
       owner
       actions {
         items {
@@ -243,20 +1106,6 @@ export const onUpdateContest = /* GraphQL */ `
           owner
         }
         nextToken
-      }
-      picture {
-        id
-        publicUrl
-        name
-        owner
-        visibility
-        createdAt
-        file {
-          bucket
-          region
-          key
-        }
-        updatedAt
       }
     }
   }
@@ -291,6 +1140,20 @@ export const onDeleteContest = /* GraphQL */ `
           nextToken
         }
       }
+      picture {
+        id
+        publicUrl
+        name
+        owner
+        visibility
+        createdAt
+        file {
+          bucket
+          region
+          key
+        }
+        updatedAt
+      }
       owner
       actions {
         items {
@@ -322,20 +1185,6 @@ export const onDeleteContest = /* GraphQL */ `
           owner
         }
         nextToken
-      }
-      picture {
-        id
-        publicUrl
-        name
-        owner
-        visibility
-        createdAt
-        file {
-          bucket
-          region
-          key
-        }
-        updatedAt
       }
     }
   }
@@ -383,13 +1232,6 @@ export const onCreateContestAction = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        actions {
-          nextToken
-        }
-        subscribers {
-          nextToken
-        }
         picture {
           id
           publicUrl
@@ -398,6 +1240,13 @@ export const onCreateContestAction = /* GraphQL */ `
           visibility
           createdAt
           updatedAt
+        }
+        owner
+        actions {
+          nextToken
+        }
+        subscribers {
+          nextToken
         }
       }
       owner
@@ -459,13 +1308,6 @@ export const onUpdateContestAction = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        actions {
-          nextToken
-        }
-        subscribers {
-          nextToken
-        }
         picture {
           id
           publicUrl
@@ -474,6 +1316,13 @@ export const onUpdateContestAction = /* GraphQL */ `
           visibility
           createdAt
           updatedAt
+        }
+        owner
+        actions {
+          nextToken
+        }
+        subscribers {
+          nextToken
         }
       }
       owner
@@ -535,13 +1384,6 @@ export const onDeleteContestAction = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        actions {
-          nextToken
-        }
-        subscribers {
-          nextToken
-        }
         picture {
           id
           publicUrl
@@ -550,6 +1392,13 @@ export const onDeleteContestAction = /* GraphQL */ `
           visibility
           createdAt
           updatedAt
+        }
+        owner
+        actions {
+          nextToken
+        }
+        subscribers {
+          nextToken
         }
       }
       owner
@@ -615,6 +1464,42 @@ export const onCreateContestSubscription = /* GraphQL */ `
       completeSpotifyPlay
       createdAt
       updatedAt
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        owner
+        actionPageSubscriptions {
+          nextToken
+        }
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
+          nextToken
+        }
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        owner
+        actionPageSubscriptions {
+          nextToken
+        }
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
+          nextToken
+        }
+      }
       contest {
         id
         headline
@@ -640,13 +1525,6 @@ export const onCreateContestSubscription = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        actions {
-          nextToken
-        }
-        subscribers {
-          nextToken
-        }
         picture {
           id
           publicUrl
@@ -656,38 +1534,15 @@ export const onCreateContestSubscription = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        owner
+        actions {
+          nextToken
+        }
+        subscribers {
+          nextToken
+        }
       }
       owner
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        createdAt
-        updatedAt
-        subscriptions {
-          nextToken
-        }
-        owner
-        actions {
-          nextToken
-        }
-      }
-      referralEnduser {
-        id
-        username
-        firstName
-        lastName
-        createdAt
-        updatedAt
-        subscriptions {
-          nextToken
-        }
-        owner
-        actions {
-          nextToken
-        }
-      }
     }
   }
 `;
@@ -705,6 +1560,42 @@ export const onUpdateContestSubscription = /* GraphQL */ `
       completeSpotifyPlay
       createdAt
       updatedAt
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        owner
+        actionPageSubscriptions {
+          nextToken
+        }
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
+          nextToken
+        }
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        owner
+        actionPageSubscriptions {
+          nextToken
+        }
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
+          nextToken
+        }
+      }
       contest {
         id
         headline
@@ -730,13 +1621,6 @@ export const onUpdateContestSubscription = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        actions {
-          nextToken
-        }
-        subscribers {
-          nextToken
-        }
         picture {
           id
           publicUrl
@@ -746,38 +1630,15 @@ export const onUpdateContestSubscription = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        owner
+        actions {
+          nextToken
+        }
+        subscribers {
+          nextToken
+        }
       }
       owner
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        createdAt
-        updatedAt
-        subscriptions {
-          nextToken
-        }
-        owner
-        actions {
-          nextToken
-        }
-      }
-      referralEnduser {
-        id
-        username
-        firstName
-        lastName
-        createdAt
-        updatedAt
-        subscriptions {
-          nextToken
-        }
-        owner
-        actions {
-          nextToken
-        }
-      }
     }
   }
 `;
@@ -795,6 +1656,42 @@ export const onDeleteContestSubscription = /* GraphQL */ `
       completeSpotifyPlay
       createdAt
       updatedAt
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        owner
+        actionPageSubscriptions {
+          nextToken
+        }
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
+          nextToken
+        }
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
+        createdAt
+        updatedAt
+        owner
+        actionPageSubscriptions {
+          nextToken
+        }
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
+          nextToken
+        }
+      }
       contest {
         id
         headline
@@ -820,13 +1717,6 @@ export const onDeleteContestSubscription = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        actions {
-          nextToken
-        }
-        subscribers {
-          nextToken
-        }
         picture {
           id
           publicUrl
@@ -836,170 +1726,21 @@ export const onDeleteContestSubscription = /* GraphQL */ `
           createdAt
           updatedAt
         }
-      }
-      owner
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        createdAt
-        updatedAt
-        subscriptions {
-          nextToken
-        }
         owner
         actions {
           nextToken
         }
-      }
-      referralEnduser {
-        id
-        username
-        firstName
-        lastName
-        createdAt
-        updatedAt
-        subscriptions {
-          nextToken
-        }
-        owner
-        actions {
+        subscribers {
           nextToken
         }
       }
-    }
-  }
-`;
-export const onCreateEnduser = /* GraphQL */ `
-  subscription OnCreateEnduser($owner: String) {
-    onCreateEnduser(owner: $owner) {
-      id
-      username
-      firstName
-      lastName
-      createdAt
-      updatedAt
-      subscriptions {
-        items {
-          id
-          contestID
-          enduserID
-          referralEnduserID
-          enduserPoints
-          completeStreetTeamJoin
-          completeSpotifyFollow
-          completeSpotifySave
-          completeSpotifyPlay
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       owner
-      actions {
-        items {
-          id
-          enduserID
-          actionID
-          status
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
-export const onUpdateEnduser = /* GraphQL */ `
-  subscription OnUpdateEnduser($owner: String) {
-    onUpdateEnduser(owner: $owner) {
-      id
-      username
-      firstName
-      lastName
-      createdAt
-      updatedAt
-      subscriptions {
-        items {
-          id
-          contestID
-          enduserID
-          referralEnduserID
-          enduserPoints
-          completeStreetTeamJoin
-          completeSpotifyFollow
-          completeSpotifySave
-          completeSpotifyPlay
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      owner
-      actions {
-        items {
-          id
-          enduserID
-          actionID
-          status
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const onDeleteEnduser = /* GraphQL */ `
-  subscription OnDeleteEnduser($owner: String) {
-    onDeleteEnduser(owner: $owner) {
-      id
-      username
-      firstName
-      lastName
-      createdAt
-      updatedAt
-      subscriptions {
-        items {
-          id
-          contestID
-          enduserID
-          referralEnduserID
-          enduserPoints
-          completeStreetTeamJoin
-          completeSpotifyFollow
-          completeSpotifySave
-          completeSpotifyPlay
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      owner
-      actions {
-        items {
-          id
-          enduserID
-          actionID
-          status
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const onCreateEnduserActions = /* GraphQL */ `
-  subscription OnCreateEnduserActions($owner: String) {
-    onCreateEnduserActions(owner: $owner) {
+export const onCreateEnduserContestActions = /* GraphQL */ `
+  subscription OnCreateEnduserContestActions($owner: String) {
+    onCreateEnduserContestActions(owner: $owner) {
       id
       enduserID
       enduser {
@@ -1009,11 +1750,14 @@ export const onCreateEnduserActions = /* GraphQL */ `
         lastName
         createdAt
         updatedAt
-        subscriptions {
+        owner
+        actionPageSubscriptions {
           nextToken
         }
-        owner
-        actions {
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
           nextToken
         }
       }
@@ -1066,9 +1810,9 @@ export const onCreateEnduserActions = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateEnduserActions = /* GraphQL */ `
-  subscription OnUpdateEnduserActions($owner: String) {
-    onUpdateEnduserActions(owner: $owner) {
+export const onUpdateEnduserContestActions = /* GraphQL */ `
+  subscription OnUpdateEnduserContestActions($owner: String) {
+    onUpdateEnduserContestActions(owner: $owner) {
       id
       enduserID
       enduser {
@@ -1078,11 +1822,14 @@ export const onUpdateEnduserActions = /* GraphQL */ `
         lastName
         createdAt
         updatedAt
-        subscriptions {
+        owner
+        actionPageSubscriptions {
           nextToken
         }
-        owner
-        actions {
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
           nextToken
         }
       }
@@ -1135,9 +1882,9 @@ export const onUpdateEnduserActions = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteEnduserActions = /* GraphQL */ `
-  subscription OnDeleteEnduserActions($owner: String) {
-    onDeleteEnduserActions(owner: $owner) {
+export const onDeleteEnduserContestActions = /* GraphQL */ `
+  subscription OnDeleteEnduserContestActions($owner: String) {
+    onDeleteEnduserContestActions(owner: $owner) {
       id
       enduserID
       enduser {
@@ -1147,11 +1894,14 @@ export const onDeleteEnduserActions = /* GraphQL */ `
         lastName
         createdAt
         updatedAt
-        subscriptions {
+        owner
+        actionPageSubscriptions {
           nextToken
         }
-        owner
-        actions {
+        contestSubscriptions {
+          nextToken
+        }
+        contestActions {
           nextToken
         }
       }
@@ -1201,60 +1951,6 @@ export const onDeleteEnduserActions = /* GraphQL */ `
       createdAt
       updatedAt
       owner
-    }
-  }
-`;
-export const onCreatePicture = /* GraphQL */ `
-  subscription OnCreatePicture($owner: String) {
-    onCreatePicture(owner: $owner) {
-      id
-      publicUrl
-      name
-      owner
-      visibility
-      createdAt
-      file {
-        bucket
-        region
-        key
-      }
-      updatedAt
-    }
-  }
-`;
-export const onUpdatePicture = /* GraphQL */ `
-  subscription OnUpdatePicture($owner: String) {
-    onUpdatePicture(owner: $owner) {
-      id
-      publicUrl
-      name
-      owner
-      visibility
-      createdAt
-      file {
-        bucket
-        region
-        key
-      }
-      updatedAt
-    }
-  }
-`;
-export const onDeletePicture = /* GraphQL */ `
-  subscription OnDeletePicture($owner: String) {
-    onDeletePicture(owner: $owner) {
-      id
-      publicUrl
-      name
-      owner
-      visibility
-      createdAt
-      file {
-        bucket
-        region
-        key
-      }
-      updatedAt
     }
   }
 `;
