@@ -1311,6 +1311,15 @@ background: linear-gradient(90deg, rgba(254,217,62,.15) 0%, rgba(250,213,58,.15)
   overflow: scroll;
 }
 
+.music-color {
+  background: hsla(266, 99%, 66%, 1.0);
+}
+
+.music-color-gradient {
+  background: hsla(266, 99%, 66%, 1.0);
+  background: linear-gradient(90deg, hsla(266, 99%, 66%, 1.0) 0%,    hsla(266, 95%, 63%, 1.0) 86%, hsla(266, 90%, 60%, 1.0) 100%);
+}
+
 @media (min-width: 1px) {
   .center-box {
     padding: 25px;

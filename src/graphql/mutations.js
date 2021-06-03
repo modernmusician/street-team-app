@@ -289,6 +289,132 @@ export const deleteEnduser = /* GraphQL */ `
     }
   }
 `;
+export const createArtistUser = /* GraphQL */ `
+  mutation CreateArtistUser(
+    $input: CreateArtistUserInput!
+    $condition: ModelArtistUserConditionInput
+  ) {
+    createArtistUser(input: $input, condition: $condition) {
+      id
+      username
+      firstName
+      lastName
+      artistID
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        createdAt
+        updatedAt
+        owner
+        contests {
+          nextToken
+        }
+      }
+      owner
+      actionPages {
+        items {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateArtistUser = /* GraphQL */ `
+  mutation UpdateArtistUser(
+    $input: UpdateArtistUserInput!
+    $condition: ModelArtistUserConditionInput
+  ) {
+    updateArtistUser(input: $input, condition: $condition) {
+      id
+      username
+      firstName
+      lastName
+      artistID
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        createdAt
+        updatedAt
+        owner
+        contests {
+          nextToken
+        }
+      }
+      owner
+      actionPages {
+        items {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteArtistUser = /* GraphQL */ `
+  mutation DeleteArtistUser(
+    $input: DeleteArtistUserInput!
+    $condition: ModelArtistUserConditionInput
+  ) {
+    deleteArtistUser(input: $input, condition: $condition) {
+      id
+      username
+      firstName
+      lastName
+      artistID
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        createdAt
+        updatedAt
+        owner
+        contests {
+          nextToken
+        }
+      }
+      owner
+      actionPages {
+        items {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const createPicture = /* GraphQL */ `
   mutation CreatePicture(
     $input: CreatePictureInput!
@@ -360,6 +486,7 @@ export const createActionPage = /* GraphQL */ `
     createActionPage(input: $input, condition: $condition) {
       id
       artistID
+      creatorUserID
       pictureID
       pageTitle
       heading
@@ -373,6 +500,26 @@ export const createActionPage = /* GraphQL */ `
         updatedAt
         owner
         contests {
+          nextToken
+        }
+      }
+      creatorUser {
+        id
+        username
+        firstName
+        lastName
+        artistID
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        actionPages {
           nextToken
         }
       }
@@ -435,6 +582,7 @@ export const updateActionPage = /* GraphQL */ `
     updateActionPage(input: $input, condition: $condition) {
       id
       artistID
+      creatorUserID
       pictureID
       pageTitle
       heading
@@ -448,6 +596,26 @@ export const updateActionPage = /* GraphQL */ `
         updatedAt
         owner
         contests {
+          nextToken
+        }
+      }
+      creatorUser {
+        id
+        username
+        firstName
+        lastName
+        artistID
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        actionPages {
           nextToken
         }
       }
@@ -510,6 +678,7 @@ export const deleteActionPage = /* GraphQL */ `
     deleteActionPage(input: $input, condition: $condition) {
       id
       artistID
+      creatorUserID
       pictureID
       pageTitle
       heading
@@ -523,6 +692,26 @@ export const deleteActionPage = /* GraphQL */ `
         updatedAt
         owner
         contests {
+          nextToken
+        }
+      }
+      creatorUser {
+        id
+        username
+        firstName
+        lastName
+        artistID
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        actionPages {
           nextToken
         }
       }
@@ -630,6 +819,7 @@ export const createActionPageSubscriptions = /* GraphQL */ `
       actionPage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -639,6 +829,16 @@ export const createActionPageSubscriptions = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -717,6 +917,7 @@ export const updateActionPageSubscriptions = /* GraphQL */ `
       actionPage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -726,6 +927,16 @@ export const updateActionPageSubscriptions = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -804,6 +1015,7 @@ export const deleteActionPageSubscriptions = /* GraphQL */ `
       actionPage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -813,6 +1025,16 @@ export const deleteActionPageSubscriptions = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -860,6 +1082,7 @@ export const createActionPageButton = /* GraphQL */ `
       actionpage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -869,6 +1092,16 @@ export const createActionPageButton = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -916,6 +1149,7 @@ export const updateActionPageButton = /* GraphQL */ `
       actionpage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -925,6 +1159,16 @@ export const updateActionPageButton = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -972,6 +1216,7 @@ export const deleteActionPageButton = /* GraphQL */ `
       actionpage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -981,6 +1226,16 @@ export const deleteActionPageButton = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner

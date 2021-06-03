@@ -12,6 +12,7 @@ import styled from 'styled-components';
 // import ReactDeadline from '../ReactDeadline';
 import PointsBox from "../Components/PointsBox"
 import ActionButton from '../Components/ActionButton';
+import ClaimRewardButton from "../Components/ClaimRewardButton"
 import ActionPointsButton from "../Components/ActionPointsButton"
 import ActionPointsButtonTyped from "../Components/ActionPointsButtonTyped"
 // import EmailForm from "../EmailForm";
@@ -24,6 +25,7 @@ import { FaSpotify } from "react-icons/fa";
 import { FaCheckCircle } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { MdLibraryMusic } from "react-icons/md";
+import { AiFillGift } from "react-icons/ai";
 
 import { gql, useMutation } from '@apollo/react-hooks';
 
@@ -40,12 +42,15 @@ function ViewActionPageCard({pageData}) {
 
 const linkUrl = "/secure/referral/"+pageData.actionPageId;
 var orderActionButtons = [];
+var orderClaimRewardButtons = [];
 if(pageData.actionButtons.items.length > 0){
   orderActionButtons = pageData.actionButtons.items.sort(function(a, b){return a.position - b.position})
   console.log("sorted buttons are...")
   console.log(orderActionButtons)
 }
 
+const futureClaimRewardsButton = "addinglater";
+const claimRewardUrl = pageData.actionButtons.items;
 
 const myTotalPoints = useContext(totalPointsContext);
 
@@ -97,6 +102,16 @@ const myTotalPoints = useContext(totalPointsContext);
              {/*
              <AmplifySignOut
              */}
+            </div>
+            <div>
+              {futureClaimRewardsButton=="addinglater" ? null
+              :
+                <ClaimRewardButton
+                  rewardName = "Starter Pack"
+                  url= {claimRewardUrl}
+                  isLocked= {true}
+                />
+              }
             </div>
             
           <div className="register-button-box">

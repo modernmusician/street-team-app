@@ -10,7 +10,7 @@ import { FaFire } from "react-icons/fa";
 import { FaCheckSquare } from "react-icons/fa";
 import { AiOutlineCheck } from "react-icons/ai";
 
-const SpotifyFollowInputForm = ({
+const FollowMusicInputForm = ({
       inputValues,
       handleOnChange,
       setInputValues,
@@ -21,25 +21,13 @@ const SpotifyFollowInputForm = ({
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1"></label>
                 <input 
-                type="email"
-                name="spotifyFollowArtistUrl"
-                value={inputValues.spotifyFollowArtistUrl}
+                type="text"
+                name="followMusicUrl"
+                value={inputValues.followMusicUrl}
                 onChange={handleOnChange}
                 className="form-control" 
                 id="" 
-                placeholder="Enter Spotify Artist URL" 
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1"></label>
-                <input 
-                type="email"
-                name="spotifyFollowPlaylistUrl"
-                value={inputValues.spotifyFollowPlaylistUrl}
-                onChange={handleOnChange}
-                className="form-control" 
-                id="" 
-                placeholder="Enter Spotify Playlist URL" 
+                placeholder="Enter Follow Music URL" 
                 />
               </div>
           
@@ -47,4 +35,4 @@ const SpotifyFollowInputForm = ({
         )
 }
 
-export default SpotifyFollowInputForm
+export default FollowMusicInputForm
