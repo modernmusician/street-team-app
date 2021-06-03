@@ -10,7 +10,7 @@ import React, { useState, useRef } from 'react';
 // import { FaCheckSquare } from "react-icons/fa";
 // import { AiOutlineCheck } from "react-icons/ai";
 
-const StreetTeamInputForm = ({
+const SendEmailInputForm = ({
       inputValues,
       handleOnChange,
       setInputValues,
@@ -22,16 +22,16 @@ const StreetTeamInputForm = ({
                 <label htmlFor="exampleInputEmail1"></label>
                 <input 
                 type="email"
-                name="streetTeamUrl"
-                value={inputValues.streetTeamUrl}
+                name="sendEmailUrl"
+                value={inputValues.sendEmailUrl}
                 onChange={handleOnChange}
                 className="form-control" 
                 id="" 
-                placeholder="Enter Street Team Group URL" 
+                placeholder="Enter Your Email Address" 
                 />
               </div>
           </div>
         )
 }
 
-export default StreetTeamInputForm
+export default SendEmailInputForm

@@ -9,6 +9,9 @@ import { FaSpotify } from "react-icons/fa";
 import { FaCheckCircle } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { MdLibraryMusic } from "react-icons/md";
+import { FaLock } from "react-icons/fa";
+import { HiUserGroup } from "react-icons/hi";
+
 
 
 function ActionPointsButtonTyped({preActionText,postActionText,actionType,pointValue,url,completed}) {
@@ -32,9 +35,27 @@ function ActionPointsButtonTyped({preActionText,postActionText,actionType,pointV
         buttonTextColor= "light ";
         icon = FaSpotify;
         
-    } else if (actionType === "streetTeamJoin") {
+    } else if (actionType === "joinGroup") {
         buttonColor= "complete-registration-color";
         buttonTextColor= "dark ";
+        icon = HiUserGroup;
+    }
+    
+    else if (actionType === "claimStarterPack") {
+        buttonColor= "spotify-color";
+        buttonTextColor= "light ";
+        icon = FaLock;
+    }
+    
+    else if (actionType === "sendEmail") {
+        buttonColor= "complete-registration-color";
+        buttonTextColor= "dark ";
+        icon = HiOutlineMail;
+    }
+    
+    else if (actionType === "followMusic") {
+        buttonColor= "music-color";
+        buttonTextColor= "light ";
         icon = MdLibraryMusic;
     }
     

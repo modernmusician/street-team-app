@@ -20,14 +20,28 @@ function ActionButton({actionButtonConfig}) {
 
   const [completed, setCompleted] = useState(false);
   const totalPointCount = useContext(totalPointsContext);
+  function cleanUrl(urlString){
+    var link=""
+    if(urlString!=null){
+      //if the link is a mailto link, don't add HTTP to it
+      if(urlString.toUpperCase().includes("MAILTO:")){
+        link=urlString;
+      }
+      else{
+        link = (urlString.indexOf('://') === -1) ? 'http://' + urlString : urlString;
+      }
+    }
+    return link;
+  }
   const handleClick = useCallback(
     (e) => {
       setCompleted(true);
       const pointValue = actionButtonConfig.pointValue ?? 10; //default value is 10 points
       totalPointCount.dispatch({type:'Increment',amount:pointValue})
       if (actionButtonConfig.targetURL!=undefined){
-        console.log(actionButtonConfig.targetURL);
-        window.open(actionButtonConfig.targetURL, "_blank");
+        const cleanUrlString = cleanUrl(actionButtonConfig.targetURL)
+        console.log(cleanUrlString);
+        window.open(cleanUrlString, "_blank");
       }
       //here is where we will put logic for other ActionButtonServices
     },

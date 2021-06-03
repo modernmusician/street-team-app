@@ -141,6 +141,76 @@ export const getEnduser = /* GraphQL */ `
     }
   }
 `;
+export const listArtistUsers = /* GraphQL */ `
+  query ListArtistUsers(
+    $filter: ModelArtistUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listArtistUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        firstName
+        lastName
+        artistID
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        actionPages {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getArtistUser = /* GraphQL */ `
+  query GetArtistUser($id: ID!) {
+    getArtistUser(id: $id) {
+      id
+      username
+      firstName
+      lastName
+      artistID
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        createdAt
+        updatedAt
+        owner
+        contests {
+          nextToken
+        }
+      }
+      owner
+      actionPages {
+        items {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const listPictures = /* GraphQL */ `
   query ListPictures(
     $filter: ModelPictureFilterInput
@@ -194,6 +264,7 @@ export const listActionPages = /* GraphQL */ `
       items {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -203,6 +274,16 @@ export const listActionPages = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -233,6 +314,7 @@ export const getActionPage = /* GraphQL */ `
     getActionPage(id: $id) {
       id
       artistID
+      creatorUserID
       pictureID
       pageTitle
       heading
@@ -246,6 +328,26 @@ export const getActionPage = /* GraphQL */ `
         updatedAt
         owner
         contests {
+          nextToken
+        }
+      }
+      creatorUser {
+        id
+        username
+        firstName
+        lastName
+        artistID
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        actionPages {
           nextToken
         }
       }
@@ -350,6 +452,7 @@ export const getActionPageSubscriptions = /* GraphQL */ `
       actionPage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -359,6 +462,16 @@ export const getActionPageSubscriptions = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -425,6 +538,7 @@ export const listActionPageSubscriptionss = /* GraphQL */ `
         actionPage {
           id
           artistID
+          creatorUserID
           pictureID
           pageTitle
           heading
@@ -458,6 +572,7 @@ export const getActionPageButton = /* GraphQL */ `
       actionpage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -467,6 +582,16 @@ export const getActionPageButton = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -520,6 +645,7 @@ export const listActionPageButtons = /* GraphQL */ `
         actionpage {
           id
           artistID
+          creatorUserID
           pictureID
           pageTitle
           heading

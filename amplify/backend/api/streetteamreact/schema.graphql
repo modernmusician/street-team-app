@@ -37,6 +37,32 @@ type Enduser
     @connection(keyName: "byEnduser", fields: ["id"])
 }
 
+type ArtistUser
+  @model
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  )
+  @key(name: "byArtist", fields: ["artistID", "id"])
+  {
+  """
+  Artist User manages an Artist Type giving them permissions to access and edit that artists records
+  Right now artist users and artists are one-to-one, in the future probably want a single artist user to be able to manage multiple artists
+  """
+  id: ID!
+  username: String
+  firstName: String
+  lastName: String
+  artistID: ID
+  artist: Artist @connection(fields: ["artistID"])
+  actionPages: [ActionPage] @connection(keyName: "byCreatorUser", fields: ["id"])
+}
+
 type Picture
   @model
   @aws_iam
@@ -72,6 +98,7 @@ enum Visibility {
 type ActionPage
   @model
   @key(name: "byArtist", fields: ["artistID", "heading"])
+  @key(name: "byCreatorUser", fields: ["creatorUserID"])
   @aws_iam
   @aws_cognito_user_pools
   @auth(
@@ -82,11 +109,13 @@ type ActionPage
     ]
   ) {
   id: ID!
-  artistID: ID!
+  artistID: ID
   artist: Artist @connection(fields: ["artistID"])
+  creatorUserID: ID
+  creatorUser: ArtistUser @connection(fields: ["creatorUserID"])
   actionButtons: [ActionPageButton]
     @connection(keyName: "byActionPage", fields: ["id"])
-  pictureID: ID!
+  pictureID: ID
   picture: Picture @connection(fields: ["pictureID"])
   subscribers: [ActionPageSubscriptions]
     @connection(keyName: "byActionPage", fields: ["id"])

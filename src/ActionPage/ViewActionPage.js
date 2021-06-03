@@ -93,15 +93,19 @@ function ViewActionPage({pageId})  {
     return(<PageNotFound message={"pageId: ".concat(pageId)}/>)
   }
   
+  const picture = pageData.picture;
+  var picUrl = ""; //default background pic is empty
+  if(picture) //if the picture exists, use the publicUrl from that pic
+  {    
+    picUrl=picture.publicUrl;
+  }
   console.log("background picture:");
-  console.log(pageData.picture.publicUrl);
+  console.log(picUrl);
   
   return (
-  
-  
     <div>
       <div>
-        <Background backgroundPictureUrl={pageData.picture.publicUrl} myClass="background-wrapper" />
+        <Background backgroundPictureUrl={picUrl} myClass="background-wrapper" />
       </div>
       <div>
         <CenterBox

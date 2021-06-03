@@ -21,9 +21,9 @@ const StreetTeamInputForm = ({
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1"></label>
                 <input 
-                type="email"
-                name="streetTeamUrl"
-                value={inputValues.streetTeamUrl}
+                type="text"
+                name="joinGroupUrl"
+                value={inputValues.joinGroupUrl}
                 onChange={handleOnChange}
                 className="form-control" 
                 id="" 

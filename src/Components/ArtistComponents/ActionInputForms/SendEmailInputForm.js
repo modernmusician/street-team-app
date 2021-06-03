@@ -10,7 +10,7 @@ import { FaFire } from "react-icons/fa";
 import { FaCheckSquare } from "react-icons/fa";
 import { AiOutlineCheck } from "react-icons/ai";
 
-const SpotifySaveInputForm = ({
+const SendEmailInputForm = ({
       inputValues,
       handleOnChange,
       setInputValues,
@@ -22,12 +22,12 @@ const SpotifySaveInputForm = ({
                 <label htmlFor="exampleInputEmail1"></label>
                 <input 
                 type="email"
-                name="spotifySaveUrl"
-                value={inputValues.spotifySaveUrl}
+                name="sendEmailUrl"
+                value={inputValues.sendEmailUrl}
                 onChange={handleOnChange}
                 className="form-control" 
                 id="" 
-                placeholder="Enter Spotify Track or Album URI" 
+                placeholder="Enter your email address for fans" 
                 />
               </div>
           
@@ -35,4 +35,4 @@ const SpotifySaveInputForm = ({
         )
 }
 
-export default SpotifySaveInputForm
+export default SendEmailInputForm

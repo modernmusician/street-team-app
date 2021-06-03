@@ -271,6 +271,123 @@ export const onDeleteEnduser = /* GraphQL */ `
     }
   }
 `;
+export const onCreateArtistUser = /* GraphQL */ `
+  subscription OnCreateArtistUser($owner: String) {
+    onCreateArtistUser(owner: $owner) {
+      id
+      username
+      firstName
+      lastName
+      artistID
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        createdAt
+        updatedAt
+        owner
+        contests {
+          nextToken
+        }
+      }
+      owner
+      actionPages {
+        items {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateArtistUser = /* GraphQL */ `
+  subscription OnUpdateArtistUser($owner: String) {
+    onUpdateArtistUser(owner: $owner) {
+      id
+      username
+      firstName
+      lastName
+      artistID
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        createdAt
+        updatedAt
+        owner
+        contests {
+          nextToken
+        }
+      }
+      owner
+      actionPages {
+        items {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteArtistUser = /* GraphQL */ `
+  subscription OnDeleteArtistUser($owner: String) {
+    onDeleteArtistUser(owner: $owner) {
+      id
+      username
+      firstName
+      lastName
+      artistID
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        createdAt
+        updatedAt
+        owner
+        contests {
+          nextToken
+        }
+      }
+      owner
+      actionPages {
+        items {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const onCreatePicture = /* GraphQL */ `
   subscription OnCreatePicture($owner: String) {
     onCreatePicture(owner: $owner) {
@@ -330,6 +447,7 @@ export const onCreateActionPage = /* GraphQL */ `
     onCreateActionPage(owner: $owner) {
       id
       artistID
+      creatorUserID
       pictureID
       pageTitle
       heading
@@ -343,6 +461,26 @@ export const onCreateActionPage = /* GraphQL */ `
         updatedAt
         owner
         contests {
+          nextToken
+        }
+      }
+      creatorUser {
+        id
+        username
+        firstName
+        lastName
+        artistID
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        actionPages {
           nextToken
         }
       }
@@ -402,6 +540,7 @@ export const onUpdateActionPage = /* GraphQL */ `
     onUpdateActionPage(owner: $owner) {
       id
       artistID
+      creatorUserID
       pictureID
       pageTitle
       heading
@@ -415,6 +554,26 @@ export const onUpdateActionPage = /* GraphQL */ `
         updatedAt
         owner
         contests {
+          nextToken
+        }
+      }
+      creatorUser {
+        id
+        username
+        firstName
+        lastName
+        artistID
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        actionPages {
           nextToken
         }
       }
@@ -474,6 +633,7 @@ export const onDeleteActionPage = /* GraphQL */ `
     onDeleteActionPage(owner: $owner) {
       id
       artistID
+      creatorUserID
       pictureID
       pageTitle
       heading
@@ -487,6 +647,26 @@ export const onDeleteActionPage = /* GraphQL */ `
         updatedAt
         owner
         contests {
+          nextToken
+        }
+      }
+      creatorUser {
+        id
+        username
+        firstName
+        lastName
+        artistID
+        createdAt
+        updatedAt
+        artist {
+          id
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        actionPages {
           nextToken
         }
       }
@@ -591,6 +771,7 @@ export const onCreateActionPageSubscriptions = /* GraphQL */ `
       actionPage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -600,6 +781,16 @@ export const onCreateActionPageSubscriptions = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -675,6 +866,7 @@ export const onUpdateActionPageSubscriptions = /* GraphQL */ `
       actionPage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -684,6 +876,16 @@ export const onUpdateActionPageSubscriptions = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -759,6 +961,7 @@ export const onDeleteActionPageSubscriptions = /* GraphQL */ `
       actionPage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -768,6 +971,16 @@ export const onDeleteActionPageSubscriptions = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -812,6 +1025,7 @@ export const onCreateActionPageButton = /* GraphQL */ `
       actionpage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -821,6 +1035,16 @@ export const onCreateActionPageButton = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -865,6 +1089,7 @@ export const onUpdateActionPageButton = /* GraphQL */ `
       actionpage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -874,6 +1099,16 @@ export const onUpdateActionPageButton = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner
@@ -918,6 +1153,7 @@ export const onDeleteActionPageButton = /* GraphQL */ `
       actionpage {
         id
         artistID
+        creatorUserID
         pictureID
         pageTitle
         heading
@@ -927,6 +1163,16 @@ export const onDeleteActionPageButton = /* GraphQL */ `
         artist {
           id
           name
+          createdAt
+          updatedAt
+          owner
+        }
+        creatorUser {
+          id
+          username
+          firstName
+          lastName
+          artistID
           createdAt
           updatedAt
           owner

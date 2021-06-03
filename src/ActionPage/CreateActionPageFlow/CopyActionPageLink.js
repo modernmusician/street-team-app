@@ -12,7 +12,7 @@ import useClipboard from "react-use-clipboard";
 // import ToastBody from 'react-bootstrap/ToastBody'
 // import ToastHeader from 'react-bootstrap/ToastHeader'
 
-function CopyActionPageLink ({refUrl}) {
+function ReferralForm ({refUrl}) {
 
   const noPadding = {
     paddingTop: 0,
@@ -76,4 +76,4 @@ function CopyActionPageLink ({refUrl}) {
         )
 }
 
-export default CopyActionPageLink
+export default ReferralForm
