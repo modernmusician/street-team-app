@@ -48,6 +48,35 @@
       "function": {
         "streetteamreact935863abPostConfirmation": {
           "deploymentBucketName": "amplify-streetteamreact-prod-92157-deployment",
+          "s3Key": "amplify-builds/streetteamreact935863abPostConfirmation-7178684768513457354a-build.zip",
+          "GROUP": "everyone"
+        }
+      }
+    }
+  },
+  "production": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-streetteamreact-production-153439-authRole",
+      "UnauthRoleArn": "arn:aws:iam::479344151713:role/amplify-streetteamreact-production-153439-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::479344151713:role/amplify-streetteamreact-production-153439-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-streetteamreact-production-153439-deployment",
+      "UnauthRoleName": "amplify-streetteamreact-production-153439-unauthRole",
+      "StackName": "amplify-streetteamreact-production-153439",
+      "StackId": "arn:aws:cloudformation:us-east-1:479344151713:stack/amplify-streetteamreact-production-153439/496a17e0-c574-11eb-b0b2-12c2b22562f7",
+      "AmplifyAppId": "dqjvw0jz66awx"
+    },
+    "categories": {
+      "auth": {
+        "streetteamreact935863ab": {
+          "facebookAppId": "1889301381171290"
+        },
+        "userPoolGroups": {}
+      },
+      "function": {
+        "streetteamreact935863abPostConfirmation": {
+          "GROUP": "everyone",
+          "deploymentBucketName": "amplify-streetteamreact-production-153439-deployment",
           "s3Key": "amplify-builds/streetteamreact935863abPostConfirmation-7178684768513457354a-build.zip"
         }
       }

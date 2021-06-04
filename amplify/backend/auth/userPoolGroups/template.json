@@ -41,11 +41,65 @@
     },
     "Resources": {
     
+        "everyoneGroup": {
+          "Type" : "AWS::Cognito::UserPoolGroup",
+          "Properties" : {
+              "GroupName" : "everyone",
+              "Precedence" : 1,
+              
+              "RoleArn" : {
+                "Fn::GetAtt": [
+                    "everyoneGroupRole",
+                    "Arn"
+                ]
+              },
+              
+              "UserPoolId" : {
+                "Ref": "authstreetteamreact935863abUserPoolId"
+              }
+            }
+        },
+        
+        "everyoneGroupRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "RoleName":{
+                    "Fn::Join": [
+                        "",
+                        [
+                          {
+                            "Ref": "authstreetteamreact935863abUserPoolId"
+                          },
+                          "-everyoneGroupRole"
+                        ]
+                    ]
+                },
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Sid": "",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Federated": "cognito-identity.amazonaws.com"
+                            },
+                            "Action": "sts:AssumeRoleWithWebIdentity",
+                            "Condition": {
+                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authstreetteamreact935863abIdentityPoolId"}},
+                              "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+     
+    
         "everybodyGroup": {
           "Type" : "AWS::Cognito::UserPoolGroup",
           "Properties" : {
               "GroupName" : "everybody",
-              "Precedence" : 1,
+              "Precedence" : 2,
               
               "RoleArn" : {
                 "Fn::GetAtt": [
@@ -183,10 +237,7 @@
                                     "Action": [
                                         "iam:PassRole"
                                     ],
-                                    "Resource": [
-                                        { "Ref": "AuthRoleArn" },
-                                        { "Ref": "UnauthRoleArn" }
-                                    ]
+                                    "Resource": "*"
                                 }
                             ]
                         }
@@ -236,6 +287,7 @@
                                 "    cognitoidentity.setIdentityPoolRoles(params).promise();",
                                 "    response.send(event, context, response.SUCCESS, {message: 'Successfully updated identity pool.'})",
                                 "    } catch(err) {",
+
                                 "        response.send(event, context, response.FAILED, {message: 'Error updating identity pool'});",
                                 "    }",
                                 "   };",
@@ -296,6 +348,17 @@
     },
     
     "Outputs": {
+      
+        "everyoneGroupRole": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "everyoneGroupRole",
+                    "Arn"
+                ]
+            }
+        
+        },
+        
       
         "everybodyGroupRole": {
             "Value": {

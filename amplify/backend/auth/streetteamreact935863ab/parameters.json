@@ -4,7 +4,7 @@
     "resourceNameTruncated": "street935863ab",
     "userPoolName": "streetteamreact935863ab_userpool_935863ab",
     "autoVerifiedAttributes": [
-        "email"
+        "phone_number"
     ],
     "mfaConfiguration": "OFF",
     "mfaTypes": [
@@ -14,7 +14,7 @@
     "smsVerificationMessage": "Your verification code is {####}",
     "emailVerificationSubject": "Your verification code",
     "emailVerificationMessage": "Your verification code is {####}",
-    "defaultPasswordPolicy": false,
+    "defaultPasswordPolicy": true,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
@@ -51,6 +51,7 @@
         "email"
     ],
     "userPoolGroupList": [
+        "everyone",
         "everybody"
     ],
     "serviceName": "Cognito",
@@ -65,10 +66,6 @@
             ]
         }
     ],
-    "thirdPartyAuth": true,
-    "authProviders": [
-        "graph.facebook.com"
-    ],
     "userPoolGroups": true,
     "adminQueries": false,
     "triggers": "{\n  \"PostConfirmation\": [\n    \"add-to-group\"\n  ]\n}",
@@ -77,5 +74,9 @@
     },
     "permissions": [
         "{\n  \"policyName\": \"AddToGroupCognito\",\n  \"trigger\": \"PostConfirmation\",\n  \"effect\": \"Allow\",\n  \"actions\": [\n    \"cognito-idp:AdminAddUserToGroup\",\n    \"cognito-idp:GetGroup\",\n    \"cognito-idp:CreateGroup\"\n  ],\n  \"resource\": {\n    \"paramType\": \"!GetAtt\",\n    \"keys\": [\n      \"UserPool\",\n      \"Arn\"\n    ]\n  }\n}"
-    ]
+    ],
+    "authProviders": [
+        "graph.facebook.com"
+    ],
+    "thirdPartyAuth": true
 }

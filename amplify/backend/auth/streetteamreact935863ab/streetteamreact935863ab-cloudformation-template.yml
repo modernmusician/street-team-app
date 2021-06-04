@@ -146,18 +146,6 @@ Parameters:
     Type: CommaDelimitedList
       
   
-  thirdPartyAuth:
-    Type: String
-            
-        
-  authProviders:
-    Type: CommaDelimitedList
-      
-  facebookAppId:
-    Type: String
-  
-            
-  
   userPoolGroups:
     Type: String
             
@@ -169,7 +157,6 @@ Parameters:
     Type: String
   
             
-            
       
   parentStack:
     Type: String
@@ -178,6 +165,19 @@ Parameters:
   permissions:
     Type: CommaDelimitedList
       
+        
+  authProviders:
+    Type: CommaDelimitedList
+      
+  
+  thirdPartyAuth:
+    Type: String
+            
+  facebookAppId:
+    Type: String
+  
+            
+            
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
   
@@ -251,9 +251,6 @@ Resources:
       
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
       
-      
-      EmailVerificationMessage: !Ref emailVerificationMessage
-      EmailVerificationSubject: !Ref emailVerificationSubject
       
       Policies:
         PasswordPolicy:
