@@ -11,9 +11,14 @@ export const listArtists = /* GraphQL */ `
       items {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          items{ id }
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -27,9 +32,26 @@ export const getArtist = /* GraphQL */ `
     getArtist(id: $id) {
       id
       name
+      route
       createdAt
       updatedAt
       owner
+      actionPages {
+        items {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          pageRoute
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       contests {
         items {
           id
@@ -159,6 +181,7 @@ export const listArtistUsers = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -185,9 +208,13 @@ export const getArtistUser = /* GraphQL */ `
       artist {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -202,6 +229,7 @@ export const getArtistUser = /* GraphQL */ `
           pageTitle
           heading
           subheading
+          pageRoute
           createdAt
           updatedAt
           owner
@@ -269,11 +297,13 @@ export const listActionPages = /* GraphQL */ `
         pageTitle
         heading
         subheading
+        pageRoute
         createdAt
         updatedAt
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -319,14 +349,19 @@ export const getActionPage = /* GraphQL */ `
       pageTitle
       heading
       subheading
+      pageRoute
       createdAt
       updatedAt
       artist {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -342,6 +377,7 @@ export const getActionPage = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -457,11 +493,13 @@ export const getActionPageSubscriptions = /* GraphQL */ `
         pageTitle
         heading
         subheading
+        pageRoute
         createdAt
         updatedAt
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -543,6 +581,7 @@ export const listActionPageSubscriptionss = /* GraphQL */ `
           pageTitle
           heading
           subheading
+          pageRoute
           createdAt
           updatedAt
           owner
@@ -577,11 +616,13 @@ export const getActionPageButton = /* GraphQL */ `
         pageTitle
         heading
         subheading
+        pageRoute
         createdAt
         updatedAt
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -650,6 +691,7 @@ export const listActionPageButtons = /* GraphQL */ `
           pageTitle
           heading
           subheading
+          pageRoute
           createdAt
           updatedAt
           owner
@@ -688,6 +730,7 @@ export const listContests = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -736,9 +779,13 @@ export const getContest = /* GraphQL */ `
       artist {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -831,6 +878,7 @@ export const getContestAction = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -1020,6 +1068,7 @@ export const getContestSubscription = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner

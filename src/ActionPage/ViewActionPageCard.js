@@ -54,6 +54,7 @@ const claimRewardUrl = pageData.actionButtons.items;
 
 const myTotalPoints = useContext(totalPointsContext);
 
+const pageTitle = pageData.pageTitle;
   
   return (
     
@@ -62,7 +63,7 @@ const myTotalPoints = useContext(totalPointsContext);
         <div className="headline-top margin-reset">
           <div className="flex-top-headline">
             <div className= "left-align top-left-headline">
-              {pageData.pageTitle}
+              {pageTitle}
             </div>
             
             <div className="top-right-countdown center">

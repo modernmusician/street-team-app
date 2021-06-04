@@ -67,7 +67,7 @@ function App() {
       <Landing path="/landing/:contestId" />
       <ContestPage1 path="/test/:contestId" />
       <RedirectLanding path="secure/contest/" />
-      <ViewActionPage path="/:pageId"/>
+      <ViewActionPage path="/:routeVar"/>
       <NotFoundPage default/>
       
     </Router>

@@ -7,9 +7,10 @@ import Navbar from "./Navbar"
 import FanActions from "./RightBoxes/FanActions"
 
 
+
 // import Text from "../Text";
 
-const CreateActionPageCard = ({actionPageId}) => {
+const CreateActionPageCard = ({actionPageId,artistRoute}) => {
   
   const [selectedTab, setSelectedTab] = useState('fan-actions');
   const [activeStep, setActiveStep] = useState(3);
@@ -18,7 +19,7 @@ const CreateActionPageCard = ({actionPageId}) => {
     // 'get-started': <GetStarted />,
     // 'connect-account': <ConnectAccount />,
     // 'enter-details': <EnterDetails />,
-    'fan-actions': <FanActions actionPageId = {actionPageId} />,
+    'fan-actions': <FanActions actionPageId = {actionPageId} artistRoute={artistRoute}/>,
     // 'add-integrations': null,
     // 'review-contest': <ReviewContest activeStep={activeStep} />,
   }

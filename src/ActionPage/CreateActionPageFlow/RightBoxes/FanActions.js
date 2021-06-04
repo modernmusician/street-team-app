@@ -3,6 +3,7 @@
 import { Link} from '@reach/router';
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
+import Modal from "react-bootstrap/Modal";
 import Card from 'react-bootstrap/Card';
 import styled from 'styled-components';
 
@@ -22,6 +23,8 @@ import { HiUserGroup } from "react-icons/hi";
 // import NavbarCreateProject from "../NavbarCreateProject"
 // import ContestPage1Card from "../../Cards/4ContestPage1"
 import ViewActionPageCardPreview from "../../ViewActionPageCardPreview"
+import CopyLinkModal from "../CopyLinkModal"
+
 
 import Text from "../../../Components/Text";
 import Checkfield from "../../../Components/Checkfield";
@@ -44,8 +47,20 @@ import {updateActionPageButton, createActionPageButton} from '../../../graphql/m
 // Amplify.configure(awsMobile);
 
 
-function FanActions({actionPageId}) {
+function FanActions({actionPageId,artistRoute}) {
   
+  
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  function saveAuthentication () {
+    handleClose();
+    if (authenticated){
+    }
+    else {
+    }
+    // value=true;
+  }
  
     const [submitted,setSubmitted] = useState(false);
     const [initialLoad,setInitalLoad] = useState(true);
@@ -68,7 +83,9 @@ function FanActions({actionPageId}) {
   function copyLinkToClipboard(event)
   {
     //todo this needs to be dynamic by environment (dev, app, etc)
-    var link="app.modern-musician.com/"+actionPageId
+    //TODO eventually this should use both an artist route and a pageRoute
+    const route = artistRoute ? artistRoute : actionPageId
+    var link="app.modern-musician.com/"+ route
     navigator.clipboard.writeText(link)
     console.log("copied link to clipboard",link)
   }
@@ -218,8 +235,8 @@ function FanActions({actionPageId}) {
     }
     }
     // // handle followMusicUrl
-    if(inputValues.starterPackUrl!=''){
-      newTargetUrl=inputValues.starterPackUrl;
+    if(inputValues.followMusicUrl!=''){
+      newTargetUrl=inputValues.followMusicUrl;
       var recordExists = false;
       console.log(pageData);
       if(pageData!=null){
@@ -390,22 +407,34 @@ const handleOnChange = event => {
                   className="btn-default complete-registration-button button-text-box"
                   onClick={e => onSubmitClick(e)}
                 >
-                  <div className= "complete-registration-color-gradient button-text-box dark">
+                  <div onClick={handleShow} className= "complete-registration-color-gradient button-text-box dark">
                     <p className="complete-registration-button-text center large dark">
                     Save Action Card
                     </p>
                   </div>
                 </Button>
                 {/*</Link>*/}
-                 <Button className="btn-default complete-registration-button button-text-box"
-                        onClick={e=>copyLinkToClipboard(e)}>
-                  <div className= "complete-registration-color-gradient button-text-box dark">
-                    <p className="complete-registration-button-text center large dark">
-                      {React.createElement(FaCopy)}
-                      Copy Link to Your Page
-                    </p>
-                  </div>
-                </Button>
+                
+      <Modal show={show} onHide={handleClose} dialogClassName="">
+        <Modal.Header closeButton>
+          <Modal.Title>Congrats! Here's Your Link:</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Click the button below to copy your onboarding link:
+
+           <Button className="btn-default complete-registration-button button-text-box"
+                  onClick={e=>copyLinkToClipboard(e)}>
+            <div className= "complete-registration-color-gradient button-text-box dark">
+              <p className="complete-registration-button-text center large dark">
+                {React.createElement(FaCopy)}
+                Copy Link to Your Page
+              </p>
+            </div>
+          </Button>
+        </Modal.Body>
+        <Modal.Footer>
+        </Modal.Footer>
+      </Modal>
               </div>
             </form>
         </div>

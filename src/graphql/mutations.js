@@ -9,9 +9,26 @@ export const createArtist = /* GraphQL */ `
     createArtist(input: $input, condition: $condition) {
       id
       name
+      route
       createdAt
       updatedAt
       owner
+      actionPages {
+        items {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          pageRoute
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       contests {
         items {
           id
@@ -46,9 +63,26 @@ export const updateArtist = /* GraphQL */ `
     updateArtist(input: $input, condition: $condition) {
       id
       name
+      route
       createdAt
       updatedAt
       owner
+      actionPages {
+        items {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          pageRoute
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       contests {
         items {
           id
@@ -83,9 +117,26 @@ export const deleteArtist = /* GraphQL */ `
     deleteArtist(input: $input, condition: $condition) {
       id
       name
+      route
       createdAt
       updatedAt
       owner
+      actionPages {
+        items {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          pageRoute
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       contests {
         items {
           id
@@ -305,9 +356,13 @@ export const createArtistUser = /* GraphQL */ `
       artist {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -322,6 +377,7 @@ export const createArtistUser = /* GraphQL */ `
           pageTitle
           heading
           subheading
+          pageRoute
           createdAt
           updatedAt
           owner
@@ -347,9 +403,13 @@ export const updateArtistUser = /* GraphQL */ `
       artist {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -364,6 +424,7 @@ export const updateArtistUser = /* GraphQL */ `
           pageTitle
           heading
           subheading
+          pageRoute
           createdAt
           updatedAt
           owner
@@ -389,9 +450,13 @@ export const deleteArtistUser = /* GraphQL */ `
       artist {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -406,6 +471,7 @@ export const deleteArtistUser = /* GraphQL */ `
           pageTitle
           heading
           subheading
+          pageRoute
           createdAt
           updatedAt
           owner
@@ -491,14 +557,19 @@ export const createActionPage = /* GraphQL */ `
       pageTitle
       heading
       subheading
+      pageRoute
       createdAt
       updatedAt
       artist {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -514,6 +585,7 @@ export const createActionPage = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -587,14 +659,19 @@ export const updateActionPage = /* GraphQL */ `
       pageTitle
       heading
       subheading
+      pageRoute
       createdAt
       updatedAt
       artist {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -610,6 +687,7 @@ export const updateActionPage = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -683,14 +761,19 @@ export const deleteActionPage = /* GraphQL */ `
       pageTitle
       heading
       subheading
+      pageRoute
       createdAt
       updatedAt
       artist {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -706,6 +789,7 @@ export const deleteActionPage = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -824,11 +908,13 @@ export const createActionPageSubscriptions = /* GraphQL */ `
         pageTitle
         heading
         subheading
+        pageRoute
         createdAt
         updatedAt
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -922,11 +1008,13 @@ export const updateActionPageSubscriptions = /* GraphQL */ `
         pageTitle
         heading
         subheading
+        pageRoute
         createdAt
         updatedAt
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -1020,11 +1108,13 @@ export const deleteActionPageSubscriptions = /* GraphQL */ `
         pageTitle
         heading
         subheading
+        pageRoute
         createdAt
         updatedAt
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -1087,11 +1177,13 @@ export const createActionPageButton = /* GraphQL */ `
         pageTitle
         heading
         subheading
+        pageRoute
         createdAt
         updatedAt
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -1154,11 +1246,13 @@ export const updateActionPageButton = /* GraphQL */ `
         pageTitle
         heading
         subheading
+        pageRoute
         createdAt
         updatedAt
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -1221,11 +1315,13 @@ export const deleteActionPageButton = /* GraphQL */ `
         pageTitle
         heading
         subheading
+        pageRoute
         createdAt
         updatedAt
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -1287,9 +1383,13 @@ export const createContest = /* GraphQL */ `
       artist {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -1369,9 +1469,13 @@ export const updateContest = /* GraphQL */ `
       artist {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -1451,9 +1555,13 @@ export const deleteContest = /* GraphQL */ `
       artist {
         id
         name
+        route
         createdAt
         updatedAt
         owner
+        actionPages {
+          nextToken
+        }
         contests {
           nextToken
         }
@@ -1549,6 +1657,7 @@ export const createContestAction = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -1628,6 +1737,7 @@ export const updateContestAction = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -1707,6 +1817,7 @@ export const deleteContestAction = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -1860,6 +1971,7 @@ export const createContestSubscription = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -1959,6 +2071,7 @@ export const updateContestSubscription = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner
@@ -2058,6 +2171,7 @@ export const deleteContestSubscription = /* GraphQL */ `
         artist {
           id
           name
+          route
           createdAt
           updatedAt
           owner

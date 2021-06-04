@@ -54,7 +54,7 @@ function ViewActionPageCardPreview({joinGroupUrl,sendEmailUrl,followMusicUrl,cla
 const myTotalPoints = useContext(totalPointsContext);
 const pageTitle="Almost there!";
 const heading="Welcome to the VIP community!";
-const subheading="Please take 2 mins to complete the following steps and unlock your FREE Starter Pack";
+const subheading="Please take 2 mins to complete the following steps";
   
   return (
     
@@ -87,7 +87,7 @@ const subheading="Please take 2 mins to complete the following steps and unlock 
                   preActionText="Join the VIP Group"
                   postActionText="Joined the VIP Group"
                   actionType="joinGroup"
-                  pointValue={50}
+                  pointValue={10}
                   url= ""//{spotifyFollowArtistUrl}
                   completed={false}
                 />
@@ -97,7 +97,7 @@ const subheading="Please take 2 mins to complete the following steps and unlock 
                   preActionText="Follow My Music"
                   postActionText="Followed My Music"
                   actionType="followMusic"
-                  pointValue={50}
+                  pointValue={10}
                   url= ""//{spotifyFollowArtistUrl}
                   completed={false}
                 />
@@ -107,7 +107,7 @@ const subheading="Please take 2 mins to complete the following steps and unlock 
                   preActionText="Send Me An Email"
                   postActionText="Sent Me An Email"
                   actionType="sendEmail"
-                  pointValue={50}
+                  pointValue={10}
                   url= ""//{spotifyFollowArtistUrl}
                   completed={false}
                 />
@@ -117,7 +117,7 @@ const subheading="Please take 2 mins to complete the following steps and unlock 
                   preActionText="Claim Your Free Starter Pack"
                   postActionText="Claimed Your Free Starter Pack"
                   actionType="claimStarterPack"
-                  pointValue={50}
+                  pointValue={10}
                   url= ""//{spotifyFollowArtistUrl}
                   completed={false}
                 />
