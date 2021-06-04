@@ -78,8 +78,9 @@ function FanActions({actionPageId,artistRoute}) {
     console.log(submitted);
     createOrUpdateActionButtons(inputValues,actionPageId);
     console.log("finished updating/creating buttons")
+    setShow(true);
   }
-  
+
   function copyLinkToClipboard(event)
   {
     //todo this needs to be dynamic by environment (dev, app, etc)
@@ -407,7 +408,9 @@ const handleOnChange = event => {
                   className="btn-default complete-registration-button button-text-box"
                   onClick={e => onSubmitClick(e)}
                 >
-                  <div onClick={handleShow} className= "complete-registration-color-gradient button-text-box dark">
+                  <div 
+                  // onClick={handleShow} 
+                  className= "complete-registration-color-gradient button-text-box dark">
                     <p className="complete-registration-button-text center large dark">
                     Save Action Card
                     </p>
