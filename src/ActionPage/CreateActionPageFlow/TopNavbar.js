@@ -12,13 +12,13 @@ function TopNavbar() {
                     </div>
                     <div className="navbar-right-divider"> <FaAngleRight /> </div>
                     <div> <p className="navbar-contest-title"> Create Your Action Card </p> </div>
-                </div>
+                </div> {/*
                 <div className="navbar-block-right"> 
                     <Link className="link-button" to="/login">
-                    <div className="navbar-item"> <p className="navbar-contest-title"> Logout </p> </div>
+                     <div className="navbar-item"> <p className="navbar-contest-title"> Logout </p> </div>
                     </Link>
                     <div className="navbar-item"> <img src="../../../mj_lights.png" className="navbar-image"/> </div>
-                </div>
+                </div> */}
             </div>
         </nav>
         )

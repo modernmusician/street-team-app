@@ -12,6 +12,9 @@ type Artist
   id: ID!
   name: String!
   contests: [Contest] @connection(keyName: "byArtist", fields: ["id"])
+  actionPages: [ActionPage] @connection(keyName: "byArtist",fields:["id"])
+  "route is used to route to specific pages"
+  route: String
 }
 
 type Enduser
@@ -125,6 +128,7 @@ type ActionPage
   pageTitle: String
   heading: String
   subheading: String
+  pageRoute: String
 }
 
 type ActionPageSubscriptions
