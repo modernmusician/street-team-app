@@ -115,7 +115,7 @@ function CreateActionPage()  {
   }
   );
   
-  const [addActionPage, {loading:createActionPageLoading}] = useMutation(gql(createActionPage),
+  const [addActionPage, {data: createActionPageData, loading:createActionPageLoading}] = useMutation(gql(createActionPage),
   {
       // update(cache, { data: { addSubscription } }) {
         // const {userData} = cache.readQuery({query:gql(getEnduser), input: {id: userId }});
@@ -212,6 +212,8 @@ function CreateActionPage()  {
         if(actionPageInfo!=null){
           console.log(actionPageInfo.id);
           setActionPageId(actionPageInfo.id,'actionPageId');
+        }
+        if(artistId==null){
           setArtistId(enduserInfo.artistID,'artistId');
         }
         console.log("spot 2")
@@ -234,13 +236,12 @@ function CreateActionPage()  {
       //   //then if no action page exists for an artist, create an action page
       // }
       
-      if(actionPageInfo==null && enduserInfo!=null && !createUserLoading  && !createActionPageLoading && artistId!=null && !actionPageId)
+      if(actionPageId==null && actionPageInfo==null && enduserInfo!=null && !createUserLoading  && !createActionPageLoading && artistId!=null && userId!=null)
       {
         //if action page info is null, that means this user doesn't have an action page so we'll create one
         // see above TODOs about searching related artist's action pages
         // these default values should probably be stored in the database somewhere
         var newPageInput = {
-          id: actionPageId,
           creatorUserID: userId,
           artistID: artistId,
           pageTitle:"Almost there!",
@@ -252,7 +253,14 @@ function CreateActionPage()  {
         //   newPageInput["artistID"]=artistId;
         // }
         const newActionPageData = addActionPage({variables:{input:newPageInput}});
+        if(createActionPageData!=null && actionPageId==null)
+        {
+          console.log("setting action page to be the newly created action page");
+          setActionPageId(createActionPageData.createActionPage.id);
+        }
         console.log("spot 3")
+        console.log("actionPageId",actionPageId);
+        console.log("artistId",artistId);
       }
     }
   catch(err) 
