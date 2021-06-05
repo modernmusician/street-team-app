@@ -18,6 +18,8 @@ import Amplify from 'aws-amplify';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsMobile from '../aws-exports';
 import { useLocation } from "@reach/router"
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
+
 Amplify.configure(awsMobile);
 // import { createTask } from './graphql/mutations';
 // import { listTasks } from './graphql/queries';
@@ -25,9 +27,10 @@ Amplify.configure(awsMobile);
 
 function ViewActionPage({routeVar})  {
   
-  // routeVar = 'cue-no-ego'; //this is hardcoded as the test page
-  
-  console.log(routeVar);
+  // routeVar = 'cue-no-ego'; //this is hardcoded as the test 
+	const [isLoggedOut,setIsLoggedOut] = useState(false);
+	
+console.log(routeVar);
   
   // A custom hook that builds on useLocation to parse
   // the query string for you.
@@ -51,7 +54,7 @@ function ViewActionPage({routeVar})  {
   // const [completedActions, setCompletedActions] = useState([]);
   
   useEffect(() => {
-    const fetchData = async () => {
+	const fetchData = async () => {
       setIsLoading(true);
       var pageId = routeVar;
       //first check if the routeVar matches an artist's route field. otherwise, try it as just a page id
@@ -61,8 +64,7 @@ function ViewActionPage({routeVar})  {
           variables: { filter: {route: {eq: routeVar}} },
           authMode: 'AWS_IAM',
         });
-        console.log(resultByArtistRoute.data,'resultByArtistRoute');
-        //this should only every be 1 or 0 otherwise something is wrong
+	//this should only every be 1 or 0 otherwise something is wrong
         const numberOfArtistsFound=resultByArtistRoute.data.listArtists.items.length>0;
         if(numberOfArtistsFound>0)
         {
@@ -72,9 +74,11 @@ function ViewActionPage({routeVar})  {
           const pageIdFromArtistRecord = resultByArtistRoute.data.listArtists.items[0].actionPages.items[0].id
           setArtistRouteData(pageIdFromArtistRecord);
           pageId=pageIdFromArtistRecord;
-        }
+	}
       } catch (error) {
-        console.log(`Error executing query: ${error}`);
+	console.log(`Error executing query: ${error}`);
+	console.log(error);
+	console.log(error.errors)
         setError(`Unfortunately, something went wrong: ${error}`);
       }
       try {
@@ -95,8 +99,12 @@ function ViewActionPage({routeVar})  {
 
     fetchData();
   }, []);
-
-  if (isLoading) {
+//here we're starting by logging out if someone is logged in as a temporary work around to 401 issues when a user is logged in
+if (!isLoggedOut){
+	Auth.signOut();            
+	setIsLoggedOut(true);
+	return <p>One second</p>;
+}  	                       if (isLoading) {
     return <p>Loading...</p>;
   }
   if (error) {
