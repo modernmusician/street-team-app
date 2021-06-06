@@ -236,7 +236,7 @@ function CreateActionPage()  {
       //   //then if no action page exists for an artist, create an action page
       // }
       
-      if(actionPageId==null && actionPageInfo==null && enduserInfo!=null && !createUserLoading  && !createActionPageLoading && artistId!=null && userId!=null)
+      if(createActionPageData==null && actionPageId==null && actionPageInfo==null && enduserInfo!=null && !createUserLoading  && !createActionPageLoading && artistId!=null && userId!=null)
       {
         //if action page info is null, that means this user doesn't have an action page so we'll create one
         // see above TODOs about searching related artist's action pages
@@ -253,16 +253,18 @@ function CreateActionPage()  {
         //   newPageInput["artistID"]=artistId;
         // }
         const newActionPageData = addActionPage({variables:{input:newPageInput}});
-        if(createActionPageData!=null && actionPageId==null)
-        {
-          console.log("setting action page to be the newly created action page");
-          setActionPageId(createActionPageData.createActionPage.id);
-        }
         console.log("spot 3")
         console.log("actionPageId",actionPageId);
         console.log("artistId",artistId);
+	console.log("createActionPageData",createActionPageData);
       }
-    }
+    
+	if(createActionPageData!=null && actionPageId==null)
+	{
+  	console.log("setting action page to be the newly created action page");
+  	setActionPageId(createActionPageData.createActionPage.id);
+	}
+	} 
   catch(err) 
   {
     console.log(err.message);
