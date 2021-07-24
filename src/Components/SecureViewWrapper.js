@@ -49,7 +49,7 @@ const SecureViewWrapper = ({ userRole, children }) => {
         />
       ) : (
         <AmplifySignUp
-          headerText="Register your enduser"
+          headerText="How can we reach you if you win?"
           submitButtonText="Complete Registration"
           slot="sign-up"
           usernameAlias="email"
@@ -57,8 +57,8 @@ const SecureViewWrapper = ({ userRole, children }) => {
             // { type: "username" },
             {
               type: 'name',
-              label: 'Artist Name',
-              placeholder: 'Enter your artist name',
+              label: 'Name',
+              placeholder: 'Enter your name',
               required: true,
             },
             { type: 'email' },
