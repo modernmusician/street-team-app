@@ -1,21 +1,22 @@
-import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Hello as HelloAdmin } from './Features/Admin/Hello';
+import { SecureViewWrapper } from './Components/SecureViewWrapper';
+import { ActionPage } from './Features/Enduser/ActionPage/views/ActionPage';
+// import { Hello as HelloAdmin } from './Features/Admin/Hello.jsx';
 import { Hello as HelloEnduser } from './Features/Enduser/Hello';
-import SecureViewWrapper from './Components/SecureViewWrapper';
 
-//<AmplifySignOut /> needs to be in some kind of footer thing. -SG
+// <AmplifySignOut /> needs to be in some kind of footer thing. -SG
 
 function App() {
-  //note -- to add a new secure path, the route needs to be added in AuthenticatedApp.js router
+  // note -- to add a new secure path, the route needs to be added in AuthenticatedApp.js router
   return (
     <Router>
       <Switch>
         <Route path="/admin">
           <SecureViewWrapper userRole="admin">
-            <HelloAdmin path="/hi" />
+            <ActionPage path="/:artist" />
+            {/* <HelloAdmin path="/hi" /> */}
           </SecureViewWrapper>
         </Route>
         <Route path="/secure">
@@ -30,4 +31,5 @@ function App() {
     </Router>
   );
 }
+
 export default App;

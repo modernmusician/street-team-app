@@ -1,16 +1,18 @@
-import React from 'react';
-import Amplify from 'aws-amplify';
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import {
   AmplifyAuthenticator,
-  AmplifySignUp,
   AmplifySignOut,
+  AmplifySignUp,
 } from '@aws-amplify/ui-react';
-import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
-import awsconfig from '../aws-exports';
+import Amplify from 'aws-amplify';
+import PropTypes from 'prop-types';
+import React from 'react';
+
+import awsconfig from '../../aws-exports';
 
 Amplify.configure(awsconfig);
 
-const SecureViewWrapper = ({ userRole, children }) => {
+export const SecureViewWrapper = ({ userRole, children }) => {
   const [authState, setAuthState] = React.useState();
   const [userId, setUserId] = React.useState();
 
@@ -71,4 +73,7 @@ const SecureViewWrapper = ({ userRole, children }) => {
   );
 };
 
-export default SecureViewWrapper;
+SecureViewWrapper.propTypes = {
+  userRole: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};

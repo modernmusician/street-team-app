@@ -1,9 +1,9 @@
-import React from 'react';
 import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
 export const Login = () => {
-  let { userRole } = useParams();
+  const { userRole } = useParams();
   return (
     <AmplifyAuthenticator initialAuthState="signup">
       {userRole !== 'artist' ? (

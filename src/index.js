@@ -1,19 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 // NOTE: the default AWSAppSyncClient uses an outdated apollo-client dependancy
 //  we're building a custom client instead - see this article https://medium.com/@guillac124/create-your-custom-apollo-client-for-aws-appsync-to-use-hooks-2d5cbce29db5
-
 import { ApolloProvider } from '@apollo/react-hooks';
-import { ApolloLink } from 'apollo-link';
-import { createAuthLink } from 'aws-appsync-auth-link';
-import { createHttpLink } from 'apollo-link-http';
-import aws_config from './aws-exports';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-
 import Auth from '@aws-amplify/auth';
+import { ApolloLink } from 'apollo-link';
+import { createHttpLink } from 'apollo-link-http';
+import { createAuthLink } from 'aws-appsync-auth-link';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import App from './App';
+import aws_config from './aws-exports';
+import { ThemeProvider } from './Components/ThemeProvider';
 
 const url = aws_config.aws_appsync_graphqlEndpoint;
 const region = aws_config.aws_appsync_region;
@@ -39,7 +40,9 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </ApolloProvider>,
   document.getElementById('root')
 );
