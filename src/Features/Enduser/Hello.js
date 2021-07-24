@@ -13,5 +13,5 @@ export function Hello() {
   } = useQuery(gql(listArtists), {});
 
   console.log(artistData);
-  return <div style={{ color: 'white' }}>hi admin</div>;
+  return <div style={{ color: 'white' }}>hi enduser</div>;
 }
