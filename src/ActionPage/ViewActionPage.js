@@ -59,7 +59,7 @@ function ViewActionPage({ routeVar }) {
       try {
         const resultByArtistRoute = await API.graphql({
           query: listArtists,
-          variables: { filter: { route: { eq: routeVar }, limit: 5000 } },
+          variables: { limit: 5000, filter: { route: { eq: routeVar } } },
           authMode: 'AWS_IAM',
         });
         //this should only every be 1 or 0 otherwise something is wrong
