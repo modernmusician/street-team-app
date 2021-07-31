@@ -4,7 +4,14 @@ export const createTheme = theme => {
   return {
     ...baseTheme,
     colors: {
-      primary: 'purple',
+      primary: '#5E30B8',
+      primaryTint: '#7857B8',
+      primaryShade: '#40207D',
+      gray1: '#484848',
+      gray2: '#393939',
+      gray3: '#1F1F1F',
+      black: 'black',
+      white: 'white',
       ...baseTheme.colors,
     },
     spacing: {
@@ -16,12 +23,9 @@ export const createTheme = theme => {
       ...baseTheme.spacing,
     },
     fonts: {
-      primary:
-        // eslint-disable-next-line max-len
-        "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+      primary: 'Oswald',
       heading: 'Open Sans',
-      code:
-        "source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace",
+      code: "source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace",
       ...baseTheme.fonts,
     },
     fontSizes: {
@@ -30,6 +34,7 @@ export const createTheme = theme => {
       md: '16px',
       lg: '18px',
       xl: '20px',
+      xxl: '30px',
       ...baseTheme.fontSizes,
     },
     fontWeights: {

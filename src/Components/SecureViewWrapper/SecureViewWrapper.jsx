@@ -24,7 +24,7 @@ export const SecureViewWrapper = ({ userRole, children }) => {
   }, []);
 
   return authState === AuthState.SignedIn && userId ? (
-    <div className="App">
+    <div>
       {children}
       <AmplifySignOut />
     </div>
