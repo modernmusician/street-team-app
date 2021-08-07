@@ -2,7 +2,7 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import styled from 'styled-components';
 
-const HeaderContainer = styled(Row)({
+const HeaderContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
   color: ({ theme }) => theme.colors.white,

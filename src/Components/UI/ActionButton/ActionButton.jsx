@@ -1,7 +1,7 @@
 import Color from 'color';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import { Button } from '../Button';
 import { MdLibraryMusic } from 'react-icons/md';
 import { Icon } from '../Icon';
 import styled from 'styled-components';
@@ -10,9 +10,14 @@ import { cleanUrl } from '../../../utils/sharedUtils';
 const ActionButtonContainer = styled(Button)(({ color, textColor }) => {
   const fontColor = Color(textColor);
   const regularColor = Color(color);
-  const lighterColor = regularColor.lighten(0.1).hex();
-  const darkerColor = regularColor.darken(0.1).hex();
-  const gradientColor = `linear-gradient(90deg, ${lighterColor} 0%, ${regularColor.hex()} 75%, ${darkerColor} 100%)`;
+  const lighterColor = regularColor.lighten(0.05);
+  const darkerColor = regularColor.darken(0.4);
+  const gradientColor = `linear-gradient(90deg, ${lighterColor} 0%, ${regularColor} 75%, ${darkerColor} 100%)`;
+  const hoverGradientColor = `linear-gradient(90deg,
+    ${lighterColor.darken(0.2)} 0%,
+    ${regularColor} 75%,
+    ${darkerColor.darken(0.2)} 100%
+  )`;
 
   return {
     display: 'flex',
@@ -21,13 +26,19 @@ const ActionButtonContainer = styled(Button)(({ color, textColor }) => {
     alignItems: 'center',
     width: '100%',
     borderRadius: '0px',
+    height: 'auto',
     background: gradientColor,
     border: 'none',
     padding: 0,
     margin: 0,
+    height: '71px',
     color: fontColor.hex(),
     '&:hover': {
-      color: fontColor.negate().hex(),
+      color: fontColor,
+      background: hoverGradientColor,
+      [PointsContainer]: {
+        background: regularColor.darken(0.1),
+      },
     },
   };
 });
@@ -35,16 +46,22 @@ const ActionButtonContainer = styled(Button)(({ color, textColor }) => {
 const PointsContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
   background: ({ color }) => color,
-  padding: '0px 18px 5px 18px',
+  padding: '0px 25px 5px 25px',
   color: 'inherit',
+  fontSize: ({ theme }) => theme.fontSizes.sm,
+  minHeight: '100%',
 });
 
 const ContentContainer = styled.div({
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'row',
-  padding: 15,
+  justifyContent: 'flex-start',
+  padding: '15px',
+  minHeight: '100%',
 });
 
 const Points = styled.p(({ theme }) => {
@@ -59,6 +76,8 @@ const Points = styled.p(({ theme }) => {
 
 const Title = styled.p(({ theme }) => {
   return {
+    textAlign: 'left',
+    wordWrap: 'break-word',
     fontSize: theme.fontSizes.md,
     fontWeight: theme.fontWeights.bold,
     margin: 0,
@@ -106,7 +125,7 @@ export const ActionButton = ({
     >
       <ContentContainer>
         {buttonIcon ? (
-          <ButtonIcon size={35} name={'MdLibraryMusic'} textColor={textColor} />
+          <ButtonIcon size={35} name={buttonIcon} textColor={textColor} />
         ) : (
           <ButtonIcon as={MdLibraryMusic} />
         )}

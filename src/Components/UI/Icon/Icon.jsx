@@ -4,50 +4,52 @@ import * as Heroicons from 'react-icons/hi';
 import * as FontAwesome from 'react-icons/fa';
 
 // TEMPORARY back compat
-
-// const checkIconOld = name => {
-//   switch (name) {
-//     case 'Ticket':
-//       icon = FaLock;
-//       break;
-//     case 'Trophy':
-//       icon = FaTrophy;
-//       break;
-//     case 'Email':
-//       icon = HiOutlineMail;
-//       break;
-//     case 'Group':
-//       icon = HiUserGroup;
-//       break;
-//     case 'Music':
-//       icon = MdLibraryMusic;
-//       break;
-//     default:
-//       icon = MdLibraryMusic;
-//   }
-// };
-
-const checkIcon = name => {
-  let library = FontAwesome;
+const checkIconOld = name => {
+  let icon;
   switch (name) {
-    case 'Md':
-      library = MaterialDesign;
+    case 'Ticket':
+      icon = FontAwesome['FaLock'];
       break;
-    case 'Hi':
-      library = Heroicons;
+    case 'Trophy':
+      icon = FontAwesome['FaTrophy'];
       break;
-    case 'Fa':
-      library = FontAwesome;
+    case 'Email':
+      icon = Heroicons['HiOutlineMail'];
       break;
+    case 'Group':
+      icon = Heroicons['HiUserGroup'];
+      break;
+    case 'Music':
+      icon = MaterialDesign['MdLibraryMusic'];
+      break;
+    default:
+      icon = MaterialDesign['MdLibraryMusic'];
   }
-  return library;
+  return icon;
 };
 
-export const Icon = ({ name, size, color }) => {
-  const iconLibraryId = name.substring(0, 2);
-  const Library = checkIcon(iconLibraryId);
-  console.log('checkIcon', checkIcon(iconLibraryId));
+// const checkIcon = name => {
+//   let library = FontAwesome;
+//   switch (name) {
+//     case 'Md':
+//       library = MaterialDesign;
+//       break;
+//     case 'Hi':
+//       library = Heroicons;
+//       break;
+//     case 'Fa':
+//       library = FontAwesome;
+//       break;
+//   }
+//   return library;
+// };
 
-  const Icon = Library[name];
+export const Icon = ({ name, size, color }) => {
+  // const iconLibraryId = name.substring(0, 2);
+  // const Library = checkIcon(iconLibraryId);
+  // const Icon = Library[name];
+
+  const Icon = checkIconOld(name);
+
   return <Icon size={size} style={{ color: color }} />;
 };
