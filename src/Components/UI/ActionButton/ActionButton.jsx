@@ -26,7 +26,6 @@ const ActionButtonContainer = styled(Button)(({ color, textColor }) => {
     alignItems: 'center',
     width: '100%',
     borderRadius: '0px',
-    height: 'auto',
     background: gradientColor,
     border: 'none',
     padding: 0,
@@ -110,7 +109,7 @@ export const ActionButton = ({
   console.log('props', props);
   const handleOnClick = () => {
     setIsClicked(true);
-    if (targetURL != undefined) {
+    if (targetURL !== undefined) {
       const cleanUrlString = cleanUrl(targetURL);
       window.open(cleanUrlString, '_blank');
     }

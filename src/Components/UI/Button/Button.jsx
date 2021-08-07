@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button as BootstrapButton } from 'react-bootstrap';
 import styled from 'styled-components';
 

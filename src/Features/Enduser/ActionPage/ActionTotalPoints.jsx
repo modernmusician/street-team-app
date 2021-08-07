@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Row from 'react-bootstrap/Row';
 import styled from 'styled-components';
 
 const TotalPointsContainer = styled.div({

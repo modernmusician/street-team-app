@@ -27,12 +27,12 @@ const BodyContainer = styled(Container)({
 });
 
 export const ActionPage = () => {
-  const {
-    data: artistData,
-    // loading: userLoading,
-    // error: userError,
-    // refetch: refectchUserData,
-  } = useQuery(gql(listArtists), {});
+  // const {
+  //   data: artistData,
+  //   // loading: userLoading,
+  //   // error: userError,
+  //   // refetch: refectchUserData,
+  // } = useQuery(gql(listArtists), {});
 
   const {
     data: actionPageData,
