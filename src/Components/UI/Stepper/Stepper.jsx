@@ -24,10 +24,7 @@ export const Stepper = ({ currentStep, steps }) => {
         if (totalSteps !== index + 1) {
           return (
             <React.Fragment key={step}>
-              <StepperItem
-                step={step}
-                isActive={index + 1 <= currentStep}
-              />
+              <StepperItem step={step} isActive={index + 1 <= currentStep} />
               <StepperRule />
             </React.Fragment>
           );
@@ -50,6 +47,5 @@ Stepper.propTypes = {
 };
 
 Stepper.defaultProps = {
-  totalSteps: null,
   currentStep: 0,
 };

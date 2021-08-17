@@ -7,7 +7,7 @@
     "plugin:testcafe/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["react", "simple-import-sort", "testcafe", "prettier"],
+  "plugins": ["react", "testcafe", "prettier"],
   "parserOptions": {
     "ecmaVersion": 8,
     "sourceType": "module",
@@ -40,6 +40,7 @@
     "import/no-duplicates": 0,
     "import/no-default-export": "error",
     "import/prefer-default-export": "off",
+    "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
     "prettier/prettier": [
       "error",
       {
@@ -54,7 +55,7 @@
     "import/no-unresolved": 0,
     "import/no-named-as-default": 2,
     "comma-dangle": 0,
-    "indent": [2, 2, { "SwitchCase": 0 }],
+    "indent": [2, 2, { "SwitchCase": 1 }],
     "no-console": 0,
     "no-alert": 0,
     "max-len": ["error", 150],
@@ -66,7 +67,6 @@
       "error",
       { "allow": ["_browserHistory", "__data"] }
     ],
-    "simple-import-sort/sort": "error",
     "import/order": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": "off"

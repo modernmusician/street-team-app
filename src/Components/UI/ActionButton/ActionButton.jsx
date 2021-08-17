@@ -1,11 +1,23 @@
 import Color from 'color';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '../Button';
 import { MdLibraryMusic } from 'react-icons/md';
 import { Icon } from '../Icon';
 import styled from 'styled-components';
 import { cleanUrl } from '../../../utils/sharedUtils';
+
+const PointsContainer = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: ({ color }) => color,
+  padding: '0px 25px 5px 25px',
+  color: 'inherit',
+  fontSize: ({ theme }) => theme.fontSizes.sm,
+  minHeight: '100%',
+});
 
 const ActionButtonContainer = styled(Button)(({ color, textColor }) => {
   const fontColor = Color(textColor);
@@ -40,18 +52,6 @@ const ActionButtonContainer = styled(Button)(({ color, textColor }) => {
       },
     },
   };
-});
-
-const PointsContainer = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  background: ({ color }) => color,
-  padding: '0px 25px 5px 25px',
-  color: 'inherit',
-  fontSize: ({ theme }) => theme.fontSizes.sm,
-  minHeight: '100%',
 });
 
 const ContentContainer = styled.div({
@@ -148,6 +148,9 @@ ActionButton.propTypes = {
   postActionText: PropTypes.string,
   preActionText: PropTypes.string,
   pointValue: PropTypes.number,
+  state: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  id: PropTypes.string.isRequired,
+  handleAction: PropTypes.func.isRequired,
 };
 
 ActionButton.defaultProps = {

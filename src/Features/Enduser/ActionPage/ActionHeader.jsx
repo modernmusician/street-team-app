@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -28,4 +29,13 @@ export const ActionHeader = ({ data }) => {
       <SubHeader>{data?.getActionPage?.subheading}</SubHeader>
     </HeaderContainer>
   );
+};
+
+ActionHeader.propTypes = {
+  data: PropTypes.shape({
+    getActionPage: PropTypes.shape({
+      heading: PropTypes.string,
+      subheading: PropTypes.string,
+    }),
+  }).isRequired,
 };

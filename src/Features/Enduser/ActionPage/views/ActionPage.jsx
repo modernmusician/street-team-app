@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
-import { listArtists, getActionPage } from '../../../../graphql/queries';
+import { getActionPage } from '../../../../graphql/queries';
 import { ActionButtons } from '../ActionButtons';
 import { ActionStepper } from '../ActionStepper';
 import { ActionHeader } from '../ActionHeader';
@@ -40,32 +40,33 @@ export const ActionPage = () => {
   const {
     data: actionPageData,
     loading,
-    error,
+    // error,
   } = useQuery(gql(getActionPage), {
     variables: { id: 'cue-no-ego' },
   });
 
   const handleAction = id => {
     const updatedActions = actionValues.map(item => {
-      if (item.id === id) return {
+      if (item.id === id)
+        return {
           ...item,
           complete: true,
-      }
-      return item
+        };
+      return item;
     });
-    setActionValues(updatedActions)
-  }
+    setActionValues(updatedActions);
+  };
 
   useEffect(() => {
     let total = 0;
     for (let i = 0; i < actionValues.length; i++) {
       const element = actionValues[i];
       if (element.complete) {
-        total = total + element.points;
+        total += element.points;
       }
     }
     setTotalPoints(total);
-  }, [actionValues])
+  }, [actionValues]);
 
   useEffect(() => {
     if (actionPageData) {
@@ -79,44 +80,45 @@ export const ActionPage = () => {
           points: +element.pointValue,
         });
       }
-      setActionValues(values)
+      setActionValues(values);
     }
   }, [actionPageData]);
 
-  if (loading) return (
-    <Row className="justify-content-md-center">
-      <Col md="auto">
+  if (loading)
+    return (
+      <Row className="justify-content-md-center">
+        <Col md="auto">
           <Spinner animation="border" role="status" variant="light" />
-      </Col>
-    </Row>
-  );
+        </Col>
+      </Row>
+    );
 
   return (
     <ActionPageContainer>
-        <StyledContainer>
-          <Row>
-            <Col className="p-0">
-              <ActionStepper />
+      <StyledContainer>
+        <Row>
+          <Col className="p-0">
+            <ActionStepper />
+          </Col>
+        </Row>
+        <BodyContainer>
+          <Row className="mb-3">
+            <Col>
+              <ActionHeader data={actionPageData} />
             </Col>
           </Row>
-          <BodyContainer>
-            <Row className="mb-3">
-              <Col>
-                <ActionHeader data={actionPageData} />
-              </Col>
-            </Row>
-            <ActionButtons
-              data={actionPageData}
-              state={actionValues}
-              handleAction={handleAction}
-            />
-          </BodyContainer>
-          <Row>
-            <Col className="p-0">
-              <ActionTotalPoints totalPoints={totalPoints}/>
-            </Col>
-          </Row>
-        </StyledContainer>
+          <ActionButtons
+            data={actionPageData}
+            state={actionValues}
+            handleAction={handleAction}
+          />
+        </BodyContainer>
+        <Row>
+          <Col className="p-0">
+            <ActionTotalPoints totalPoints={totalPoints} />
+          </Col>
+        </Row>
+      </StyledContainer>
     </ActionPageContainer>
   );
 };

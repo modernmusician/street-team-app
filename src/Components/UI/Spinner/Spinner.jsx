@@ -7,7 +7,7 @@ const StyledSpinner = styled(BootStrapSpinner)(
   ({ theme, color, size, thickness, margin }) => {
     return {
       color: color || theme.colors.white,
-      margin: margin,
+      margin,
       fontSize: thickness,
       height: size,
       width: size,

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as MaterialDesign from 'react-icons/md';
 import * as Heroicons from 'react-icons/hi';
 import * as FontAwesome from 'react-icons/fa';
@@ -8,22 +9,22 @@ const checkIconOld = name => {
   let icon;
   switch (name) {
     case 'Ticket':
-      icon = FontAwesome['FaLock'];
+      icon = FontAwesome.FaLock;
       break;
     case 'Trophy':
-      icon = FontAwesome['FaTrophy'];
+      icon = FontAwesome.FaTrophy;
       break;
     case 'Email':
-      icon = Heroicons['HiOutlineMail'];
+      icon = Heroicons.HiOutlineMail;
       break;
     case 'Group':
-      icon = Heroicons['HiUserGroup'];
+      icon = Heroicons.HiUserGroup;
       break;
     case 'Music':
-      icon = MaterialDesign['MdLibraryMusic'];
+      icon = MaterialDesign.MdLibraryMusic;
       break;
     default:
-      icon = MaterialDesign['MdLibraryMusic'];
+      icon = MaterialDesign.MdLibraryMusic;
   }
   return icon;
 };
@@ -49,7 +50,19 @@ export const Icon = ({ name, size, color }) => {
   // const Library = checkIcon(iconLibraryId);
   // const Icon = Library[name];
 
-  const Icon = checkIconOld(name);
+  const IconElement = checkIconOld(name);
 
-  return <Icon size={size} style={{ color: color }} />;
+  return <IconElement size={size} style={{ color }} />;
+};
+
+Icon.propTypes = {
+  name: PropTypes.string,
+  size: PropTypes.number,
+  color: PropTypes.string,
+};
+
+Icon.defaultProps = {
+  name: null,
+  size: 35,
+  color: '#5E30B8',
 };
