@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { gql, useQuery } from '@apollo/react-hooks';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -14,7 +14,7 @@ import { Spinner } from '../../../../Components/ui/Spinner';
 const ActionPageContainer = styled(Container)({
   maxWidth: '480px',
   width: '50%',
-  margin: '15px auto'
+  margin: '15px auto',
 });
 
 const StyledContainer = styled(Container)({
@@ -27,6 +27,9 @@ const BodyContainer = styled(Container)({
 });
 
 export const ActionPage = () => {
+  const [actionValues, setActionValues] = useState([]);
+  const [totalPoints, setTotalPoints] = useState(0);
+
   // const {
   //   data: artistData,
   //   // loading: userLoading,
@@ -42,10 +45,54 @@ export const ActionPage = () => {
     variables: { id: 'cue-no-ego' },
   });
 
-  console.log('actionPageData', actionPageData);
+  const handleAction = id => {
+    const updatedActions = actionValues.map(item => {
+      if (item.id === id) return {
+          ...item,
+          complete: true,
+      }
+      return item
+    });
+    setActionValues(updatedActions)
+  }
+
+  useEffect(() => {
+    let total = 0;
+    for (let i = 0; i < actionValues.length; i++) {
+      const element = actionValues[i];
+      if (element.complete) {
+        total = total + element.points;
+      }
+    }
+    setTotalPoints(total);
+  }, [actionValues])
+
+  useEffect(() => {
+    if (actionPageData) {
+      const actionArray = actionPageData.getActionPage.actionButtons.items;
+      const values = [];
+      for (let i = 0; i < actionArray.length; i++) {
+        const element = actionArray[i];
+        values.push({
+          id: element.id,
+          complete: false,
+          points: +element.pointValue,
+        });
+      }
+      setActionValues(values)
+    }
+  }, [actionPageData]);
+
+  if (loading) return (
+    <Row className="justify-content-md-center">
+      <Col md="auto">
+          <Spinner animation="border" role="status" variant="light" />
+      </Col>
+    </Row>
+  );
+
   return (
     <ActionPageContainer>
-      {!loading ? (
         <StyledContainer>
           <Row>
             <Col className="p-0">
@@ -58,21 +105,18 @@ export const ActionPage = () => {
                 <ActionHeader data={actionPageData} />
               </Col>
             </Row>
-            <ActionButtons data={actionPageData} />
+            <ActionButtons
+              data={actionPageData}
+              state={actionValues}
+              handleAction={handleAction}
+            />
           </BodyContainer>
           <Row>
             <Col className="p-0">
-              <ActionTotalPoints data={actionPageData} />
+              <ActionTotalPoints totalPoints={totalPoints}/>
             </Col>
           </Row>
         </StyledContainer>
-      ) : (
-        <Row className="justify-content-md-center">
-          <Col md="auto">
-            <Spinner animation="border" role="status" variant="light" />
-          </Col>
-        </Row>
-      )}
     </ActionPageContainer>
   );
 };

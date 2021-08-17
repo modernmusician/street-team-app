@@ -23,9 +23,8 @@ export const Stepper = ({ currentStep, steps }) => {
       {steps.map((step, index) => {
         if (totalSteps !== index + 1) {
           return (
-            <React.Fragment>
+            <React.Fragment key={step}>
               <StepperItem
-                key={step}
                 step={step}
                 isActive={index + 1 <= currentStep}
               />

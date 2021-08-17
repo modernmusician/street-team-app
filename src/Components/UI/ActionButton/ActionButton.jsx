@@ -103,23 +103,25 @@ export const ActionButton = ({
   buttonIcon,
   pointValue,
   textColor,
-  ...props
+  state,
+  id,
+  handleAction,
 }) => {
-  const [isClicked, setIsClicked] = useState(false);
-  console.log('props', props);
   const handleOnClick = () => {
-    setIsClicked(true);
+    handleAction(id);
     if (targetURL !== undefined) {
       const cleanUrlString = cleanUrl(targetURL);
       window.open(cleanUrlString, '_blank');
     }
   };
 
+  const complete = state?.find(item => item.id === id)?.complete;
+
   return (
     <ActionButtonContainer
       color={backgroundColor}
       textColor={textColor}
-      disabled={isClicked}
+      disabled={complete}
       onClick={handleOnClick}
     >
       <ContentContainer>
@@ -128,7 +130,7 @@ export const ActionButton = ({
         ) : (
           <ButtonIcon as={MdLibraryMusic} />
         )}
-        <Title>{isClicked ? postActionText : preActionText}</Title>
+        <Title>{complete ? postActionText : preActionText}</Title>
       </ContentContainer>
       <PointsContainer color={backgroundColor}>
         <Points>{pointValue}</Points>

@@ -9,17 +9,17 @@ const StyledContainer = styled.div({
   button: { marginBottom: '15px' },
 });
 
-export const ActionButtons = ({ data }) => {
+export const ActionButtons = ({ data, state, handleAction }) => {
   const actionButtons = [...data.getActionPage.actionButtons.items].sort(
     compareId('position')
   );
   return (
     <StyledContainer>
-      {actionButtons.map((item, i) => {
+      {actionButtons.map((item) => {
         return (
-          <Row>
+          <Row key={item.id}>
             <Col>
-              <ActionButton key={i} {...item} />
+              <ActionButton {...item} state={state} handleAction={handleAction}/>
             </Col>
           </Row>
         );
