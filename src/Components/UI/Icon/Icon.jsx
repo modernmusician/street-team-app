@@ -64,5 +64,5 @@ Icon.propTypes = {
 Icon.defaultProps = {
   name: null,
   size: 35,
-  color: '#5E30B8',
+  color: null,
 };

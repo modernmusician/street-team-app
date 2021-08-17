@@ -1,7 +1,7 @@
 import Color from 'color';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button } from '../Button';
+import { Button } from 'react-bootstrap';
 import { MdLibraryMusic } from 'react-icons/md';
 import { Icon } from '../Icon';
 import styled from 'styled-components';
@@ -19,12 +19,19 @@ const PointsContainer = styled.div({
   minHeight: '100%',
 });
 
-const ActionButtonContainer = styled(Button)(({ color, textColor }) => {
+// eslint-disable-next-line no-unused-vars
+const ActionButtonContainer = styled(({ textColor, ...props }) => (
+  <Button {...props} />
+))(({ color, textColor }) => {
   const fontColor = Color(textColor);
   const regularColor = Color(color);
   const lighterColor = regularColor.lighten(0.05);
   const darkerColor = regularColor.darken(0.4);
-  const gradientColor = `linear-gradient(90deg, ${lighterColor} 0%, ${regularColor} 75%, ${darkerColor} 100%)`;
+  const gradientColor = `linear-gradient(90deg,
+    ${lighterColor} 0%,
+    ${regularColor} 75%,
+    ${darkerColor} 100%
+  )`;
   const hoverGradientColor = `linear-gradient(90deg,
     ${lighterColor.darken(0.2)} 0%,
     ${regularColor} 75%,
@@ -49,6 +56,13 @@ const ActionButtonContainer = styled(Button)(({ color, textColor }) => {
       background: hoverGradientColor,
       [PointsContainer]: {
         background: regularColor.darken(0.1),
+      },
+    },
+    '&:disabled': {
+      cursor: 'not-allowed',
+      color: fontColor,
+      '&:hover': {
+        color: fontColor,
       },
     },
   };

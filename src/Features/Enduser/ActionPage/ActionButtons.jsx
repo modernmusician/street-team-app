@@ -42,6 +42,6 @@ ActionButtons.propTypes = {
       }),
     }),
   }).isRequired,
-  state: PropTypes.shape({}).isRequired,
+  state: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   handleAction: PropTypes.func.isRequired,
 };
