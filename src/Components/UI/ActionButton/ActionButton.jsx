@@ -91,7 +91,7 @@ const Title = styled.p(({ theme }) => {
   return {
     textAlign: 'left',
     wordWrap: 'break-word',
-    fontSize: theme.fontSizes.md,
+    fontSize: theme.fontSizes.sm,
     fontWeight: theme.fontWeights.bold,
     margin: 0,
     marginLeft: '15px',
@@ -121,6 +121,7 @@ export const ActionButton = ({
   id,
   handleAction,
 }) => {
+  // All external links should be A tags
   const handleOnClick = () => {
     handleAction(id);
     if (targetURL !== undefined) {

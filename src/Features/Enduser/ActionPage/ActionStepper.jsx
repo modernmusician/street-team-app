@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Stepper } from '../../../Components/ui/Stepper';
+import { Stepper } from '../../../Components/UI/Stepper';
 
 const StepperContainer = styled.div({
   background: ({ theme }) => theme.colors.gray2,

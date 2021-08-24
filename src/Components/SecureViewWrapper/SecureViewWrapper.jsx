@@ -6,69 +6,58 @@ import {
 } from '@aws-amplify/ui-react';
 import Amplify from 'aws-amplify';
 import PropTypes from 'prop-types';
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import awsconfig from '../../aws-exports';
 
 Amplify.configure(awsconfig);
 
-export const SecureViewWrapper = ({ userRole, children }) => {
-  const [authState, setAuthState] = React.useState();
-  const [userId, setUserId] = React.useState();
+const Footer = styled.footer({
+  height: '50px',
+  flexShrink: 0,
+});
 
-  React.useEffect(() => {
-    return onAuthUIStateChange((nextAuthState, authData) => {
+export const SecureViewWrapper = ({ userRole, children }) => {
+  const [authState, setAuthState] = useState();
+  const [userId, setUserId] = useState();
+
+  useEffect(() => {
+    onAuthUIStateChange((nextAuthState, authData) => {
       setAuthState(nextAuthState);
       setUserId(authData);
     });
   }, []);
 
+  const signUpProps = {
+    headerText: userRole
+      ? 'Create a Fan Action sequence'
+      : 'How can we reach you if you win?',
+    submitButtonText: 'Complete Registration',
+    slot: 'sign-up',
+    usernameAlias: 'email',
+    formFields: [
+      {
+        type: 'name',
+        label: userRole ? 'Artist Name' : 'Name',
+        placeholder: userRole ? 'Enter your artist name' : 'Enter your name',
+        required: true,
+      },
+      { type: 'email' },
+      { type: 'password' },
+      { type: 'phone_number' },
+    ],
+  };
+
   return authState === AuthState.SignedIn && userId ? (
-    <div>
-      {children}
-      <AmplifySignOut />
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <div style={{ flex: '1 0 auto' }}>{children}</div>
+      <Footer>
+        <AmplifySignOut />
+      </Footer>
     </div>
   ) : (
     <AmplifyAuthenticator initialAuthState="signup">
-      {userRole === 'admin' ? (
-        <AmplifySignUp
-          headerText="Create a Fan Action sequence"
-          submitButtonText="Complete Registration"
-          slot="sign-up"
-          usernameAlias="email"
-          formFields={[
-            // { type: "username" },
-            {
-              type: 'name',
-              label: 'Artist Name',
-              placeholder: 'Enter your artist name',
-              required: true,
-            },
-            { type: 'email' },
-            { type: 'password' },
-            { type: 'phone_number' },
-          ]}
-        />
-      ) : (
-        <AmplifySignUp
-          headerText="How can we reach you if you win?"
-          submitButtonText="Complete Registration"
-          slot="sign-up"
-          usernameAlias="email"
-          formFields={[
-            // { type: "username" },
-            {
-              type: 'name',
-              label: 'Name',
-              placeholder: 'Enter your name',
-              required: true,
-            },
-            { type: 'email' },
-            { type: 'password' },
-            { type: 'phone_number' },
-          ]}
-        />
-      )}
+      <AmplifySignUp {...signUpProps} />
     </AmplifyAuthenticator>
   );
 };

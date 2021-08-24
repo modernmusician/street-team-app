@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import styled from 'styled-components';
 
-import { ActionButton } from '../../../Components/ui/ActionButton';
+import { ActionButton } from '../../../Components/UI/ActionButton';
 import { compareId } from '../../../utils/sharedUtils';
 
 const StyledContainer = styled.div({

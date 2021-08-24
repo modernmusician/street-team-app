@@ -4,16 +4,16 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import { getActionPage } from '../../../../graphql/queries';
 import { ActionButtons } from '../ActionButtons';
 import { ActionStepper } from '../ActionStepper';
 import { ActionHeader } from '../ActionHeader';
 import { ActionTotalPoints } from '../ActionTotalPoints';
-import { Spinner } from '../../../../Components/ui/Spinner';
+import { Spinner } from '../../../../Components/UI/Spinner';
 
 const ActionPageContainer = styled(Container)({
-  maxWidth: '480px',
-  width: '50%',
+  maxWidth: '450px',
   margin: '15px auto',
 });
 
@@ -29,7 +29,7 @@ const BodyContainer = styled(Container)({
 export const ActionPage = () => {
   const [actionValues, setActionValues] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
-
+  const { artist } = useParams();
   // const {
   //   data: artistData,
   //   // loading: userLoading,
@@ -42,7 +42,7 @@ export const ActionPage = () => {
     loading,
     // error,
   } = useQuery(gql(getActionPage), {
-    variables: { id: 'cue-no-ego' },
+    variables: { id: artist },
   });
 
   const handleAction = id => {
@@ -86,16 +86,18 @@ export const ActionPage = () => {
 
   if (loading)
     return (
-      <Row className="justify-content-md-center">
-        <Col md="auto">
-          <Spinner animation="border" role="status" variant="light" />
-        </Col>
-      </Row>
+      <ActionPageContainer fluid>
+        <Row className="justify-content-md-center">
+          <Col md="auto" style={{ textAlign: 'center' }}>
+            <Spinner animation="border" role="status" variant="light" />
+          </Col>
+        </Row>
+      </ActionPageContainer>
     );
 
   return (
-    <ActionPageContainer>
-      <StyledContainer>
+    <ActionPageContainer fluid>
+      <StyledContainer fluid>
         <Row>
           <Col className="p-0">
             <ActionStepper />
