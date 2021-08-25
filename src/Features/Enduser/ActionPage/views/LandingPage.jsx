@@ -1,3 +1,5 @@
+// landing page is the same as an action page, except that there's no login required
+// use case is primarily for a landing page which would lead a user to an ActionPage
 import React, { useState, useEffect } from 'react';
 import { gql, useQuery } from '@apollo/react-hooks';
 
@@ -9,20 +11,13 @@ import { getActionPage } from '../../../../graphql/queries';
 import { ActionButtons } from '../ActionButtons';
 import { ActionStepper } from '../ActionStepper';
 import { ActionHeader } from '../ActionHeader';
-import { ActionTotalPoints } from '../ActionTotalPoints';
 import { Spinner } from '../../../../Components/UI/Spinner';
 import { ActionPageContainer, StyledContainer, BodyContainer } from '../ActionPageContainer';
+import { PublicClient } from '../../../../Components/ApolloProvider/PublicClient';
 
-export const ActionPage = () => {
+export const LandingPage = () => {
   const [actionValues, setActionValues] = useState([]);
-  const [totalPoints, setTotalPoints] = useState(0);
   const { artist } = useParams();
-  // const {
-  //   data: artistData,
-  //   // loading: userLoading,
-  //   // error: userError,
-  //   // refetch: refectchUserData,
-  // } = useQuery(gql(listArtists), {});
 
   const {
     data: actionPageData,
@@ -30,6 +25,7 @@ export const ActionPage = () => {
     // error,
   } = useQuery(gql(getActionPage), {
     variables: { id: artist },
+    client: PublicClient,
   });
 
   const handleAction = id => {
@@ -43,17 +39,6 @@ export const ActionPage = () => {
     });
     setActionValues(updatedActions);
   };
-
-  useEffect(() => {
-    let total = 0;
-    for (let i = 0; i < actionValues.length; i++) {
-      const element = actionValues[i];
-      if (element.complete) {
-        total += element.points;
-      }
-    }
-    setTotalPoints(total);
-  }, [actionValues]);
 
   useEffect(() => {
     if (actionPageData) {
@@ -87,7 +72,7 @@ export const ActionPage = () => {
       <StyledContainer fluid>
         <Row>
           <Col className="p-0">
-            <ActionStepper currentStep={2}/>
+            <ActionStepper currentStep={1}/>
           </Col>
         </Row>
         <BodyContainer>
@@ -102,11 +87,7 @@ export const ActionPage = () => {
             handleAction={handleAction}
           />
         </BodyContainer>
-        <Row>
-          <Col className="p-0">
-            <ActionTotalPoints totalPoints={totalPoints} />
-          </Col>
-        </Row>
+        {/* TODO need a button here that links to the same artist page but at /secure route */}
       </StyledContainer>
     </ActionPageContainer>
   );

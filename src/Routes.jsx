@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { SecureViewWrapper } from './Components/SecureViewWrapper';
 import { ActionPage } from './Features/Enduser/ActionPage/views/ActionPage';
+import { LandingPage } from './Features/Enduser/ActionPage/views/LandingPage';
 import { CreateActionPage } from './Features/Admin/CreateActionPage/views/CreateActionPage';
 
 export const Routes = () => {
@@ -23,9 +24,8 @@ export const Routes = () => {
               <Route component={HelloEnduser} exact path="/hi" />
             </SecureViewWrapper> */}
 
-        <Route path="/">
-          <div>Hello</div>
-          {/* <HelloEnduser path="/hi" /> */}
+        <Route path="/:artist">
+          <LandingPage />
         </Route>
       </Switch>
     </Router>

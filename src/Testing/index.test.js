@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { describe } from 'riteway';
 
-import App from './App';
+import App from '../App';
 // import render from 'riteway/render-component';
 
 // ##default create-react-app
@@ -23,8 +23,8 @@ describe('App component', async assert => {
 
     assert({
       given: 'no props',
-      should: 'render a button',
-      actual: $('.btn').length,
+      should: 'render a div',
+      actual: $('.div').length,
       expected: 1,
     });
   }
