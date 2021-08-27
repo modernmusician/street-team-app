@@ -12,7 +12,7 @@ const StyledContainer = styled.div({
 });
 
 export const ActionButtons = ({ data, state, handleAction }) => {
-  const actionButtons = [...data.getActionPage.actionButtons.items].sort(
+  const actionButtons = [...data.actionButtons.items].sort(
     compareId('position')
   );
   return (

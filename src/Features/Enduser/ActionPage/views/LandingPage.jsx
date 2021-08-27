@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { useParams } from 'react-router-dom';
-import { getActionPage } from '../../../../graphql/queries';
+import { getActionPageByArtistAndPageRoute} from '../../../../graphql-custom/queries';
 import { ActionButtons } from '../ActionButtons';
 import { ActionStepper } from '../ActionStepper';
 import { ActionHeader } from '../ActionHeader';
@@ -15,18 +15,20 @@ import { Spinner } from '../../../../Components/UI/Spinner';
 import { ActionPageContainer, StyledContainer, BodyContainer } from '../ActionPageContainer';
 import { PublicClient } from '../../../../Components/ApolloProvider/PublicClient';
 
+// landing page is essentially an action page that is public, so there are no points and we're using a different Apollo client (no auth)
 export const LandingPage = () => {
+    console.log("hello from landing page")
   const [actionValues, setActionValues] = useState([]);
-  const { artist } = useParams();
-
+  //here we're defining a default page route as "landing" so if no pageRoute is provided, we'll use that
+  const { artist, page = "landing" } = useParams();
   const {
-    data: actionPageData,
-    loading,
-    // error,
-  } = useQuery(gql(getActionPage), {
-    variables: { id: artist },
-    client: PublicClient,
-  });
+    data : actionPageData,
+    loading: loading,
+  }
+   = useQuery(gql(getActionPageByArtistAndPageRoute),{
+     variables: {artistRoute: artist, pageRoute: page },
+     client: PublicClient,
+   });
 
   const handleAction = id => {
     const updatedActions = actionValues.map(item => {
@@ -42,7 +44,7 @@ export const LandingPage = () => {
 
   useEffect(() => {
     if (actionPageData) {
-      const actionArray = actionPageData.getActionPage.actionButtons.items;
+      const actionArray = actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons.items;
       const values = [];
       for (let i = 0; i < actionArray.length; i++) {
         const element = actionArray[i];
@@ -66,6 +68,8 @@ export const LandingPage = () => {
         </Row>
       </ActionPageContainer>
     );
+  //if the actionPageInfo exists, it should be in this format (assuming a single artist route and page route exist)
+  const actionPageInfo = actionPageData.ArtistByRoute.items[0].actionPages.items[0];
 
   return (
     <ActionPageContainer fluid>
@@ -78,11 +82,11 @@ export const LandingPage = () => {
         <BodyContainer>
           <Row className="mb-3">
             <Col>
-              <ActionHeader data={actionPageData} />
+              <ActionHeader data={actionPageInfo} />
             </Col>
           </Row>
           <ActionButtons
-            data={actionPageData}
+            data={actionPageInfo}
             state={actionValues}
             handleAction={handleAction}
           />

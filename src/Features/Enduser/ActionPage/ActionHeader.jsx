@@ -24,9 +24,9 @@ const Rule = styled.div({
 export const ActionHeader = ({ data }) => {
   return (
     <HeaderContainer>
-      <Header>{data?.getActionPage?.heading}</Header>
+      <Header>{data?.heading}</Header>
       <Rule />
-      <SubHeader>{data?.getActionPage?.subheading}</SubHeader>
+      <SubHeader>{data?.subheading}</SubHeader>
     </HeaderContainer>
   );
 };

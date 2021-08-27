@@ -2,6 +2,7 @@ type Artist
   @model
   @aws_iam
   @aws_cognito_user_pools
+  @key(name: "byRoute", fields: ["route"], queryField: "ArtistByRoute")
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update, delete] }
@@ -11,6 +12,8 @@ type Artist
   ) {
   id: ID!
   name: String!
+  "genre should eventually be more like tags than just a string"
+  genre: String 
   contests: [Contest] @connection(keyName: "byArtist", fields: ["id"])
   actionPages: [ActionPage] @connection(keyName: "byArtist",fields:["id"])
   "route is used to route to specific pages"
@@ -32,11 +35,18 @@ type Enduser
   username: String
   firstName: String
   lastName: String
+  email: String
+  phone: String
+  profileName: String
+  "eventually might want this to be using an image type instead of just a URL string..."
+  profilePicture: String
+  profileDescription: String
+  profileSocialLink: String
   actionPageSubscriptions: [ActionPageSubscriptions]
     @connection(keyName: "byEnduser", fields: ["id"])
-  contestActions: [EnduserContestActions]
-    @connection(keyName: "byEnduser", fields: ["id"])
-  contestSubscriptions: [ContestSubscription]
+  referredSubscribers: [ActionPageSubscriptions]
+    @connection(keyName: "byReferralEnduser",fields: ["id"])
+  completedActions: [EnduserCompletedActions]
     @connection(keyName: "byEnduser", fields: ["id"])
 }
 
@@ -61,47 +71,19 @@ type ArtistUser
   username: String
   firstName: String
   lastName: String
+  email: String
+  phoneNumber: String
   artistID: ID
   artist: Artist @connection(fields: ["artistID"])
   actionPages: [ActionPage] @connection(keyName: "byCreatorUser", fields: ["id"])
 }
 
-type Picture
-  @model
-  @aws_iam
-  @aws_cognito_user_pools
-  @auth(
-    rules: [
-      { allow: owner, operations: [create, read, update, delete] }
-      { allow: public, provider: iam, operations: [read] }
-      { allow: groups, groups: ["everyone"], operations: [read] }
-    ]
-  ) {
-  id: ID!
-  publicUrl: String
-  name: String
-  owner: String
-  visibility: Visibility
-  createdAt: String
-  file: S3Object
-}
-
-type S3Object {
-  bucket: String!
-  region: String!
-  key: String!
-}
-
-enum Visibility {
-  public
-  private
-}
-
 "ActionPage Data Types"
 type ActionPage
   @model
-  @key(name: "byArtist", fields: ["artistID", "heading"])
+  @key(name: "byArtist", fields: ["artistID", "heading"], queryField: "ActionPagesByArtist")
   @key(name: "byCreatorUser", fields: ["creatorUserID"])
+  @key(name: "byRoute", fields: ["pageRoute"],queryField: "ActionPagesByRoute")
   @aws_iam
   @aws_cognito_user_pools
   @auth(
@@ -142,12 +124,13 @@ type ActionPageSubscriptions
       { allow: groups, groups: ["everyone"], operations: [read] }
     ]
   )
-  @key(name: "byActionPage", fields: ["actionPageID", "enduserID"])
-  @key(name: "byEnduser", fields: ["enduserID", "actionPageID"])
+  @key(name: "byActionPage", fields: ["actionPageID"], queryField: "ActionPageSubscriptionsByActionPage")
+  @key(name: "byEnduser", fields: ["enduserID"], queryField: "ActionPageSubscriptionsByEnduser")
   @key(
-    name: "byReferralEnduser"
-    fields: ["referralEnduserID", "actionPageID"]
-  ) {
+    name: "byReferralEnduser",
+    fields: ["referralEnduserID"], 
+    queryField: "ActionPageSubscriptionsByReferralEnduser"
+    ) {
   """
   Connects the ActionPage to the users participating in that page
   note: completedActionButtonIDs maybe should just be a connection to ActionButtons, but for simplicity right now we're just storing the IDs on this record, not a connection to the entire object
@@ -178,6 +161,7 @@ type ActionPageButton
   id: ID!
   actionPageID: ID!
   actionpage: ActionPage @connection(fields: ["actionPageID"])
+  enduserCompletedActions: [EnduserCompletedActions] @connection(keyName: "byAction", fields: ["id"])
   """
   Configurable Details
   """
@@ -195,7 +179,65 @@ type ActionPageButton
   serviceAction: AWSJSON
 }
 
-"Contest Data Types"
+type EnduserCompletedActions
+  @model
+  @key(name: "byActionPage", fields: ["actionPageID"], queryField: "EnduserCompletedActionsByActionPage")
+  @key(name: "byAction", fields: ["actionID"], queryField: "EnduserCompletedActionsByActionButton")
+  @key(name: "byEnduserAndActionPage", fields: ["actionPageID", "enduserID"], queryField: "EnduserCompletedActionsByEnduserAndActionPage")
+  @key(name: "byArtist", fields: ["artistID"], queryField: "EnduserCompletedActionsByEnduserAndActionPage")
+  @key(name: "byEnduser", fields: ["enduserID"], queryField: "EnduserCompletedActionsByEnduser")
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
+  enduserID: ID!
+  enduser: Enduser @connection(fields: ["enduserID"])
+  actionID: ID!
+  action: ActionPageButton @connection(fields: ["actionID"])
+  actionPageID: ID!
+  actionPage: ActionPage @connection(fields: ["actionPageID"])
+  artistID: ID!
+  artist: Artist @connection(fields: ["artistID"])
+  isExpired: Boolean
+}
+
+type Picture
+  @model
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
+  id: ID!
+  publicUrl: String
+  name: String
+  owner: String
+  visibility: Visibility
+  createdAt: String
+  file: S3Object
+}
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
+enum Visibility {
+  public
+  private
+}
+
+"Contest Data Types -- LEGACY"
 type Contest
   @model
   @key(name: "byArtist", fields: ["artistID", "headline"])

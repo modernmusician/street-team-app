@@ -14,17 +14,13 @@ export const Routes = () => {
           <SecureViewWrapper userRole="admin">
             <CreateActionPage />
           </SecureViewWrapper>
-        </Route>
-        <Route path="/secure/:artist">
+        </Route> 
+        <Route path="/secure/:artist/:page?">
           <SecureViewWrapper userRole="enduser">
             <ActionPage />
           </SecureViewWrapper>
         </Route>
-        {/* <SecureViewWrapper userRole="enduser">
-              <Route component={HelloEnduser} exact path="/hi" />
-            </SecureViewWrapper> */}
-
-        <Route path="/:artist">
+        <Route path="/:artist/:page?">
           <LandingPage />
         </Route>
       </Switch>
