@@ -2,33 +2,33 @@
 // use case is primarily for a landing page which would lead a user to an ActionPage
 import React, { useState, useEffect } from 'react';
 import { gql, useQuery } from '@apollo/react-hooks';
-
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
+import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import { getActionPageByArtistAndPageRoute} from '../../../../graphql-custom/queries';
+import { getActionPageByArtistAndPageRoute } from '../../../../graphql-custom/queries';
 import { ActionButtons } from '../ActionButtons';
 import { ActionStepper } from '../ActionStepper';
 import { ActionHeader } from '../ActionHeader';
 import { Spinner } from '../../../../Components/UI/Spinner';
-import { ActionPageContainer, StyledContainer, BodyContainer } from '../ActionPageContainer';
+import {
+  ActionPageContainer,
+  StyledContainer,
+  BodyContainer,
+} from '../ActionPageContainer';
 import { PublicClient } from '../../../../Components/ApolloProvider/PublicClient';
 
 // landing page is essentially an action page that is public, so there are no points and we're using a different Apollo client (no auth)
 export const LandingPage = () => {
-    console.log("hello from landing page")
+  console.log('hello from landing page');
   const [actionValues, setActionValues] = useState([]);
-  //here we're defining a default page route as "landing" so if no pageRoute is provided, we'll use that
-  const { artist, page = "landing" } = useParams();
-  const {
-    data : actionPageData,
-    loading: loading,
-  }
-   = useQuery(gql(getActionPageByArtistAndPageRoute),{
-     variables: {artistRoute: artist, pageRoute: page },
-     client: PublicClient,
-   });
+  // here we're defining a default page route as "landing" so if no pageRoute is provided, we'll use that
+  const { artist, page = 'landing' } = useParams();
+  const { data: actionPageData, loading } = useQuery(
+    gql(getActionPageByArtistAndPageRoute),
+    {
+      variables: { artistRoute: artist, pageRoute: page },
+      client: PublicClient,
+    }
+  );
 
   const handleAction = id => {
     const updatedActions = actionValues.map(item => {
@@ -43,8 +43,10 @@ export const LandingPage = () => {
   };
 
   useEffect(() => {
-    if (actionPageData) {
-      const actionArray = actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons.items;
+    if (actionPageData && actionPageData?.ArtistByRoute?.items?.length > 0) {
+      const actionArray =
+        actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons
+          .items;
       const values = [];
       for (let i = 0; i < actionArray.length; i++) {
         const element = actionArray[i];
@@ -68,15 +70,30 @@ export const LandingPage = () => {
         </Row>
       </ActionPageContainer>
     );
-  //if the actionPageInfo exists, it should be in this format (assuming a single artist route and page route exist)
-  const actionPageInfo = actionPageData.ArtistByRoute.items[0].actionPages.items[0];
+  console.log('actionPageData', actionPageData);
+  // if the actionPageInfo exists, it should be in this format (assuming a single artist route and page route exist)
+
+  if (actionPageData?.ArtistByRoute?.items?.length === 0) {
+    return (
+      <Container fluid>
+        <Row>
+          <Col>
+            <h1>No Actions</h1>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+
+  const actionPageInfo =
+    actionPageData.ArtistByRoute.items[0].actionPages.items[0];
 
   return (
     <ActionPageContainer fluid>
       <StyledContainer fluid>
         <Row>
           <Col className="p-0">
-            <ActionStepper currentStep={1}/>
+            <ActionStepper currentStep={1} />
           </Col>
         </Row>
         <BodyContainer>

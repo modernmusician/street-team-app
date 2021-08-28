@@ -14,7 +14,7 @@ export const Routes = () => {
           <SecureViewWrapper userRole="admin">
             <CreateActionPage />
           </SecureViewWrapper>
-        </Route> 
+        </Route>
         <Route path="/secure/:artist/:page?">
           <SecureViewWrapper userRole="enduser">
             <ActionPage />

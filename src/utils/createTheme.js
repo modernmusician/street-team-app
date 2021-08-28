@@ -12,6 +12,7 @@ export const createTheme = theme => {
       gray3: '#1F1F1F',
       black: 'black',
       white: 'white',
+      yellow: '#fed93e',
       ...baseTheme.colors,
     },
     spacing: {

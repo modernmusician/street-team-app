@@ -6,6 +6,7 @@ import { MdLibraryMusic } from 'react-icons/md';
 import { Icon } from '../Icon';
 import styled from 'styled-components';
 import { cleanUrl } from '../../../utils/sharedUtils';
+import { useGradient } from '../../../Hooks/useGradient';
 
 const PointsContainer = styled.div({
   display: 'flex',
@@ -24,19 +25,6 @@ const ActionButtonContainer = styled(({ textColor, ...props }) => (
   <Button {...props} />
 ))(({ color, textColor }) => {
   const fontColor = Color(textColor);
-  const regularColor = Color(color);
-  const lighterColor = regularColor.lighten(0.05);
-  const darkerColor = regularColor.darken(0.4);
-  const gradientColor = `linear-gradient(90deg,
-    ${lighterColor} 0%,
-    ${regularColor} 75%,
-    ${darkerColor} 100%
-  )`;
-  const hoverGradientColor = `linear-gradient(90deg,
-    ${lighterColor.darken(0.2)} 0%,
-    ${regularColor} 75%,
-    ${darkerColor.darken(0.2)} 100%
-  )`;
 
   return {
     display: 'flex',
@@ -45,7 +33,7 @@ const ActionButtonContainer = styled(({ textColor, ...props }) => (
     alignItems: 'center',
     width: '100%',
     borderRadius: '0px',
-    background: gradientColor,
+    background: useGradient({ color, customLighten: 0.05, customDarken: 0.4 }),
     border: 'none',
     padding: 0,
     margin: 0,
@@ -53,9 +41,9 @@ const ActionButtonContainer = styled(({ textColor, ...props }) => (
     color: fontColor.hex(),
     '&:hover': {
       color: fontColor,
-      background: hoverGradientColor,
+      background: useGradient({ color, customLighten: 0.2, customDarken: 0.2 }),
       [PointsContainer]: {
-        background: regularColor.darken(0.1),
+        background: Color(color).darken(0.1),
       },
     },
     '&:disabled': {

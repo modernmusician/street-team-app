@@ -3,28 +3,32 @@ import { gql, useQuery } from '@apollo/react-hooks';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 
 import { useParams } from 'react-router-dom';
-import { getActionPageByArtistAndPageRoute} from '../../../../graphql-custom/queries';
+import { getActionPageByArtistAndPageRoute } from '../../../../graphql-custom/queries';
 import { ActionButtons } from '../ActionButtons';
 import { ActionStepper } from '../ActionStepper';
 import { ActionHeader } from '../ActionHeader';
 import { ActionTotalPoints } from '../ActionTotalPoints';
 import { Spinner } from '../../../../Components/UI/Spinner';
-import { ActionPageContainer, StyledContainer, BodyContainer } from '../ActionPageContainer';
+import {
+  ActionPageContainer,
+  StyledContainer,
+  BodyContainer,
+} from '../ActionPageContainer';
 
 export const ActionPage = () => {
   const [actionValues, setActionValues] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
-  const { artist, page = "join"} = useParams();
-  console.log(`page variable is ${page}`)
-  const {
-    data : actionPageData,
-    loading: loading,
-  }
-   = useQuery(gql(getActionPageByArtistAndPageRoute),{
-     variables: {artistRoute: artist, pageRoute: page }
-   });
+  const { artist, page = 'join' } = useParams();
+  console.log(`page variable is ${page}`);
+  const { data: actionPageData, loading } = useQuery(
+    gql(getActionPageByArtistAndPageRoute),
+    {
+      variables: { artistRoute: artist, pageRoute: page },
+    }
+  );
 
   const handleAction = id => {
     const updatedActions = actionValues.map(item => {
@@ -50,9 +54,11 @@ export const ActionPage = () => {
   }, [actionValues]);
 
   useEffect(() => {
-    if (actionPageData) {
+    if (actionPageData && actionPageData?.ArtistByRoute?.items?.length > 0) {
       // this is currently assuming that 1) artist exsists at this route & 2) only one action page exists at this page route
-      const actionArray = actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons.items;
+      const actionArray =
+        actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons
+          .items;
       const values = [];
       for (let i = 0; i < actionArray.length; i++) {
         const element = actionArray[i];
@@ -77,16 +83,27 @@ export const ActionPage = () => {
       </ActionPageContainer>
     );
 
-  const actionPageInfo = actionPageData.ArtistByRoute.items[0].actionPages.items[0];
-  console.log(`actionPage info is`);
-  console.log(actionPageInfo);
+  if (actionPageData?.ArtistByRoute?.items?.length === 0) {
+    return (
+      <Container fluid>
+        <Row>
+          <Col>
+            <h1>No Actions</h1>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+
+  const actionPageInfo =
+    actionPageData.ArtistByRoute.items[0].actionPages.items[0];
 
   return (
     <ActionPageContainer fluid>
       <StyledContainer fluid>
         <Row>
           <Col className="p-0">
-            <ActionStepper currentStep={2}/>
+            <ActionStepper currentStep={2} />
           </Col>
         </Row>
         <BodyContainer>

@@ -24,35 +24,42 @@ const checkIconOld = name => {
       icon = MaterialDesign.MdLibraryMusic;
       break;
     default:
-      icon = MaterialDesign.MdLibraryMusic;
+      icon = null;
   }
   return icon;
 };
 
-// const checkIcon = name => {
-//   let library = FontAwesome;
-//   switch (name) {
-//     case 'Md':
-//       library = MaterialDesign;
-//       break;
-//     case 'Hi':
-//       library = Heroicons;
-//       break;
-//     case 'Fa':
-//       library = FontAwesome;
-//       break;
-//   }
-//   return library;
-// };
+const checkIcon = name => {
+  let library;
+  switch (name) {
+    case 'Md':
+      library = MaterialDesign;
+      break;
+    case 'Hi':
+      library = Heroicons;
+      break;
+    case 'Fa':
+      library = FontAwesome;
+      break;
+    default:
+      library = FontAwesome;
+      break;
+  }
+  return library;
+};
 
 export const Icon = ({ name, size, color }) => {
-  // const iconLibraryId = name.substring(0, 2);
-  // const Library = checkIcon(iconLibraryId);
-  // const Icon = Library[name];
+  const iconLibraryId = name.substring(0, 2);
+  const Library = checkIcon(iconLibraryId);
+  const IconDynamic = Library[name];
 
   const IconElement = checkIconOld(name);
 
-  return <IconElement size={size} style={{ color }} />;
+  return IconElement ? (
+    <IconElement size={size} style={{ color }} />
+  ) : (
+    <IconDynamic size={size} style={{ color }} />
+  );
 };
 
 Icon.propTypes = {
