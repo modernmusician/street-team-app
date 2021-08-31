@@ -18,17 +18,17 @@
 - ```
   amplify configure 
   ```
-  - Follow the prompts
-- Close the console browser window that gets opened. Back in the terminal, press "Enter"
-  - ```
+- Follow the prompts
+  - Close the console browser window that gets opened. Back in the terminal, press "Enter"
+- ```
   region: us-east-1 <br>
   username: type your aws console username for the modern-musician environment
   ```
-- Close the console browser window that gets opened. Back in the terminal press "Enter"
-  - ```
+  - Close the console browser window that gets opened. Back in the terminal press "Enter"
+- ```
   accessKeyId: enter your access key from the csv file you were sent by the system admin
   secretAccessKey: enter the secret access key from the csv file you were sent by the system admin
-  profile: enter whatever name you want your local profile to be stored under on your machine
+  Profile Name: enter whatever name you want your local profile to be stored under on your machine
   ```
   - Should get the message "Successfully set up the new user"
 - Pull the dev backend environment into your local environment
