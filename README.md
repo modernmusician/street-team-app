@@ -15,6 +15,7 @@
   ```
   
 ## Setting up the backend
+### Initialize local amplify profile
 - ```
   amplify configure 
   ```
@@ -30,7 +31,10 @@
   secretAccessKey: enter the secret access key from the csv file you were sent by the system admin
   Profile Name: enter whatever name you want your local profile to be stored under on your machine
   ```
-  - Should get the message "Successfully set up the new user"
+ 
+Should get the message "Successfully set up the new user"!
+
+### Get the latest state on your device
 - Pull the dev backend environment into your local environment
   - ```
     amplify env checkout dev 
