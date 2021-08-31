@@ -176,7 +176,7 @@ type ActionPageButton
   """
   serviceAction should eventually be its own graphql type when we start building that feature. this is a placeholder json object
   """
-  serviceAction: AWSJSON
+  serviceAction: String
 }
 
 type EnduserCompletedActions

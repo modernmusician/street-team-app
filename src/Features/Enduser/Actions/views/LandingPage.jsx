@@ -15,6 +15,7 @@ import {
   BodyContainer,
 } from '../ActionPageContainer';
 import { PublicClient } from '../../../../Components/ApolloProvider/PublicClient';
+import { PlayWidget } from '../../../../Components/UI/Integrations/SoundCloud/PlayWidget';
 
 // landing page is essentially an action page that is public, so there are no points and we're using a different Apollo client (no auth)
 export const LandingPage = () => {
@@ -102,6 +103,7 @@ export const LandingPage = () => {
               <ActionHeader data={actionPageInfo} />
             </Col>
           </Row>
+          <PlayWidget sourceUrl="https://soundcloud.com/whosah/make-a-move"/>
           <ActionButtons
             data={actionPageInfo}
             state={actionValues}

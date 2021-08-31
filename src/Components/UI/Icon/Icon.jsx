@@ -23,6 +23,9 @@ const checkIconOld = name => {
     case 'Music':
       icon = MaterialDesign.MdLibraryMusic;
       break;
+    case 'Redeem':
+      icon = MaterialDesign.MdRedeem;
+      break;
     default:
       icon = null;
   }
