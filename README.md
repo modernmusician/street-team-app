@@ -19,7 +19,7 @@
   amplify configure 
   ```
 - Follow the prompts
-  - Close the console browser window that gets opened. Back in the terminal, press "Enter"
+- Close the console browser window that gets opened. Back in the terminal, press "Enter"
 - ```
   region: us-east-1 <br>
   username: type your aws console username for the modern-musician environment
@@ -33,8 +33,8 @@
   - Should get the message "Successfully set up the new user"
 - Pull the dev backend environment into your local environment
   - ```
-  amplify env checkout dev 
-  ```
+    amplify env checkout dev 
+    ```
 - Pull the latest backend into your local environment
   - ```
     amplify pull 
