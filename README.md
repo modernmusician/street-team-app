@@ -22,7 +22,7 @@
 - Follow the prompts
 - Close the console browser window that gets opened. Back in the terminal, press "Enter"
 - ```
-  region: us-east-1 <br>
+  region: us-east-1
   username: type your aws console username for the modern-musician environment
   ```
   - Close the console browser window that gets opened. Back in the terminal press "Enter"
