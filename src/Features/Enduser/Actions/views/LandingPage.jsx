@@ -1,6 +1,7 @@
 // landing page is the same as an action page, except that there's no login required
 // use case is primarily for a landing page which would lead a user to an ActionPage
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { gql, useQuery } from '@apollo/react-hooks';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
@@ -16,6 +17,60 @@ import {
 } from '../ActionPageContainer';
 import { PublicClient } from '../../../../Components/ApolloProvider/PublicClient';
 import { PlayWidget } from '../../../../Components/UI/Integrations/SoundCloud/PlayWidget';
+import Icon from '../../../../Components/UI/Icon';
+import tempImage from '../../../../assets/whoash.jpg';
+
+const LandingPageActionPageContainer = styled(ActionPageContainer)`
+  position: relative;
+`;
+
+const LandingPageContainer = styled.div`
+  align-items: center;
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+`;
+
+const ArtistImage = styled.div`
+  position: fixed;
+  background-image: url(${props => props.imageSrc});
+  background-attachment: scroll;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: table-cell;
+  -webkit-filter: blur(20px);
+  -moz-filter: blur(20px);
+  -ms-filter: blur(20px);
+  -o-filter: blur(20px);
+  filter: blur(20px);
+  height: 100%;
+  pointer-events: none;
+  position: absolute;
+  vertical-align: middle;
+  width: 100%;
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+`;
+
+const FanMagnetWidget = styled(Container)`
+  background: #1f1f1f 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 5px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  max-width: 660px;
+  position: relative;
+  justify-content: space-around;
+`;
+
+const MagnetHeader = styled.div`
+  font-size: 50px;
+  text-align: center;
+`;
 
 // landing page is essentially an action page that is public, so there are no points and we're using a different Apollo client (no auth)
 export const LandingPage = () => {
@@ -71,7 +126,6 @@ export const LandingPage = () => {
         </Row>
       </ActionPageContainer>
     );
-  console.log('actionPageData', actionPageData);
   // if the actionPageInfo exists, it should be in this format (assuming a single artist route and page route exist)
 
   if (actionPageData?.ArtistByRoute?.items?.length === 0) {
@@ -89,29 +143,23 @@ export const LandingPage = () => {
   const actionPageInfo =
     actionPageData.ArtistByRoute.items[0].actionPages.items[0];
 
+  console.log('actionPageInfo', actionPageInfo);
+
   return (
-    <ActionPageContainer fluid>
-      <StyledContainer fluid>
-        <Row>
-          <Col className="p-0">
-            <ActionStepper currentStep={1} />
-          </Col>
-        </Row>
-        <BodyContainer>
-          <Row className="mb-3">
-            <Col>
-              <ActionHeader data={actionPageInfo} />
-            </Col>
-          </Row>
-          <PlayWidget sourceUrl="https://soundcloud.com/whosah/make-a-move"/>
-          <ActionButtons
-            data={actionPageInfo}
-            state={actionValues}
-            handleAction={handleAction}
-          />
-        </BodyContainer>
-        {/* TODO need a button here that links to the same artist page but at /secure route */}
-      </StyledContainer>
-    </ActionPageContainer>
+    <LandingPageContainer>
+      <ArtistImage imageSrc={tempImage} />
+      <FanMagnetWidget>
+        <MagnetHeader>{actionPageInfo.heading}</MagnetHeader>
+        <PlayWidget sourceUrl="https://soundcloud.com/whosah/make-a-move" />
+        {/* <button type="button" onClick={() => {}}>
+          CLAIM YOUR FREE GIFT
+        </button> */}
+        <ActionButtons
+          data={actionPageInfo}
+          state={actionValues}
+          handleAction={handleAction}
+        />
+      </FanMagnetWidget>
+    </LandingPageContainer>
   );
 };

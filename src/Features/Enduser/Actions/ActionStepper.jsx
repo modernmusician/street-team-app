@@ -7,7 +7,7 @@ const StepperContainer = styled.div({
   padding: ({ theme }) => `${theme.spacing.lg} ${theme.spacing.xl}`,
 });
 
-export const ActionStepper = ({currentStep}) => {
+export const ActionStepper = ({ currentStep }) => {
   return (
     <StepperContainer>
       <Stepper steps={['1', '2', '3']} currentStep={currentStep} />

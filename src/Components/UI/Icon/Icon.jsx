@@ -17,6 +17,9 @@ const checkIconOld = name => {
     case 'Email':
       icon = Heroicons.HiOutlineMail;
       break;
+    case 'Gift':
+      icon = FontAwesome.FaGift;
+      break;
     case 'Group':
       icon = Heroicons.HiUserGroup;
       break;
