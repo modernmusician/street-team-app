@@ -45,8 +45,6 @@ export const getActionPageByArtistAndPageRoute = `query getArtistActionPageByRou
                 actionPageID
                 enduserID
                 referralEnduserID
-                enduserPoints
-                completedActionButtons
                 createdAt
                 updatedAt
                 owner
