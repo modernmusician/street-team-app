@@ -10,6 +10,23 @@ export const createArtist = /* GraphQL */ `
       id
       name
       genre
+      profilePicture
+      tags {
+        items {
+          id
+          tag
+          artistID
+          endusers {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          artist {
+            nextToken
+          }
+        }
+        nextToken
+      }
       route
       createdAt
       updatedAt
@@ -30,6 +47,7 @@ export const createArtist = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -62,53 +80,6 @@ export const createArtist = /* GraphQL */ `
             visibility
             createdAt
             updatedAt
-          }
-        }
-        nextToken
-      }
-      contests {
-        items {
-          id
-          headline
-          description
-          encouragementHeadline
-          encouragementDescription
-          landingButtonText
-          deadline
-          artistID
-          pictureID
-          testPictureUrl
-          streetTeamUrl
-          spotifyPlayUrl
-          spotifyFollowPlaylistUrl
-          spotifyFollowArtistUrl
-          spotifySaveUrl
-          createdAt
-          updatedAt
-          artist {
-            id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
-          }
-          picture {
-            id
-            publicUrl
-            name
-            owner
-            visibility
-            createdAt
-            updatedAt
-          }
-          owner
-          actions {
-            nextToken
-          }
-          subscribers {
-            nextToken
           }
         }
         nextToken
@@ -125,6 +96,23 @@ export const updateArtist = /* GraphQL */ `
       id
       name
       genre
+      profilePicture
+      tags {
+        items {
+          id
+          tag
+          artistID
+          endusers {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          artist {
+            nextToken
+          }
+        }
+        nextToken
+      }
       route
       createdAt
       updatedAt
@@ -145,6 +133,7 @@ export const updateArtist = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -177,53 +166,6 @@ export const updateArtist = /* GraphQL */ `
             visibility
             createdAt
             updatedAt
-          }
-        }
-        nextToken
-      }
-      contests {
-        items {
-          id
-          headline
-          description
-          encouragementHeadline
-          encouragementDescription
-          landingButtonText
-          deadline
-          artistID
-          pictureID
-          testPictureUrl
-          streetTeamUrl
-          spotifyPlayUrl
-          spotifyFollowPlaylistUrl
-          spotifyFollowArtistUrl
-          spotifySaveUrl
-          createdAt
-          updatedAt
-          artist {
-            id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
-          }
-          picture {
-            id
-            publicUrl
-            name
-            owner
-            visibility
-            createdAt
-            updatedAt
-          }
-          owner
-          actions {
-            nextToken
-          }
-          subscribers {
-            nextToken
           }
         }
         nextToken
@@ -240,6 +182,23 @@ export const deleteArtist = /* GraphQL */ `
       id
       name
       genre
+      profilePicture
+      tags {
+        items {
+          id
+          tag
+          artistID
+          endusers {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          artist {
+            nextToken
+          }
+        }
+        nextToken
+      }
       route
       createdAt
       updatedAt
@@ -260,6 +219,7 @@ export const deleteArtist = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -292,53 +252,6 @@ export const deleteArtist = /* GraphQL */ `
             visibility
             createdAt
             updatedAt
-          }
-        }
-        nextToken
-      }
-      contests {
-        items {
-          id
-          headline
-          description
-          encouragementHeadline
-          encouragementDescription
-          landingButtonText
-          deadline
-          artistID
-          pictureID
-          testPictureUrl
-          streetTeamUrl
-          spotifyPlayUrl
-          spotifyFollowPlaylistUrl
-          spotifyFollowArtistUrl
-          spotifySaveUrl
-          createdAt
-          updatedAt
-          artist {
-            id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
-          }
-          picture {
-            id
-            publicUrl
-            name
-            owner
-            visibility
-            createdAt
-            updatedAt
-          }
-          owner
-          actions {
-            nextToken
-          }
-          subscribers {
-            nextToken
           }
         }
         nextToken
@@ -362,17 +275,48 @@ export const createEnduser = /* GraphQL */ `
       profilePicture
       profileDescription
       profileSocialLink
+      tags {
+        items {
+          id
+          enduserID
+          tagID
+          tag {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          enduser {
+            id
+            username
+            firstName
+            lastName
+            email
+            phone
+            profileName
+            profilePicture
+            profileDescription
+            profileSocialLink
+            createdAt
+            updatedAt
+            owner
+          }
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
-      actionPageSubscriptions {
+      EnduserPageSubscription {
         items {
           id
           actionPageID
           enduserID
           referralEnduserID
-          enduserPoints
-          completedActionButtonIDs
+          enduserTotalPoints
           createdAt
           updatedAt
           enduser {
@@ -419,6 +363,9 @@ export const createEnduser = /* GraphQL */ `
             owner
           }
           owner
+          enduserPageSubscriptionCompletedActions {
+            nextToken
+          }
         }
         nextToken
       }
@@ -428,8 +375,7 @@ export const createEnduser = /* GraphQL */ `
           actionPageID
           enduserID
           referralEnduserID
-          enduserPoints
-          completedActionButtonIDs
+          enduserTotalPoints
           createdAt
           updatedAt
           enduser {
@@ -476,73 +422,9 @@ export const createEnduser = /* GraphQL */ `
             owner
           }
           owner
-        }
-        nextToken
-      }
-      completedActions {
-        items {
-          id
-          enduserID
-          actionID
-          actionPageID
-          artistID
-          isExpired
-          createdAt
-          updatedAt
-          artist {
-            id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
+          enduserPageSubscriptionCompletedActions {
+            nextToken
           }
-          enduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          actionPage {
-            id
-            artistID
-            creatorUserID
-            pictureID
-            pageTitle
-            heading
-            subheading
-            pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          action {
-            id
-            actionPageID
-            preActionText
-            postActionText
-            buttonIcon
-            backgroundColor
-            textColor
-            pointValue
-            position
-            targetURL
-            serviceAction
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
         }
         nextToken
       }
@@ -565,17 +447,48 @@ export const updateEnduser = /* GraphQL */ `
       profilePicture
       profileDescription
       profileSocialLink
+      tags {
+        items {
+          id
+          enduserID
+          tagID
+          tag {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          enduser {
+            id
+            username
+            firstName
+            lastName
+            email
+            phone
+            profileName
+            profilePicture
+            profileDescription
+            profileSocialLink
+            createdAt
+            updatedAt
+            owner
+          }
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
-      actionPageSubscriptions {
+      EnduserPageSubscription {
         items {
           id
           actionPageID
           enduserID
           referralEnduserID
-          enduserPoints
-          completedActionButtonIDs
+          enduserTotalPoints
           createdAt
           updatedAt
           enduser {
@@ -622,6 +535,9 @@ export const updateEnduser = /* GraphQL */ `
             owner
           }
           owner
+          enduserPageSubscriptionCompletedActions {
+            nextToken
+          }
         }
         nextToken
       }
@@ -631,8 +547,7 @@ export const updateEnduser = /* GraphQL */ `
           actionPageID
           enduserID
           referralEnduserID
-          enduserPoints
-          completedActionButtonIDs
+          enduserTotalPoints
           createdAt
           updatedAt
           enduser {
@@ -679,73 +594,9 @@ export const updateEnduser = /* GraphQL */ `
             owner
           }
           owner
-        }
-        nextToken
-      }
-      completedActions {
-        items {
-          id
-          enduserID
-          actionID
-          actionPageID
-          artistID
-          isExpired
-          createdAt
-          updatedAt
-          artist {
-            id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
+          enduserPageSubscriptionCompletedActions {
+            nextToken
           }
-          enduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          actionPage {
-            id
-            artistID
-            creatorUserID
-            pictureID
-            pageTitle
-            heading
-            subheading
-            pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          action {
-            id
-            actionPageID
-            preActionText
-            postActionText
-            buttonIcon
-            backgroundColor
-            textColor
-            pointValue
-            position
-            targetURL
-            serviceAction
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
         }
         nextToken
       }
@@ -768,17 +619,48 @@ export const deleteEnduser = /* GraphQL */ `
       profilePicture
       profileDescription
       profileSocialLink
+      tags {
+        items {
+          id
+          enduserID
+          tagID
+          tag {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          enduser {
+            id
+            username
+            firstName
+            lastName
+            email
+            phone
+            profileName
+            profilePicture
+            profileDescription
+            profileSocialLink
+            createdAt
+            updatedAt
+            owner
+          }
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
-      actionPageSubscriptions {
+      EnduserPageSubscription {
         items {
           id
           actionPageID
           enduserID
           referralEnduserID
-          enduserPoints
-          completedActionButtonIDs
+          enduserTotalPoints
           createdAt
           updatedAt
           enduser {
@@ -825,6 +707,9 @@ export const deleteEnduser = /* GraphQL */ `
             owner
           }
           owner
+          enduserPageSubscriptionCompletedActions {
+            nextToken
+          }
         }
         nextToken
       }
@@ -834,8 +719,7 @@ export const deleteEnduser = /* GraphQL */ `
           actionPageID
           enduserID
           referralEnduserID
-          enduserPoints
-          completedActionButtonIDs
+          enduserTotalPoints
           createdAt
           updatedAt
           enduser {
@@ -882,73 +766,9 @@ export const deleteEnduser = /* GraphQL */ `
             owner
           }
           owner
-        }
-        nextToken
-      }
-      completedActions {
-        items {
-          id
-          enduserID
-          actionID
-          actionPageID
-          artistID
-          isExpired
-          createdAt
-          updatedAt
-          artist {
-            id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
+          enduserPageSubscriptionCompletedActions {
+            nextToken
           }
-          enduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          actionPage {
-            id
-            artistID
-            creatorUserID
-            pictureID
-            pageTitle
-            heading
-            subheading
-            pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          action {
-            id
-            actionPageID
-            preActionText
-            postActionText
-            buttonIcon
-            backgroundColor
-            textColor
-            pointValue
-            position
-            targetURL
-            serviceAction
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
         }
         nextToken
       }
@@ -974,6 +794,17 @@ export const createArtistUser = /* GraphQL */ `
         id
         name
         genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         route
         createdAt
         updatedAt
@@ -988,29 +819,6 @@ export const createArtistUser = /* GraphQL */ `
             heading
             subheading
             pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        contests {
-          items {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
             createdAt
             updatedAt
             owner
@@ -1035,6 +843,7 @@ export const createArtistUser = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -1093,6 +902,17 @@ export const updateArtistUser = /* GraphQL */ `
         id
         name
         genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         route
         createdAt
         updatedAt
@@ -1107,29 +927,6 @@ export const updateArtistUser = /* GraphQL */ `
             heading
             subheading
             pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        contests {
-          items {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
             createdAt
             updatedAt
             owner
@@ -1154,6 +951,7 @@ export const updateArtistUser = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -1212,6 +1010,17 @@ export const deleteArtistUser = /* GraphQL */ `
         id
         name
         genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         route
         createdAt
         updatedAt
@@ -1226,29 +1035,6 @@ export const deleteArtistUser = /* GraphQL */ `
             heading
             subheading
             pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        contests {
-          items {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
             createdAt
             updatedAt
             owner
@@ -1273,6 +1059,7 @@ export const deleteArtistUser = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -1332,6 +1119,17 @@ export const createActionPage = /* GraphQL */ `
         id
         name
         genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         route
         createdAt
         updatedAt
@@ -1346,29 +1144,6 @@ export const createActionPage = /* GraphQL */ `
             heading
             subheading
             pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        contests {
-          items {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
             createdAt
             updatedAt
             owner
@@ -1390,14 +1165,15 @@ export const createActionPage = /* GraphQL */ `
           id
           name
           genre
+          profilePicture
+          tags {
+            nextToken
+          }
           route
           createdAt
           updatedAt
           owner
           actionPages {
-            nextToken
-          }
-          contests {
             nextToken
           }
         }
@@ -1426,8 +1202,7 @@ export const createActionPage = /* GraphQL */ `
           actionPageID
           enduserID
           referralEnduserID
-          enduserPoints
-          completedActionButtonIDs
+          enduserTotalPoints
           createdAt
           updatedAt
           enduser {
@@ -1474,6 +1249,9 @@ export const createActionPage = /* GraphQL */ `
             owner
           }
           owner
+          enduserPageSubscriptionCompletedActions {
+            nextToken
+          }
         }
         nextToken
       }
@@ -1506,7 +1284,7 @@ export const createActionPage = /* GraphQL */ `
             owner
           }
           owner
-          enduserCompletedActions {
+          enduserPageSubscriptionCompletedActions {
             nextToken
           }
         }
@@ -1549,6 +1327,17 @@ export const updateActionPage = /* GraphQL */ `
         id
         name
         genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         route
         createdAt
         updatedAt
@@ -1563,29 +1352,6 @@ export const updateActionPage = /* GraphQL */ `
             heading
             subheading
             pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        contests {
-          items {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
             createdAt
             updatedAt
             owner
@@ -1607,14 +1373,15 @@ export const updateActionPage = /* GraphQL */ `
           id
           name
           genre
+          profilePicture
+          tags {
+            nextToken
+          }
           route
           createdAt
           updatedAt
           owner
           actionPages {
-            nextToken
-          }
-          contests {
             nextToken
           }
         }
@@ -1643,8 +1410,7 @@ export const updateActionPage = /* GraphQL */ `
           actionPageID
           enduserID
           referralEnduserID
-          enduserPoints
-          completedActionButtonIDs
+          enduserTotalPoints
           createdAt
           updatedAt
           enduser {
@@ -1691,6 +1457,9 @@ export const updateActionPage = /* GraphQL */ `
             owner
           }
           owner
+          enduserPageSubscriptionCompletedActions {
+            nextToken
+          }
         }
         nextToken
       }
@@ -1723,7 +1492,7 @@ export const updateActionPage = /* GraphQL */ `
             owner
           }
           owner
-          enduserCompletedActions {
+          enduserPageSubscriptionCompletedActions {
             nextToken
           }
         }
@@ -1766,6 +1535,17 @@ export const deleteActionPage = /* GraphQL */ `
         id
         name
         genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         route
         createdAt
         updatedAt
@@ -1780,29 +1560,6 @@ export const deleteActionPage = /* GraphQL */ `
             heading
             subheading
             pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        contests {
-          items {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
             createdAt
             updatedAt
             owner
@@ -1824,14 +1581,15 @@ export const deleteActionPage = /* GraphQL */ `
           id
           name
           genre
+          profilePicture
+          tags {
+            nextToken
+          }
           route
           createdAt
           updatedAt
           owner
           actionPages {
-            nextToken
-          }
-          contests {
             nextToken
           }
         }
@@ -1860,8 +1618,7 @@ export const deleteActionPage = /* GraphQL */ `
           actionPageID
           enduserID
           referralEnduserID
-          enduserPoints
-          completedActionButtonIDs
+          enduserTotalPoints
           createdAt
           updatedAt
           enduser {
@@ -1908,6 +1665,9 @@ export const deleteActionPage = /* GraphQL */ `
             owner
           }
           owner
+          enduserPageSubscriptionCompletedActions {
+            nextToken
+          }
         }
         nextToken
       }
@@ -1940,7 +1700,7 @@ export const deleteActionPage = /* GraphQL */ `
             owner
           }
           owner
-          enduserCompletedActions {
+          enduserPageSubscriptionCompletedActions {
             nextToken
           }
         }
@@ -1963,18 +1723,17 @@ export const deleteActionPage = /* GraphQL */ `
     }
   }
 `;
-export const createActionPageSubscriptions = /* GraphQL */ `
-  mutation CreateActionPageSubscriptions(
-    $input: CreateActionPageSubscriptionsInput!
-    $condition: ModelActionPageSubscriptionsConditionInput
+export const createEnduserPageSubscription = /* GraphQL */ `
+  mutation CreateEnduserPageSubscription(
+    $input: CreateEnduserPageSubscriptionInput!
+    $condition: ModelEnduserPageSubscriptionConditionInput
   ) {
-    createActionPageSubscriptions(input: $input, condition: $condition) {
+    createEnduserPageSubscription(input: $input, condition: $condition) {
       id
       actionPageID
       enduserID
       referralEnduserID
-      enduserPoints
-      completedActionButtonIDs
+      enduserTotalPoints
       createdAt
       updatedAt
       enduser {
@@ -1988,17 +1747,26 @@ export const createActionPageSubscriptions = /* GraphQL */ `
         profilePicture
         profileDescription
         profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
-        actionPageSubscriptions {
+        EnduserPageSubscription {
           items {
             id
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2011,22 +1779,7 @@ export const createActionPageSubscriptions = /* GraphQL */ `
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2045,17 +1798,26 @@ export const createActionPageSubscriptions = /* GraphQL */ `
         profilePicture
         profileDescription
         profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
-        actionPageSubscriptions {
+        EnduserPageSubscription {
           items {
             id
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2068,22 +1830,7 @@ export const createActionPageSubscriptions = /* GraphQL */ `
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2106,14 +1853,15 @@ export const createActionPageSubscriptions = /* GraphQL */ `
           id
           name
           genre
+          profilePicture
+          tags {
+            nextToken
+          }
           route
           createdAt
           updatedAt
           owner
           actionPages {
-            nextToken
-          }
-          contests {
             nextToken
           }
         }
@@ -2131,6 +1879,7 @@ export const createActionPageSubscriptions = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -2148,8 +1897,7 @@ export const createActionPageSubscriptions = /* GraphQL */ `
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2191,21 +1939,58 @@ export const createActionPageSubscriptions = /* GraphQL */ `
         }
       }
       owner
+      enduserPageSubscriptionCompletedActions {
+        items {
+          id
+          enduserPageSubscriptionID
+          actionID
+          isExpired
+          createdAt
+          updatedAt
+          enduserPageSubscription {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          action {
+            id
+            actionPageID
+            preActionText
+            postActionText
+            buttonIcon
+            backgroundColor
+            textColor
+            pointValue
+            position
+            targetURL
+            serviceAction
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
-export const updateActionPageSubscriptions = /* GraphQL */ `
-  mutation UpdateActionPageSubscriptions(
-    $input: UpdateActionPageSubscriptionsInput!
-    $condition: ModelActionPageSubscriptionsConditionInput
+export const updateEnduserPageSubscription = /* GraphQL */ `
+  mutation UpdateEnduserPageSubscription(
+    $input: UpdateEnduserPageSubscriptionInput!
+    $condition: ModelEnduserPageSubscriptionConditionInput
   ) {
-    updateActionPageSubscriptions(input: $input, condition: $condition) {
+    updateEnduserPageSubscription(input: $input, condition: $condition) {
       id
       actionPageID
       enduserID
       referralEnduserID
-      enduserPoints
-      completedActionButtonIDs
+      enduserTotalPoints
       createdAt
       updatedAt
       enduser {
@@ -2219,17 +2004,26 @@ export const updateActionPageSubscriptions = /* GraphQL */ `
         profilePicture
         profileDescription
         profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
-        actionPageSubscriptions {
+        EnduserPageSubscription {
           items {
             id
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2242,22 +2036,7 @@ export const updateActionPageSubscriptions = /* GraphQL */ `
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2276,17 +2055,26 @@ export const updateActionPageSubscriptions = /* GraphQL */ `
         profilePicture
         profileDescription
         profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
-        actionPageSubscriptions {
+        EnduserPageSubscription {
           items {
             id
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2299,22 +2087,7 @@ export const updateActionPageSubscriptions = /* GraphQL */ `
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2337,14 +2110,15 @@ export const updateActionPageSubscriptions = /* GraphQL */ `
           id
           name
           genre
+          profilePicture
+          tags {
+            nextToken
+          }
           route
           createdAt
           updatedAt
           owner
           actionPages {
-            nextToken
-          }
-          contests {
             nextToken
           }
         }
@@ -2362,6 +2136,7 @@ export const updateActionPageSubscriptions = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -2379,8 +2154,7 @@ export const updateActionPageSubscriptions = /* GraphQL */ `
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2422,21 +2196,58 @@ export const updateActionPageSubscriptions = /* GraphQL */ `
         }
       }
       owner
+      enduserPageSubscriptionCompletedActions {
+        items {
+          id
+          enduserPageSubscriptionID
+          actionID
+          isExpired
+          createdAt
+          updatedAt
+          enduserPageSubscription {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          action {
+            id
+            actionPageID
+            preActionText
+            postActionText
+            buttonIcon
+            backgroundColor
+            textColor
+            pointValue
+            position
+            targetURL
+            serviceAction
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
-export const deleteActionPageSubscriptions = /* GraphQL */ `
-  mutation DeleteActionPageSubscriptions(
-    $input: DeleteActionPageSubscriptionsInput!
-    $condition: ModelActionPageSubscriptionsConditionInput
+export const deleteEnduserPageSubscription = /* GraphQL */ `
+  mutation DeleteEnduserPageSubscription(
+    $input: DeleteEnduserPageSubscriptionInput!
+    $condition: ModelEnduserPageSubscriptionConditionInput
   ) {
-    deleteActionPageSubscriptions(input: $input, condition: $condition) {
+    deleteEnduserPageSubscription(input: $input, condition: $condition) {
       id
       actionPageID
       enduserID
       referralEnduserID
-      enduserPoints
-      completedActionButtonIDs
+      enduserTotalPoints
       createdAt
       updatedAt
       enduser {
@@ -2450,17 +2261,26 @@ export const deleteActionPageSubscriptions = /* GraphQL */ `
         profilePicture
         profileDescription
         profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
-        actionPageSubscriptions {
+        EnduserPageSubscription {
           items {
             id
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2473,22 +2293,7 @@ export const deleteActionPageSubscriptions = /* GraphQL */ `
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2507,17 +2312,26 @@ export const deleteActionPageSubscriptions = /* GraphQL */ `
         profilePicture
         profileDescription
         profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
-        actionPageSubscriptions {
+        EnduserPageSubscription {
           items {
             id
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2530,22 +2344,7 @@ export const deleteActionPageSubscriptions = /* GraphQL */ `
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2568,14 +2367,15 @@ export const deleteActionPageSubscriptions = /* GraphQL */ `
           id
           name
           genre
+          profilePicture
+          tags {
+            nextToken
+          }
           route
           createdAt
           updatedAt
           owner
           actionPages {
-            nextToken
-          }
-          contests {
             nextToken
           }
         }
@@ -2593,6 +2393,7 @@ export const deleteActionPageSubscriptions = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -2610,8 +2411,7 @@ export const deleteActionPageSubscriptions = /* GraphQL */ `
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2653,6 +2453,44 @@ export const deleteActionPageSubscriptions = /* GraphQL */ `
         }
       }
       owner
+      enduserPageSubscriptionCompletedActions {
+        items {
+          id
+          enduserPageSubscriptionID
+          actionID
+          isExpired
+          createdAt
+          updatedAt
+          enduserPageSubscription {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          action {
+            id
+            actionPageID
+            preActionText
+            postActionText
+            buttonIcon
+            backgroundColor
+            textColor
+            pointValue
+            position
+            targetURL
+            serviceAction
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -2690,14 +2528,15 @@ export const createActionPageButton = /* GraphQL */ `
           id
           name
           genre
+          profilePicture
+          tags {
+            nextToken
+          }
           route
           createdAt
           updatedAt
           owner
           actionPages {
-            nextToken
-          }
-          contests {
             nextToken
           }
         }
@@ -2715,6 +2554,7 @@ export const createActionPageButton = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -2732,8 +2572,7 @@ export const createActionPageButton = /* GraphQL */ `
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2775,49 +2614,20 @@ export const createActionPageButton = /* GraphQL */ `
         }
       }
       owner
-      enduserCompletedActions {
+      enduserPageSubscriptionCompletedActions {
         items {
           id
-          enduserID
+          enduserPageSubscriptionID
           actionID
-          actionPageID
-          artistID
           isExpired
           createdAt
           updatedAt
-          artist {
+          enduserPageSubscription {
             id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
-          }
-          enduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          actionPage {
-            id
-            artistID
-            creatorUserID
-            pictureID
-            pageTitle
-            heading
-            subheading
-            pageRoute
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2879,14 +2689,15 @@ export const updateActionPageButton = /* GraphQL */ `
           id
           name
           genre
+          profilePicture
+          tags {
+            nextToken
+          }
           route
           createdAt
           updatedAt
           owner
           actionPages {
-            nextToken
-          }
-          contests {
             nextToken
           }
         }
@@ -2904,6 +2715,7 @@ export const updateActionPageButton = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -2921,8 +2733,7 @@ export const updateActionPageButton = /* GraphQL */ `
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -2964,49 +2775,20 @@ export const updateActionPageButton = /* GraphQL */ `
         }
       }
       owner
-      enduserCompletedActions {
+      enduserPageSubscriptionCompletedActions {
         items {
           id
-          enduserID
+          enduserPageSubscriptionID
           actionID
-          actionPageID
-          artistID
           isExpired
           createdAt
           updatedAt
-          artist {
+          enduserPageSubscription {
             id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
-          }
-          enduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          actionPage {
-            id
-            artistID
-            creatorUserID
-            pictureID
-            pageTitle
-            heading
-            subheading
-            pageRoute
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -3068,14 +2850,15 @@ export const deleteActionPageButton = /* GraphQL */ `
           id
           name
           genre
+          profilePicture
+          tags {
+            nextToken
+          }
           route
           createdAt
           updatedAt
           owner
           actionPages {
-            nextToken
-          }
-          contests {
             nextToken
           }
         }
@@ -3093,6 +2876,7 @@ export const deleteActionPageButton = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -3110,8 +2894,7 @@ export const deleteActionPageButton = /* GraphQL */ `
             actionPageID
             enduserID
             referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -3153,49 +2936,20 @@ export const deleteActionPageButton = /* GraphQL */ `
         }
       }
       owner
-      enduserCompletedActions {
+      enduserPageSubscriptionCompletedActions {
         items {
           id
-          enduserID
+          enduserPageSubscriptionID
           actionID
-          actionPageID
-          artistID
           isExpired
           createdAt
           updatedAt
-          artist {
+          enduserPageSubscription {
             id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
-          }
-          enduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          actionPage {
-            id
-            artistID
-            creatorUserID
-            pictureID
-            pageTitle
-            heading
-            subheading
-            pageRoute
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
             createdAt
             updatedAt
             owner
@@ -3223,239 +2977,78 @@ export const deleteActionPageButton = /* GraphQL */ `
     }
   }
 `;
-export const createEnduserCompletedActions = /* GraphQL */ `
-  mutation CreateEnduserCompletedActions(
-    $input: CreateEnduserCompletedActionsInput!
-    $condition: ModelEnduserCompletedActionsConditionInput
+export const createEnduserPageSubscriptionCompletedActions = /* GraphQL */ `
+  mutation CreateEnduserPageSubscriptionCompletedActions(
+    $input: CreateEnduserPageSubscriptionCompletedActionsInput!
+    $condition: ModelEnduserPageSubscriptionCompletedActionsConditionInput
   ) {
-    createEnduserCompletedActions(input: $input, condition: $condition) {
+    createEnduserPageSubscriptionCompletedActions(
+      input: $input
+      condition: $condition
+    ) {
       id
-      enduserID
+      enduserPageSubscriptionID
       actionID
-      actionPageID
-      artistID
       isExpired
       createdAt
       updatedAt
-      artist {
+      enduserPageSubscription {
         id
-        name
-        genre
-        route
+        actionPageID
+        enduserID
+        referralEnduserID
+        enduserTotalPoints
         createdAt
         updatedAt
-        owner
-        actionPages {
-          items {
-            id
-            artistID
-            creatorUserID
-            pictureID
-            pageTitle
-            heading
-            subheading
-            pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        contests {
-          items {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        email
-        phone
-        profileName
-        profilePicture
-        profileDescription
-        profileSocialLink
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        referredSubscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      actionPage {
-        id
-        artistID
-        creatorUserID
-        pictureID
-        pageTitle
-        heading
-        subheading
-        pageRoute
-        createdAt
-        updatedAt
-        artist {
-          id
-          name
-          genre
-          route
-          createdAt
-          updatedAt
-          owner
-          actionPages {
-            nextToken
-          }
-          contests {
-            nextToken
-          }
-        }
-        creatorUser {
+        enduser {
           id
           username
           firstName
           lastName
           email
-          phoneNumber
-          artistID
+          phone
+          profileName
+          profilePicture
+          profileDescription
+          profileSocialLink
+          tags {
+            nextToken
+          }
           createdAt
           updatedAt
-          artist {
-            id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
-          }
           owner
-          actionPages {
+          EnduserPageSubscription {
+            nextToken
+          }
+          referredSubscribers {
             nextToken
           }
         }
-        owner
-        subscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        actionButtons {
-          items {
-            id
-            actionPageID
-            preActionText
-            postActionText
-            buttonIcon
-            backgroundColor
-            textColor
-            pointValue
-            position
-            targetURL
-            serviceAction
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        picture {
+        referralEnduser {
           id
-          publicUrl
-          name
-          owner
-          visibility
-          createdAt
-          file {
-            bucket
-            region
-            key
+          username
+          firstName
+          lastName
+          email
+          phone
+          profileName
+          profilePicture
+          profileDescription
+          profileSocialLink
+          tags {
+            nextToken
           }
+          createdAt
           updatedAt
+          owner
+          EnduserPageSubscription {
+            nextToken
+          }
+          referredSubscribers {
+            nextToken
+          }
         }
-      }
-      action {
-        id
-        actionPageID
-        preActionText
-        postActionText
-        buttonIcon
-        backgroundColor
-        textColor
-        pointValue
-        position
-        targetURL
-        serviceAction
-        createdAt
-        updatedAt
-        actionpage {
+        actionPage {
           id
           artistID
           creatorUserID
@@ -3470,6 +3063,7 @@ export const createEnduserCompletedActions = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -3505,13 +3099,89 @@ export const createEnduserCompletedActions = /* GraphQL */ `
           }
         }
         owner
-        enduserCompletedActions {
+        enduserPageSubscriptionCompletedActions {
           items {
             id
-            enduserID
+            enduserPageSubscriptionID
             actionID
-            actionPageID
+            isExpired
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      action {
+        id
+        actionPageID
+        preActionText
+        postActionText
+        buttonIcon
+        backgroundColor
+        textColor
+        pointValue
+        position
+        targetURL
+        serviceAction
+        createdAt
+        updatedAt
+        actionpage {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          pageRoute
+          createdAt
+          updatedAt
+          artist {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          creatorUser {
+            id
+            username
+            firstName
+            lastName
+            email
+            phoneNumber
             artistID
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+          subscribers {
+            nextToken
+          }
+          actionButtons {
+            nextToken
+          }
+          picture {
+            id
+            publicUrl
+            name
+            owner
+            visibility
+            createdAt
+            updatedAt
+          }
+        }
+        owner
+        enduserPageSubscriptionCompletedActions {
+          items {
+            id
+            enduserPageSubscriptionID
+            actionID
             isExpired
             createdAt
             updatedAt
@@ -3524,239 +3194,78 @@ export const createEnduserCompletedActions = /* GraphQL */ `
     }
   }
 `;
-export const updateEnduserCompletedActions = /* GraphQL */ `
-  mutation UpdateEnduserCompletedActions(
-    $input: UpdateEnduserCompletedActionsInput!
-    $condition: ModelEnduserCompletedActionsConditionInput
+export const updateEnduserPageSubscriptionCompletedActions = /* GraphQL */ `
+  mutation UpdateEnduserPageSubscriptionCompletedActions(
+    $input: UpdateEnduserPageSubscriptionCompletedActionsInput!
+    $condition: ModelEnduserPageSubscriptionCompletedActionsConditionInput
   ) {
-    updateEnduserCompletedActions(input: $input, condition: $condition) {
+    updateEnduserPageSubscriptionCompletedActions(
+      input: $input
+      condition: $condition
+    ) {
       id
-      enduserID
+      enduserPageSubscriptionID
       actionID
-      actionPageID
-      artistID
       isExpired
       createdAt
       updatedAt
-      artist {
+      enduserPageSubscription {
         id
-        name
-        genre
-        route
+        actionPageID
+        enduserID
+        referralEnduserID
+        enduserTotalPoints
         createdAt
         updatedAt
-        owner
-        actionPages {
-          items {
-            id
-            artistID
-            creatorUserID
-            pictureID
-            pageTitle
-            heading
-            subheading
-            pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        contests {
-          items {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        email
-        phone
-        profileName
-        profilePicture
-        profileDescription
-        profileSocialLink
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        referredSubscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      actionPage {
-        id
-        artistID
-        creatorUserID
-        pictureID
-        pageTitle
-        heading
-        subheading
-        pageRoute
-        createdAt
-        updatedAt
-        artist {
-          id
-          name
-          genre
-          route
-          createdAt
-          updatedAt
-          owner
-          actionPages {
-            nextToken
-          }
-          contests {
-            nextToken
-          }
-        }
-        creatorUser {
+        enduser {
           id
           username
           firstName
           lastName
           email
-          phoneNumber
-          artistID
+          phone
+          profileName
+          profilePicture
+          profileDescription
+          profileSocialLink
+          tags {
+            nextToken
+          }
           createdAt
           updatedAt
-          artist {
-            id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
-          }
           owner
-          actionPages {
+          EnduserPageSubscription {
+            nextToken
+          }
+          referredSubscribers {
             nextToken
           }
         }
-        owner
-        subscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        actionButtons {
-          items {
-            id
-            actionPageID
-            preActionText
-            postActionText
-            buttonIcon
-            backgroundColor
-            textColor
-            pointValue
-            position
-            targetURL
-            serviceAction
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        picture {
+        referralEnduser {
           id
-          publicUrl
-          name
-          owner
-          visibility
-          createdAt
-          file {
-            bucket
-            region
-            key
+          username
+          firstName
+          lastName
+          email
+          phone
+          profileName
+          profilePicture
+          profileDescription
+          profileSocialLink
+          tags {
+            nextToken
           }
+          createdAt
           updatedAt
+          owner
+          EnduserPageSubscription {
+            nextToken
+          }
+          referredSubscribers {
+            nextToken
+          }
         }
-      }
-      action {
-        id
-        actionPageID
-        preActionText
-        postActionText
-        buttonIcon
-        backgroundColor
-        textColor
-        pointValue
-        position
-        targetURL
-        serviceAction
-        createdAt
-        updatedAt
-        actionpage {
+        actionPage {
           id
           artistID
           creatorUserID
@@ -3771,6 +3280,7 @@ export const updateEnduserCompletedActions = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -3806,13 +3316,89 @@ export const updateEnduserCompletedActions = /* GraphQL */ `
           }
         }
         owner
-        enduserCompletedActions {
+        enduserPageSubscriptionCompletedActions {
           items {
             id
-            enduserID
+            enduserPageSubscriptionID
             actionID
-            actionPageID
+            isExpired
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      action {
+        id
+        actionPageID
+        preActionText
+        postActionText
+        buttonIcon
+        backgroundColor
+        textColor
+        pointValue
+        position
+        targetURL
+        serviceAction
+        createdAt
+        updatedAt
+        actionpage {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          pageRoute
+          createdAt
+          updatedAt
+          artist {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          creatorUser {
+            id
+            username
+            firstName
+            lastName
+            email
+            phoneNumber
             artistID
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+          subscribers {
+            nextToken
+          }
+          actionButtons {
+            nextToken
+          }
+          picture {
+            id
+            publicUrl
+            name
+            owner
+            visibility
+            createdAt
+            updatedAt
+          }
+        }
+        owner
+        enduserPageSubscriptionCompletedActions {
+          items {
+            id
+            enduserPageSubscriptionID
+            actionID
             isExpired
             createdAt
             updatedAt
@@ -3825,239 +3411,78 @@ export const updateEnduserCompletedActions = /* GraphQL */ `
     }
   }
 `;
-export const deleteEnduserCompletedActions = /* GraphQL */ `
-  mutation DeleteEnduserCompletedActions(
-    $input: DeleteEnduserCompletedActionsInput!
-    $condition: ModelEnduserCompletedActionsConditionInput
+export const deleteEnduserPageSubscriptionCompletedActions = /* GraphQL */ `
+  mutation DeleteEnduserPageSubscriptionCompletedActions(
+    $input: DeleteEnduserPageSubscriptionCompletedActionsInput!
+    $condition: ModelEnduserPageSubscriptionCompletedActionsConditionInput
   ) {
-    deleteEnduserCompletedActions(input: $input, condition: $condition) {
+    deleteEnduserPageSubscriptionCompletedActions(
+      input: $input
+      condition: $condition
+    ) {
       id
-      enduserID
+      enduserPageSubscriptionID
       actionID
-      actionPageID
-      artistID
       isExpired
       createdAt
       updatedAt
-      artist {
+      enduserPageSubscription {
         id
-        name
-        genre
-        route
+        actionPageID
+        enduserID
+        referralEnduserID
+        enduserTotalPoints
         createdAt
         updatedAt
-        owner
-        actionPages {
-          items {
-            id
-            artistID
-            creatorUserID
-            pictureID
-            pageTitle
-            heading
-            subheading
-            pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        contests {
-          items {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        email
-        phone
-        profileName
-        profilePicture
-        profileDescription
-        profileSocialLink
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        referredSubscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      actionPage {
-        id
-        artistID
-        creatorUserID
-        pictureID
-        pageTitle
-        heading
-        subheading
-        pageRoute
-        createdAt
-        updatedAt
-        artist {
-          id
-          name
-          genre
-          route
-          createdAt
-          updatedAt
-          owner
-          actionPages {
-            nextToken
-          }
-          contests {
-            nextToken
-          }
-        }
-        creatorUser {
+        enduser {
           id
           username
           firstName
           lastName
           email
-          phoneNumber
-          artistID
+          phone
+          profileName
+          profilePicture
+          profileDescription
+          profileSocialLink
+          tags {
+            nextToken
+          }
           createdAt
           updatedAt
-          artist {
-            id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
-          }
           owner
-          actionPages {
+          EnduserPageSubscription {
+            nextToken
+          }
+          referredSubscribers {
             nextToken
           }
         }
-        owner
-        subscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        actionButtons {
-          items {
-            id
-            actionPageID
-            preActionText
-            postActionText
-            buttonIcon
-            backgroundColor
-            textColor
-            pointValue
-            position
-            targetURL
-            serviceAction
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        picture {
+        referralEnduser {
           id
-          publicUrl
-          name
-          owner
-          visibility
-          createdAt
-          file {
-            bucket
-            region
-            key
+          username
+          firstName
+          lastName
+          email
+          phone
+          profileName
+          profilePicture
+          profileDescription
+          profileSocialLink
+          tags {
+            nextToken
           }
+          createdAt
           updatedAt
+          owner
+          EnduserPageSubscription {
+            nextToken
+          }
+          referredSubscribers {
+            nextToken
+          }
         }
-      }
-      action {
-        id
-        actionPageID
-        preActionText
-        postActionText
-        buttonIcon
-        backgroundColor
-        textColor
-        pointValue
-        position
-        targetURL
-        serviceAction
-        createdAt
-        updatedAt
-        actionpage {
+        actionPage {
           id
           artistID
           creatorUserID
@@ -4072,6 +3497,7 @@ export const deleteEnduserCompletedActions = /* GraphQL */ `
             id
             name
             genre
+            profilePicture
             route
             createdAt
             updatedAt
@@ -4107,13 +3533,89 @@ export const deleteEnduserCompletedActions = /* GraphQL */ `
           }
         }
         owner
-        enduserCompletedActions {
+        enduserPageSubscriptionCompletedActions {
           items {
             id
-            enduserID
+            enduserPageSubscriptionID
             actionID
-            actionPageID
+            isExpired
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      action {
+        id
+        actionPageID
+        preActionText
+        postActionText
+        buttonIcon
+        backgroundColor
+        textColor
+        pointValue
+        position
+        targetURL
+        serviceAction
+        createdAt
+        updatedAt
+        actionpage {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          pageRoute
+          createdAt
+          updatedAt
+          artist {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          creatorUser {
+            id
+            username
+            firstName
+            lastName
+            email
+            phoneNumber
             artistID
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+          subscribers {
+            nextToken
+          }
+          actionButtons {
+            nextToken
+          }
+          picture {
+            id
+            publicUrl
+            name
+            owner
+            visibility
+            createdAt
+            updatedAt
+          }
+        }
+        owner
+        enduserPageSubscriptionCompletedActions {
+          items {
+            id
+            enduserPageSubscriptionID
+            actionID
             isExpired
             createdAt
             updatedAt
@@ -4123,6 +3625,948 @@ export const deleteEnduserCompletedActions = /* GraphQL */ `
         }
       }
       owner
+    }
+  }
+`;
+export const createEnduserArtistSubscription = /* GraphQL */ `
+  mutation CreateEnduserArtistSubscription(
+    $input: CreateEnduserArtistSubscriptionInput!
+    $condition: ModelEnduserArtistSubscriptionConditionInput
+  ) {
+    createEnduserArtistSubscription(input: $input, condition: $condition) {
+      id
+      artistID
+      enduserID
+      referralEnduserID
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        route
+        createdAt
+        updatedAt
+        owner
+        actionPages {
+          items {
+            id
+            artistID
+            creatorUserID
+            pictureID
+            pageTitle
+            heading
+            subheading
+            pageRoute
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        email
+        phone
+        profileName
+        profilePicture
+        profileDescription
+        profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        EnduserPageSubscription {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        referredSubscribers {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
+        email
+        phone
+        profileName
+        profilePicture
+        profileDescription
+        profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        EnduserPageSubscription {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        referredSubscribers {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateEnduserArtistSubscription = /* GraphQL */ `
+  mutation UpdateEnduserArtistSubscription(
+    $input: UpdateEnduserArtistSubscriptionInput!
+    $condition: ModelEnduserArtistSubscriptionConditionInput
+  ) {
+    updateEnduserArtistSubscription(input: $input, condition: $condition) {
+      id
+      artistID
+      enduserID
+      referralEnduserID
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        route
+        createdAt
+        updatedAt
+        owner
+        actionPages {
+          items {
+            id
+            artistID
+            creatorUserID
+            pictureID
+            pageTitle
+            heading
+            subheading
+            pageRoute
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        email
+        phone
+        profileName
+        profilePicture
+        profileDescription
+        profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        EnduserPageSubscription {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        referredSubscribers {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
+        email
+        phone
+        profileName
+        profilePicture
+        profileDescription
+        profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        EnduserPageSubscription {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        referredSubscribers {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteEnduserArtistSubscription = /* GraphQL */ `
+  mutation DeleteEnduserArtistSubscription(
+    $input: DeleteEnduserArtistSubscriptionInput!
+    $condition: ModelEnduserArtistSubscriptionConditionInput
+  ) {
+    deleteEnduserArtistSubscription(input: $input, condition: $condition) {
+      id
+      artistID
+      enduserID
+      referralEnduserID
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        route
+        createdAt
+        updatedAt
+        owner
+        actionPages {
+          items {
+            id
+            artistID
+            creatorUserID
+            pictureID
+            pageTitle
+            heading
+            subheading
+            pageRoute
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        email
+        phone
+        profileName
+        profilePicture
+        profileDescription
+        profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        EnduserPageSubscription {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        referredSubscribers {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      referralEnduser {
+        id
+        username
+        firstName
+        lastName
+        email
+        phone
+        profileName
+        profilePicture
+        profileDescription
+        profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        EnduserPageSubscription {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        referredSubscribers {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const createEnduserTag = /* GraphQL */ `
+  mutation CreateEnduserTag(
+    $input: CreateEnduserTagInput!
+    $condition: ModelEnduserTagConditionInput
+  ) {
+    createEnduserTag(input: $input, condition: $condition) {
+      id
+      tag
+      artistID
+      endusers {
+        items {
+          id
+          enduserID
+          tagID
+          tag {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          enduser {
+            id
+            username
+            firstName
+            lastName
+            email
+            phone
+            profileName
+            profilePicture
+            profileDescription
+            profileSocialLink
+            createdAt
+            updatedAt
+            owner
+          }
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      artist {
+        items {
+          id
+          name
+          genre
+          profilePicture
+          tags {
+            nextToken
+          }
+          route
+          createdAt
+          updatedAt
+          owner
+          actionPages {
+            nextToken
+          }
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateEnduserTag = /* GraphQL */ `
+  mutation UpdateEnduserTag(
+    $input: UpdateEnduserTagInput!
+    $condition: ModelEnduserTagConditionInput
+  ) {
+    updateEnduserTag(input: $input, condition: $condition) {
+      id
+      tag
+      artistID
+      endusers {
+        items {
+          id
+          enduserID
+          tagID
+          tag {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          enduser {
+            id
+            username
+            firstName
+            lastName
+            email
+            phone
+            profileName
+            profilePicture
+            profileDescription
+            profileSocialLink
+            createdAt
+            updatedAt
+            owner
+          }
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      artist {
+        items {
+          id
+          name
+          genre
+          profilePicture
+          tags {
+            nextToken
+          }
+          route
+          createdAt
+          updatedAt
+          owner
+          actionPages {
+            nextToken
+          }
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteEnduserTag = /* GraphQL */ `
+  mutation DeleteEnduserTag(
+    $input: DeleteEnduserTagInput!
+    $condition: ModelEnduserTagConditionInput
+  ) {
+    deleteEnduserTag(input: $input, condition: $condition) {
+      id
+      tag
+      artistID
+      endusers {
+        items {
+          id
+          enduserID
+          tagID
+          tag {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          enduser {
+            id
+            username
+            firstName
+            lastName
+            email
+            phone
+            profileName
+            profilePicture
+            profileDescription
+            profileSocialLink
+            createdAt
+            updatedAt
+            owner
+          }
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      artist {
+        items {
+          id
+          name
+          genre
+          profilePicture
+          tags {
+            nextToken
+          }
+          route
+          createdAt
+          updatedAt
+          owner
+          actionPages {
+            nextToken
+          }
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createTagEnduserConnector = /* GraphQL */ `
+  mutation CreateTagEnduserConnector(
+    $input: CreateTagEnduserConnectorInput!
+    $condition: ModelTagEnduserConnectorConditionInput
+  ) {
+    createTagEnduserConnector(input: $input, condition: $condition) {
+      id
+      enduserID
+      tagID
+      tag {
+        id
+        tag
+        artistID
+        endusers {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        artist {
+          items {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      createdAt
+      updatedAt
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        email
+        phone
+        profileName
+        profilePicture
+        profileDescription
+        profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        EnduserPageSubscription {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        referredSubscribers {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const updateTagEnduserConnector = /* GraphQL */ `
+  mutation UpdateTagEnduserConnector(
+    $input: UpdateTagEnduserConnectorInput!
+    $condition: ModelTagEnduserConnectorConditionInput
+  ) {
+    updateTagEnduserConnector(input: $input, condition: $condition) {
+      id
+      enduserID
+      tagID
+      tag {
+        id
+        tag
+        artistID
+        endusers {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        artist {
+          items {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      createdAt
+      updatedAt
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        email
+        phone
+        profileName
+        profilePicture
+        profileDescription
+        profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        EnduserPageSubscription {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        referredSubscribers {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const deleteTagEnduserConnector = /* GraphQL */ `
+  mutation DeleteTagEnduserConnector(
+    $input: DeleteTagEnduserConnectorInput!
+    $condition: ModelTagEnduserConnectorConditionInput
+  ) {
+    deleteTagEnduserConnector(input: $input, condition: $condition) {
+      id
+      enduserID
+      tagID
+      tag {
+        id
+        tag
+        artistID
+        endusers {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        artist {
+          items {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      createdAt
+      updatedAt
+      enduser {
+        id
+        username
+        firstName
+        lastName
+        email
+        phone
+        profileName
+        profilePicture
+        profileDescription
+        profileSocialLink
+        tags {
+          items {
+            id
+            enduserID
+            tagID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        EnduserPageSubscription {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        referredSubscribers {
+          items {
+            id
+            actionPageID
+            enduserID
+            referralEnduserID
+            enduserTotalPoints
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -4186,2163 +4630,6 @@ export const deletePicture = /* GraphQL */ `
         key
       }
       updatedAt
-    }
-  }
-`;
-export const createContest = /* GraphQL */ `
-  mutation CreateContest(
-    $input: CreateContestInput!
-    $condition: ModelContestConditionInput
-  ) {
-    createContest(input: $input, condition: $condition) {
-      id
-      headline
-      description
-      encouragementHeadline
-      encouragementDescription
-      landingButtonText
-      deadline
-      artistID
-      pictureID
-      testPictureUrl
-      streetTeamUrl
-      spotifyPlayUrl
-      spotifyFollowPlaylistUrl
-      spotifyFollowArtistUrl
-      spotifySaveUrl
-      createdAt
-      updatedAt
-      artist {
-        id
-        name
-        genre
-        route
-        createdAt
-        updatedAt
-        owner
-        actionPages {
-          items {
-            id
-            artistID
-            creatorUserID
-            pictureID
-            pageTitle
-            heading
-            subheading
-            pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        contests {
-          items {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      picture {
-        id
-        publicUrl
-        name
-        owner
-        visibility
-        createdAt
-        file {
-          bucket
-          region
-          key
-        }
-        updatedAt
-      }
-      owner
-      actions {
-        items {
-          id
-          preActionText
-          postActionText
-          pointValue
-          contestID
-          actionType {
-            id
-            value
-            createdAt
-            updatedAt
-            owner
-          }
-          url
-          createdAt
-          updatedAt
-          contest {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
-          enduserActions {
-            nextToken
-          }
-        }
-        nextToken
-      }
-      subscribers {
-        items {
-          id
-          contestID
-          enduserID
-          referralEnduserID
-          enduserPoints
-          completeStreetTeamJoin
-          completeSpotifyFollow
-          completeSpotifySave
-          completeSpotifyPlay
-          createdAt
-          updatedAt
-          enduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          referralEnduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          contest {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const updateContest = /* GraphQL */ `
-  mutation UpdateContest(
-    $input: UpdateContestInput!
-    $condition: ModelContestConditionInput
-  ) {
-    updateContest(input: $input, condition: $condition) {
-      id
-      headline
-      description
-      encouragementHeadline
-      encouragementDescription
-      landingButtonText
-      deadline
-      artistID
-      pictureID
-      testPictureUrl
-      streetTeamUrl
-      spotifyPlayUrl
-      spotifyFollowPlaylistUrl
-      spotifyFollowArtistUrl
-      spotifySaveUrl
-      createdAt
-      updatedAt
-      artist {
-        id
-        name
-        genre
-        route
-        createdAt
-        updatedAt
-        owner
-        actionPages {
-          items {
-            id
-            artistID
-            creatorUserID
-            pictureID
-            pageTitle
-            heading
-            subheading
-            pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        contests {
-          items {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      picture {
-        id
-        publicUrl
-        name
-        owner
-        visibility
-        createdAt
-        file {
-          bucket
-          region
-          key
-        }
-        updatedAt
-      }
-      owner
-      actions {
-        items {
-          id
-          preActionText
-          postActionText
-          pointValue
-          contestID
-          actionType {
-            id
-            value
-            createdAt
-            updatedAt
-            owner
-          }
-          url
-          createdAt
-          updatedAt
-          contest {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
-          enduserActions {
-            nextToken
-          }
-        }
-        nextToken
-      }
-      subscribers {
-        items {
-          id
-          contestID
-          enduserID
-          referralEnduserID
-          enduserPoints
-          completeStreetTeamJoin
-          completeSpotifyFollow
-          completeSpotifySave
-          completeSpotifyPlay
-          createdAt
-          updatedAt
-          enduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          referralEnduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          contest {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const deleteContest = /* GraphQL */ `
-  mutation DeleteContest(
-    $input: DeleteContestInput!
-    $condition: ModelContestConditionInput
-  ) {
-    deleteContest(input: $input, condition: $condition) {
-      id
-      headline
-      description
-      encouragementHeadline
-      encouragementDescription
-      landingButtonText
-      deadline
-      artistID
-      pictureID
-      testPictureUrl
-      streetTeamUrl
-      spotifyPlayUrl
-      spotifyFollowPlaylistUrl
-      spotifyFollowArtistUrl
-      spotifySaveUrl
-      createdAt
-      updatedAt
-      artist {
-        id
-        name
-        genre
-        route
-        createdAt
-        updatedAt
-        owner
-        actionPages {
-          items {
-            id
-            artistID
-            creatorUserID
-            pictureID
-            pageTitle
-            heading
-            subheading
-            pageRoute
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        contests {
-          items {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      picture {
-        id
-        publicUrl
-        name
-        owner
-        visibility
-        createdAt
-        file {
-          bucket
-          region
-          key
-        }
-        updatedAt
-      }
-      owner
-      actions {
-        items {
-          id
-          preActionText
-          postActionText
-          pointValue
-          contestID
-          actionType {
-            id
-            value
-            createdAt
-            updatedAt
-            owner
-          }
-          url
-          createdAt
-          updatedAt
-          contest {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
-          enduserActions {
-            nextToken
-          }
-        }
-        nextToken
-      }
-      subscribers {
-        items {
-          id
-          contestID
-          enduserID
-          referralEnduserID
-          enduserPoints
-          completeStreetTeamJoin
-          completeSpotifyFollow
-          completeSpotifySave
-          completeSpotifyPlay
-          createdAt
-          updatedAt
-          enduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          referralEnduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          contest {
-            id
-            headline
-            description
-            encouragementHeadline
-            encouragementDescription
-            landingButtonText
-            deadline
-            artistID
-            pictureID
-            testPictureUrl
-            streetTeamUrl
-            spotifyPlayUrl
-            spotifyFollowPlaylistUrl
-            spotifyFollowArtistUrl
-            spotifySaveUrl
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const createContestAction = /* GraphQL */ `
-  mutation CreateContestAction(
-    $input: CreateContestActionInput!
-    $condition: ModelContestActionConditionInput
-  ) {
-    createContestAction(input: $input, condition: $condition) {
-      id
-      preActionText
-      postActionText
-      pointValue
-      contestID
-      actionType {
-        id
-        value
-        createdAt
-        updatedAt
-        owner
-      }
-      url
-      createdAt
-      updatedAt
-      contest {
-        id
-        headline
-        description
-        encouragementHeadline
-        encouragementDescription
-        landingButtonText
-        deadline
-        artistID
-        pictureID
-        testPictureUrl
-        streetTeamUrl
-        spotifyPlayUrl
-        spotifyFollowPlaylistUrl
-        spotifyFollowArtistUrl
-        spotifySaveUrl
-        createdAt
-        updatedAt
-        artist {
-          id
-          name
-          genre
-          route
-          createdAt
-          updatedAt
-          owner
-          actionPages {
-            nextToken
-          }
-          contests {
-            nextToken
-          }
-        }
-        picture {
-          id
-          publicUrl
-          name
-          owner
-          visibility
-          createdAt
-          file {
-            bucket
-            region
-            key
-          }
-          updatedAt
-        }
-        owner
-        actions {
-          items {
-            id
-            preActionText
-            postActionText
-            pointValue
-            contestID
-            url
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        subscribers {
-          items {
-            id
-            contestID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completeStreetTeamJoin
-            completeSpotifyFollow
-            completeSpotifySave
-            completeSpotifyPlay
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      owner
-      enduserActions {
-        items {
-          id
-          enduserID
-          enduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          actionID
-          action {
-            id
-            preActionText
-            postActionText
-            pointValue
-            contestID
-            url
-            createdAt
-            updatedAt
-            owner
-          }
-          status
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const updateContestAction = /* GraphQL */ `
-  mutation UpdateContestAction(
-    $input: UpdateContestActionInput!
-    $condition: ModelContestActionConditionInput
-  ) {
-    updateContestAction(input: $input, condition: $condition) {
-      id
-      preActionText
-      postActionText
-      pointValue
-      contestID
-      actionType {
-        id
-        value
-        createdAt
-        updatedAt
-        owner
-      }
-      url
-      createdAt
-      updatedAt
-      contest {
-        id
-        headline
-        description
-        encouragementHeadline
-        encouragementDescription
-        landingButtonText
-        deadline
-        artistID
-        pictureID
-        testPictureUrl
-        streetTeamUrl
-        spotifyPlayUrl
-        spotifyFollowPlaylistUrl
-        spotifyFollowArtistUrl
-        spotifySaveUrl
-        createdAt
-        updatedAt
-        artist {
-          id
-          name
-          genre
-          route
-          createdAt
-          updatedAt
-          owner
-          actionPages {
-            nextToken
-          }
-          contests {
-            nextToken
-          }
-        }
-        picture {
-          id
-          publicUrl
-          name
-          owner
-          visibility
-          createdAt
-          file {
-            bucket
-            region
-            key
-          }
-          updatedAt
-        }
-        owner
-        actions {
-          items {
-            id
-            preActionText
-            postActionText
-            pointValue
-            contestID
-            url
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        subscribers {
-          items {
-            id
-            contestID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completeStreetTeamJoin
-            completeSpotifyFollow
-            completeSpotifySave
-            completeSpotifyPlay
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      owner
-      enduserActions {
-        items {
-          id
-          enduserID
-          enduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          actionID
-          action {
-            id
-            preActionText
-            postActionText
-            pointValue
-            contestID
-            url
-            createdAt
-            updatedAt
-            owner
-          }
-          status
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const deleteContestAction = /* GraphQL */ `
-  mutation DeleteContestAction(
-    $input: DeleteContestActionInput!
-    $condition: ModelContestActionConditionInput
-  ) {
-    deleteContestAction(input: $input, condition: $condition) {
-      id
-      preActionText
-      postActionText
-      pointValue
-      contestID
-      actionType {
-        id
-        value
-        createdAt
-        updatedAt
-        owner
-      }
-      url
-      createdAt
-      updatedAt
-      contest {
-        id
-        headline
-        description
-        encouragementHeadline
-        encouragementDescription
-        landingButtonText
-        deadline
-        artistID
-        pictureID
-        testPictureUrl
-        streetTeamUrl
-        spotifyPlayUrl
-        spotifyFollowPlaylistUrl
-        spotifyFollowArtistUrl
-        spotifySaveUrl
-        createdAt
-        updatedAt
-        artist {
-          id
-          name
-          genre
-          route
-          createdAt
-          updatedAt
-          owner
-          actionPages {
-            nextToken
-          }
-          contests {
-            nextToken
-          }
-        }
-        picture {
-          id
-          publicUrl
-          name
-          owner
-          visibility
-          createdAt
-          file {
-            bucket
-            region
-            key
-          }
-          updatedAt
-        }
-        owner
-        actions {
-          items {
-            id
-            preActionText
-            postActionText
-            pointValue
-            contestID
-            url
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        subscribers {
-          items {
-            id
-            contestID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completeStreetTeamJoin
-            completeSpotifyFollow
-            completeSpotifySave
-            completeSpotifyPlay
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      owner
-      enduserActions {
-        items {
-          id
-          enduserID
-          enduser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phone
-            profileName
-            profilePicture
-            profileDescription
-            profileSocialLink
-            createdAt
-            updatedAt
-            owner
-          }
-          actionID
-          action {
-            id
-            preActionText
-            postActionText
-            pointValue
-            contestID
-            url
-            createdAt
-            updatedAt
-            owner
-          }
-          status
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const createActionType = /* GraphQL */ `
-  mutation CreateActionType(
-    $input: CreateActionTypeInput!
-    $condition: ModelActionTypeConditionInput
-  ) {
-    createActionType(input: $input, condition: $condition) {
-      id
-      value
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateActionType = /* GraphQL */ `
-  mutation UpdateActionType(
-    $input: UpdateActionTypeInput!
-    $condition: ModelActionTypeConditionInput
-  ) {
-    updateActionType(input: $input, condition: $condition) {
-      id
-      value
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteActionType = /* GraphQL */ `
-  mutation DeleteActionType(
-    $input: DeleteActionTypeInput!
-    $condition: ModelActionTypeConditionInput
-  ) {
-    deleteActionType(input: $input, condition: $condition) {
-      id
-      value
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const createContestSubscription = /* GraphQL */ `
-  mutation CreateContestSubscription(
-    $input: CreateContestSubscriptionInput!
-    $condition: ModelContestSubscriptionConditionInput
-  ) {
-    createContestSubscription(input: $input, condition: $condition) {
-      id
-      contestID
-      enduserID
-      referralEnduserID
-      enduserPoints
-      completeStreetTeamJoin
-      completeSpotifyFollow
-      completeSpotifySave
-      completeSpotifyPlay
-      createdAt
-      updatedAt
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        email
-        phone
-        profileName
-        profilePicture
-        profileDescription
-        profileSocialLink
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        referredSubscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      referralEnduser {
-        id
-        username
-        firstName
-        lastName
-        email
-        phone
-        profileName
-        profilePicture
-        profileDescription
-        profileSocialLink
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        referredSubscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      contest {
-        id
-        headline
-        description
-        encouragementHeadline
-        encouragementDescription
-        landingButtonText
-        deadline
-        artistID
-        pictureID
-        testPictureUrl
-        streetTeamUrl
-        spotifyPlayUrl
-        spotifyFollowPlaylistUrl
-        spotifyFollowArtistUrl
-        spotifySaveUrl
-        createdAt
-        updatedAt
-        artist {
-          id
-          name
-          genre
-          route
-          createdAt
-          updatedAt
-          owner
-          actionPages {
-            nextToken
-          }
-          contests {
-            nextToken
-          }
-        }
-        picture {
-          id
-          publicUrl
-          name
-          owner
-          visibility
-          createdAt
-          file {
-            bucket
-            region
-            key
-          }
-          updatedAt
-        }
-        owner
-        actions {
-          items {
-            id
-            preActionText
-            postActionText
-            pointValue
-            contestID
-            url
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        subscribers {
-          items {
-            id
-            contestID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completeStreetTeamJoin
-            completeSpotifyFollow
-            completeSpotifySave
-            completeSpotifyPlay
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const updateContestSubscription = /* GraphQL */ `
-  mutation UpdateContestSubscription(
-    $input: UpdateContestSubscriptionInput!
-    $condition: ModelContestSubscriptionConditionInput
-  ) {
-    updateContestSubscription(input: $input, condition: $condition) {
-      id
-      contestID
-      enduserID
-      referralEnduserID
-      enduserPoints
-      completeStreetTeamJoin
-      completeSpotifyFollow
-      completeSpotifySave
-      completeSpotifyPlay
-      createdAt
-      updatedAt
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        email
-        phone
-        profileName
-        profilePicture
-        profileDescription
-        profileSocialLink
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        referredSubscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      referralEnduser {
-        id
-        username
-        firstName
-        lastName
-        email
-        phone
-        profileName
-        profilePicture
-        profileDescription
-        profileSocialLink
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        referredSubscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      contest {
-        id
-        headline
-        description
-        encouragementHeadline
-        encouragementDescription
-        landingButtonText
-        deadline
-        artistID
-        pictureID
-        testPictureUrl
-        streetTeamUrl
-        spotifyPlayUrl
-        spotifyFollowPlaylistUrl
-        spotifyFollowArtistUrl
-        spotifySaveUrl
-        createdAt
-        updatedAt
-        artist {
-          id
-          name
-          genre
-          route
-          createdAt
-          updatedAt
-          owner
-          actionPages {
-            nextToken
-          }
-          contests {
-            nextToken
-          }
-        }
-        picture {
-          id
-          publicUrl
-          name
-          owner
-          visibility
-          createdAt
-          file {
-            bucket
-            region
-            key
-          }
-          updatedAt
-        }
-        owner
-        actions {
-          items {
-            id
-            preActionText
-            postActionText
-            pointValue
-            contestID
-            url
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        subscribers {
-          items {
-            id
-            contestID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completeStreetTeamJoin
-            completeSpotifyFollow
-            completeSpotifySave
-            completeSpotifyPlay
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const deleteContestSubscription = /* GraphQL */ `
-  mutation DeleteContestSubscription(
-    $input: DeleteContestSubscriptionInput!
-    $condition: ModelContestSubscriptionConditionInput
-  ) {
-    deleteContestSubscription(input: $input, condition: $condition) {
-      id
-      contestID
-      enduserID
-      referralEnduserID
-      enduserPoints
-      completeStreetTeamJoin
-      completeSpotifyFollow
-      completeSpotifySave
-      completeSpotifyPlay
-      createdAt
-      updatedAt
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        email
-        phone
-        profileName
-        profilePicture
-        profileDescription
-        profileSocialLink
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        referredSubscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      referralEnduser {
-        id
-        username
-        firstName
-        lastName
-        email
-        phone
-        profileName
-        profilePicture
-        profileDescription
-        profileSocialLink
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        referredSubscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      contest {
-        id
-        headline
-        description
-        encouragementHeadline
-        encouragementDescription
-        landingButtonText
-        deadline
-        artistID
-        pictureID
-        testPictureUrl
-        streetTeamUrl
-        spotifyPlayUrl
-        spotifyFollowPlaylistUrl
-        spotifyFollowArtistUrl
-        spotifySaveUrl
-        createdAt
-        updatedAt
-        artist {
-          id
-          name
-          genre
-          route
-          createdAt
-          updatedAt
-          owner
-          actionPages {
-            nextToken
-          }
-          contests {
-            nextToken
-          }
-        }
-        picture {
-          id
-          publicUrl
-          name
-          owner
-          visibility
-          createdAt
-          file {
-            bucket
-            region
-            key
-          }
-          updatedAt
-        }
-        owner
-        actions {
-          items {
-            id
-            preActionText
-            postActionText
-            pointValue
-            contestID
-            url
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        subscribers {
-          items {
-            id
-            contestID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completeStreetTeamJoin
-            completeSpotifyFollow
-            completeSpotifySave
-            completeSpotifyPlay
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const createEnduserContestActions = /* GraphQL */ `
-  mutation CreateEnduserContestActions(
-    $input: CreateEnduserContestActionsInput!
-    $condition: ModelEnduserContestActionsConditionInput
-  ) {
-    createEnduserContestActions(input: $input, condition: $condition) {
-      id
-      enduserID
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        email
-        phone
-        profileName
-        profilePicture
-        profileDescription
-        profileSocialLink
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        referredSubscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      actionID
-      action {
-        id
-        preActionText
-        postActionText
-        pointValue
-        contestID
-        actionType {
-          id
-          value
-          createdAt
-          updatedAt
-          owner
-        }
-        url
-        createdAt
-        updatedAt
-        contest {
-          id
-          headline
-          description
-          encouragementHeadline
-          encouragementDescription
-          landingButtonText
-          deadline
-          artistID
-          pictureID
-          testPictureUrl
-          streetTeamUrl
-          spotifyPlayUrl
-          spotifyFollowPlaylistUrl
-          spotifyFollowArtistUrl
-          spotifySaveUrl
-          createdAt
-          updatedAt
-          artist {
-            id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
-          }
-          picture {
-            id
-            publicUrl
-            name
-            owner
-            visibility
-            createdAt
-            updatedAt
-          }
-          owner
-          actions {
-            nextToken
-          }
-          subscribers {
-            nextToken
-          }
-        }
-        owner
-        enduserActions {
-          items {
-            id
-            enduserID
-            actionID
-            status
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      status
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateEnduserContestActions = /* GraphQL */ `
-  mutation UpdateEnduserContestActions(
-    $input: UpdateEnduserContestActionsInput!
-    $condition: ModelEnduserContestActionsConditionInput
-  ) {
-    updateEnduserContestActions(input: $input, condition: $condition) {
-      id
-      enduserID
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        email
-        phone
-        profileName
-        profilePicture
-        profileDescription
-        profileSocialLink
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        referredSubscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      actionID
-      action {
-        id
-        preActionText
-        postActionText
-        pointValue
-        contestID
-        actionType {
-          id
-          value
-          createdAt
-          updatedAt
-          owner
-        }
-        url
-        createdAt
-        updatedAt
-        contest {
-          id
-          headline
-          description
-          encouragementHeadline
-          encouragementDescription
-          landingButtonText
-          deadline
-          artistID
-          pictureID
-          testPictureUrl
-          streetTeamUrl
-          spotifyPlayUrl
-          spotifyFollowPlaylistUrl
-          spotifyFollowArtistUrl
-          spotifySaveUrl
-          createdAt
-          updatedAt
-          artist {
-            id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
-          }
-          picture {
-            id
-            publicUrl
-            name
-            owner
-            visibility
-            createdAt
-            updatedAt
-          }
-          owner
-          actions {
-            nextToken
-          }
-          subscribers {
-            nextToken
-          }
-        }
-        owner
-        enduserActions {
-          items {
-            id
-            enduserID
-            actionID
-            status
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      status
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteEnduserContestActions = /* GraphQL */ `
-  mutation DeleteEnduserContestActions(
-    $input: DeleteEnduserContestActionsInput!
-    $condition: ModelEnduserContestActionsConditionInput
-  ) {
-    deleteEnduserContestActions(input: $input, condition: $condition) {
-      id
-      enduserID
-      enduser {
-        id
-        username
-        firstName
-        lastName
-        email
-        phone
-        profileName
-        profilePicture
-        profileDescription
-        profileSocialLink
-        createdAt
-        updatedAt
-        owner
-        actionPageSubscriptions {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        referredSubscribers {
-          items {
-            id
-            actionPageID
-            enduserID
-            referralEnduserID
-            enduserPoints
-            completedActionButtonIDs
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        completedActions {
-          items {
-            id
-            enduserID
-            actionID
-            actionPageID
-            artistID
-            isExpired
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      actionID
-      action {
-        id
-        preActionText
-        postActionText
-        pointValue
-        contestID
-        actionType {
-          id
-          value
-          createdAt
-          updatedAt
-          owner
-        }
-        url
-        createdAt
-        updatedAt
-        contest {
-          id
-          headline
-          description
-          encouragementHeadline
-          encouragementDescription
-          landingButtonText
-          deadline
-          artistID
-          pictureID
-          testPictureUrl
-          streetTeamUrl
-          spotifyPlayUrl
-          spotifyFollowPlaylistUrl
-          spotifyFollowArtistUrl
-          spotifySaveUrl
-          createdAt
-          updatedAt
-          artist {
-            id
-            name
-            genre
-            route
-            createdAt
-            updatedAt
-            owner
-          }
-          picture {
-            id
-            publicUrl
-            name
-            owner
-            visibility
-            createdAt
-            updatedAt
-          }
-          owner
-          actions {
-            nextToken
-          }
-          subscribers {
-            nextToken
-          }
-        }
-        owner
-        enduserActions {
-          items {
-            id
-            enduserID
-            actionID
-            status
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-      }
-      status
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
