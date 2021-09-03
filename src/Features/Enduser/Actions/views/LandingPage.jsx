@@ -6,23 +6,12 @@ import { gql, useQuery } from '@apollo/react-hooks';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { getActionPageByArtistAndPageRoute } from '../../../../graphql-custom/queries';
-import { ActionButtons } from '../ActionButtons';
-import { ActionStepper } from '../ActionStepper';
-import { ActionHeader } from '../ActionHeader';
 import { Spinner } from '../../../../Components/UI/Spinner';
-import {
-  ActionPageContainer,
-  StyledContainer,
-  BodyContainer,
-} from '../ActionPageContainer';
+import { ActionPageContainer } from '../ActionPageContainer';
 import { PublicClient } from '../../../../Components/ApolloProvider/PublicClient';
 import { PlayWidget } from '../../../../Components/UI/Integrations/SoundCloud/PlayWidget';
-import Icon from '../../../../Components/UI/Icon';
+import { Icon } from '../../../../Components/UI/Icon';
 import tempImage from '../../../../assets/whoash.jpg';
-
-const LandingPageActionPageContainer = styled(ActionPageContainer)`
-  position: relative;
-`;
 
 const LandingPageContainer = styled.div`
   align-items: center;
@@ -63,6 +52,7 @@ const FanMagnetWidget = styled(Container)`
   display: flex;
   flex-direction: column;
   max-width: 660px;
+  padding: 50px;
   position: relative;
   justify-content: space-around;
 `;
@@ -70,12 +60,36 @@ const FanMagnetWidget = styled(Container)`
 const MagnetHeader = styled.div`
   font-size: 50px;
   text-align: center;
+  padding: 20px 0;
+`;
+
+const GiftButton = styled.button`
+  background-color: #544c2e;
+  border: 1px solid #333333;
+  color: #202021;
+  font-size: 40px;
+  font-weight: 500;
+  margin: 60px 0 45px;
+  padding: 37px 47px;
+`;
+
+const GiftButtonInner = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    margin-right: 18px;
+  }
+`;
+
+const PlayerContainer = styled.div`
+  padding: 20px 0;
 `;
 
 // landing page is essentially an action page that is public, so there are no points and we're using a different Apollo client (no auth)
 export const LandingPage = () => {
   console.log('hello from landing page');
-  const [actionValues, setActionValues] = useState([]);
+  const [soundCloudURL, setSoundCloudURL] = useState('');
   // here we're defining a default page route as "landing" so if no pageRoute is provided, we'll use that
   const { artist, page = 'landing' } = useParams();
   const { data: actionPageData, loading } = useQuery(
@@ -86,49 +100,33 @@ export const LandingPage = () => {
     }
   );
 
-  const handleAction = id => {
-    const updatedActions = actionValues.map(item => {
-      if (item.id === id)
-        return {
-          ...item,
-          complete: true,
-        };
-      return item;
-    });
-    setActionValues(updatedActions);
-  };
-
   useEffect(() => {
-    if (actionPageData && actionPageData?.ArtistByRoute?.items?.length > 0) {
-      const actionArray =
-        actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons
-          .items;
-      const values = [];
-      for (let i = 0; i < actionArray.length; i++) {
-        const element = actionArray[i];
-        values.push({
-          id: element.id,
-          complete: false,
-          points: +element.pointValue,
-        });
+    if (actionPageData) {
+      const soundCloudAction =
+        actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons.items.find(
+          item => item.serviceAction === 'SoundCloudEmbed'
+        );
+      if (soundCloudAction) {
+        setSoundCloudURL(soundCloudAction.targetURL);
       }
-      setActionValues(values);
     }
   }, [actionPageData]);
 
   if (loading)
     return (
-      <ActionPageContainer fluid>
-        <Row className="justify-content-md-center">
-          <Col md="auto" style={{ textAlign: 'center' }}>
-            <Spinner animation="border" role="status" variant="light" />
-          </Col>
-        </Row>
-      </ActionPageContainer>
+      <LandingPageContainer>
+        <Container fluid>
+          <Row className="justify-content-md-center">
+            <Col md="auto" style={{ textAlign: 'center' }}>
+              <Spinner animation="border" role="status" variant="light" />
+            </Col>
+          </Row>
+        </Container>
+      </LandingPageContainer>
     );
   // if the actionPageInfo exists, it should be in this format (assuming a single artist route and page route exist)
 
-  if (actionPageData?.ArtistByRoute?.items?.length === 0) {
+  if (!actionPageData || actionPageData?.ArtistByRoute?.items?.length === 0) {
     return (
       <Container fluid>
         <Row>
@@ -143,22 +141,23 @@ export const LandingPage = () => {
   const actionPageInfo =
     actionPageData.ArtistByRoute.items[0].actionPages.items[0];
 
-  console.log('actionPageInfo', actionPageInfo);
-
   return (
     <LandingPageContainer>
+      {/** TODO: replace static artist image with dynamic one */}
       <ArtistImage imageSrc={tempImage} />
       <FanMagnetWidget>
         <MagnetHeader>{actionPageInfo.heading}</MagnetHeader>
-        <PlayWidget sourceUrl="https://soundcloud.com/whosah/make-a-move" />
-        {/* <button type="button" onClick={() => {}}>
-          CLAIM YOUR FREE GIFT
-        </button> */}
-        <ActionButtons
-          data={actionPageInfo}
-          state={actionValues}
-          handleAction={handleAction}
-        />
+        <PlayerContainer>
+          <PlayWidget sourceUrl={soundCloudURL} />
+        </PlayerContainer>
+        <GiftButton type="button" onClick={() => {}}>
+          <GiftButtonInner>
+            <span>
+              <Icon color="#202021" name="Gift" size={70} />
+            </span>
+            <div>CLAIM YOUR FREE GIFT</div>
+          </GiftButtonInner>
+        </GiftButton>
       </FanMagnetWidget>
     </LandingPageContainer>
   );
