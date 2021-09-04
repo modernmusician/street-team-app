@@ -6,7 +6,7 @@ import { Icon } from '../Icon';
 const StyledButton = styled.button`
   background-color: ${({ bgColor }) => bgColor};
   border: 1px solid #333333;
-  color: #202021;
+  color: ${({ color }) => color};
   font-size: 40px;
   font-weight: 500;
   margin: 60px 0 45px;
@@ -25,14 +25,16 @@ const StyledButtonInner = styled.div`
 export const FanMagnetButton = ({
   active,
   activeBgColor,
-  inactiveBgColor,
   ctaText,
+  color,
   handleClick,
+  inactiveBgColor,
   iconName,
 }) => {
   return (
     <StyledButton
       bgColor={active ? activeBgColor : inactiveBgColor}
+      color={color}
       disabled={!active}
       type="button"
       onClick={handleClick}
@@ -47,10 +49,15 @@ export const FanMagnetButton = ({
   );
 };
 
+FanMagnetButton.defaultProps = {
+  inactiveBgColor: '#544c2e',
+};
+
 FanMagnetButton.propTypes = {
   activeBgColor: PropTypes.string.isRequired,
-  inactiveBgColor: PropTypes.string.isRequired,
+  inactiveBgColor: PropTypes.string,
   ctaText: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
   active: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
   iconName: PropTypes.string.isRequired,

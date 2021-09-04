@@ -142,6 +142,7 @@ export const LandingPage = () => {
             <FanMagnetButton
               active={isButtonActive}
               activeBgColor="#807650"
+              color="#202021"
               inactiveBgColor="#544c2e"
               handleClick={() => setCurrentStep(2)}
               ctaText="CLAIM YOUR FREE GIFT"
@@ -149,7 +150,38 @@ export const LandingPage = () => {
             />
           </React.Fragment>
         )}
-        {currentStep === 2 && <div>This is the second step</div>}
+        {currentStep === 2 && (
+          <React.Fragment>
+            <MagnetHeader>Did you enjoy the song?</MagnetHeader>
+            <FanMagnetButton
+              active={isButtonActive}
+              activeBgColor="#807650"
+              color="white"
+              inactiveBgColor="#544c2e"
+              handleClick={() => {}}
+              ctaText="I loved it!"
+              iconName="Gift"
+            />
+            <FanMagnetButton
+              active={isButtonActive}
+              activeBgColor="#807650"
+              color="white"
+              inactiveBgColor="#544c2e"
+              handleClick={() => {}}
+              ctaText="It was okay"
+              iconName="Gift"
+            />
+            <FanMagnetButton
+              active={isButtonActive}
+              activeBgColor="#807650"
+              color="white"
+              inactiveBgColor="#544c2e"
+              handleClick={() => {}}
+              ctaText="I didn't like it"
+              iconName="Gift"
+            />
+          </React.Fragment>
+        )}
       </FanMagnetWidget>
     </LandingPageContainer>
   );
