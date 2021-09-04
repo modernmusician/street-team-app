@@ -50,6 +50,7 @@ const PlayerContainer = styled.div`
 export const LandingPage = () => {
   console.log('hello from landing page');
   const [soundCloudURL, setSoundCloudURL] = useState('');
+  const [continueButtonDetails, setContineButtonDetails] = useState('');
   const [currentStep, setCurrentStep] = useState(1);
   const [isButtonActive, setIsButtonActive] = useState(false);
   // here we're defining a default page route as "landing" so if no pageRoute is provided, we'll use that
@@ -70,6 +71,12 @@ export const LandingPage = () => {
         );
       if (soundCloudAction) {
         setSoundCloudURL(soundCloudAction.targetURL);
+      }
+      const continueButtonDetails = actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons.items.find(
+        item => item.serviceAction === 'ContinueButton'
+      );
+      if(continueButtonDetails){
+        setContineButtonDetails(continueButtonDetails);
       }
     }
   }, [actionPageData]);
@@ -121,12 +128,12 @@ export const LandingPage = () => {
             </PlayerContainer>
             <FanMagnetButton
               active={isButtonActive}
-              activeBgColor="#807650"
-              color="#202021"
+              activeBgColor={continueButtonDetails.backgroundColor || "#807650"}
+              color={continueButtonDetails.textColor || "#202021"}
               inactiveBgColor="#544c2e"
               handleClick={() => setCurrentStep(2)}
-              ctaText="CLAIM YOUR FREE GIFT"
-              iconName="Gift"
+              ctaText={continueButtonDetails.preActionText || "CLAIM YOUR FREE GIFT"}
+              iconName={continueButtonDetails.buttonIcon || "Gift"}
             />
           </React.Fragment>
         )}
