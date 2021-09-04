@@ -6,8 +6,11 @@ import { gql, useQuery } from '@apollo/react-hooks';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { getActionPageByArtistAndPageRoute } from '../../../../graphql-custom/queries';
-import { Spinner } from '../../../../Components/UI/Spinner';
-import { FanMagnetButton } from '../../../../Components/UI/FanMagnetButton';
+import {
+  ArtistImage,
+  FanMagnetButton,
+  Spinner,
+} from '../../../../Components/UI';
 import { PublicClient } from '../../../../Components/ApolloProvider/PublicClient';
 import { PlayWidget } from '../../../../Components/UI/Integrations/SoundCloud/PlayWidget';
 import tempImage from '../../../../assets/whoash.jpg';
@@ -18,29 +21,6 @@ const LandingPageContainer = styled.div`
   height: 100%;
   overflow: hidden;
   position: relative;
-`;
-
-const ArtistImage = styled.div`
-  position: fixed;
-  background-image: url(${props => props.imageSrc});
-  background-attachment: scroll;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: table-cell;
-  -webkit-filter: blur(20px);
-  -moz-filter: blur(20px);
-  -ms-filter: blur(20px);
-  -o-filter: blur(20px);
-  filter: blur(20px);
-  height: 100%;
-  pointer-events: none;
-  position: absolute;
-  vertical-align: middle;
-  width: 100%;
-  -ms-transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
 `;
 
 const FanMagnetWidget = styled(Container)`
@@ -131,7 +111,7 @@ export const LandingPage = () => {
   return (
     <LandingPageContainer>
       {/** TODO: replace static artist image with dynamic one */}
-      <ArtistImage imageSrc={tempImage} />
+      <ArtistImage imageUrl={tempImage} />
       <FanMagnetWidget>
         {currentStep === 1 && (
           <React.Fragment>
