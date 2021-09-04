@@ -7,10 +7,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { getActionPageByArtistAndPageRoute } from '../../../../graphql-custom/queries';
 import { Spinner } from '../../../../Components/UI/Spinner';
-import { ActionPageContainer } from '../ActionPageContainer';
+import { FanMagnetButton } from '../../../../Components/UI/FanMagnetButton';
 import { PublicClient } from '../../../../Components/ApolloProvider/PublicClient';
 import { PlayWidget } from '../../../../Components/UI/Integrations/SoundCloud/PlayWidget';
-import { Icon } from '../../../../Components/UI/Icon';
 import tempImage from '../../../../assets/whoash.jpg';
 
 const LandingPageContainer = styled.div`
@@ -63,25 +62,6 @@ const MagnetHeader = styled.div`
   padding: 20px 0;
 `;
 
-const GiftButton = styled.button`
-  background-color: #544c2e;
-  border: 1px solid #333333;
-  color: #202021;
-  font-size: 40px;
-  font-weight: 500;
-  margin: 60px 0 45px;
-  padding: 37px 47px;
-`;
-
-const GiftButtonInner = styled.div`
-  display: flex;
-  align-items: center;
-
-  span {
-    margin-right: 18px;
-  }
-`;
-
 const PlayerContainer = styled.div`
   padding: 20px 0;
 `;
@@ -90,6 +70,8 @@ const PlayerContainer = styled.div`
 export const LandingPage = () => {
   console.log('hello from landing page');
   const [soundCloudURL, setSoundCloudURL] = useState('');
+  const [currentStep, setCurrentStep] = useState(1);
+  const [isButtonActive, setIsButtonActive] = useState(false);
   // here we're defining a default page route as "landing" so if no pageRoute is provided, we'll use that
   const { artist, page = 'landing' } = useParams();
   const { data: actionPageData, loading } = useQuery(
@@ -111,6 +93,11 @@ export const LandingPage = () => {
       }
     }
   }, [actionPageData]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsButtonActive(true), 30000);
+    return () => clearTimeout(timer);
+  }, []);
 
   if (loading)
     return (
@@ -146,18 +133,23 @@ export const LandingPage = () => {
       {/** TODO: replace static artist image with dynamic one */}
       <ArtistImage imageSrc={tempImage} />
       <FanMagnetWidget>
-        <MagnetHeader>{actionPageInfo.heading}</MagnetHeader>
-        <PlayerContainer>
-          <PlayWidget sourceUrl={soundCloudURL} />
-        </PlayerContainer>
-        <GiftButton type="button" onClick={() => {}}>
-          <GiftButtonInner>
-            <span>
-              <Icon color="#202021" name="Gift" size={70} />
-            </span>
-            <div>CLAIM YOUR FREE GIFT</div>
-          </GiftButtonInner>
-        </GiftButton>
+        {currentStep === 1 && (
+          <React.Fragment>
+            <MagnetHeader>{actionPageInfo.heading}</MagnetHeader>
+            <PlayerContainer>
+              <PlayWidget sourceUrl={soundCloudURL} />
+            </PlayerContainer>
+            <FanMagnetButton
+              active={isButtonActive}
+              activeBgColor="#807650"
+              inactiveBgColor="#544c2e"
+              handleClick={() => setCurrentStep(2)}
+              ctaText="CLAIM YOUR FREE GIFT"
+              iconName="Gift"
+            />
+          </React.Fragment>
+        )}
+        {currentStep === 2 && <div>This is the second step</div>}
       </FanMagnetWidget>
     </LandingPageContainer>
   );
