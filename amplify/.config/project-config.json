@@ -2,7 +2,7 @@
   "providers": [
     "awscloudformation"
   ],
-  "projectName": "streetteamreact",
+  "projectName": "streetteamapp",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {
@@ -11,7 +11,7 @@
       "SourceDir": "src",
       "DistributionDir": "build",
       "BuildCommand": "npm run-script build",
-      "StartCommand": "npm run-script start"
+      "StartCommand": "npm run start"
     }
   }
 }
