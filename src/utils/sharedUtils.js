@@ -1,4 +1,3 @@
-import { data } from 'browserslist';
 import { getAllActionPagesAndSubscriptionDetailsByArtist } from '../graphql-custom/queries';
 
 export const compareId = (key, order = 'asc') => {
@@ -49,12 +48,12 @@ export const getTotalPointsByEnduserIdAndActionPage = (enduserId, artistRoute) =
     // extract the data returned from the query that we care about
     let totalActionPagePoints = 0;
     if (actionPageAndSubscriptionData.items.length > 1) {
-        resultPageRoute = data.items.actionPages.items.pageRoute;
+        resultPageRoute = actionPageAndSubscriptionData.items.actionPages.items.pageRoute;
         
         let subscriberData = actionPageAndSubscriptionData.items.actionPages.items[0].subscribers.items.filter (subscriber => {
             subscriber.items.enduserId = enduserId    
         });
-        
+
         // loop through all enduser's completedActions to build the total tally
         subscriberData.items.enduser.completedActions.items.forEach(action => {
             totalActionPagePoints += action.pointValue
