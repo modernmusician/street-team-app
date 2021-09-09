@@ -2,16 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Icon } from '../../../Components/UI/Icon';
+import { Checkbox } from '../../../Components/UI/Checkbox';
+import { TextField } from '../../../Components/UI/TextField';
 
 const CreateActionContainer = styled(Container)({
   border: '1px solid',
-  borderColor: ({ theme }) => theme.colors.white,
+  borderColor: ({ theme }) => theme.colors.gray,
   padding: ({ theme }) => theme.spacing.lg,
-});
-
-const SubText = styled.p({
-  fontSize: ({ theme }) => theme.fontSizes.sm,
-  margin: 0,
 });
 
 const IconContainer = styled(Col)({
@@ -19,36 +16,26 @@ const IconContainer = styled(Col)({
   justifyContent: 'flex-end',
 });
 
-const CheckboxLabel = styled.label({
-  color: ({ theme }) => theme.colors.white,
-  fontSize: ({ theme }) => theme.fontSizes.lg,
-  fontFamily: ({ theme }) => theme.fonts.heading,
-  fontWeight: ({ theme }) => theme.fontWeights.medium,
-  'input[type=checkbox]': {
-    marginRight: ({ theme }) => theme.spacing.md,
-  },
-});
-
 export const CreateAction = () => {
-  const [checked, setChecked] = useState(false);
-  const handleChange = e => {
+  const [checked, setChecked] = useState(true);
+  const [textValue, setTextValue] = useState('asdfasdf');
+  const handleCheckBoxChange = e => {
     setChecked(e.target.checked);
+  };
+  const handleInpuChange = e => {
+    setTextValue(e.target.value);
   };
 
   return (
     <CreateActionContainer>
       <Row>
         <Col>
-          <CheckboxLabel htmlFor="vip">
-            <input
-              type="checkbox"
-              id="vip"
-              onChange={handleChange}
-              checked={checked}
-            />
-            Join the VIP Group
-          </CheckboxLabel>
-          <SubText>Get More Street Team Members...</SubText>
+          <Checkbox
+            label="Join the VIP Group"
+            subText="Get More Street Team Members..."
+            checked={checked}
+            onChange={handleCheckBoxChange}
+          />
         </Col>
         <IconContainer>
           <Icon name="MdLibraryMusic" color="white" />
@@ -57,7 +44,11 @@ export const CreateAction = () => {
       {checked && (
         <Row>
           <Col>
-            <input type="text" placeholder="Enter Street Team Group URL" />
+            <TextField
+              value={textValue}
+              onChange={handleInpuChange}
+              placeholder="Enter Street Team Group URL"
+            />
           </Col>
         </Row>
       )}
