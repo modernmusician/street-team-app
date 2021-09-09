@@ -17,11 +17,17 @@ const checkIconOld = name => {
     case 'Email':
       icon = Heroicons.HiOutlineMail;
       break;
+    case 'Gift':
+      icon = FontAwesome.FaGift;
+      break;
     case 'Group':
       icon = Heroicons.HiUserGroup;
       break;
     case 'Music':
       icon = MaterialDesign.MdLibraryMusic;
+      break;
+    case 'Redeem':
+      icon = MaterialDesign.MdRedeem;
       break;
     default:
       icon = null;
