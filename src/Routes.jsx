@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { SecureViewWrapper } from './Components/SecureViewWrapper';
-import { ActionPage } from './Features/Enduser/Actions/views/ActionPage';
+import { ActionsView } from './Features/Enduser/Actions/views/ActionsView';
 import { LandingPage } from './Features/Enduser/Actions/views/LandingPage';
 import { CreateActionPage } from './Features/Admin/CreateActions/views/CreateActionPage';
 
@@ -17,7 +17,7 @@ export const Routes = () => {
         </Route>
         <Route path="/secure/:artist/:page?">
           <SecureViewWrapper userRole="enduser">
-            <ActionPage />
+            <ActionsView />
           </SecureViewWrapper>
         </Route>
         <Route path="/:artist/:page?">

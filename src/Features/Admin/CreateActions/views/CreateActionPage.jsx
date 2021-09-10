@@ -9,7 +9,7 @@ import { SetupActions } from '../SetupActions';
 import { useGetActionPage } from '../hooks/useGetActionPage';
 
 const RootContainer = styled(Container)({
-  background: ({ theme }) => theme.colors.gray3,
+  background: ({ theme }) => theme.colors.black,
   height: '100%',
 });
 

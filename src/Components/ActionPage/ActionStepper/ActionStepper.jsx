@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Stepper } from '../../../Components/UI/Stepper';
+import { Stepper } from '../../UI/Stepper';
 
 const StepperContainer = styled.div({
   background: ({ theme }) => theme.colors.gray2,
@@ -13,4 +14,12 @@ export const ActionStepper = ({ currentStep }) => {
       <Stepper steps={['1', '2', '3']} currentStep={currentStep} />
     </StepperContainer>
   );
+};
+
+ActionStepper.propTypes = {
+  currentStep: PropTypes.number,
+};
+
+ActionStepper.defaultProps = {
+  currentStep: 1,
 };

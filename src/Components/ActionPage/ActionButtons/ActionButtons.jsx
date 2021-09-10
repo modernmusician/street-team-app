@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import styled from 'styled-components';
 
-import { ActionButton } from '../../../Components/UI/ActionButton';
+import { ActionButton } from '../../UI/ActionButton';
 import { compareId } from '../../../utils/sharedUtils';
 
 const StyledContainer = styled.div({
@@ -36,10 +36,8 @@ export const ActionButtons = ({ data, state, handleAction }) => {
 
 ActionButtons.propTypes = {
   data: PropTypes.shape({
-    getActionPage: PropTypes.shape({
-      actionButtons: PropTypes.shape({
-        items: PropTypes.arrayOf(PropTypes.shape({})),
-      }),
+    actionButtons: PropTypes.shape({
+      items: PropTypes.arrayOf(PropTypes.shape({})),
     }),
   }).isRequired,
   state: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
