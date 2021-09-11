@@ -39,7 +39,7 @@ const ActionButtonContainer = styled(({ textColor, ...props }) => (
     margin: 0,
     height: '71px',
     color: fontColor.hex(),
-    '&:hover': {
+    '&:hover, &:focus, &:active': {
       color: fontColor,
       background: useGradient({ color, customLighten: 0.2, customDarken: 0.2 }),
       [PointsContainer]: {
@@ -112,7 +112,7 @@ export const ActionButton = ({
   // All external links should be A tags
   const handleOnClick = () => {
     handleAction(id);
-    if (targetURL !== undefined) {
+    if (targetURL) {
       const cleanUrlString = cleanUrl(targetURL);
       window.open(cleanUrlString, '_blank');
     }
@@ -151,9 +151,9 @@ ActionButton.propTypes = {
   postActionText: PropTypes.string,
   preActionText: PropTypes.string,
   pointValue: PropTypes.number,
-  state: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  id: PropTypes.string.isRequired,
-  handleAction: PropTypes.func.isRequired,
+  state: PropTypes.arrayOf(PropTypes.shape({})),
+  id: PropTypes.string,
+  handleAction: PropTypes.func,
 };
 
 ActionButton.defaultProps = {
@@ -163,5 +163,8 @@ ActionButton.defaultProps = {
   targetURL: null,
   postActionText: null,
   preActionText: null,
+  state: null,
+  id: null,
   pointValue: 0,
+  handleAction: () => {},
 };

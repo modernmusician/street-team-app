@@ -39,10 +39,27 @@ const SaveButton = styled(Button)(({ theme }) => {
       background: useGradient({ color: theme.colors.yellow }),
       color: theme.colors.black,
     },
+    '&:focus': {
+      background: useGradient({ color: theme.colors.yellow }),
+      color: theme.colors.black,
+    },
   };
 });
 
-export const SetupActions = ({ actions }) => {
+export const SetupActions = ({
+  actions,
+  onChangeCheckbox,
+  onChangeInput,
+  actionChecked,
+  actionValue,
+}) => {
+  const onSubmit = () => {
+    console.log('onSubmitClick called', actionChecked, actionValue);
+    // createOrUpdateActionButtons(inputValues, actionPageId);
+    // console.log('finished updating/creating buttons');
+    // setShow(true);
+  };
+
   return (
     <Container>
       <Row>
@@ -68,9 +85,13 @@ export const SetupActions = ({ actions }) => {
               {actions.map((item, i) => {
                 return (
                   <CreateAction
+                    {...item}
                     key={item.id}
                     isLast={i + 1 === actions.length}
-                    {...item}
+                    onChangeCheckbox={() => onChangeCheckbox(item?.id)}
+                    onChangeInput={e => onChangeInput(e, item?.id)}
+                    isChecked={actionChecked[item.id]}
+                    inputValue={actionValue[item.id]}
                   />
                 );
               })}
@@ -80,7 +101,7 @@ export const SetupActions = ({ actions }) => {
         <Card.Body>
           <Row>
             <Col>
-              <SaveButton>Save Action Card</SaveButton>
+              <SaveButton onClick={onSubmit}>Save Action Card</SaveButton>
             </Col>
           </Row>
         </Card.Body>
@@ -90,6 +111,10 @@ export const SetupActions = ({ actions }) => {
 };
 
 SetupActions.propTypes = {
+  onChangeCheckbox: PropTypes.func,
+  onChangeInput: PropTypes.func,
+  actionChecked: PropTypes.shape({}),
+  actionValue: PropTypes.shape({}),
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
@@ -107,4 +132,8 @@ SetupActions.propTypes = {
 
 SetupActions.defaultProps = {
   actions: [],
+  onChangeCheckbox: () => {},
+  onChangeInput: () => {},
+  actionChecked: {},
+  actionValue: {},
 };

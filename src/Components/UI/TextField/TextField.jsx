@@ -44,12 +44,20 @@ const FormGroup = styled(Form.Group)({
   padding: 0,
 });
 
-export const TextField = ({ label, subText, placeholder, value, onChange }) => {
+export const TextField = ({
+  label,
+  subText,
+  placeholder,
+  value,
+  onChange,
+  hideLabel,
+}) => {
   return (
     <FormGroup controlId="formBasicEmail">
-      <InputLabel>{label}</InputLabel>
+      <InputLabel>{!hideLabel && label}</InputLabel>
       <Input
         type="text"
+        aria-label={hideLabel ? label : null}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -64,6 +72,7 @@ TextField.propTypes = {
   subText: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string,
+  hideLabel: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
 };
 
@@ -71,4 +80,5 @@ TextField.defaultProps = {
   subText: null,
   value: null,
   placeholder: null,
+  hideLabel: false,
 };

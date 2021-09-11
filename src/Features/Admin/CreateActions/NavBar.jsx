@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Nav from 'react-bootstrap/Nav';
+import { Navbar } from 'react-bootstrap';
 import { Icon } from '../../../Components/UI/Icon';
 import logo from '../../../assets/mm_square_bright.png';
 
-const NavBarContainer = styled(Nav)({
+const NavBarContainer = styled(Navbar)({
   display: 'flex',
   alignItems: 'center',
   padding: ({ theme }) => theme.spacing.md,
@@ -25,8 +25,10 @@ const Header = styled.h2({
 
 export const NavBar = () => {
   return (
-    <NavBarContainer defaultActiveKey="/home" as="ul">
-      <Logo src={logo} alt="Modern Musician Logo" />
+    <NavBarContainer sticky="top">
+      <Navbar.Brand href="#">
+        <Logo src={logo} alt="Modern Musician Logo" />
+      </Navbar.Brand>
       <Icon name="MdChevronRight" size={45} color="gray" />
       <Header>Create Your Action Card</Header>
     </NavBarContainer>

@@ -280,7 +280,7 @@ export const ActionsView = () => {
           </Col>
         </Row>
         <ActionPage.Buttons
-          data={actionPageInfo}
+          data={actionPageInfo.actionButtons.items}
           state={actionValues}
           handleAction={handleAction}
         />

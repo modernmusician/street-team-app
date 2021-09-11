@@ -49,6 +49,8 @@ export const CreateAction = ({
         <Row>
           <Col>
             <TextField
+              hideLabel
+              label={label}
               value={inputValue}
               onChange={inputOnChange}
               placeholder={inputPlaceholder}

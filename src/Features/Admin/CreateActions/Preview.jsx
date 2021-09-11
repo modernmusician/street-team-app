@@ -1,8 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col, Row, Container } from 'react-bootstrap';
 import { ActionPage } from '../../../Components/ActionPage';
+import { apiActionsConfig } from './configs/actionsConfig';
+import { compareId } from '../../../utils/sharedUtils';
 
-export const Preview = () => {
+const filteredActions = actionChecked => {
+  const activeActions = [];
+  Object.keys(actionChecked).forEach(key => {
+    if (actionChecked[key]) {
+      activeActions.push(apiActionsConfig[key]);
+    }
+  });
+  return activeActions.sort(compareId('position'));
+};
+
+export const Preview = ({ actionChecked }) => {
+  const actions = filteredActions(actionChecked);
+
   return (
     <Container>
       <Row>
@@ -25,11 +40,7 @@ export const Preview = () => {
               />
             </Col>
           </Row>
-          {/* <ActionPage.Buttons
-          data={actionPageInfo}
-          state={actionValues}
-          handleAction={handleAction}
-        /> */}
+          {actions.length > 0 && <ActionPage.Buttons data={actions} />}
         </ActionPage.Body>
         <Row>
           <Col className="p-0">
@@ -39,4 +50,12 @@ export const Preview = () => {
       </ActionPage>
     </Container>
   );
+};
+
+Preview.propTypes = {
+  actionChecked: PropTypes.shape({}),
+};
+
+Preview.defaultProps = {
+  actionChecked: {},
 };
