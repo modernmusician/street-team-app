@@ -8,12 +8,22 @@ import {
 } from '../../../../context/FanMagnetContext';
 
 const Step2MagnetHeader = styled(FanMagnetHeader)`
-  font-size: 60px;
-  margin-bottom: 35px;
+  && {
+    font-size: 60px;
+    margin-bottom: 35px;
+  }
 `;
 
 const MagnetButton = styled(FanMagnetButton)`
   margin: 0 0 50px;
+  font-size: 51px;
+  font-weight: 400;
+  padding: 30px 47px;
+
+  span {
+    font-size: 55px;
+    margin-right: 43px;
+  }
 `;
 
 export const FanMagnetStep2 = () => {

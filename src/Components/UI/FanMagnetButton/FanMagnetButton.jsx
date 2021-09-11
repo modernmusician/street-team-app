@@ -26,6 +26,7 @@ export const FanMagnetButton = ({
   activeBgColor,
   activeColor,
   children,
+  className,
   inactiveColor,
   handleClick,
   inactiveBgColor,
@@ -35,6 +36,7 @@ export const FanMagnetButton = ({
     <StyledButton
       bgColor={active ? activeBgColor : inactiveBgColor}
       color={active ? activeColor : inactiveColor}
+      className={className}
       disabled={!active}
       type="button"
       onClick={handleClick}
@@ -46,6 +48,7 @@ export const FanMagnetButton = ({
 };
 
 FanMagnetButton.defaultProps = {
+  className: '',
   inactiveBgColor: '#544c2e',
   inactiveColor: '#202021',
 };
@@ -54,6 +57,7 @@ FanMagnetButton.propTypes = {
   activeBgColor: PropTypes.string.isRequired,
   inactiveBgColor: PropTypes.string,
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
   activeColor: PropTypes.string.isRequired,
   active: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,

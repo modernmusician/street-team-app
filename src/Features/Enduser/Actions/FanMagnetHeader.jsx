@@ -8,10 +8,11 @@ export const MagnetHeader = styled.div`
   padding: 20px 0;
 `;
 
-export const FanMagnetHeader = ({ children }) => {
-  return <MagnetHeader>{children}</MagnetHeader>;
+export const FanMagnetHeader = ({ children, className }) => {
+  return <MagnetHeader className={className}>{children}</MagnetHeader>;
 };
 
 FanMagnetHeader.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.node.isRequired,
 };
