@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useGradient } from '../../../Hooks/useGradient';
@@ -41,50 +42,7 @@ const SaveButton = styled(Button)(({ theme }) => {
   };
 });
 
-export const SetupActions = () => {
-  const actions = [
-    {
-      label: 'Join the VIP Group',
-      subText: 'Get More Street Team Members...',
-      icon: 'MdGroup',
-      isChecked: true,
-      onChangeCheckbox: () => {},
-      inputPlaceholder: 'Enter Street Team Group URL',
-      inputValue: '',
-      inputOnChange: () => {},
-    },
-    {
-      label: 'Follow My Music',
-      subText: 'Get More Music Followers...',
-      icon: 'MdLibraryMusic',
-      isChecked: true,
-      onChangeCheckbox: () => {},
-      inputPlaceholder: 'Enter Follow Music URL',
-      inputValue: '',
-      inputOnChange: () => {},
-    },
-    {
-      label: 'Send Me An Email',
-      subText: 'Get Emails From Fans...',
-      icon: 'MdEmail',
-      isChecked: true,
-      onChangeCheckbox: () => {},
-      inputPlaceholder: 'Enter Your Email Address',
-      inputValue: '',
-      inputOnChange: () => {},
-    },
-    {
-      label: 'Claim Your Free Started Pack',
-      subText: 'Get More Starter Pack Sales...',
-      icon: 'FaGift',
-      isChecked: true,
-      onChangeCheckbox: () => {},
-      inputPlaceholder: 'Enter Starter Pack URL',
-      inputValue: '',
-      inputOnChange: () => {},
-    },
-  ];
-
+export const SetupActions = ({ actions }) => {
   return (
     <Container>
       <Row>
@@ -110,7 +68,7 @@ export const SetupActions = () => {
               {actions.map((item, i) => {
                 return (
                   <CreateAction
-                    key={item.label}
+                    key={item.id}
                     isLast={i + 1 === actions.length}
                     {...item}
                   />
@@ -129,4 +87,24 @@ export const SetupActions = () => {
       </ActionCard>
     </Container>
   );
+};
+
+SetupActions.propTypes = {
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      subText: PropTypes.string,
+      icon: PropTypes.string,
+      isChecked: PropTypes.bool,
+      isLast: PropTypes.bool,
+      onChangeCheckbox: PropTypes.func,
+      inputPlaceholder: PropTypes.string,
+      inputValue: PropTypes.string,
+      inputOnChange: PropTypes.func,
+    })
+  ),
+};
+
+SetupActions.defaultProps = {
+  actions: [],
 };
