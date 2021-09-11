@@ -39,9 +39,14 @@ const SubText = styled(Form.Text)({
   margin: 0,
 });
 
+const FormGroup = styled(Form.Group)({
+  margin: 0,
+  padding: 0,
+});
+
 export const TextField = ({ label, subText, placeholder, value, onChange }) => {
   return (
-    <Form.Group controlId="formBasicEmail">
+    <FormGroup controlId="formBasicEmail">
       <InputLabel>{label}</InputLabel>
       <Input
         type="text"
@@ -50,7 +55,7 @@ export const TextField = ({ label, subText, placeholder, value, onChange }) => {
         onChange={onChange}
       />
       {subText && <SubText className="text-muted">{subText}</SubText>}
-    </Form.Group>
+    </FormGroup>
   );
 };
 

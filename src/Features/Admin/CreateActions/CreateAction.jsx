@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Icon } from '../../../Components/UI/Icon';
 import { Checkbox } from '../../../Components/UI/Checkbox';
@@ -9,6 +10,7 @@ const CreateActionContainer = styled(Container)({
   border: '1px solid',
   borderColor: ({ theme }) => theme.colors.gray,
   padding: ({ theme }) => theme.spacing.lg,
+  marginBottom: ({ theme, isLast }) => !isLast && theme.spacing.md,
 });
 
 const IconContainer = styled(Col)({
@@ -16,42 +18,68 @@ const IconContainer = styled(Col)({
   justifyContent: 'flex-end',
 });
 
-export const CreateAction = () => {
-  const [checked, setChecked] = useState(true);
-  const [textValue, setTextValue] = useState('asdfasdf');
-  const handleCheckBoxChange = e => {
-    setChecked(e.target.checked);
-  };
-  const handleInpuChange = e => {
-    setTextValue(e.target.value);
-  };
-
+export const CreateAction = ({
+  label,
+  subText,
+  icon,
+  isChecked,
+  onChangeCheckbox,
+  inputPlaceholder,
+  inputValue,
+  inputOnChange,
+  isLast,
+  ...props
+}) => {
   return (
-    <CreateActionContainer>
+    <CreateActionContainer {...props} isLast={isLast}>
       <Row>
-        <Col>
+        <Col xs={10}>
           <Checkbox
-            label="Join the VIP Group"
-            subText="Get More Street Team Members..."
-            checked={checked}
-            onChange={handleCheckBoxChange}
+            label={label}
+            subText={subText}
+            checked={isChecked}
+            onChange={onChangeCheckbox}
           />
         </Col>
         <IconContainer>
-          <Icon name="MdLibraryMusic" color="white" />
+          <Icon name={icon} color="white" />
         </IconContainer>
       </Row>
-      {checked && (
+      {isChecked && (
         <Row>
           <Col>
             <TextField
-              value={textValue}
-              onChange={handleInpuChange}
-              placeholder="Enter Street Team Group URL"
+              value={inputValue}
+              onChange={inputOnChange}
+              placeholder={inputPlaceholder}
             />
           </Col>
         </Row>
       )}
     </CreateActionContainer>
   );
+};
+
+CreateAction.propTypes = {
+  label: PropTypes.string,
+  subText: PropTypes.string,
+  icon: PropTypes.string,
+  isChecked: PropTypes.bool,
+  isLast: PropTypes.bool,
+  onChangeCheckbox: PropTypes.func,
+  inputPlaceholder: PropTypes.string,
+  inputValue: PropTypes.string,
+  inputOnChange: PropTypes.func,
+};
+
+CreateAction.defaultProps = {
+  label: null,
+  subText: null,
+  icon: null,
+  isChecked: false,
+  isLast: false,
+  onChangeCheckbox: null,
+  inputPlaceholder: null,
+  inputValue: null,
+  inputOnChange: null,
 };

@@ -10,6 +10,7 @@ import { useGetActionPage } from '../hooks/useGetActionPage';
 
 const RootContainer = styled(Container)({
   background: ({ theme }) => theme.colors.black,
+  marginBottom: ({ theme }) => theme.spacing.xl,
   height: '100%',
 });
 
@@ -28,7 +29,7 @@ export const CreateActionPage = () => {
     );
 
   return (
-    <React.Fragment>
+    <div>
       <NavBar />
       <RootContainer fluid>
         <Container fluid>
@@ -48,6 +49,6 @@ export const CreateActionPage = () => {
           </Row>
         </Container>
       </RootContainer>
-    </React.Fragment>
+    </div>
   );
 };

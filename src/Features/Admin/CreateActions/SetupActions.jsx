@@ -14,7 +14,6 @@ const HeaderRow = styled(Card.Body)(({ theme }) => {
     h3: {
       fontSize: theme.fontSizes.lg,
       fontWeight: theme.fontWeights.bold,
-      marginBottom: theme.spacing.sm,
     },
     p: {
       fontSize: theme.fontSizes.xs,
@@ -43,6 +42,49 @@ const SaveButton = styled(Button)(({ theme }) => {
 });
 
 export const SetupActions = () => {
+  const actions = [
+    {
+      label: 'Join the VIP Group',
+      subText: 'Get More Street Team Members...',
+      icon: 'MdGroup',
+      isChecked: true,
+      onChangeCheckbox: () => {},
+      inputPlaceholder: 'Enter Street Team Group URL',
+      inputValue: '',
+      inputOnChange: () => {},
+    },
+    {
+      label: 'Follow My Music',
+      subText: 'Get More Music Followers...',
+      icon: 'MdLibraryMusic',
+      isChecked: true,
+      onChangeCheckbox: () => {},
+      inputPlaceholder: 'Enter Follow Music URL',
+      inputValue: '',
+      inputOnChange: () => {},
+    },
+    {
+      label: 'Send Me An Email',
+      subText: 'Get Emails From Fans...',
+      icon: 'MdEmail',
+      isChecked: true,
+      onChangeCheckbox: () => {},
+      inputPlaceholder: 'Enter Your Email Address',
+      inputValue: '',
+      inputOnChange: () => {},
+    },
+    {
+      label: 'Claim Your Free Started Pack',
+      subText: 'Get More Starter Pack Sales...',
+      icon: 'FaGift',
+      isChecked: true,
+      onChangeCheckbox: () => {},
+      inputPlaceholder: 'Enter Starter Pack URL',
+      inputValue: '',
+      inputOnChange: () => {},
+    },
+  ];
+
   return (
     <Container>
       <Row>
@@ -65,7 +107,15 @@ export const SetupActions = () => {
         <Card.Body>
           <Row>
             <Col>
-              <CreateAction />
+              {actions.map((item, i) => {
+                return (
+                  <CreateAction
+                    key={item.label}
+                    isLast={i + 1 === actions.length}
+                    {...item}
+                  />
+                );
+              })}
             </Col>
           </Row>
         </Card.Body>
