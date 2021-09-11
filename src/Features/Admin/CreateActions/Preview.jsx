@@ -10,7 +10,7 @@ export const Preview = () => {
           <h2>Preview</h2>
         </Col>
       </Row>
-      <ActionPage style={{ marginTop: 0 }}>
+      <ActionPage style={{ margin: 0 }}>
         <Row>
           <Col className="p-0">
             <ActionPage.Stepper currentStep={2} />

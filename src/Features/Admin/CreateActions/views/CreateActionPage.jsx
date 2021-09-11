@@ -28,24 +28,26 @@ export const CreateActionPage = () => {
     );
 
   return (
-    <RootContainer fluid>
+    <React.Fragment>
       <NavBar />
-      <Container fluid>
-        <Row>
-          <Col>
-            <ActionCard />
-          </Col>
-          <Col>
-            <SetupActions
-              actionPageId={actionPageId}
-              artistRoute={artistRoute}
-            />
-          </Col>
-          <Col>
-            <Preview />
-          </Col>
-        </Row>
-      </Container>
-    </RootContainer>
+      <RootContainer fluid>
+        <Container fluid>
+          <Row>
+            <Col lg={3}>
+              <ActionCard />
+            </Col>
+            <Col>
+              <SetupActions
+                actionPageId={actionPageId}
+                artistRoute={artistRoute}
+              />
+            </Col>
+            <Col>
+              <Preview />
+            </Col>
+          </Row>
+        </Container>
+      </RootContainer>
+    </React.Fragment>
   );
 };
