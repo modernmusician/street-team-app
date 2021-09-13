@@ -95,60 +95,6 @@
         },
      
     
-        "everybodyGroup": {
-          "Type" : "AWS::Cognito::UserPoolGroup",
-          "Properties" : {
-              "GroupName" : "everybody",
-              "Precedence" : 2,
-              
-              "RoleArn" : {
-                "Fn::GetAtt": [
-                    "everybodyGroupRole",
-                    "Arn"
-                ]
-              },
-              
-              "UserPoolId" : {
-                "Ref": "authstreetteamreact935863abUserPoolId"
-              }
-            }
-        },
-        
-        "everybodyGroupRole": {
-            "Type": "AWS::IAM::Role",
-            "Properties": {
-                "RoleName":{
-                    "Fn::Join": [
-                        "",
-                        [
-                          {
-                            "Ref": "authstreetteamreact935863abUserPoolId"
-                          },
-                          "-everybodyGroupRole"
-                        ]
-                    ]
-                },
-                "AssumeRolePolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                        {
-                            "Sid": "",
-                            "Effect": "Allow",
-                            "Principal": {
-                                "Federated": "cognito-identity.amazonaws.com"
-                            },
-                            "Action": "sts:AssumeRoleWithWebIdentity",
-                            "Condition": {
-                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authstreetteamreact935863abIdentityPoolId"}},
-                              "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-     
-    
     
         "LambdaExecutionRole": {
             "Type": "AWS::IAM::Role",
@@ -355,17 +301,6 @@
             "Value": {
                 "Fn::GetAtt": [
                     "everyoneGroupRole",
-                    "Arn"
-                ]
-            }
-        
-        },
-        
-      
-        "everybodyGroupRole": {
-            "Value": {
-                "Fn::GetAtt": [
-                    "everybodyGroupRole",
                     "Arn"
                 ]
             }

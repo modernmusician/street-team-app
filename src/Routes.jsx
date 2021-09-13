@@ -5,11 +5,16 @@ import { SecureViewWrapper } from './Components/SecureViewWrapper';
 import { ActionPage } from './Features/Enduser/Actions/views/ActionPage';
 import { LandingPage } from './Features/Enduser/Actions/views/LandingPage';
 import { CreateActionPage } from './Features/Admin/CreateActions/views/CreateActionPage';
+import { Test } from './Components/Login/Test';
+import {Login } from './Components/Login/Login';
 
 export const Routes = () => {
   return (
     <Router>
       <Switch>
+        <Route path="/login">
+          <Login/>
+        </Route>
         <Route path="/admin/create-action-page">
           <SecureViewWrapper userRole="admin">
             <CreateActionPage />

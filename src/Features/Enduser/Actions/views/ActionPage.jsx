@@ -20,6 +20,9 @@ import {
   BodyContainer,
 } from '../ActionPageContainer';
 import { Auth } from 'aws-amplify';
+import { AmplifySignOut } from '@aws-amplify/ui-react';
+
+import { Hub } from 'aws-amplify';
 
 export const ActionPage = () => {
   const [actionValues, setActionValues] = useState([]);
@@ -30,6 +33,10 @@ export const ActionPage = () => {
   const [userEmail, setUserEmail] = useState(null);
   const { artist, page = 'join' } = useParams();
 
+
+
+
+  window.LOG_LEVEL = 'DEBUG'
   // get user info from logged in Auth (this should live in the utils directory)
   Auth.currentAuthenticatedUser({
     bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
@@ -38,14 +45,46 @@ export const ActionPage = () => {
       setUserId(user.username);
       console.log(`Load additional settings for user: ${user.username}`);
       // console.log("User Info:");
-      // console.log(user);
-      setUserEmail(user.attributes.email);
+      console.log(user);
+      setUserEmail(user?.attributes?.email);
       // console.log("Enduser Fullname:");
-      console.log(user.attributes.email);
+      // console.log(user.attributes);
       // TBD
+      console.log(`user is `);
       console.log(user);
     })
     .catch(err => console.log(err));
+
+    
+
+Hub.listen('auth', (data) => {
+    const {payload} = data;
+    if (payload.event === 'signOut') {
+       console.log('signOut');
+    } else if (payload.event === 'signIn') {
+       console.log('A new auth event has happened: ', data.payload.data.username + ' has ' + data.payload.event);
+    }
+});
+
+    Auth.currentCredentials().then(creds => {
+      console.log('current credentials are: ')
+      console.log(creds)});
+
+    // sign in as a user in the cognito user pool
+    // Auth.signIn({
+
+    // })
+
+    // sign up a user in the cognito user pool
+    // Auth.signUp({
+    //   username: user.email,
+    //   password,
+    //   attributes: {
+    //     email,
+    //     name: ${fname} ${lname},
+    //     phone_number: phoneNumber
+    //   }
+    // })
 
   //get the user data for the user -- used for making sure an enduser exists
   //this could be obtained with the rest of the action page data, but we're likely going to move this logic into a centralized place since we'll need to be verifying a user record exists on lots of pages
