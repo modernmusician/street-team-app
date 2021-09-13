@@ -12,7 +12,11 @@ export const FanMagnetHeader = ({ children, className }) => {
   return <MagnetHeader className={className}>{children}</MagnetHeader>;
 };
 
+FanMagnetHeader.defaultProps = {
+  className: '',
+};
+
 FanMagnetHeader.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.node.isRequired,
+  className: PropTypes.node,
 };
