@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Spinner } from '../../../../Components/UI/Spinner';
@@ -7,14 +7,35 @@ import { NavBar } from '../NavBar';
 import { Preview } from '../Preview';
 import { SetupActions } from '../SetupActions';
 import { useGetActionPage } from '../hooks/useGetActionPage';
+import { selectActionsConfig } from '../configs/actionsConfig';
 
 const RootContainer = styled(Container)({
-  background: ({ theme }) => theme.colors.gray3,
+  background: ({ theme }) => theme.colors.black,
+  marginTop: ({ theme }) => theme.spacing.xl,
+  marginBottom: ({ theme }) => theme.spacing.xl,
   height: '100%',
 });
 
 export const CreateActionPage = () => {
   const { loading, actionPageId, artistRoute } = useGetActionPage();
+  const [actionChecked, setActionChecked] = useState({});
+  const [actionValue, setActionValue] = useState({});
+
+  const onChangeCheckbox = id => {
+    setActionChecked({
+      ...actionChecked,
+      [id]: !actionChecked[id],
+    });
+  };
+
+  const onChangeInput = (e, id) => {
+    setActionValue({
+      ...actionValue,
+      [id]: e.target.value,
+    });
+  };
+
+  console.log(actionValue, actionChecked);
 
   if (loading)
     return (
@@ -28,24 +49,34 @@ export const CreateActionPage = () => {
     );
 
   return (
-    <RootContainer fluid>
+    <div>
       <NavBar />
-      <Container fluid>
-        <Row>
-          <Col>
-            <ActionCard />
-          </Col>
-          <Col>
-            <SetupActions
-              actionPageId={actionPageId}
-              artistRoute={artistRoute}
-            />
-          </Col>
-          <Col>
-            <Preview />
-          </Col>
-        </Row>
-      </Container>
-    </RootContainer>
+      <RootContainer fluid>
+        <Container fluid>
+          <Row>
+            <Col lg={3}>
+              <ActionCard />
+            </Col>
+            <Col>
+              <SetupActions
+                actionPageId={actionPageId}
+                artistRoute={artistRoute}
+                actions={selectActionsConfig}
+                onChangeCheckbox={onChangeCheckbox}
+                onChangeInput={onChangeInput}
+                actionChecked={actionChecked}
+                actionValue={actionValue}
+              />
+            </Col>
+            <Col>
+              <Preview
+                actionChecked={actionChecked}
+                actionValue={actionValue}
+              />
+            </Col>
+          </Row>
+        </Container>
+      </RootContainer>
+    </div>
   );
 };

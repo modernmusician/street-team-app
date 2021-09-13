@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Icon } from '../../../Components/UI/Icon';
+import { Checkbox } from '../../../Components/UI/Checkbox';
+import { TextField } from '../../../Components/UI/TextField';
 
 const CreateActionContainer = styled(Container)({
   border: '1px solid',
-  borderColor: ({ theme }) => theme.colors.white,
+  borderColor: ({ theme }) => theme.colors.gray,
   padding: ({ theme }) => theme.spacing.lg,
-});
-
-const SubText = styled.p({
-  fontSize: ({ theme }) => theme.fontSizes.sm,
-  margin: 0,
+  marginBottom: ({ theme, isLast }) => !isLast && theme.spacing.md,
 });
 
 const IconContainer = styled(Col)({
@@ -19,48 +18,70 @@ const IconContainer = styled(Col)({
   justifyContent: 'flex-end',
 });
 
-const CheckboxLabel = styled.label({
-  color: ({ theme }) => theme.colors.white,
-  fontSize: ({ theme }) => theme.fontSizes.lg,
-  fontFamily: ({ theme }) => theme.fonts.heading,
-  fontWeight: ({ theme }) => theme.fontWeights.medium,
-  'input[type=checkbox]': {
-    marginRight: ({ theme }) => theme.spacing.md,
-  },
-});
-
-export const CreateAction = () => {
-  const [checked, setChecked] = useState(false);
-  const handleChange = e => {
-    setChecked(e.target.checked);
-  };
-
+export const CreateAction = ({
+  label,
+  subText,
+  icon,
+  isChecked,
+  onChangeCheckbox,
+  inputPlaceholder,
+  inputValue,
+  inputOnChange,
+  isLast,
+  ...props
+}) => {
   return (
-    <CreateActionContainer>
+    <CreateActionContainer {...props} isLast={isLast}>
       <Row>
-        <Col>
-          <CheckboxLabel htmlFor="vip">
-            <input
-              type="checkbox"
-              id="vip"
-              onChange={handleChange}
-              checked={checked}
-            />
-            Join the VIP Group
-          </CheckboxLabel>
-          <SubText>Get More Street Team Members...</SubText>
+        <Col xs={10}>
+          <Checkbox
+            label={label}
+            subText={subText}
+            checked={isChecked}
+            onChange={onChangeCheckbox}
+          />
         </Col>
         <IconContainer>
-          <Icon name="MdLibraryMusic" color="white" />
+          <Icon name={icon} color="white" />
         </IconContainer>
       </Row>
-      {checked && (
+      {isChecked && (
         <Row>
           <Col>
-            <input type="text" placeholder="Enter Street Team Group URL" />
+            <TextField
+              hideLabel
+              label={label}
+              value={inputValue}
+              onChange={inputOnChange}
+              placeholder={inputPlaceholder}
+            />
           </Col>
         </Row>
       )}
     </CreateActionContainer>
   );
+};
+
+CreateAction.propTypes = {
+  label: PropTypes.string,
+  subText: PropTypes.string,
+  icon: PropTypes.string,
+  isChecked: PropTypes.bool,
+  isLast: PropTypes.bool,
+  onChangeCheckbox: PropTypes.func,
+  inputPlaceholder: PropTypes.string,
+  inputValue: PropTypes.string,
+  inputOnChange: PropTypes.func,
+};
+
+CreateAction.defaultProps = {
+  label: null,
+  subText: null,
+  icon: null,
+  isChecked: false,
+  isLast: false,
+  onChangeCheckbox: null,
+  inputPlaceholder: null,
+  inputValue: null,
+  inputOnChange: null,
 };

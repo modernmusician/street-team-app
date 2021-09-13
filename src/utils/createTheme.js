@@ -7,6 +7,7 @@ export const createTheme = theme => {
       primary: '#5E30B8',
       primaryTint: '#7857B8',
       primaryShade: '#40207D',
+      gray: 'gray',
       gray1: '#484848',
       gray2: '#393939',
       gray3: '#1F1F1F',

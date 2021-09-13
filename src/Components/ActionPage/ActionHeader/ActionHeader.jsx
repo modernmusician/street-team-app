@@ -21,21 +21,22 @@ const Rule = styled.div({
   border: ({ theme }) => `1px solid ${theme.colors.white}`,
 });
 
-export const ActionHeader = ({ data }) => {
+export const ActionHeader = ({ heading, subHeading }) => {
   return (
     <HeaderContainer>
-      <Header>{data?.heading}</Header>
+      <Header>{heading}</Header>
       <Rule />
-      <SubHeader>{data?.subheading}</SubHeader>
+      <SubHeader>{subHeading}</SubHeader>
     </HeaderContainer>
   );
 };
 
 ActionHeader.propTypes = {
-  data: PropTypes.shape({
-    getActionPage: PropTypes.shape({
-      heading: PropTypes.string,
-      subheading: PropTypes.string,
-    }),
-  }).isRequired,
+  heading: PropTypes.string,
+  subHeading: PropTypes.string,
+};
+
+ActionHeader.defaultProps = {
+  heading: '',
+  subHeading: '',
 };
