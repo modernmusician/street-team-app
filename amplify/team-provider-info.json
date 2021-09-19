@@ -14,14 +14,15 @@
     "categories": {
       "auth": {
         "streetteamreact935863ab": {
-          "facebookAppId": "1889301381171290"
+          "facebookAppId": "674030226824129"
         },
         "userPoolGroups": {}
       },
       "function": {
         "streetteamreact935863abPostConfirmation": {
           "deploymentBucketName": "amplify-streetteamreact-dev-235234-deployment",
-          "s3Key": "amplify-builds/streetteamreact935863abPostConfirmation-7178684768513457354a-build.zip"
+          "s3Key": "amplify-builds/streetteamreact935863abPostConfirmation-7178684768513457354a-build.zip",
+          "GROUP": "everyone"
         }
       }
     }

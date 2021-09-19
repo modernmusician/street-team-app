@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Icon } from '../Icon';
 
 const StyledButton = styled.button`
-  background-color: ${({ bgColor }) => bgColor};
+  background: ${({ bgColor }) => bgColor};
   border: 1px solid #333333;
   color: ${({ color }) => color};
   font-size: 40px;
   font-weight: 500;
-  margin: 60px 0 45px;
+  margin: ${({ margin }) => margin};
   padding: 37px 47px;
 `;
 
@@ -25,40 +24,43 @@ const StyledButtonInner = styled.div`
 export const FanMagnetButton = ({
   active,
   activeBgColor,
-  ctaText,
-  color,
+  activeColor,
+  children,
+  className,
+  inactiveColor,
   handleClick,
   inactiveBgColor,
-  iconName,
+  margin,
 }) => {
   return (
     <StyledButton
       bgColor={active ? activeBgColor : inactiveBgColor}
-      color={color}
+      color={active ? activeColor : inactiveColor}
+      className={className}
       disabled={!active}
       type="button"
       onClick={handleClick}
+      margin={margin}
     >
-      <StyledButtonInner>
-        <span>
-          <Icon color="#202021" name={iconName} size={70} />
-        </span>
-        <div>{ctaText}</div>
-      </StyledButtonInner>
+      <StyledButtonInner>{children}</StyledButtonInner>
     </StyledButton>
   );
 };
 
 FanMagnetButton.defaultProps = {
+  className: '',
   inactiveBgColor: '#544c2e',
+  inactiveColor: '#202021',
 };
 
 FanMagnetButton.propTypes = {
   activeBgColor: PropTypes.string.isRequired,
   inactiveBgColor: PropTypes.string,
-  ctaText: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  activeColor: PropTypes.string.isRequired,
   active: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
-  iconName: PropTypes.string.isRequired,
+  inactiveColor: PropTypes.string,
+  margin: PropTypes.string.isRequired,
 };

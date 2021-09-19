@@ -7,8 +7,32 @@ const awsmobile = {
     "aws_cognito_region": "us-east-1",
     "aws_user_pools_id": "us-east-1_dfEd0lWf4",
     "aws_user_pools_web_client_id": "7cv82i7h9jjfliojcteib8783t",
-    "oauth": {},
-    "federationTarget": "COGNITO_IDENTITY_POOLS",
+    "oauth": {
+        "domain": "streetteamreactbd40b2f8-bd40b2f8-dev.auth.us-east-1.amazoncognito.com",
+        "scope": [
+            "phone",
+            "email",
+            "openid",
+            "profile",
+            "aws.cognito.signin.user.admin"
+        ],
+        "redirectSignIn": "https://b273-174-20-142-170.ngrok.io/login/,https://app.modern-musician.com/login/,https://dev.modern-musician.com/login/",
+        "redirectSignOut": "https://b273-174-20-142-170.ngrok.io/login/,https://app.modern-musician.com/login/,https://dev.modern-musician.com/login/",
+        "responseType": "token"
+    },
+    "federationTarget": "COGNITO_USER_AND_IDENTITY_POOLS",
+    "aws_cognito_login_mechanism": [],
+    "aws_cognito_signup_attributes": [
+        "EMAIL"
+    ],
+    "aws_cognito_mfa_configuration": "OFF",
+    "aws_cognito_mfa_types": [
+        "SMS"
+    ],
+    "aws_cognito_password_protection_settings": {
+        "passwordPolicyMinLength": 8,
+        "passwordPolicyCharacters": []
+    },
     "aws_appsync_graphqlEndpoint": "https://sc7eeyz5onb37cthxqdtfio64y.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_appsync_region": "us-east-1",
     "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS"

@@ -8,11 +8,14 @@ import { useParams } from 'react-router-dom';
 import { getActionPageByArtistAndPageRoute } from '../../../../graphql-custom/queries';
 import {
   ArtistImage,
+  Icon,
   FanMagnetButton,
   Spinner,
 } from '../../../../Components/UI';
 import { PublicClient } from '../../../../Components/ApolloProvider/PublicClient';
 import { PlayWidget } from '../../../../Components/UI/Integrations/SoundCloud/PlayWidget';
+import { FanMagnetStep2 } from './FanMagnetStep2';
+import { FanMagnetHeader } from '../FanMagnetHeader';
 import tempImage from '../../../../assets/whoash.jpg';
 
 const LandingPageContainer = styled.div`
@@ -36,23 +39,17 @@ const FanMagnetWidget = styled(Container)`
   justify-content: space-around;
 `;
 
-const MagnetHeader = styled.div`
-  font-size: 50px;
-  text-align: center;
-  padding: 20px 0;
-`;
-
 const PlayerContainer = styled.div`
   padding: 20px 0;
 `;
 
 // landing page is essentially an action page that is public, so there are no points and we're using a different Apollo client (no auth)
 export const LandingPage = () => {
-  console.log('hello from landing page');
   const [soundCloudURL, setSoundCloudURL] = useState('');
   const [continueButtonDetails, setContineButtonDetails] = useState('');
   const [currentStep, setCurrentStep] = useState(1);
   const [isButtonActive, setIsButtonActive] = useState(false);
+
   // here we're defining a default page route as "landing" so if no pageRoute is provided, we'll use that
   const { artist, page = 'landing' } = useParams();
   const { data: actionPageData, loading } = useQuery(
@@ -72,12 +69,12 @@ export const LandingPage = () => {
       if (soundCloudAction) {
         setSoundCloudURL(soundCloudAction.targetURL);
       }
-      const continueButtonDetails =
+      const continueButton =
         actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons.items.find(
           item => item.serviceAction === 'ContinueButton'
         );
-      if (continueButtonDetails) {
-        setContineButtonDetails(continueButtonDetails);
+      if (continueButton) {
+        setContineButtonDetails(continueButton);
       }
     }
   }, [actionPageData]);
@@ -123,55 +120,32 @@ export const LandingPage = () => {
       <FanMagnetWidget>
         {currentStep === 1 && (
           <React.Fragment>
-            <MagnetHeader>{actionPageInfo.heading}</MagnetHeader>
+            <FanMagnetHeader>{actionPageInfo.heading}</FanMagnetHeader>
             <PlayerContainer>
               <PlayWidget sourceUrl={soundCloudURL} />
             </PlayerContainer>
             <FanMagnetButton
               active={isButtonActive}
               activeBgColor={continueButtonDetails.backgroundColor || '#807650'}
-              color={continueButtonDetails.textColor || '#202021'}
+              activeColor={continueButtonDetails.textColor || '#202021'}
               inactiveBgColor="#544c2e"
+              margin="60px 0 45px"
               handleClick={() => setCurrentStep(2)}
-              ctaText={
-                continueButtonDetails.preActionText || 'CLAIM YOUR FREE GIFT'
-              }
-              iconName={continueButtonDetails.buttonIcon || 'Gift'}
-            />
+            >
+              <span>
+                <Icon
+                  color="#202021"
+                  name={continueButtonDetails.buttonIcon || 'Gift'}
+                  size={70}
+                />
+              </span>
+              <div>
+                {continueButtonDetails.preActionText || 'CLAIM YOUR FREE GIFT'}
+              </div>
+            </FanMagnetButton>
           </React.Fragment>
         )}
-        {currentStep === 2 && (
-          <React.Fragment>
-            <MagnetHeader>Did you enjoy the song?</MagnetHeader>
-            <FanMagnetButton
-              active={isButtonActive}
-              activeBgColor="#807650"
-              color="white"
-              inactiveBgColor="#544c2e"
-              handleClick={() => {}}
-              ctaText="I loved it!"
-              iconName="Gift"
-            />
-            <FanMagnetButton
-              active={isButtonActive}
-              activeBgColor="#807650"
-              color="white"
-              inactiveBgColor="#544c2e"
-              handleClick={() => {}}
-              ctaText="It was okay"
-              iconName="Gift"
-            />
-            <FanMagnetButton
-              active={isButtonActive}
-              activeBgColor="#807650"
-              color="white"
-              inactiveBgColor="#544c2e"
-              handleClick={() => {}}
-              ctaText="I didn't like it"
-              iconName="Gift"
-            />
-          </React.Fragment>
-        )}
+        {currentStep === 2 && <FanMagnetStep2 />}
       </FanMagnetWidget>
     </LandingPageContainer>
   );
