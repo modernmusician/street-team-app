@@ -5,7 +5,6 @@ import { SecureViewWrapper } from './Components/SecureViewWrapper';
 import { ActionsView } from './Features/Enduser/Actions/views/ActionsView';
 import { LandingPage } from './Features/Enduser/Actions/views/LandingPage';
 import { CreateActionPage } from './Features/Admin/CreateActions/views/CreateActionPage';
-import { Test } from './Components/Login/Test';
 import {Login } from './Components/Login/Login';
 
 export const Routes = () => {

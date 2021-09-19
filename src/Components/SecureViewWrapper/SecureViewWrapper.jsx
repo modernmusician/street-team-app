@@ -10,7 +10,6 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import awsconfig from '../../aws-exports';
-import {SignInWithFacebook} from '../Login/FacebookLogin';
 
 import { useHistory } from "react-router-dom";
 
