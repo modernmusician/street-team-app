@@ -72,10 +72,11 @@ export const LandingPage = () => {
       if (soundCloudAction) {
         setSoundCloudURL(soundCloudAction.targetURL);
       }
-      const continueButtonDetails = actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons.items.find(
-        item => item.serviceAction === 'ContinueButton'
-      );
-      if(continueButtonDetails){
+      const continueButtonDetails =
+        actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons.items.find(
+          item => item.serviceAction === 'ContinueButton'
+        );
+      if (continueButtonDetails) {
         setContineButtonDetails(continueButtonDetails);
       }
     }
@@ -128,12 +129,14 @@ export const LandingPage = () => {
             </PlayerContainer>
             <FanMagnetButton
               active={isButtonActive}
-              activeBgColor={continueButtonDetails.backgroundColor || "#807650"}
-              color={continueButtonDetails.textColor || "#202021"}
+              activeBgColor={continueButtonDetails.backgroundColor || '#807650'}
+              color={continueButtonDetails.textColor || '#202021'}
               inactiveBgColor="#544c2e"
               handleClick={() => setCurrentStep(2)}
-              ctaText={continueButtonDetails.preActionText || "CLAIM YOUR FREE GIFT"}
-              iconName={continueButtonDetails.buttonIcon || "Gift"}
+              ctaText={
+                continueButtonDetails.preActionText || 'CLAIM YOUR FREE GIFT'
+              }
+              iconName={continueButtonDetails.buttonIcon || 'Gift'}
             />
           </React.Fragment>
         )}

@@ -17,7 +17,9 @@ export const useGetActionPage = () => {
   const [error, setError] = useState();
 
   const { userId, artistName } = useCurrentAuthUser();
-
+  console.log('userId', userId);
+  console.log('artistRoute', artistRoute);
+  console.log('actionPageInfo', actionPageInfo);
   // define queries
   const {
     data: userData,
@@ -27,7 +29,7 @@ export const useGetActionPage = () => {
   } = useQuery(gql(getArtistUser), {
     variables: { id: userId },
   });
-
+  console.log('userData', userData);
   const {
     data: artistByRouteData,
     loading: artistByRouteLoading,
@@ -129,7 +131,7 @@ export const useGetActionPage = () => {
       if (createArtistData && !artistId) {
         setArtistId(createArtistData.createArtist.id);
       }
-      if (!artistId) {
+      if (artistId) {
         // add new user since it doesn't exist
         addUser({
           variables: {
@@ -146,7 +148,7 @@ export const useGetActionPage = () => {
       setArtistRoute(enduserInfo.artist.route);
       // TODO this should pull from the artist, not from the enduserInfo
       setActionPageInfo(enduserInfo.actionPages.items[0]);
-      if (actionPageInfo) {
+      if (enduserInfo.actionPages.items[0]) {
         setActionPageId(actionPageInfo.id, 'actionPageId');
       }
       if (!artistId) {
