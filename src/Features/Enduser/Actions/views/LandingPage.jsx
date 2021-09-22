@@ -6,38 +6,15 @@ import { gql, useQuery } from '@apollo/react-hooks';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { getActionPageByArtistAndPageRoute } from '../../../../graphql-custom/queries';
-import {
-  ArtistImage,
-  Icon,
-  FanMagnetButton,
-  Spinner,
-} from '../../../../Components/UI';
+import { Icon, FanMagnetButton, Spinner } from '../../../../Components/UI';
 import { PublicClient } from '../../../../Components/ApolloProvider/PublicClient';
 import { PlayWidget } from '../../../../Components/UI/Integrations/SoundCloud/PlayWidget';
 import { FanMagnetStep2 } from './FanMagnetStep2';
-import { FanMagnetHeader } from '../FanMagnetHeader';
-import tempImage from '../../../../assets/whoash.jpg';
-
-const LandingPageContainer = styled.div`
-  align-items: center;
-  display: flex;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-`;
-
-const FanMagnetWidget = styled(Container)`
-  background: #1f1f1f 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 6px #00000029;
-  border-radius: 5px;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  max-width: 660px;
-  padding: 50px;
-  position: relative;
-  justify-content: space-around;
-`;
+import {
+  PageContainer,
+  PageHeader,
+  StyledPageContainer,
+} from '../../../../Components/Page';
 
 const PlayerContainer = styled.div`
   padding: 20px 0;
@@ -86,7 +63,7 @@ export const LandingPage = () => {
 
   if (loading)
     return (
-      <LandingPageContainer>
+      <StyledPageContainer>
         <Container fluid>
           <Row className="justify-content-md-center">
             <Col md="auto" style={{ textAlign: 'center' }}>
@@ -94,7 +71,7 @@ export const LandingPage = () => {
             </Col>
           </Row>
         </Container>
-      </LandingPageContainer>
+      </StyledPageContainer>
     );
   // if the actionPageInfo exists, it should be in this format (assuming a single artist route and page route exist)
 
@@ -114,39 +91,35 @@ export const LandingPage = () => {
     actionPageData.ArtistByRoute.items[0].actionPages.items[0];
 
   return (
-    <LandingPageContainer>
-      {/** TODO: replace static artist image with dynamic one */}
-      <ArtistImage imageUrl={tempImage} />
-      <FanMagnetWidget>
-        {currentStep === 1 && (
-          <React.Fragment>
-            <FanMagnetHeader>{actionPageInfo.heading}</FanMagnetHeader>
-            <PlayerContainer>
-              <PlayWidget sourceUrl={soundCloudURL} />
-            </PlayerContainer>
-            <FanMagnetButton
-              active={isButtonActive}
-              activeBgColor={continueButtonDetails.backgroundColor || '#807650'}
-              activeColor={continueButtonDetails.textColor || '#202021'}
-              inactiveBgColor="#544c2e"
-              margin="60px 0 45px"
-              handleClick={() => setCurrentStep(2)}
-            >
-              <span>
-                <Icon
-                  color="#202021"
-                  name={continueButtonDetails.buttonIcon || 'Gift'}
-                  size={70}
-                />
-              </span>
-              <div>
-                {continueButtonDetails.preActionText || 'CLAIM YOUR FREE GIFT'}
-              </div>
-            </FanMagnetButton>
-          </React.Fragment>
-        )}
-        {currentStep === 2 && <FanMagnetStep2 />}
-      </FanMagnetWidget>
-    </LandingPageContainer>
+    <PageContainer>
+      {currentStep === 1 && (
+        <React.Fragment>
+          <PageHeader>{actionPageInfo.heading}</PageHeader>
+          <PlayerContainer>
+            <PlayWidget sourceUrl={soundCloudURL} />
+          </PlayerContainer>
+          <FanMagnetButton
+            active={isButtonActive}
+            activeBgColor={continueButtonDetails.backgroundColor || '#807650'}
+            activeColor={continueButtonDetails.textColor || '#202021'}
+            inactiveBgColor="#544c2e"
+            margin="60px 0 45px"
+            handleClick={() => setCurrentStep(2)}
+          >
+            <span>
+              <Icon
+                color="#202021"
+                name={continueButtonDetails.buttonIcon || 'Gift'}
+                size={70}
+              />
+            </span>
+            <div>
+              {continueButtonDetails.preActionText || 'CLAIM YOUR FREE GIFT'}
+            </div>
+          </FanMagnetButton>
+        </React.Fragment>
+      )}
+      {currentStep === 2 && <FanMagnetStep2 />}
+    </PageContainer>
   );
 };
