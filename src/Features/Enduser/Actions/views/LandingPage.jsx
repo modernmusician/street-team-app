@@ -6,10 +6,12 @@ import { gql, useQuery } from '@apollo/react-hooks';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { getActionPageByArtistAndPageRoute } from '../../../../graphql-custom/queries';
+import {getActionPagesByArtistRoute} from '../graphql/getActionPagesByArtist'
 import { Icon, FanMagnetButton, Spinner } from '../../../../Components/UI';
 import { PublicClient } from '../../../../Components/ApolloProvider/PublicClient';
 import { PlayWidget } from '../../../../Components/UI/Integrations/SoundCloud/PlayWidget';
 import { FanMagnetStep2 } from './FanMagnetStep2';
+import {useHistory} from 'react-router-dom';
 import {
   PageContainer,
   PageHeader,
@@ -26,11 +28,20 @@ export const LandingPage = () => {
   const [continueButtonDetails, setContineButtonDetails] = useState('');
   const [currentStep, setCurrentStep] = useState(1);
   const [isButtonActive, setIsButtonActive] = useState(false);
+  let history = useHistory();
+
+  const continueToNextStep = () => {
+    //pull the root path from the location and push to the /secure path for that artist
+    const path=window.location.pathname;
+    const currentPathArray=window.location.pathname.split("/").filter(x => x!=="");
+    const newRoute = ['/secure'].concat(currentPathArray[0]).join('/');
+    history.push(newRoute);
+  }
 
   // here we're defining a default page route as "landing" so if no pageRoute is provided, we'll use that
   const { artist, page = 'landing' } = useParams();
   const { data: actionPageData, loading } = useQuery(
-    gql(getActionPageByArtistAndPageRoute),
+    gql(getActionPagesByArtistRoute),
     {
       variables: { artistRoute: artist, pageRoute: page },
       client: PublicClient,
@@ -39,15 +50,20 @@ export const LandingPage = () => {
 
   useEffect(() => {
     if (actionPageData) {
+      // here we re-route the user if this artist doesn't have a 'landing' route defined... eventually we'll want to use page types here
+      const landingPageData = actionPageData.ArtistByRoute.items[0].actionPages.items.find(item => item.pageRoute==='landing');
+      if(!landingPageData){
+        continueToNextStep()
+      }
       const soundCloudAction =
-        actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons.items.find(
+        landingPageData?.actionButtons.items.find(
           item => item.serviceAction === 'SoundCloudEmbed'
         );
       if (soundCloudAction) {
         setSoundCloudURL(soundCloudAction.targetURL);
       }
       const continueButton =
-        actionPageData.ArtistByRoute.items[0].actionPages.items[0].actionButtons.items.find(
+        landingPageData?.actionButtons.items.find(
           item => item.serviceAction === 'ContinueButton'
         );
       if (continueButton) {

@@ -6,7 +6,7 @@ import {
   FanMagnetContext,
   SURVEY_SELECTION,
 } from '../../../../context/FanMagnetContext';
-import {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom';
 
 const Step2MagnetHeader = styled(PageHeader)`
   && {
