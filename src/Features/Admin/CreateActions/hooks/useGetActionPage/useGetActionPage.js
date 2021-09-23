@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/react-hooks';
+import { getActionPageByArtistAndPageRoute } from '../../../../../graphql-custom/queries';
 import { getArtistUser, listArtists } from '../../../../../graphql/queries';
 import {
   createArtistUser,
@@ -18,25 +19,159 @@ export const useGetActionPage = () => {
 
   const { userId, artistName } = useCurrentAuthUser();
   console.log('userId', userId);
-  console.log('artistRoute', artistRoute);
-  console.log('actionPageInfo', actionPageInfo);
+  // console.log('artistRoute', artistRoute);
+  // console.log('actionPageInfo', actionPageInfo);
   // define queries
+  // console.log('userData', userData);
+
+  // const {
+  //   data: artistByRouteData,
+  //   loading: artistByRouteLoading,
+  //   error: artistByRouteError,
+  //   refetch: refetchArtistByRoute,
+  // } = useQuery(gql(listArtists), {
+  //   variables: { filter: { route: { eq: artistRoute } } },
+  // });
+
+  const getArtistByEnduser = `query GetArtistUser($id: ID!, $pageRoute: String) {
+    getArtistUser(id: $id) {
+      id
+      username
+      firstName
+      lastName
+      email
+      phoneNumber
+      artistID
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        route
+        createdAt
+        updatedAt
+        owner
+        actionPages(filter: {pageRoute: {eq: $pageRoute}}) {
+          items {
+            id
+            artistID
+            creatorUserID
+            pictureID
+            pageTitle
+            heading
+            subheading
+            pageRoute
+            createdAt
+            updatedAt
+            owner
+            actionButtons {
+              items {
+                id
+                actionPageID
+                preActionText
+                postActionText
+                buttonIcon
+                backgroundColor
+                textColor
+                pointValue
+                position
+                targetURL
+                serviceAction
+                createdAt
+                updatedAt
+                owner
+              }
+            }
+          }
+          nextToken
+        }
+      }
+      owner
+      actionPages {
+        items {
+          id
+          artistID
+          creatorUserID
+          pictureID
+          pageTitle
+          heading
+          subheading
+          pageRoute
+          createdAt
+          updatedAt
+          artist {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          creatorUser {
+            id
+            username
+            firstName
+            lastName
+            email
+            phoneNumber
+            artistID
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+          subscribers {
+            nextToken
+          }
+          actionButtons {
+            nextToken
+          }
+          picture {
+            id
+            publicUrl
+            name
+            owner
+            visibility
+            createdAt
+            updatedAt
+          }
+        }
+        nextToken
+      }
+    }
+  }
+`;
+
   const {
     data: userData,
     loading: userLoading,
     error: userError,
     refetch: refectchUserData,
-  } = useQuery(gql(getArtistUser), {
-    variables: { id: userId },
+  } = useQuery(gql(getArtistByEnduser), {
+    variables: { id: userId, pageRoute: 'join' },
   });
-  console.log('userData', userData);
+
   const {
     data: artistByRouteData,
-    loading: artistByRouteLoading,
     error: artistByRouteError,
+    loading: artistByRouteLoading,
     refetch: refetchArtistByRoute,
-  } = useQuery(gql(listArtists), {
-    variables: { filter: { route: { eq: artistRoute } } },
+  } = useQuery(gql(getActionPageByArtistAndPageRoute), {
+    variables: { artistRoute, pageRoute: 'join' },
   });
 
   // define mutations
@@ -104,7 +239,7 @@ export const useGetActionPage = () => {
     console.log('artistByRouteData', artistByRouteData);
     if (artistByRouteData && !artistByRouteLoading && artistRoute) {
       // find if an artist exists at this route. if it does, try a different route
-      if (artistByRouteData.listArtists.items.length === 0) {
+      if (artistByRouteData.ArtistByRoute.items.length === 0) {
         return true;
       }
 
@@ -144,11 +279,15 @@ export const useGetActionPage = () => {
         refectchUserData();
       }
     }
+    console.log('enduserInfo', enduserInfo);
+    console.log('actionPageId', actionPageId);
+    console.log('artistRoute', artistRoute);
     if (enduserInfo && !actionPageId && !artistRoute) {
       setArtistRoute(enduserInfo.artist.route);
       // TODO this should pull from the artist, not from the enduserInfo
       setActionPageInfo(enduserInfo.actionPages.items[0]);
       if (enduserInfo.actionPages.items[0]) {
+        console.log('actionPageInfo.id', actionPageInfo.id);
         setActionPageId(actionPageInfo.id, 'actionPageId');
       }
       if (!artistId) {
@@ -202,5 +341,6 @@ export const useGetActionPage = () => {
     error,
     actionPageId,
     artistRoute,
+    actionPageData: artistByRouteData?.ArtistByRoute?.items?.[0],
   };
 };
