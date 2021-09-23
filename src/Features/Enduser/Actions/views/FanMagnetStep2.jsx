@@ -6,7 +6,7 @@ import {
   FanMagnetContext,
   SURVEY_SELECTION,
 } from '../../../../context/FanMagnetContext';
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
 const Step2MagnetHeader = styled(PageHeader)`
   && {
@@ -24,6 +24,10 @@ const MagnetButton = styled(FanMagnetButton)`
   span {
     font-size: 55px;
     margin-right: 43px;
+
+    @media (max-width: 600px) {
+      margin-right: 18px;
+    }
   }
 `;
 
@@ -32,11 +36,13 @@ export const FanMagnetStep2 = () => {
   let history = useHistory();
   const continueToNextStep = () => {
     //pull the root path from the location and push to the /secure path for that artist
-    const path=window.location.pathname;
-    const currentPathArray=window.location.pathname.split("/").filter(x => x!=="");
+    const path = window.location.pathname;
+    const currentPathArray = window.location.pathname
+      .split('/')
+      .filter(x => x !== '');
     const newRoute = ['/secure'].concat(currentPathArray[0]).join('/');
     history.push(newRoute);
-  }
+  };
 
   return (
     <React.Fragment>
