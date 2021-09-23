@@ -15,18 +15,16 @@ import { Icon } from '../UI/Icon';
 import { PageContainer, PageHeader } from '../Page';
 import { FanMagnetButton } from '../UI';
 
-// TODO need to update the awsconfig onRedirectCallback dynamically based on environment variables
-// copy the constant config (aws-exports.js) because config is read only. -- using location.href
-const updatedConfig = awsconfig;
-// // update the configUpdate constant with the good URLs
-// console.log(updatedConfig);
-// console.log(onRedirectCallback)
-updatedConfig.oauth.redirectSignIn =
-  'https://b273-174-20-142-170.ngrok.io/login/';
-updatedConfig.oauth.redirectSignOut =
-  'https://b273-174-20-142-170.ngrok.io/login/';
-// console.log(updatedConfig);
+// here we're copying the constant config (aws-exports.js) because config is read only. -- then updating location.href
+var updatedConfig = awsconfig;
+//build the current url to be used for oauth redirect (should probably use env variables... but this is quicker right now)
+const currentUrl = window.location.href;
+// takes the current url root, and adds the join route
+const redirectUrl = currentUrl.split("/").slice(0,3).join("/") + "/login/"
 
+updatedConfig.oauth.redirectSignIn = redirectUrl;
+updatedConfig.oauth.redirectSignOut = redirectUrl;
+console.log(`redirectUrl`,redirectUrl);
 Amplify.configure(updatedConfig);
 
 function checkUser() {
@@ -54,12 +52,12 @@ const StyledButton = styled(FanMagnetButton)`
 const ButtonInnerText = styled.div`
   text-align: left;
   font-family: 'Open Sans';
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
 `;
 
 const StyledPageHeader = styled(PageHeader)`
-  font-size: 60px;
+  font-size: 40px;
 `;
 
 const OrBlock = styled.div`
@@ -78,7 +76,7 @@ const Terms = styled.div`
   a {
     color: white;
     font-family: 'Open Sans';
-    font-size: 18px;
+    font-size: 16px;
     text-decoration: underline;
   }
 `;
@@ -95,7 +93,16 @@ export const SecureViewWrapper = ({ userRole, children }) => {
   }
 
   console.log('hello from secure wrapper');
+  
+  //set the initial authState if the current user is already authenticated (in the case of oauth redirect, it will be)
+  if (authState === undefined) {
+    Auth.currentAuthenticatedUser().then((authData) => {
+      setAuthState(AuthState.SignedIn);
+      setUserId(authData);
+    });
+  }
 
+  //use this useEffect to changes state
   useEffect(() => {
     onAuthUIStateChange((nextAuthState, authData) => {
       setAuthState(nextAuthState);
@@ -106,8 +113,8 @@ export const SecureViewWrapper = ({ userRole, children }) => {
   const signUpProps = {
     headerText:
       userRole === 'admin'
-        ? 'Create a Fan Action sequence'
-        : 'Or sign up with your email',
+        ? 'Create a Fan Magnet sequence'
+        : 'Continue with your email',
     submitButtonText: 'Complete Registration',
     slot: 'sign-up',
     usernameAlias: 'email',
@@ -129,17 +136,19 @@ export const SecureViewWrapper = ({ userRole, children }) => {
     facebookAppId: '674030226824129', // login here https://developers.facebook.com/apps/
   };
 
+  console.log(`authState`, authState);
+  console.log(`userId`, userId);
   return authState === AuthState.SignedIn && userId ? (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <div style={{ flex: '1 0 auto' }}>{children}</div>
       <Footer>
-        {/* <AmplifySignOut /> */}
-        <Button onClick={checkUser}>Check User</Button>
-        <Button onClick={signOut}>Sign Out</Button>
+        <AmplifySignOut />
+        {/* <Button onClick={checkUser}>Check User</Button> */}
+        {/* <Button onClick={signOut}>Sign Out</Button> */}
       </Footer>
     </div>
   ) : (
-    <PageContainer pageContentPadding="50px 95px">
+    <PageContainer pageContentPadding="10px">
       {!showSignupForm && (
         <React.Fragment>
           <StyledPageHeader>Unlock Your Free Gift</StyledPageHeader>
@@ -155,7 +164,7 @@ export const SecureViewWrapper = ({ userRole, children }) => {
             <div>
               <ButtonInnerText>
                 Continue with
-                <br /> Facebook
+                Facebook
               </ButtonInnerText>
             </div>
           </StyledButton>
@@ -172,12 +181,12 @@ export const SecureViewWrapper = ({ userRole, children }) => {
             <div>
               <ButtonInnerText>
                 Connect With
-                <br /> Email
+                 Email
               </ButtonInnerText>
             </div>
           </StyledButton>
           <Terms>
-            <a href="#">
+            <a href="https://www.modern-musician.com/terms" target='_blank'>
               By accepting this gift, I acknowledge that I have reviewed and
               agreed to our Terms of Use, Contest Rules, and Privacy Policy.
             </a>
@@ -185,9 +194,26 @@ export const SecureViewWrapper = ({ userRole, children }) => {
         </React.Fragment>
       )}
       {showSignupForm && (
-        <AmplifyAuthenticator initialAuthState="signup">
-          <AmplifySignUp {...signUpProps} />
-        </AmplifyAuthenticator>
+        <React.Fragment>
+          <AmplifyAuthenticator initialAuthState="signup">
+            <AmplifySignUp {...signUpProps} />
+          </AmplifyAuthenticator>
+          <StyledButton
+            active
+            activeColor="white"
+            activeBgColor="transparent linear-gradient(90deg, #404040 0%, #393838 92%, #363636 100%) 0% 0% no-repeat padding-box;"
+            handleClick={() => setShowSignupForm(false)}
+          >
+            <span>
+              <Icon color="white" name="FaUndo" size={70} />
+            </span>
+            <div>
+              <ButtonInnerText>
+                Go Back
+              </ButtonInnerText>
+            </div>
+          </StyledButton>
+        </React.Fragment>
       )}
     </PageContainer>
   );

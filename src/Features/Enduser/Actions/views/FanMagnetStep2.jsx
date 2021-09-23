@@ -6,19 +6,20 @@ import {
   FanMagnetContext,
   SURVEY_SELECTION,
 } from '../../../../context/FanMagnetContext';
+import {useHistory} from 'react-router-dom'
 
 const Step2MagnetHeader = styled(PageHeader)`
   && {
-    font-size: 60px;
-    margin-bottom: 35px;
+    font-size: 20px;
+    margin-bottom: 5px;
   }
 `;
 
 const MagnetButton = styled(FanMagnetButton)`
   margin: 0 0 50px;
-  font-size: 51px;
+  font-size: 30px;
   font-weight: 400;
-  padding: 30px 47px;
+  padding: 10px 17px;
 
   span {
     font-size: 55px;
@@ -28,6 +29,15 @@ const MagnetButton = styled(FanMagnetButton)`
 
 export const FanMagnetStep2 = () => {
   const { setFanMagnetSurvey } = useContext(FanMagnetContext);
+  let history = useHistory();
+  const continueToNextStep = () => {
+    //pull the root path from the location and push to the /secure path for that artist
+    const path=window.location.pathname;
+    const currentPathArray=window.location.pathname.split("/").filter(x => x!=="");
+    const newRoute = ['/secure'].concat(currentPathArray[0]).join('/');
+    history.push(newRoute);
+  }
+
   return (
     <React.Fragment>
       <Step2MagnetHeader>Did you enjoy the song?</Step2MagnetHeader>
@@ -38,6 +48,7 @@ export const FanMagnetStep2 = () => {
         margin="0 0 50px"
         handleClick={() => {
           setFanMagnetSurvey(SURVEY_SELECTION.LOVE_IT);
+          continueToNextStep();
         }}
       >
         <span>👍</span>
@@ -50,6 +61,7 @@ export const FanMagnetStep2 = () => {
         margin="0 0 50px"
         handleClick={() => {
           setFanMagnetSurvey(SURVEY_SELECTION.OKAY);
+          continueToNextStep();
         }}
       >
         <span>👌</span>
@@ -62,9 +74,10 @@ export const FanMagnetStep2 = () => {
         margin="0 0 50px"
         handleClick={() => {
           setFanMagnetSurvey(SURVEY_SELECTION.DISLIKE);
+          continueToNextStep();
         }}
       >
-        <span>👌</span>
+        <span>👎</span>
         <div>{SURVEY_SELECTION.DISLIKE}</div>
       </MagnetButton>
     </React.Fragment>

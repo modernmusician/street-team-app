@@ -29,7 +29,7 @@ export const ActionPage = () => {
   const [actionPageID, setActionPageID] = useState(0);
   const [enduserPageSubscriptionID, setEnduserPageSubscriptionID] = useState(0);
   const [totalPoints, setTotalPoints] = useState(0);
-  const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
   const { artist, page = 'join' } = useParams();
 
@@ -42,7 +42,7 @@ export const ActionPage = () => {
     bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
   })
     .then(user => {
-      setUserId(user.username);
+      setUser(user);
       console.log(`Load additional settings for user: ${user.username}`);
       // console.log("User Info:");
       console.log(user);
@@ -94,18 +94,18 @@ Hub.listen('auth', (data) => {
     error: enduserError,
     refetch: refetchEnduserData
   } = useQuery(gql(getEnduser), {
-    variables: { id: userId },
+    variables: { id: user.username },
   });
 
   //define mutation for create a new enduser record
   const [addEnduser, { loading: createEnduserLoading, data:createEnduserData, error:createEnduserError }] = useMutation(gql(createEnduser),
   {
       update(cache, { data: { addEnduser } }) {
-        // const {enduserData} = cache.readQuery({query:gql(getEnduser), input: {id: userId }});
+        // const {enduserData} = cache.readQuery({query:gql(getEnduser), input: {id: user.username }});
         cache.writeQuery({query:gql(getEnduser),data:{enduser: addEnduser}});
       },
     refetchQueries: [{query:gql(getEnduser),
-    variables: {id: userId },
+    variables: {id: user.username },
     }],
     awaitRefetchQueries:true
     
@@ -116,7 +116,7 @@ Hub.listen('auth', (data) => {
   const [addSubscription, {loading:loadingNewSubscription}] = useMutation(gql(createEnduserPageSubscription),
   {
     refetchQueries: [{query:gql(getActionPageAndEnduserDetailsByArtistPageRouteAndEnduserID),
-    variables: { artistRoute: artist, pageRoute: page, enduserID: userId},
+    variables: { artistRoute: artist, pageRoute: page, enduserID: user.username},
     }],
     awaitRefetchQueries:true
   }
@@ -126,7 +126,7 @@ Hub.listen('auth', (data) => {
   const [addCompletedAction, {loading:loadingCompletedAction}] = useMutation(gql(createEnduserPageSubscriptionCompletedActions),
   {
     refetchQueries: [{query:gql(getActionPageAndEnduserDetailsByArtistPageRouteAndEnduserID),
-    variables: { artistRoute: artist, pageRoute: page, enduserID: userId},
+    variables: { artistRoute: artist, pageRoute: page, enduserID: user.username},
     }],
     awaitRefetchQueries:true
   }
@@ -136,8 +136,8 @@ Hub.listen('auth', (data) => {
   if(enduserData!=null && enduserData.getEnduser==null && !createEnduserLoading){
     console.log("enduserInfo does not exist -- creating enduser");
     const newEnduserData = addEnduser({variables:{input :{
-      id:userId,
-      email: userEmail,
+      id: user.username,
+      email: user.attributes?.email,
     } }});
     console.log(newEnduserData);
     console.log("enduser record created");
@@ -148,7 +148,7 @@ Hub.listen('auth', (data) => {
   const { data: actionPageData, loading } = useQuery(
     gql(getActionPageAndEnduserDetailsByArtistPageRouteAndEnduserID),
     {
-      variables: { artistRoute: artist, pageRoute: page, enduserID: userId},
+      variables: { artistRoute: artist, pageRoute: page, enduserID: user.username},
     }
   );
 
@@ -209,17 +209,17 @@ Hub.listen('auth', (data) => {
   useEffect(()=>{
     if (!loadingNewSubscription && actionPageData && actionPageData?.ArtistByRoute?.items[0]?.actionPages?.items[0]?.subscribers?.items?.length < 1){
       // create a new enduser subscription for this page if one doesn't already exist
-      if(actionPageID && userId){
+      if(actionPageID && user?.username){
         // TODO need to add the referral ID here when creating a subscription
         const newSubscriptionData = addSubscription({variables:{input:{
           actionPageID: actionPageID,
-          enduserID:userId,
+          enduserID:user.username,
         }
         }});
         console.log(`newSubscription data is ${newSubscriptionData}`)
       }
       else {
-        console.log(`need userId and actionPageID to create a record`)
+        console.log(`need user.username and actionPageID to create a record`)
       }
     }
     else if(actionPageData?.ArtistByRoute?.items[0]?.actionPages?.items[0]?.subscribers?.items?.length > 0){

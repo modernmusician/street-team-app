@@ -6,10 +6,10 @@ const StyledButton = styled.button`
   background: ${({ bgColor }) => bgColor};
   border: 1px solid #333333;
   color: ${({ color }) => color};
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 500;
   margin: ${({ margin }) => margin};
-  padding: 37px 47px;
+  padding: 17px 30px;
 `;
 
 const StyledButtonInner = styled.div`
