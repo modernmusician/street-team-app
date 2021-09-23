@@ -8,7 +8,6 @@ export const useCurrentAuthUser = () => {
     bypassCache: false,
   })
     .then(user => {
-      console.log('Load additional settings for user:', user);
       setUserId(user.username);
       setArtistName(user.attributes.name);
     })

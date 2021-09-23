@@ -6,6 +6,10 @@ export const StyledPageHeader = styled.div`
   font-size: 50px;
   text-align: center;
   padding: 20px 0;
+
+  @media (max-width: 600px) {
+    font-size: 30px;
+  }
 `;
 
 export const PageHeader = ({ children, className }) => {

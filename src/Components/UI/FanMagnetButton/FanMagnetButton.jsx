@@ -10,6 +10,11 @@ const StyledButton = styled.button`
   font-weight: 500;
   margin: ${({ margin }) => margin};
   padding: 17px 30px;
+
+  @media (max-width: 600px) {
+    padding: 18px 21px !important;
+    font-size: 20px;
+  }
 `;
 
 const StyledButtonInner = styled.div`
@@ -18,6 +23,10 @@ const StyledButtonInner = styled.div`
 
   span {
     margin-right: 18px;
+
+    @media (max-width: 600px) {
+      transform: scale(0.8);
+    }
   }
 `;
 

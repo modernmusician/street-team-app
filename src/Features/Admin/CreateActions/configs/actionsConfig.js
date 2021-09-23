@@ -29,6 +29,14 @@ export const selectActionsConfig = [
   },
 ];
 
+// active={isButtonActive}
+// activeBgColor={continueButtonDetails.backgroundColor || "#807650"}
+// color={continueButtonDetails.textColor || "#202021"}
+// inactiveBgColor="#544c2e"
+// handleClick={() => setCurrentStep(2)}
+// ctaText={continueButtonDetails.preActionText || "CLAIM YOUR FREE GIFT"}
+// iconName={continueButtonDetails.buttonIcon || "Gift"}
+
 export const apiActionsConfig = {
   email: {
     // actionPageID: actionPageId,
@@ -45,6 +53,7 @@ export const apiActionsConfig = {
     // actionPageID: actionPageId,
     buttonIcon: 'Group',
     // targetURL: newTargetUrl,
+    serviceAction: 'link',
     backgroundColor: '#FED93E',
     pointValue: 10,
     position: 1,

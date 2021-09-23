@@ -58,6 +58,12 @@ export const ActionCard = () => {
             <h4>Setup Fan Actions</h4>
           </Actions>
         </Row>
+        {/* <Row>
+          <Actions>
+            <Icon name="MdEdit" color={theme.colors.primary} size={20} />
+            <h4>Setup Landing Page</h4>
+          </Actions>
+        </Row> */}
       </ActionContainer>
     </Container>
   );

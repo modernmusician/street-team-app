@@ -17,7 +17,8 @@ const RootContainer = styled(Container)({
 });
 
 export const CreateActionPage = () => {
-  const { loading, actionPageId, artistRoute } = useGetActionPage();
+  const { loading, actionPageId, artistRoute, actionPageData } =
+    useGetActionPage();
   const [actionChecked, setActionChecked] = useState({});
   const [actionValue, setActionValue] = useState({});
 
@@ -61,6 +62,7 @@ export const CreateActionPage = () => {
               <SetupActions
                 actionPageId={actionPageId}
                 artistRoute={artistRoute}
+                actionPageData={actionPageData}
                 actions={selectActionsConfig}
                 onChangeCheckbox={onChangeCheckbox}
                 onChangeInput={onChangeInput}
