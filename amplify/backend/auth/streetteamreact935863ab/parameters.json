@@ -4,7 +4,7 @@
     "resourceNameTruncated": "street935863ab",
     "userPoolName": "streetteamreact935863ab_userpool_935863ab",
     "autoVerifiedAttributes": [
-        "phone_number"
+        "email"
     ],
     "mfaConfiguration": "OFF",
     "mfaTypes": [
@@ -20,6 +20,7 @@
     "requiredAttributes": [
         "email"
     ],
+    "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
@@ -45,14 +46,13 @@
             "Arn"
         ]
     },
-    "useDefault": "manual",
-    "hostedUI": false,
+    "useDefault": "defaultSocial",
+    "hostedUI": true,
     "usernameAttributes": [
         "email"
     ],
     "userPoolGroupList": [
-        "everyone",
-        "everybody"
+        "everyone"
     ],
     "serviceName": "Cognito",
     "dependsOn": [
@@ -75,8 +75,12 @@
     "permissions": [
         "{\n  \"policyName\": \"AddToGroupCognito\",\n  \"trigger\": \"PostConfirmation\",\n  \"effect\": \"Allow\",\n  \"actions\": [\n    \"cognito-idp:AdminAddUserToGroup\",\n    \"cognito-idp:GetGroup\",\n    \"cognito-idp:CreateGroup\"\n  ],\n  \"resource\": {\n    \"paramType\": \"!GetAtt\",\n    \"keys\": [\n      \"UserPool\",\n      \"Arn\"\n    ]\n  }\n}"
     ],
-    "authProviders": [
-        "graph.facebook.com"
+    "hostedUIDomainName": "streetteamreactbd40b2f8-bd40b2f8",
+    "authProvidersUserPool": [
+        "Facebook"
     ],
-    "thirdPartyAuth": true
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}}]",
+    "breakCircularDependency": false,
+    "authProviders": [],
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"implicit\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://7eb6-174-20-142-170.ngrok.io/login/\",\"https://app.modern-musician.com/login/\",\"https://dev.modern-musician.com/login/\"],\"LogoutURLs\":[\"https://7eb6-174-20-142-170.ngrok.io/login/\",\"https://app.modern-musician.com/login/\",\"https://dev.modern-musician.com/login/\"]}"
 }
