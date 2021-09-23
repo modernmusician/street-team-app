@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import awsconfig from '../../aws-exports';
 import { useParams } from 'react-router-dom';
-import {Redirect, useHistory, useLocation} from 'react-router-dom';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 
 Amplify.configure(awsconfig);
 
@@ -17,7 +17,6 @@ const Footer = styled.footer({
   height: '50px',
   flexShrink: 0,
 });
-
 
 export const Login = () => {
   const { userRole } = useParams();
@@ -33,20 +32,20 @@ export const Login = () => {
   // }, []);
 
   const notArtist = userRole !== 'artist';
-  const referrerRoute ='/test/me/out';
+  const referrerRoute = '/test/me/out';
 
   let history = useHistory();
   let location = useLocation();
 
-  let { from } = location.state || { from: { pathname: "/" } };
+  let { from } = location.state || { from: { pathname: '/' } };
 
   console.log(location.state);
-  console.log(history)
+  console.log(history);
 
   const previousRoute = window.localStorage.getItem('route');
   console.log(previousRoute);
 
-  if(previousRoute){
+  if (previousRoute) {
     history.push(previousRoute);
     // setRoute(previousRoute);
   }
@@ -77,11 +76,8 @@ export const Login = () => {
 
   /// /secure/Artist/page - > not logged in
 
-
-  return route ? (
-    <div> loading</div> ): 
-    (<div> page not found </div>
-  )};
+  return route ? <div> loading</div> : <div> page not found </div>;
+};
 //   return authState === AuthState.SignedIn && userId ? (
 //     route ? (
 //           <Redirect

@@ -2,21 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export const MagnetHeader = styled.div`
+export const StyledPageHeader = styled.div`
   font-size: 50px;
   text-align: center;
   padding: 20px 0;
 `;
 
-export const FanMagnetHeader = ({ children, className }) => {
-  return <MagnetHeader className={className}>{children}</MagnetHeader>;
+export const PageHeader = ({ children, className }) => {
+  return <StyledPageHeader className={className}>{children}</StyledPageHeader>;
 };
 
-FanMagnetHeader.defaultProps = {
+PageHeader.defaultProps = {
   className: '',
 };
 
-FanMagnetHeader.propTypes = {
+PageHeader.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.node,
 };

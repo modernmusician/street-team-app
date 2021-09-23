@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { FanMagnetButton } from '../../../../Components/UI';
-import { FanMagnetHeader } from '../FanMagnetHeader';
+import { PageHeader } from '../../../../Components/Page/PageHeader';
 import {
   FanMagnetContext,
   SURVEY_SELECTION,
 } from '../../../../context/FanMagnetContext';
 
-const Step2MagnetHeader = styled(FanMagnetHeader)`
+const Step2MagnetHeader = styled(PageHeader)`
   && {
     font-size: 60px;
     margin-bottom: 35px;

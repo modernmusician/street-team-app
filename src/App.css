@@ -1,11 +1,10 @@
 @import 'https://fonts.googleapis.com/css2?family=Oswald';
 @import 'https://fonts.googleapis.com/css?family=Open Sans';
 
-
 :root {
-  --amplify-primary-color: #5E30B8;
-  --amplify-primary-tint: #7857B8;
-  --amplify-primary-shade: #40207D;
+  --amplify-primary-color: #5e30b8;
+  --amplify-primary-tint: #7857b8;
+  --amplify-primary-shade: #40207d;
 }
 
 * {
@@ -19,7 +18,8 @@ html {
   height: 100%;
 }
 
-body, #root {
+body,
+#root {
   margin: 0;
   font-family: 'Oswald';
   -webkit-font-smoothing: antialiased;
@@ -35,24 +35,24 @@ code {
 }
 
 h1 {
-  font-family: "Oswald";
+  font-family: 'Oswald';
   color: white;
 }
 
 h2 {
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   color: white;
 }
 
 h3 {
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   margin-block-start: 5px;
   margin-block-end: 5px;
   font-size: 18px;
 }
 
 h4 {
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   margin-block-start: 5px;
   margin-block-end: 5px;
   font-size: 14px;
@@ -60,7 +60,7 @@ h4 {
 }
 
 h5 {
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   color: white;
   text-transform: uppercase;
   font-weight: normal;
@@ -74,6 +74,10 @@ hr {
 }
 
 p {
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   color: white;
+}
+
+amplify-authenticator {
+  --container-height: 100%;
 }
