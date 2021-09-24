@@ -6,6 +6,7 @@ import {
   createArtistUser,
   createActionPage,
   createArtist,
+  updateArtistUser,
 } from '../../../../../graphql/mutations';
 import { useCurrentAuthUser } from '../useCurrentAuthUser';
 
@@ -160,7 +161,7 @@ export const useGetActionPage = () => {
     data: userData,
     loading: userLoading,
     error: userError,
-    refetch: refectchUserData,
+    refetch: refetchUserData,
   } = useQuery(gql(getArtistByEnduser), {
     variables: { id: userId, pageRoute: 'join' },
   });
@@ -179,7 +180,7 @@ export const useGetActionPage = () => {
     addUser,
     {
       loading: createUserLoading,
-      // data: createUserData,
+      data: createUserData,
       error: createUserError,
     },
   ] = useMutation(gql(createArtistUser), {
@@ -212,9 +213,9 @@ export const useGetActionPage = () => {
         variables: { id: userId },
       },
       {
-        query: gql(listArtists),
-        variables: { filter: { id: { eq: artistId } } },
-      },
+        query: gql(getActionPageByArtistAndPageRoute),
+        variables: { artistRoute, pageRoute: 'join' },
+      }
     ],
     awaitRefetchQueries: true,
   });
@@ -242,9 +243,11 @@ export const useGetActionPage = () => {
       if (artistByRouteData.ArtistByRoute.items.length === 0) {
         return true;
       }
-
-      setRouteIncrement(routeIncrement + 1);
-      setArtistRoute(`${artistRoute}-${routeIncrement.toString()}`);
+      let artistArray = artistRoute.split('_');
+      console.log(`artistArray`,artistArray);
+      let artistName = artistArray[0];
+      setRouteIncrement(parseInt(routeIncrement) + 1);
+      setArtistRoute(`${artistName}_${routeIncrement.toString()}`);
       refetchArtistByRoute();
     }
     return false;
@@ -254,9 +257,9 @@ export const useGetActionPage = () => {
 
   try {
     // if the enduser does not exist
-    if (!enduserInfo && !createUserLoading && uniqueArtistRoute()) {
+    if (!enduserInfo && !createUserLoading && !createUserData) {
       // create an artist for the new user
-      if (!createArtistLoading && !artistId && !createArtistData) {
+      if (!createArtistLoading && !artistId && !createArtistData && uniqueArtistRoute()) {
         // route string is defined elsewhere
         const artistInput = { name: artistName, route: artistRoute };
         addArtist({
@@ -266,7 +269,7 @@ export const useGetActionPage = () => {
       if (createArtistData && !artistId) {
         setArtistId(createArtistData.createArtist.id);
       }
-      if (artistId) {
+      if (artistId && userId && !createUserData && !userData) {
         // add new user since it doesn't exist
         addUser({
           variables: {
@@ -276,12 +279,26 @@ export const useGetActionPage = () => {
             },
           },
         });
-        refectchUserData();
+        refetchUserData();
       }
     }
     console.log('enduserInfo', enduserInfo);
     console.log('actionPageId', actionPageId);
     console.log('artistRoute', artistRoute);
+    //if the enduser doesn't have an artist, add one & then set the artist Id
+    if (enduserInfo && !enduserInfo.artist && !createArtistData && !createArtistLoading){
+      console.log(`no artist for enduser... create one! `)
+      const artistInput = { name: artistName, route: artistRoute };
+      // addArtist({
+      //   variables: { input: artistInput },
+      // });
+    }
+    if (createArtistData && !artistId) {
+      const id =createArtistData.createArtist.id
+      setArtistId(id);
+      enduserInfo.artistID = id;
+      updateArtistUser(enduserInfo)
+    }
     if (enduserInfo && !actionPageId && !artistRoute) {
       setArtistRoute(enduserInfo.artist.route);
       // TODO this should pull from the artist, not from the enduserInfo
@@ -341,6 +358,6 @@ export const useGetActionPage = () => {
     error,
     actionPageId,
     artistRoute,
-    actionPageData: artistByRouteData?.ArtistByRoute?.items?.[0],
+    actionPageData: userData?.getArtistUser?.artist?.actionPages?.items?.find(item => item.pageRoute==="join"),
   };
 };

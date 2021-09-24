@@ -19,6 +19,12 @@ export const Routes = () => {
             <CreateActionPage />
           </SecureViewWrapper>
         </Route>
+        {/* support backwards compatability (to be removed later on) */}
+        <Route path="/artist/secure/create-action-page">
+          <SecureViewWrapper userRole="admin">
+            <CreateActionPage />
+          </SecureViewWrapper>
+        </Route>
         <Route path="/secure/:artist/:page?">
           <SecureViewWrapper userRole="enduser">
             <ActionsView />

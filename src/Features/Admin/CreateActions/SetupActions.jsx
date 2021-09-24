@@ -77,12 +77,12 @@ export const SetupActions = ({
     gql(createActionPageButton),
     {
       refetchQueries: [
-        { query: gql(getActionPage), variables: { id: actionPageData.id } },
+        { query: gql(getActionPage), variables: { id: actionPageData?.id } },
       ],
       awaitRefetchQueries: false,
     }
   );
-
+  console.log(`actionPageData is ` ,actionPageData)
   const onSubmit = () => {
     console.log('actionChecked, actionValue', actionChecked, actionValue);
     console.log('create or update called');
@@ -144,7 +144,7 @@ export const SetupActions = ({
       let recordExists = false;
       const inputVariables = {
         ...apiActionsConfig.vipGroup,
-        actionPageID: actionPageData.id,
+        actionPageID: actionPageData?.id,
         targetURL: newTargetUrl,
       };
       if (actionPageData) {
@@ -179,7 +179,7 @@ export const SetupActions = ({
       let recordExists = false;
       const inputVariables = {
         ...apiActionsConfig.starterPack,
-        actionPageID: actionPageData.id,
+        actionPageID: actionPageData?.id,
         targetURL: actionValue.starterPack,
       };
       if (actionPageData) {
@@ -214,7 +214,7 @@ export const SetupActions = ({
       let recordExists = false;
       const inputVariables = {
         ...apiActionsConfig.followMusic,
-        actionPageID: actionPageData.id,
+        actionPageID: actionPageData?.id,
         targetURL: newTargetUrl,
       };
       if (actionPageData) {
