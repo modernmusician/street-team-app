@@ -168,7 +168,7 @@ function CreateActionPage() {
   }
 
   console.log(userData, 'userData');
-  const enduserInfo = userData.getArtistUser;
+  const enduserInfo = userData?.getArtistUser;
   // const artistInfo = artistData.getArtist;
 
   var actionPageInfo = null;

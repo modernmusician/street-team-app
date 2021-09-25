@@ -73,22 +73,24 @@ export const SetupActions = ({
 
   const [updateActionButton] = useMutation(gql(updateActionPageButton));
 
-  const [addActionPageButton, { loading: loadingActionPage }] = useMutation(
-    gql(createActionPageButton),
-    {
-      refetchQueries: [
-        { query: gql(getActionPage), variables: { id: actionPageData?.id } },
-      ],
-      awaitRefetchQueries: false,
-    }
+  const [addActionPageButton, { loading: loadingActionPageButton }] = useMutation(
+    gql(createActionPageButton)
+    // ,
+    // {
+    //   refetchQueries: [
+    //     { query: gql(getActionPage), variables: { id: actionPageData?.id } },
+    //   ],
+    //   awaitRefetchQueries: false,
+    // }
   );
-  console.log(`actionPageData is ` ,actionPageData)
+  
   const onSubmit = () => {
+    console.log(`actionPageData is ` ,actionPageData)
     console.log('actionChecked, actionValue', actionChecked, actionValue);
     console.log('create or update called');
     console.log('actionValue, actionPageId', actionChecked, actionValue);
     let newTargetUrl = '';
-    const actionButtons = actionPageData?.items?.[0]?.actionButtons?.items;
+    const actionButtons = actionPageData?.actionButtons?.items;
     console.log('check', actionValue?.email && actionChecked?.email);
     // handle sendEmailUrl
     if (actionValue?.email && actionChecked?.email) {
@@ -100,6 +102,7 @@ export const SetupActions = ({
         targetURL: emailUrl,
       };
       console.log('inputVariables', inputVariables);
+      console.log('actionButtons',actionButtons)
       if (actionPageData) {
         // if the action buttons exist in the pageData, update them
         if (actionButtons) {
@@ -113,15 +116,13 @@ export const SetupActions = ({
             updateActionButton({
               variables: {
                 input:
-                  // id:emailButton.id,
-                  // targetURL:actionValue.sendEmailUrl,
                   inputVariables,
               },
             });
             recordExists = true; // don't go on to create a new record
           }
         }
-        if (!recordExists) {
+        if (!recordExists && !loadingActionPageButton) {
           console.log('creating a new button');
           // create the button record
           addActionPageButton({
@@ -130,7 +131,7 @@ export const SetupActions = ({
         }
         console.log('we did it!');
       }
-      if (!recordExists) {
+      if (!recordExists && !loadingActionPageButton) {
         console.log('creating a new button');
         // create the button record
         addActionPageButton({
@@ -162,7 +163,7 @@ export const SetupActions = ({
             recordExists = true; // don't go on to create a new record
           }
         }
-        if (!recordExists) {
+        if (!recordExists && !loadingActionPageButton) {
           console.log('creating a new button');
           // create the button record
           addActionPageButton({
@@ -197,7 +198,7 @@ export const SetupActions = ({
             recordExists = true; // don't go on to create a new record
           }
         }
-        if (!recordExists) {
+        if (!recordExists && !loadingActionPageButton) {
           console.log('creating a new button');
           // create the button record
           addActionPageButton({
@@ -232,7 +233,7 @@ export const SetupActions = ({
             recordExists = true; // don't go on to create a new record
           }
         }
-        if (!recordExists) {
+        if (!recordExists && !loadingActionPageButton) {
           console.log('creating a new button');
           // create the button record
           addActionPageButton({
