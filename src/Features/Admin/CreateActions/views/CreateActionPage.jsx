@@ -6,6 +6,7 @@ import { ActionCard } from '../ActionCard';
 import { NavBar } from '../NavBar';
 import { Preview } from '../Preview';
 import { SetupActions } from '../SetupActions';
+import { SetupLanding } from '../SetupLanding';
 import { useGetActionPage } from '../hooks/useGetActionPage';
 import { selectActionsConfig } from '../configs/actionsConfig';
 
@@ -17,6 +18,7 @@ const RootContainer = styled(Container)({
 });
 
 export const CreateActionPage = () => {
+  const [activeView, setActiveView] = useState('action');
   const { loading, actionPageId, artistRoute, actionPageData } =
     useGetActionPage();
   const [actionChecked, setActionChecked] = useState({});
@@ -105,20 +107,26 @@ export const CreateActionPage = () => {
         <Container fluid>
           <Row>
             <Col lg={3}>
-              <ActionCard />
+              <ActionCard
+                activeView={activeView}
+                setActiveView={setActiveView}
+              />
             </Col>
             <Col>
-              <SetupActions
-                actionPageId={actionPageId}
-                artistRoute={artistRoute}
-                actionPageData={data}
-                actions={selectActionsConfig}
-                onChangeCheckbox={onChangeCheckbox}
-                onChangeInput={onChangeInput}
-                actionChecked={actionChecked}
-                actionValue={actionValue}
-                setData={setData}
-              />
+              {activeView === 'action' && (
+                <SetupActions
+                  actionPageId={actionPageId}
+                  artistRoute={artistRoute}
+                  actionPageData={data}
+                  actions={selectActionsConfig}
+                  onChangeCheckbox={onChangeCheckbox}
+                  onChangeInput={onChangeInput}
+                  actionChecked={actionChecked}
+                  actionValue={actionValue}
+                  setData={setData}
+                />
+              )}
+              {activeView === 'landing' && <SetupLanding />}
             </Col>
             <Col>
               <Preview
