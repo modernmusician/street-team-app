@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Spinner } from '../../../../Components/UI/Spinner';
@@ -21,6 +21,8 @@ export const CreateActionPage = () => {
     useGetActionPage();
   const [actionChecked, setActionChecked] = useState({});
   const [actionValue, setActionValue] = useState({});
+  const [data, setData] = useState(actionPageData);
+  const [savedDataRestored, setSavedDataRestored] = useState(false);
 
   const onChangeCheckbox = id => {
     setActionChecked({
@@ -38,6 +40,51 @@ export const CreateActionPage = () => {
 
   console.log(actionValue, actionChecked);
 
+  useEffect(() => {
+    if (!data) setData(actionPageData);
+  }, [actionPageData]);
+
+  useEffect(() => {
+    // pull in existing data from the database if the values haven't yet been set
+    if (
+      data &&
+      Object.keys(actionValue).length === 0 &&
+      Object.keys(actionChecked).length === 0 &&
+      !savedDataRestored
+    ) {
+      const checked = {};
+      const values = {};
+      const buttonsArray = data?.actionButtons?.items;
+      for (let i = 0; i < buttonsArray.length; i++) {
+        const element = buttonsArray[i];
+        console.log(element);
+        // handle the email url button
+        if (element.buttonIcon === 'Email') {
+          checked.email = true;
+          // strip the email address out of the templated email message
+          // eslint-disable-next-line prefer-destructuring
+          values.email = element.targetURL.split('?')[0].split('mailto:')[1];
+        }
+        // handle the group join button
+        if (buttonsArray[i].buttonIcon === 'Group') {
+          checked.vipGroup = true;
+          values.vipGroup = element.targetURL;
+        }
+        if (buttonsArray[i].buttonIcon === 'Ticket') {
+          checked.starterPack = true;
+          values.starterPack = buttonsArray[i].targetURL;
+        }
+        if (buttonsArray[i].buttonIcon === 'Music') {
+          checked.followMusic = true;
+          values.followMusic = buttonsArray[i].targetURL;
+        }
+      }
+      setActionChecked(checked);
+      setActionValue(values);
+      setSavedDataRestored(true);
+    }
+  }, [data]);
+
   if (loading)
     return (
       <Container fluid>
@@ -48,6 +95,8 @@ export const CreateActionPage = () => {
         </Row>
       </Container>
     );
+
+  console.log(`actionChecked`, actionChecked, `actionValue`, actionValue, data);
 
   return (
     <div>
@@ -62,12 +111,13 @@ export const CreateActionPage = () => {
               <SetupActions
                 actionPageId={actionPageId}
                 artistRoute={artistRoute}
-                actionPageData={actionPageData}
+                actionPageData={data}
                 actions={selectActionsConfig}
                 onChangeCheckbox={onChangeCheckbox}
                 onChangeInput={onChangeInput}
                 actionChecked={actionChecked}
                 actionValue={actionValue}
+                setData={setData}
               />
             </Col>
             <Col>
