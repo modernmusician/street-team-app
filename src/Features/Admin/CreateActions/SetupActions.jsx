@@ -1,17 +1,18 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col, Button, Card } from 'react-bootstrap';
+import { Container, Row, Col, Button, Card, Modal } from 'react-bootstrap';
 import styled from 'styled-components';
+import { Icon } from '../../../Components/UI/Icon';
 import { useGradient } from '../../../Hooks/useGradient';
 // import { apiActionsConfig } from './configs/actionsConfig';
 // import { compareId } from '../../../utils/sharedUtils';
-import { gql, useQuery, useMutation } from '@apollo/react-hooks';
+import { gql, useMutation } from '@apollo/react-hooks';
 import {
   updateActionPageButton,
   createActionPageButton,
 } from '../../../graphql/mutations';
-import { getActionPage } from '../../../graphql/queries';
+// import { getActionPage } from '../../../graphql/queries';
 import { apiActionsConfig } from './configs/actionsConfig';
 import { CreateAction } from './CreateAction';
 
@@ -35,7 +36,7 @@ const HeaderRow = styled(Card.Body)(({ theme }) => {
   };
 });
 
-const SaveButton = styled(Button)(({ theme }) => {
+const StyledButton = styled(Button)(({ theme }) => {
   return {
     background: theme.colors.yellow,
     color: theme.colors.black,
@@ -61,37 +62,40 @@ export const SetupActions = ({
   onChangeInput,
   actionChecked,
   actionValue,
-  // actionPageId,
+  setData,
   artistRoute,
+  actionPageId,
   actionPageData,
 }) => {
-  // const {
-  //   data: pageData,
-  //   loading: pageDataLoading,
-  //   error: pageDataError,
-  // } = useQuery(gql(getActionPage), { variables: { id: actionPageId } });
+  const [show, setShow] = useState(false);
 
-  const [updateActionButton] = useMutation(gql(updateActionPageButton));
+  const [updateActionButton] = useMutation(gql(updateActionPageButton), {
+    onCompleted: data => {
+      setData(data.updateActionPageButton);
+      setShow(true);
+    },
+  });
 
-  const [addActionPageButton, { loading: loadingActionPageButton }] = useMutation(
-    gql(createActionPageButton)
-    // ,
-    // {
-    //   refetchQueries: [
-    //     { query: gql(getActionPage), variables: { id: actionPageData?.id } },
-    //   ],
-    //   awaitRefetchQueries: false,
-    // }
-  );
-  
+  const [addActionPageButton, { loading: loadingActionPageButton }] =
+    useMutation(gql(createActionPageButton), {
+      onCompleted: data => {
+        setData(data.updateActionPageButton);
+        setShow(true);
+      },
+    });
+
+  const copyLinkToClipboard = () => {
+    // todo this needs to be dynamic by environment (dev, app, etc)
+    // TODO eventually this should use both an artist route and a pageRoute
+    const route = artistRoute || actionPageId;
+    const link = `app.modern-musician.com/${route}`;
+    navigator.clipboard.writeText(link);
+    console.log('copied link to clipboard', link);
+  };
+
   const onSubmit = () => {
-    console.log(`actionPageData is ` ,actionPageData)
-    console.log('actionChecked, actionValue', actionChecked, actionValue);
-    console.log('create or update called');
-    console.log('actionValue, actionPageId', actionChecked, actionValue);
     let newTargetUrl = '';
     const actionButtons = actionPageData?.actionButtons?.items;
-    console.log('check', actionValue?.email && actionChecked?.email);
     // handle sendEmailUrl
     if (actionValue?.email && actionChecked?.email) {
       const emailUrl = `mailto:${actionValue.email}?subject=I%20joined%20the%20team!&body=Hey!%20I%20just%20joined%20the%20team!%0A%0A%20Here's%20where%20I'm%20from%20and%20why%20I'm%20interested%20in%20being%20a%20part%20of%20the%20community...`;
@@ -101,38 +105,31 @@ export const SetupActions = ({
         actionPageID: actionPageData.id,
         targetURL: emailUrl,
       };
-      console.log('inputVariables', inputVariables);
-      console.log('actionButtons',actionButtons)
-      if (actionPageData) {
+      if (actionPageData?.id) {
         // if the action buttons exist in the pageData, update them
         if (actionButtons) {
           const emailButton = actionButtons.find(
             element => element.buttonIcon === 'Email'
           );
           if (emailButton) {
-            console.log('updating the email button');
             // update  the button
             inputVariables.id = emailButton.id;
             updateActionButton({
               variables: {
-                input:
-                  inputVariables,
+                input: inputVariables,
               },
             });
             recordExists = true; // don't go on to create a new record
           }
         }
         if (!recordExists && !loadingActionPageButton) {
-          console.log('creating a new button');
           // create the button record
           addActionPageButton({
             variables: { input: inputVariables },
           });
         }
-        console.log('we did it!');
       }
       if (!recordExists && !loadingActionPageButton) {
-        console.log('creating a new button');
         // create the button record
         addActionPageButton({
           variables: { input: inputVariables },
@@ -145,17 +142,16 @@ export const SetupActions = ({
       let recordExists = false;
       const inputVariables = {
         ...apiActionsConfig.vipGroup,
-        actionPageID: actionPageData?.id,
+        actionPageID: actionPageData.id,
         targetURL: newTargetUrl,
       };
-      if (actionPageData) {
+      if (actionPageData?.id) {
         // if the action buttons exist in the pageData, update the button
         if (actionButtons) {
           const button = actionButtons.find(
             element => element.buttonIcon === 'Group'
           );
 
-          console.log(button);
           if (button) {
             // update  the button
             inputVariables.id = button.id;
@@ -164,13 +160,11 @@ export const SetupActions = ({
           }
         }
         if (!recordExists && !loadingActionPageButton) {
-          console.log('creating a new button');
           // create the button record
           addActionPageButton({
             variables: { input: inputVariables },
           });
         }
-        console.log('we did it!');
       }
     }
 
@@ -180,18 +174,16 @@ export const SetupActions = ({
       let recordExists = false;
       const inputVariables = {
         ...apiActionsConfig.starterPack,
-        actionPageID: actionPageData?.id,
+        actionPageID: actionPageData.id,
         targetURL: actionValue.starterPack,
       };
-      if (actionPageData) {
+      if (actionPageData?.id) {
         // if the action buttons exist in the pageData, update them
         if (actionButtons) {
           const button = actionButtons.find(
             element => element.buttonIcon === 'Ticket'
           );
-          console.log(button);
           if (button) {
-            console.log('updating a button');
             // update  the button
             inputVariables.id = button.id;
             updateActionButton({ variables: { input: inputVariables } });
@@ -199,13 +191,11 @@ export const SetupActions = ({
           }
         }
         if (!recordExists && !loadingActionPageButton) {
-          console.log('creating a new button');
           // create the button record
           addActionPageButton({
             variables: { input: inputVariables },
           });
         }
-        console.log('we did it!');
       }
     }
 
@@ -215,18 +205,16 @@ export const SetupActions = ({
       let recordExists = false;
       const inputVariables = {
         ...apiActionsConfig.followMusic,
-        actionPageID: actionPageData?.id,
+        actionPageID: actionPageData.id,
         targetURL: newTargetUrl,
       };
-      if (actionPageData) {
+      if (actionPageData?.id) {
         // if the action buttons exist in the pageData, update them
         if (actionButtons) {
           const button = actionButtons.find(
             element => element.buttonIcon === 'Music'
           );
-          console.log(button);
           if (button) {
-            console.log('updating a button');
             // update  the button
             inputVariables.id = button.id;
             updateActionButton({ variables: { input: inputVariables } });
@@ -234,13 +222,11 @@ export const SetupActions = ({
           }
         }
         if (!recordExists && !loadingActionPageButton) {
-          console.log('creating a new button');
           // create the button record
           addActionPageButton({
             variables: { input: inputVariables },
           });
         }
-        console.log('we did it!');
       }
     }
 
@@ -250,60 +236,92 @@ export const SetupActions = ({
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <h2>Set Up Fan Actions</h2>
-        </Col>
-      </Row>
-      <ActionCard>
-        <HeaderRow>
-          <Row>
-            <Col>
-              <h3>Fan Actions</h3>
-              <p>
-                Select &quot;Fan Actions&quot; that someone can take to support
-                your music and unlock a free gift
-              </p>
-            </Col>
-          </Row>
-        </HeaderRow>
-        <Card.Body>
-          <Row>
-            <Col>
-              {actions.map((item, i) => {
-                return (
-                  <CreateAction
-                    {...item}
-                    key={item.id}
-                    isLast={i + 1 === actions.length}
-                    onChangeCheckbox={() => onChangeCheckbox(item?.id)}
-                    inputOnChange={e => onChangeInput(e, item?.id)}
-                    isChecked={actionChecked[item.id]}
-                    inputValue={actionValue[item.id]}
-                  />
-                );
-              })}
-            </Col>
-          </Row>
-        </Card.Body>
-        <Card.Body>
-          <Row>
-            <Col>
-              <SaveButton onClick={onSubmit}>Save Action Card</SaveButton>
-            </Col>
-          </Row>
-        </Card.Body>
-      </ActionCard>
-    </Container>
+    <React.Fragment>
+      <Container>
+        <Row>
+          <Col>
+            <h2>Set Up Fan Actions</h2>
+          </Col>
+        </Row>
+        <ActionCard>
+          <HeaderRow>
+            <Row>
+              <Col>
+                <h3>Fan Actions</h3>
+                <p>
+                  Select &quot;Fan Actions&quot; that someone can take to
+                  support your music and unlock a free gift
+                </p>
+              </Col>
+            </Row>
+          </HeaderRow>
+          <Card.Body>
+            <Row>
+              <Col>
+                {actions.map((item, i) => {
+                  return (
+                    <CreateAction
+                      {...item}
+                      key={item.id}
+                      isLast={i + 1 === actions.length}
+                      onChangeCheckbox={() => onChangeCheckbox(item?.id)}
+                      inputOnChange={e => onChangeInput(e, item?.id)}
+                      isChecked={actionChecked[item.id]}
+                      inputValue={actionValue[item.id]}
+                    />
+                  );
+                })}
+              </Col>
+            </Row>
+          </Card.Body>
+          <Card.Body>
+            <Row>
+              <Col>
+                <StyledButton onClick={onSubmit}>Save Action Card</StyledButton>
+              </Col>
+            </Row>
+          </Card.Body>
+        </ActionCard>
+      </Container>
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Congrats! Here's Your Link:</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p style={{ color: 'black' }}>
+            Click the button below to copy your onboarding link:
+          </p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <StyledButton onClick={copyLinkToClipboard}>
+            <Icon
+              name="FaCopy"
+              color="black"
+              size={20}
+              style={{ marginRight: 10 }}
+            />
+            Copy Link To Your Page
+          </StyledButton>
+        </Modal.Footer>
+      </Modal>
+    </React.Fragment>
   );
 };
 
 SetupActions.propTypes = {
   onChangeCheckbox: PropTypes.func,
   onChangeInput: PropTypes.func,
+  setData: PropTypes.func,
   actionPageId: PropTypes.string,
   artistRoute: PropTypes.string,
+  actionPageData: PropTypes.shape({
+    id: PropTypes.string,
+    actionButtons: PropTypes.shape({
+      items: PropTypes.arrayOf(PropTypes.shape({})),
+    }),
+  }),
   actionChecked: PropTypes.shape({
     email: PropTypes.bool,
     vipGroup: PropTypes.bool,
@@ -334,9 +352,11 @@ SetupActions.propTypes = {
 SetupActions.defaultProps = {
   actions: [],
   actionPageId: null,
+  actionPageData: null,
   artistRoute: null,
   onChangeCheckbox: () => {},
   onChangeInput: () => {},
+  setData: () => {},
   actionChecked: {},
   actionValue: {},
 };

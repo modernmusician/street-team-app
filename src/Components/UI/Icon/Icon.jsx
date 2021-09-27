@@ -54,7 +54,7 @@ const checkIcon = name => {
   return library;
 };
 
-export const Icon = ({ name, size, color }) => {
+export const Icon = ({ name, size, color, style }) => {
   const iconLibraryId = name.substring(0, 2);
   const Library = checkIcon(iconLibraryId);
   const IconDynamic = Library[name];
@@ -62,9 +62,9 @@ export const Icon = ({ name, size, color }) => {
   const IconElement = checkIconOld(name);
 
   return IconElement ? (
-    <IconElement size={size} style={{ color }} />
+    <IconElement size={size} style={{ color, ...style }} />
   ) : (
-    <IconDynamic size={size} style={{ color }} />
+    <IconDynamic size={size} style={{ color, ...style }} />
   );
 };
 
@@ -72,10 +72,12 @@ Icon.propTypes = {
   name: PropTypes.string,
   size: PropTypes.number,
   color: PropTypes.string,
+  style: PropTypes.shape({}),
 };
 
 Icon.defaultProps = {
   name: null,
   size: 35,
+  style: {},
   color: null,
 };
