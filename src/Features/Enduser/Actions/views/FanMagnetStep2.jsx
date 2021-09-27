@@ -5,7 +5,7 @@ import { PageHeader } from '../../../../Components/Page/PageHeader';
 import {
   FanMagnetContext,
   SURVEY_SELECTION,
-} from '../../../../context/FanMagnetContext';
+} from '../../../../Context/FanMagnetContext';
 import { useHistory } from 'react-router-dom';
 
 const Step2MagnetHeader = styled(PageHeader)`
