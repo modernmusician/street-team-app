@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { gql, useQuery } from '@apollo/react-hooks';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Auth } from 'aws-amplify';
+import { AuthState } from '@aws-amplify/ui-components';
 import { useParams } from 'react-router-dom';
 import { getActionPageByArtistAndPageRoute } from '../../../../graphql-custom/queries';
 import {getActionPagesByArtistRoute} from '../graphql/getActionPagesByArtist'
@@ -41,26 +42,25 @@ export const LandingPage = () => {
     history.push(newRoute);
   }
 
-    // if the user is logged in, use the secure client, otherwise we'll use the Public client
-    if (authState === undefined) {
-      Auth.currentAuthenticatedUser().then(authData => {
-        console.log(`authData`,authData);
-        setAuthState(true)
-        setClient(SecureClient);
-      });
-    }
-
   // here we're defining a default page route as "landing" so if no pageRoute is provided, we'll use that
   const { artist, page = 'landing' } = useParams();
-  const { data: actionPageData, loading } = useQuery(
+  const { data: actionPageData, loading: loading, refetch: refetchPageData } = useQuery(
     gql(getActionPagesByArtistRoute),
     {
       variables: { artistRoute: artist, pageRoute: page },
-      client: client,
+      client: authState === AuthState.SignedIn ? SecureClient : PublicClient,
     }
   );
 
   useEffect(() => {
+    // if the user is logged in, refetch the request using the SecureClient instead
+    if (authState === undefined) {
+      Auth.currentAuthenticatedUser().then(authData => {
+        console.log(`authData`,authData);
+        setAuthState(AuthState.SignedIn);
+        refetchPageData();
+      });
+    }
     if (actionPageData) {
       // here we re-route the user if this artist doesn't have a 'landing' route defined... eventually we'll want to use page types here
       const landingPageData = actionPageData.ArtistByRoute.items[0].actionPages.items.find(item => item.pageRoute==='landing');
