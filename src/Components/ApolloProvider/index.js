@@ -1,2 +1,2 @@
-export { SecureClient } from './SecureClient.js';
-export { PublicClient } from './PublicClient.js';
+export { SecureClient } from './SecureClient';
+export { PublicClient } from './PublicClient';
