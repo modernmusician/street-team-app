@@ -27,6 +27,8 @@ const PlayerContainer = styled.div`
 // landing page is essentially an action page that is public, so there are no points and we're using a different Apollo client (no auth)
 export const LandingPage = () => {
   const [authState, setAuthState] = useState();
+  const [userId, setUserId] = useState();
+  const [dynamicClient, setDynamicClient] = useState();
   const [dataFetched, setDataFetched] = useState(false);
   const [soundCloudURL, setSoundCloudURL] = useState('');
   const [continueButtonDetails, setContineButtonDetails] = useState('');
@@ -46,28 +48,35 @@ export const LandingPage = () => {
   const { artist, page = 'landing' } = useParams();
   // we'll call this query after we set the auth
   const [getPageData , { data: actionPageData, loading: loading, refetch: refetchPageData }] = useLazyQuery(
-    gql(getActionPagesByArtistRoute),
-    {
+    gql(getActionPagesByArtistRoute),{
       variables: { artistRoute: artist, pageRoute: page },
-      client: authState === AuthState.SignedIn ? SecureClient : PublicClient,
+      client: dynamicClient
     }
   );
 
   useEffect(() => {
-    console.log(`actionPageData`,actionPageData);
-    // if the user is logged in, we can refetch the request using the SecureClient instead
-    if (authState === undefined && !actionPageData && !loading) {
-      Auth.currentAuthenticatedUser().then(authData => {
-        console.log(`authData`,authData);
-        console.log(actionPageData)
-        setAuthState(AuthState.SignedIn);
-      });
-      setDataFetched(true);
-      getPageData();
+    console.log(`dynamicClient`,dynamicClient);
+    //todo this logic should be centralized in the PublicClient auth setup. but for now this will work for this one page
+    if (!dynamicClient) {
+        // set the Apollo client based on whether or not the user is logged in, then fetch the data
+        Auth.currentAuthenticatedUser().then(authData => {
+          console.log(`setting secure client`)
+          setDynamicClient(SecureClient)
+        }, 
+        reason => {
+          console.log(`no user logged in, getting public data`)
+          setDynamicClient(PublicClient)
+        }).finally(output => {
+          getPageData();
+          setDataFetched(true);
+        }
+        );
     }
+    console.log(`actionPageData`,actionPageData);
     if (actionPageData) {
       // here we re-route the user if this artist doesn't have a 'landing' route defined... eventually we'll want to use page types here
       const landingPageData = actionPageData.ArtistByRoute.items[0].actionPages.items.find(item => item.pageRoute==='landing');
+      console.log(`landingPageData`,landingPageData);
       if(!landingPageData){
         console.log(`going to secure login page`)
         continueToNextStep()
@@ -120,8 +129,7 @@ export const LandingPage = () => {
     );
   }
 
-  const actionPageInfo =
-    actionPageData.ArtistByRoute.items[0].actionPages.items[0];
+  const actionPageInfo = actionPageData.ArtistByRoute.items[0].actionPages.items[0] 
 
   return (
     <PageContainer>
