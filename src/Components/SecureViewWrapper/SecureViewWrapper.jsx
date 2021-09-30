@@ -145,7 +145,7 @@ export const SecureViewWrapper = ({ userRole, children }) => {
   };
 
   const federated = {
-    facebookAppId: '674030226824129', // login here https://developers.facebook.com/apps/
+    facebookAppId: '1889301381171290', // login here https://developers.facebook.com/apps/
   };
 
   console.log(`authState`, authState);
