@@ -4,11 +4,12 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { gql, useQuery } from '@apollo/react-hooks';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Auth } from 'aws-amplify';
 import { useParams } from 'react-router-dom';
 import { getActionPageByArtistAndPageRoute } from '../../../../graphql-custom/queries';
 import {getActionPagesByArtistRoute} from '../graphql/getActionPagesByArtist'
 import { Icon, FanMagnetButton, Spinner } from '../../../../Components/UI';
-import { PublicClient } from '../../../../Components/ApolloProvider/PublicClient';
+import { PublicClient, SecureClient } from    '../../../../Components/ApolloProvider';
 import { PlayWidget } from '../../../../Components/UI/Integrations/SoundCloud/PlayWidget';
 import { FanMagnetStep2 } from './FanMagnetStep2';
 import {useHistory} from 'react-router-dom';
@@ -24,6 +25,8 @@ const PlayerContainer = styled.div`
 
 // landing page is essentially an action page that is public, so there are no points and we're using a different Apollo client (no auth)
 export const LandingPage = () => {
+  const [authState, setAuthState] = useState();
+  const [client, setClient] = useState(PublicClient);
   const [soundCloudURL, setSoundCloudURL] = useState('');
   const [continueButtonDetails, setContineButtonDetails] = useState('');
   const [currentStep, setCurrentStep] = useState(1);
@@ -38,13 +41,22 @@ export const LandingPage = () => {
     history.push(newRoute);
   }
 
+    // if the user is logged in, use the secure client, otherwise we'll use the Public client
+    if (authState === undefined) {
+      Auth.currentAuthenticatedUser().then(authData => {
+        console.log(`authData`,authData);
+        setAuthState(true)
+        setClient(SecureClient);
+      });
+    }
+
   // here we're defining a default page route as "landing" so if no pageRoute is provided, we'll use that
   const { artist, page = 'landing' } = useParams();
   const { data: actionPageData, loading } = useQuery(
     gql(getActionPagesByArtistRoute),
     {
       variables: { artistRoute: artist, pageRoute: page },
-      client: PublicClient,
+      client: client,
     }
   );
 
