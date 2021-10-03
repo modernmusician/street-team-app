@@ -1,18 +1,15 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col, Button, Card, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Card, Modal } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Icon } from '../../../Components/UI/Icon';
-import { useGradient } from '../../../Hooks/useGradient';
-// import { apiActionsConfig } from './configs/actionsConfig';
-// import { compareId } from '../../../utils/sharedUtils';
+import { Button } from '../../../Components/UI/Button';
 import { gql, useMutation } from '@apollo/react-hooks';
 import {
   updateActionPageButton,
   createActionPageButton,
 } from '../../../graphql/mutations';
-// import { getActionPage } from '../../../graphql/queries';
 import { apiActionsConfig } from './configs/actionsConfig';
 import { CreateAction } from './CreateAction';
 
@@ -32,26 +29,6 @@ const HeaderRow = styled(Card.Body)(({ theme }) => {
       fontWeight: theme.fontWeights.medium,
       lineHeight: 1.5,
       margin: 0,
-    },
-  };
-});
-
-const StyledButton = styled(Button)(({ theme }) => {
-  return {
-    background: theme.colors.yellow,
-    color: theme.colors.black,
-    width: '100%',
-    height: '60px',
-    border: 'none',
-    borderRadius: 0,
-    transition: 'unset !important',
-    '&:hover': {
-      background: useGradient({ color: theme.colors.yellow }),
-      color: theme.colors.black,
-    },
-    '&:focus': {
-      background: useGradient({ color: theme.colors.yellow }),
-      color: theme.colors.black,
     },
   };
 });
@@ -277,7 +254,7 @@ export const SetupActions = ({
           <Card.Body>
             <Row>
               <Col>
-                <StyledButton onClick={onSubmit}>Save Action Card</StyledButton>
+                <Button onClick={onSubmit}>Save Action Card</Button>
               </Col>
             </Row>
           </Card.Body>
@@ -295,7 +272,7 @@ export const SetupActions = ({
         </Modal.Body>
 
         <Modal.Footer>
-          <StyledButton onClick={copyLinkToClipboard}>
+          <Button onClick={copyLinkToClipboard}>
             <Icon
               name="FaCopy"
               color="black"
@@ -303,7 +280,7 @@ export const SetupActions = ({
               style={{ marginRight: 10 }}
             />
             Copy Link To Your Page
-          </StyledButton>
+          </Button>
         </Modal.Footer>
       </Modal>
     </React.Fragment>

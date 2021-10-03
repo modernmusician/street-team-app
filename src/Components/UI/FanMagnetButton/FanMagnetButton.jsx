@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
+  display: flex;
+  width: 100%;
   background: ${({ bgColor }) => bgColor};
   border: 1px solid #333333;
   color: ${({ color }) => color};
@@ -15,7 +17,8 @@ const StyledButton = styled.button`
 const StyledButtonInner = styled.div`
   display: flex;
   align-items: center;
-
+  justify-content: center;
+  width: 100%;
   span {
     margin-right: 18px;
   }

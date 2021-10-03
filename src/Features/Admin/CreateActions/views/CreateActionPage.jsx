@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Spinner } from '../../../../Components/UI/Spinner';
 import { ActionCard } from '../ActionCard';
 import { NavBar } from '../NavBar';
-import { Preview } from '../Preview';
+import { PreviewActions } from '../PreviewActions';
+import { PreviewLanding } from '../PreviewLanding';
 import { SetupActions } from '../SetupActions';
 import { SetupLanding } from '../SetupLanding';
 import { useGetActionPage } from '../hooks/useGetActionPage';
@@ -17,12 +20,12 @@ const RootContainer = styled(Container)({
   height: '100%',
 });
 
-export const CreateActionPage = () => {
-  const [activeView, setActiveView] = useState('action');
+export const CreateActionPage = ({ type }) => {
   const { loading, actionPageId, artistRoute, actionPageData } =
     useGetActionPage();
   const [actionChecked, setActionChecked] = useState({});
   const [actionValue, setActionValue] = useState({});
+  const [landingPageValues, setLandingPageValues] = useState('');
   const [data, setData] = useState(actionPageData);
   const [savedDataRestored, setSavedDataRestored] = useState(false);
 
@@ -107,13 +110,10 @@ export const CreateActionPage = () => {
         <Container fluid>
           <Row>
             <Col lg={3}>
-              <ActionCard
-                activeView={activeView}
-                setActiveView={setActiveView}
-              />
+              <ActionCard activeView={type} />
             </Col>
             <Col>
-              {activeView === 'action' && (
+              {type === 'action' && (
                 <SetupActions
                   actionPageId={actionPageId}
                   artistRoute={artistRoute}
@@ -126,17 +126,34 @@ export const CreateActionPage = () => {
                   setData={setData}
                 />
               )}
-              {activeView === 'landing' && <SetupLanding />}
+              {type === 'landing' && (
+                <SetupLanding
+                  landingPageValues={landingPageValues}
+                  setLandingPageValues={setLandingPageValues}
+                />
+              )}
             </Col>
             <Col>
-              <Preview
-                actionChecked={actionChecked}
-                actionValue={actionValue}
-              />
+              {type === 'action' && (
+                <PreviewActions
+                  actionChecked={actionChecked}
+                  actionValue={actionValue}
+                />
+              )}
+              {type === 'landing' && (
+                <PreviewLanding
+                  actionChecked={actionChecked}
+                  actionValue={actionValue}
+                />
+              )}
             </Col>
           </Row>
         </Container>
       </RootContainer>
     </div>
   );
+};
+
+CreateActionPage.propTypes = {
+  type: PropTypes.string.isRequired,
 };

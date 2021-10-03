@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { FanMagnetButton } from '../../../../Components/UI';
 import { PageHeader } from '../../../../Components/Page/PageHeader';
-import {
-  FanMagnetContext,
-  SURVEY_SELECTION,
-} from '../../../../context/FanMagnetContext';
-import {useHistory} from 'react-router-dom'
+// import {
+//   FanMagnetContext,
+//   SURVEY_SELECTION,
+// } from '../../../../Context/FanMagnetContext';
+import { useHistory } from 'react-router-dom';
 
 const Step2MagnetHeader = styled(PageHeader)`
   && {
@@ -28,15 +28,17 @@ const MagnetButton = styled(FanMagnetButton)`
 `;
 
 export const FanMagnetStep2 = () => {
-  const { setFanMagnetSurvey } = useContext(FanMagnetContext);
-  let history = useHistory();
+  const { setFanMagnetSurvey } = useContext();
+  const history = useHistory();
   const continueToNextStep = () => {
-    //pull the root path from the location and push to the /secure path for that artist
-    const path=window.location.pathname;
-    const currentPathArray=window.location.pathname.split("/").filter(x => x!=="");
+    // pull the root path from the location and push to the /secure path for that artist
+    const path = window.location.pathname;
+    const currentPathArray = window.location.pathname
+      .split('/')
+      .filter(x => x !== '');
     const newRoute = ['/secure'].concat(currentPathArray[0]).join('/');
     history.push(newRoute);
-  }
+  };
 
   return (
     <React.Fragment>
@@ -47,12 +49,12 @@ export const FanMagnetStep2 = () => {
         activeColor="white"
         margin="0 0 50px"
         handleClick={() => {
-          setFanMagnetSurvey(SURVEY_SELECTION.LOVE_IT);
+          // setFanMagnetSurvey(SURVEY_SELECTION.LOVE_IT);
           continueToNextStep();
         }}
       >
         <span>👍</span>
-        <div>{SURVEY_SELECTION.LOVE_IT}</div>
+        {/* <div>{SURVEY_SELECTION.LOVE_IT}</div> */}
       </MagnetButton>
       <MagnetButton
         active
@@ -60,12 +62,12 @@ export const FanMagnetStep2 = () => {
         activeColor="white"
         margin="0 0 50px"
         handleClick={() => {
-          setFanMagnetSurvey(SURVEY_SELECTION.OKAY);
+          // setFanMagnetSurvey(SURVEY_SELECTION.OKAY);
           continueToNextStep();
         }}
       >
         <span>👌</span>
-        <div>{SURVEY_SELECTION.OKAY}</div>
+        {/* <div>{SURVEY_SELECTION.OKAY}</div> */}
       </MagnetButton>
       <MagnetButton
         active
@@ -73,12 +75,12 @@ export const FanMagnetStep2 = () => {
         activeColor="white"
         margin="0 0 50px"
         handleClick={() => {
-          setFanMagnetSurvey(SURVEY_SELECTION.DISLIKE);
+          // setFanMagnetSurvey(SURVEY_SELECTION.DISLIKE);
           continueToNextStep();
         }}
       >
         <span>👎</span>
-        <div>{SURVEY_SELECTION.DISLIKE}</div>
+        {/* <div>{SURVEY_SELECTION.DISLIKE}</div> */}
       </MagnetButton>
     </React.Fragment>
   );

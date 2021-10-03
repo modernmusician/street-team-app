@@ -15,7 +15,7 @@ const filteredActions = actionChecked => {
   return activeActions.sort(compareId('position'));
 };
 
-export const Preview = ({ actionChecked }) => {
+export const PreviewActions = ({ actionChecked }) => {
   const actions = filteredActions(actionChecked);
 
   return (
@@ -52,10 +52,10 @@ export const Preview = ({ actionChecked }) => {
   );
 };
 
-Preview.propTypes = {
+PreviewActions.propTypes = {
   actionChecked: PropTypes.shape({}),
 };
 
-Preview.defaultProps = {
+PreviewActions.defaultProps = {
   actionChecked: {},
 };
