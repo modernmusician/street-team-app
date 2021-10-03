@@ -1,7 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { gql, useMutation } from '@apollo/react-hooks';
+import {
+  updateActionPageButton,
+  createActionPageButton,
+} from '../../../graphql/mutations';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { TextField } from '../../../Components/UI/TextField';
 import { Icon } from '../../../Components/UI/Icon';
@@ -40,8 +45,71 @@ const CardBody = styled(Card.Body)(({ theme }) => {
   };
 });
 
-export const SetupLanding = ({ landingPageValues, setLandingPageValues }) => {
+export const SetupLanding = ({
+  landingPageValues,
+  setLandingPageValues,
+  actionPageId,
+}) => {
+  const [error, setError] = useState(false);
   const theme = useTheme();
+
+  const [updateActionButton] = useMutation(gql(updateActionPageButton), {
+    onCompleted: data => {
+      console.log('updateActionButton DATA', data);
+      // setData(data.updateActionPageButton);
+      // setShow(true);
+    },
+  });
+
+  const [addActionPageButton, { loading: loadingActionPageButton }] =
+    useMutation(gql(createActionPageButton), {
+      onCompleted: data => {
+        console.log('addActionPageButton DATA', data);
+        // setData(data.updateActionPageButton);
+        // setShow(true);
+      },
+    });
+
+  const soundCloudConfig = {
+    actionPageID: actionPageId,
+    preActionText: null,
+    postActionText: null,
+    buttonIcon: null,
+    backgroundColor: null,
+    textColor: null,
+    pointValue: null,
+    position: 1,
+    targetURL: landingPageValues.soundCloud,
+    serviceAction: 'SoundCloudEmbed',
+  };
+
+  const continueConfig = {
+    actionPageID: actionPageId,
+    position: 2,
+    serviceAction: 'ContinueButton',
+  };
+
+  const saveLandingPage = () => {
+    const soundCloudURL = landingPageValues?.soundCloud;
+    const giftURL = landingPageValues?.gift;
+    if (actionPageId) {
+      if (soundCloudURL && giftURL) {
+        setError(false);
+        if (soundCloudURL) {
+          addActionPageButton({
+            variables: { input: soundCloudConfig },
+          });
+        }
+        if (giftURL) {
+          addActionPageButton({
+            variables: { input: continueConfig },
+          });
+        }
+      } else {
+        setError(true);
+      }
+    }
+  };
 
   return (
     <Container>
@@ -64,6 +132,9 @@ export const SetupLanding = ({ landingPageValues, setLandingPageValues }) => {
               <Col xs={10}>
                 <h3>Your Soundcloud Link</h3>
                 <p>Paste a link to your song on SoundCloud...</p>
+                {error && !landingPageValues?.soundCloud && (
+                  <p style={{ color: 'red' }}>Required</p>
+                )}
               </Col>
               <IconContainer>
                 <Icon name="MdLibraryMusic" color="white" />
@@ -91,6 +162,9 @@ export const SetupLanding = ({ landingPageValues, setLandingPageValues }) => {
               <Col xs={10}>
                 <h3>Your Free Gift Link</h3>
                 <p>Paste a link to your free gift...</p>
+                {error && !landingPageValues?.gift && (
+                  <p style={{ color: 'red' }}>Required</p>
+                )}
               </Col>
               <IconContainer>
                 <Icon name="FaGift" color="white" />
@@ -115,9 +189,7 @@ export const SetupLanding = ({ landingPageValues, setLandingPageValues }) => {
           </CreateActionContainer>
           <Row style={{ marginTop: theme.spacing.lg }}>
             <Col>
-              <Button onClick={() => console.log('test', landingPageValues)}>
-                Setup Fan Magnet Page
-              </Button>
+              <Button onClick={saveLandingPage}>Setup Fan Magnet Page</Button>
             </Col>
           </Row>
         </CardBody>
@@ -127,6 +199,7 @@ export const SetupLanding = ({ landingPageValues, setLandingPageValues }) => {
 };
 
 SetupLanding.propTypes = {
+  actionPageId: PropTypes.string.isRequired,
   landingPageValues: PropTypes.shape({
     gift: PropTypes.string,
     soundCloud: PropTypes.string,

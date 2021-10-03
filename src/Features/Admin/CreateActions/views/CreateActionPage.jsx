@@ -23,11 +23,15 @@ const RootContainer = styled(Container)({
 export const CreateActionPage = ({ type }) => {
   const { loading, actionPageId, artistRoute, actionPageData } =
     useGetActionPage();
+
+  // Action Page
   const [actionChecked, setActionChecked] = useState({});
   const [actionValue, setActionValue] = useState({});
-  const [landingPageValues, setLandingPageValues] = useState('');
   const [data, setData] = useState(actionPageData);
   const [savedDataRestored, setSavedDataRestored] = useState(false);
+
+  // Landing Page
+  const [landingPageValues, setLandingPageValues] = useState('');
 
   const onChangeCheckbox = id => {
     setActionChecked({
@@ -128,6 +132,7 @@ export const CreateActionPage = ({ type }) => {
               )}
               {type === 'landing' && (
                 <SetupLanding
+                  actionPageId={actionPageId}
                   landingPageValues={landingPageValues}
                   setLandingPageValues={setLandingPageValues}
                 />
@@ -141,10 +146,7 @@ export const CreateActionPage = ({ type }) => {
                 />
               )}
               {type === 'landing' && (
-                <PreviewLanding
-                  actionChecked={actionChecked}
-                  actionValue={actionValue}
-                />
+                <PreviewLanding soundCloudURL={landingPageValues.soundCloud} />
               )}
             </Col>
           </Row>

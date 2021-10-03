@@ -60,7 +60,9 @@ export const PreviewLanding = ({ soundCloudURL }) => {
           <PageHeader>Listen For 30 Seconds to Unlock a Free Gift</PageHeader>
           <PlayerContainer>
             {soundCloudURL ? (
-              <PlayWidget sourceUrl={soundCloudURL} />
+              <div style={{ height: 165 }}>
+                <PlayWidget sourceUrl={soundCloudURL} />
+              </div>
             ) : (
               <SoundCloudPlaceholder>
                 Enter SoundCloud URL To Preview
