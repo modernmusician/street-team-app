@@ -17,14 +17,14 @@ import { FanMagnetButton } from '../UI';
 
 // here we're copying the constant config (aws-exports.js) because config is read only. -- then updating location.href
 var updatedConfig = awsconfig;
-//build the current url to be used for oauth redirect (should probably use env variables... but this is quicker right now)
+// build the current url to be used for oauth redirect (should probably use env variables... but this is quicker right now)
 const currentUrl = window.location.href;
 // takes the current url root, and adds the join route
-const redirectUrl = currentUrl.split("/").slice(0,3).join("/") + "/login/"
+const redirectUrl = currentUrl.split('/').slice(0, 3).join('/') + '/login/';
 
 updatedConfig.oauth.redirectSignIn = redirectUrl;
 updatedConfig.oauth.redirectSignOut = redirectUrl;
-console.log(`redirectUrl`,redirectUrl);
+console.log(`redirectUrl`, redirectUrl);
 Amplify.configure(updatedConfig);
 
 function checkUser() {
@@ -47,17 +47,29 @@ const Footer = styled.footer({
 const StyledButton = styled(FanMagnetButton)`
   padding: 35px 21px;
   margin: 10px 0;
+
+  @media (max-width: 600px) {
+    transform: scale(0.9);
+  }
 `;
 
 const ButtonInnerText = styled.div`
   text-align: left;
   font-family: 'Open Sans';
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
+
+  @media (max-width: 600px) {
+    font-size: 20px;
+  }
 `;
 
 const StyledPageHeader = styled(PageHeader)`
   font-size: 40px;
+
+  @media (max-width: 600px) {
+    font-size: 30px;
+  }
 `;
 
 const OrBlock = styled.div`
@@ -93,16 +105,16 @@ export const SecureViewWrapper = ({ userRole, children }) => {
   }
 
   console.log('hello from secure wrapper');
-  
-  //set the initial authState if the current user is already authenticated (in the case of oauth redirect, it will be)
+
+  // set the initial authState if the current user is already authenticated (in the case of oauth redirect, it will be)
   if (authState === undefined) {
-    Auth.currentAuthenticatedUser().then((authData) => {
+    Auth.currentAuthenticatedUser().then(authData => {
       setAuthState(AuthState.SignedIn);
       setUserId(authData);
     });
   }
 
-  //use this useEffect to changes state
+  // use this useEffect to changes state
   useEffect(() => {
     onAuthUIStateChange((nextAuthState, authData) => {
       setAuthState(nextAuthState);
@@ -133,7 +145,7 @@ export const SecureViewWrapper = ({ userRole, children }) => {
   };
 
   const federated = {
-    facebookAppId: '674030226824129', // login here https://developers.facebook.com/apps/
+    facebookAppId: '1889301381171290', // login here https://developers.facebook.com/apps/
   };
 
   console.log(`authState`, authState);
@@ -148,7 +160,7 @@ export const SecureViewWrapper = ({ userRole, children }) => {
       </Footer>
     </div>
   ) : (
-    <PageContainer pageContentPadding="10px">
+    <PageContainer pageContentPadding="50px 95px">
       {!showSignupForm && (
         <React.Fragment>
           <StyledPageHeader>Unlock Your Free Gift</StyledPageHeader>
@@ -162,10 +174,7 @@ export const SecureViewWrapper = ({ userRole, children }) => {
               <Icon color="white" name="FaFacebook" size={70} />
             </span>
             <div>
-              <ButtonInnerText>
-                Continue with
-                Facebook
-              </ButtonInnerText>
+              <ButtonInnerText>Continue with Facebook</ButtonInnerText>
             </div>
           </StyledButton>
           <OrBlock>or</OrBlock>
@@ -179,14 +188,11 @@ export const SecureViewWrapper = ({ userRole, children }) => {
               <Icon color="white" name="FaEnvelope" size={70} />
             </span>
             <div>
-              <ButtonInnerText>
-                Connect With
-                 Email
-              </ButtonInnerText>
+              <ButtonInnerText>Connect With Email</ButtonInnerText>
             </div>
           </StyledButton>
           <Terms>
-            <a href="https://www.modern-musician.com/terms" target='_blank'>
+            <a href="https://www.modern-musician.com/terms" target="_blank">
               By accepting this gift, I acknowledge that I have reviewed and
               agreed to our Terms of Use, Contest Rules, and Privacy Policy.
             </a>
@@ -208,9 +214,7 @@ export const SecureViewWrapper = ({ userRole, children }) => {
               <Icon color="white" name="FaUndo" size={70} />
             </span>
             <div>
-              <ButtonInnerText>
-                Go Back
-              </ButtonInnerText>
+              <ButtonInnerText>Go Back</ButtonInnerText>
             </div>
           </StyledButton>
         </React.Fragment>

@@ -9,7 +9,6 @@ export const StyledPageContainer = styled.div`
   align-items: center;
   display: flex;
   height: 100%;
-  overflow: hidden;
   position: relative;
 `;
 
@@ -24,13 +23,19 @@ const PageContent = styled(Container)`
   padding: ${({ pageContentPadding }) => pageContentPadding};
   position: relative;
   justify-content: space-around;
+
+  @media (max-width: 600px) {
+    border-radius: 0;
+    padding: 15px;
+    margin: auto;
+  }
 `;
 
 export const PageContainer = ({ children, className, pageContentPadding }) => {
   return (
     <StyledPageContainer className={className}>
       {/** TODO: replace static artist image with dynamic one */}
-      <ArtistImage imageUrl={tempImage} />
+      {/* <ArtistImage imageUrl={tempImage} /> */}
       <PageContent pageContentPadding={pageContentPadding}>
         {children}
       </PageContent>

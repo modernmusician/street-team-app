@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { FanMagnetButton } from '../../../../Components/UI';
 import { PageHeader } from '../../../../Components/Page/PageHeader';
-// import {
-//   FanMagnetContext,
-//   SURVEY_SELECTION,
-// } from '../../../../Context/FanMagnetContext';
+import {
+  FanMagnetContext,
+  SURVEY_SELECTION,
+} from '../../../../Context/FanMagnetContext';
 import { useHistory } from 'react-router-dom';
 
 const Step2MagnetHeader = styled(PageHeader)`
@@ -24,6 +24,10 @@ const MagnetButton = styled(FanMagnetButton)`
   span {
     font-size: 55px;
     margin-right: 43px;
+
+    @media (max-width: 600px) {
+      margin-right: 18px;
+    }
   }
 `;
 
@@ -31,7 +35,7 @@ export const FanMagnetStep2 = () => {
   const { setFanMagnetSurvey } = useContext();
   const history = useHistory();
   const continueToNextStep = () => {
-    // pull the root path from the location and push to the /secure path for that artist
+    //pull the root path from the location and push to the /secure path for that artist
     const path = window.location.pathname;
     const currentPathArray = window.location.pathname
       .split('/')

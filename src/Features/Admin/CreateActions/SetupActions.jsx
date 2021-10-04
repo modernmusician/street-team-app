@@ -65,7 +65,10 @@ export const SetupActions = ({
     // todo this needs to be dynamic by environment (dev, app, etc)
     // TODO eventually this should use both an artist route and a pageRoute
     const route = artistRoute || actionPageId;
-    const link = `app.modern-musician.com/${route}`;
+    const currentUrl = window.location.href;
+    // takes the current url root, and adds the artist route to the page 
+    const link = currentUrl.split('/').slice(0, 3).join('/') + '/' + route;
+    // const link = `app.modern-musician.com/${route}`;
     navigator.clipboard.writeText(link);
     console.log('copied link to clipboard', link);
   };
