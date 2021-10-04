@@ -2,11 +2,17 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { FanMagnetButton } from '../../../../Components/UI';
 import { PageHeader } from '../../../../Components/Page/PageHeader';
-import {
-  FanMagnetContext,
-  SURVEY_SELECTION,
-} from '../../../../Context/FanMagnetContext';
+// import {
+//   FanMagnetContext,
+//   SURVEY_SELECTION,
+// } from '../../../../Context/FanMagnetContext';
 import { useHistory } from 'react-router-dom';
+
+export const SURVEY_SELECTION = {
+  LOVE_IT: 'I loved it!',
+  OKAY: 'It was okay',
+  DISLIKE: "I didn't like it",
+};
 
 const Step2MagnetHeader = styled(PageHeader)`
   && {
@@ -32,7 +38,7 @@ const MagnetButton = styled(FanMagnetButton)`
 `;
 
 export const FanMagnetStep2 = () => {
-  const { setFanMagnetSurvey } = useContext();
+  // const { setFanMagnetSurvey } = useContext();
   const history = useHistory();
   const continueToNextStep = () => {
     //pull the root path from the location and push to the /secure path for that artist
@@ -58,7 +64,7 @@ export const FanMagnetStep2 = () => {
         }}
       >
         <span>👍</span>
-        {/* <div>{SURVEY_SELECTION.LOVE_IT}</div> */}
+        <div>{SURVEY_SELECTION.LOVE_IT}</div>
       </MagnetButton>
       <MagnetButton
         active
@@ -71,7 +77,7 @@ export const FanMagnetStep2 = () => {
         }}
       >
         <span>👌</span>
-        {/* <div>{SURVEY_SELECTION.OKAY}</div> */}
+        <div>{SURVEY_SELECTION.OKAY}</div>
       </MagnetButton>
       <MagnetButton
         active
@@ -84,7 +90,7 @@ export const FanMagnetStep2 = () => {
         }}
       >
         <span>👎</span>
-        {/* <div>{SURVEY_SELECTION.DISLIKE}</div> */}
+        <div>{SURVEY_SELECTION.DISLIKE}</div>
       </MagnetButton>
     </React.Fragment>
   );
