@@ -1,3 +1,5 @@
+import { getAllActionPagesAndSubscriptionDetailsByArtist } from '../graphql-custom/queries';
+
 export const compareId = (key, order = 'asc') => {
     return function innerSort(a, b) {
         if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
@@ -29,4 +31,38 @@ export const cleanUrl = (urlString) => {
         }
     }
     return link;
+}
+
+export const getTotalPointsByEnduserIdAndActionPage = (enduserId, artistRoute) => { 
+    
+    let enduserResult = {};
+    let resultPageRoute = "";
+
+    const { data: actionPageAndSubscriptionData } = useQuery(
+        gql(getAllActionPagesAndSubscriptionDetailsByArtist),
+        {
+          variables: { artistRoute: artistRoute },
+        }
+    );
+
+    // extract the data returned from the query that we care about
+    let totalActionPagePoints = 0;
+    if (actionPageAndSubscriptionData.items.length > 1) {
+        resultPageRoute = actionPageAndSubscriptionData.items.actionPages.items.pageRoute;
+        
+        let subscriberData = actionPageAndSubscriptionData.items.actionPages.items[0].subscribers.items.filter (subscriber => {
+            subscriber.items.enduserId = enduserId    
+        });
+
+        // loop through all enduser's completedActions to build the total tally
+        subscriberData.items.enduser.completedActions.items.forEach(action => {
+            totalActionPagePoints += action.pointValue
+        });
+
+        subscriberData.enduserPoints = totalActionPagePoints
+
+        enduserResult = [{ resultPageRoute, subscriberData }];
+    }
+    
+    return [enduserResult]
 }
