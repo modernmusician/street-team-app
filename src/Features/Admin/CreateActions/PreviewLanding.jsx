@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Col, Row, Container, Card } from 'react-bootstrap';
 import { Icon, FanMagnetButton } from '../../../Components/UI';
-import { PageHeader } from '../../../Components/Page';
+import { PageHeader, PageContainer } from '../../../Components/Page';
+import { useTheme } from '../../../Hooks/useTheme';
 import { PlayWidget } from '../../../Components/UI/Integrations/SoundCloud/PlayWidget';
 
 const PlayerContainer = styled.div`
@@ -40,51 +41,57 @@ const SoundCloudPlaceholder = styled.div({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  textAlign: 'center',
   width: '100%',
   height: 165,
   background: ({ theme }) => theme.colors.white,
   color: ({ theme }) => theme.colors.gray2,
-  fontSize: 40,
+  fontSize: '2rem',
 });
 
 export const PreviewLanding = ({ soundCloudURL }) => {
+  const theme = useTheme();
   return (
     <Container>
       <Row>
         <Col>
-          <h2>Preview</h2>
+          <h2 style={{ fontSize: theme.fontSizes.lg }}>Preview</h2>
         </Col>
       </Row>
       <ActionCard>
         <HeaderRow>
-          <PageHeader>Listen For 30 Seconds to Unlock a Free Gift</PageHeader>
-          <PlayerContainer>
-            {soundCloudURL ? (
-              <div style={{ height: 165 }}>
-                <PlayWidget sourceUrl={soundCloudURL} />
-              </div>
-            ) : (
-              <SoundCloudPlaceholder>
-                Enter SoundCloud URL To Preview
-              </SoundCloudPlaceholder>
-            )}
-          </PlayerContainer>
-          <FanMagnetButton
-            active
-            activeBgColor="#807650"
-            activeColor="#202021"
-            inactiveBgColor="#544c2e"
-          >
-            <ButtonContainer>
-              <Icon
-                color="#202021"
-                name="Gift"
-                size={70}
-                style={{ marginRight: 20 }}
-              />
-              CLAIM YOUR FREE GIFT
-            </ButtonContainer>
-          </FanMagnetButton>
+          <PageContainer>
+            <PageHeader>
+              Listen For 30 Seconds to Unlock a Free Gift!
+            </PageHeader>
+            <PlayerContainer>
+              {soundCloudURL ? (
+                <div style={{ height: 165 }}>
+                  <PlayWidget sourceUrl={soundCloudURL} />
+                </div>
+              ) : (
+                <SoundCloudPlaceholder>
+                  Enter SoundCloud URL To Preview
+                </SoundCloudPlaceholder>
+              )}
+            </PlayerContainer>
+            <FanMagnetButton
+              active
+              activeBgColor="#807650"
+              activeColor="#202021"
+              inactiveBgColor="#544c2e"
+            >
+              <ButtonContainer>
+                <Icon
+                  color="#202021"
+                  name="Gift"
+                  size={70}
+                  style={{ marginRight: 20 }}
+                />
+                CLAIM YOUR FREE GIFT
+              </ButtonContainer>
+            </FanMagnetButton>
+          </PageContainer>
         </HeaderRow>
       </ActionCard>
     </Container>

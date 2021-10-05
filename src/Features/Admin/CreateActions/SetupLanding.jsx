@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/react-hooks';
 import {
   updateActionPageButton,
@@ -49,26 +50,29 @@ export const SetupLanding = ({
   landingPageValues,
   setLandingPageValues,
   actionPageId,
+  landingPageIds,
 }) => {
   const [error, setError] = useState(false);
   const theme = useTheme();
+  const history = useHistory();
 
   const [updateActionButton] = useMutation(gql(updateActionPageButton), {
     onCompleted: data => {
       console.log('updateActionButton DATA', data);
+      history.push('/admin/create-action-page');
       // setData(data.updateActionPageButton);
       // setShow(true);
     },
   });
 
-  const [addActionPageButton, { loading: loadingActionPageButton }] =
-    useMutation(gql(createActionPageButton), {
-      onCompleted: data => {
-        console.log('addActionPageButton DATA', data);
-        // setData(data.updateActionPageButton);
-        // setShow(true);
-      },
-    });
+  const [addActionPageButton] = useMutation(gql(createActionPageButton), {
+    onCompleted: data => {
+      console.log('addActionPageButton DATA', data);
+      history.push('/admin/create-action-page');
+      // setData(data.updateActionPageButton);
+      // setShow(true);
+    },
+  });
 
   const soundCloudConfig = {
     actionPageID: actionPageId,
@@ -89,18 +93,48 @@ export const SetupLanding = ({
     serviceAction: 'ContinueButton',
   };
 
+  const starterPackConfig = {
+    actionPageID: actionPageId,
+    buttonIcon: 'Ticket',
+    targetURL: landingPageValues.gift,
+    backgroundColor: '#43C052',
+    pointValue: 50,
+    position: 4,
+    preActionText: 'Claim Your Free Gift',
+    postActionText: 'Gift Claimed',
+    textColor: 'white',
+  };
+
   const saveLandingPage = () => {
     const soundCloudURL = landingPageValues?.soundCloud;
     const giftURL = landingPageValues?.gift;
+    const soundCloudId = landingPageIds?.soundCloud;
+    const giftId = landingPageIds?.gift;
+    const continueId = landingPageIds?.continue;
     if (actionPageId) {
       if (soundCloudURL && giftURL) {
         setError(false);
-        if (soundCloudURL) {
+        if (soundCloudId && soundCloudURL) {
+          updateActionButton({
+            variables: { input: { ...soundCloudConfig, id: soundCloudId } },
+          });
+        } else if (soundCloudURL) {
           addActionPageButton({
             variables: { input: soundCloudConfig },
           });
         }
-        if (giftURL) {
+
+        if (giftId && giftURL) {
+          updateActionButton({
+            variables: { input: { ...starterPackConfig, id: giftId } },
+          });
+        } else if (giftURL) {
+          addActionPageButton({
+            variables: { input: starterPackConfig },
+          });
+        }
+
+        if (!continueId) {
           addActionPageButton({
             variables: { input: continueConfig },
           });
@@ -115,7 +149,7 @@ export const SetupLanding = ({
     <Container>
       <Row>
         <Col>
-          <h2>Set Up Your Magnet</h2>
+          <h2 style={{ fontSize: theme.fontSizes.lg }}>Set Up Your Magnet</h2>
         </Col>
       </Row>
       <ActionContainer>
@@ -204,10 +238,16 @@ SetupLanding.propTypes = {
     gift: PropTypes.string,
     soundCloud: PropTypes.string,
   }),
+  landingPageIds: PropTypes.shape({
+    gift: PropTypes.string,
+    soundCloud: PropTypes.string,
+    continue: PropTypes.string,
+  }),
   setLandingPageValues: PropTypes.func,
 };
 
 SetupLanding.defaultProps = {
   landingPageValues: {},
+  landingPageIds: {},
   setLandingPageValues: () => {},
 };

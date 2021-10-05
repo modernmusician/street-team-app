@@ -7,8 +7,9 @@ import { Icon } from '../../../Components/UI/Icon';
 import { useTheme } from '../../../Hooks/useTheme';
 
 const ActionContainer = styled(Card)({
-  background: ({ theme }) => theme.colors.gray2,
+  background: ({ theme }) => theme.colors.black,
   padding: ({ theme }) => theme.spacing.md,
+  border: 'none',
 });
 
 const ListContainer = styled.div(({ theme, isActive }) => {
@@ -20,6 +21,9 @@ const ListContainer = styled.div(({ theme, isActive }) => {
       color: isActive ? theme.colors.primary : theme.colors.white,
       fontWeight: theme.fontWeights.bold,
     },
+    svg: {
+      marginRight: theme.spacing.md,
+    },
   };
 });
 
@@ -28,26 +32,21 @@ const Actions = styled.div(({ theme, isActive }) => {
     color: isActive ? theme.colors.primary : theme.colors.white,
     display: 'flex',
     alignItems: 'center',
-    marginLeft: theme.spacing.lg,
-    marginTop: theme.spacing.sm,
+    marginLeft: 80,
+    marginTop: theme.spacing.md,
   };
 });
 
-const Button = styled.button(({ theme, isActive }) => {
-  console.log('isActive', isActive);
+const Button = styled.button(({ theme }) => {
   return {
     display: 'flex',
-    alignItems: 'center',
+    flexDirection: 'column',
     border: 'none',
     background: 'transparent',
-    marginLeft: theme.spacing.sm,
     color: 'inherit',
     fontSize: theme.fontSizes.lg,
-    borderBottom: isActive
-      ? `4px solid ${theme.colors.primary}`
-      : '4px solid transparent',
     svg: {
-      marginRight: theme.spacing.sm,
+      marginRight: theme.spacing.lg,
     },
   };
 });
@@ -62,56 +61,30 @@ export const ActionCard = ({ activeView }) => {
     <Container>
       <Row>
         <Col>
-          <h2>Create Your Fan Funnel</h2>
+          <h2 style={{ fontSize: theme.fontSizes.lg }}>
+            Create Your Fan Funnel
+          </h2>
+          <p style={{ fontSize: theme.fontSizes.sm }}>Build Your Audience</p>
         </Col>
       </Row>
       <ActionContainer>
         <Row>
           <Col>
-            <ListContainer isActive={isActionActive}>
-              <Icon
-                name="FaTrophy"
-                color={
-                  isActionActive ? theme.colors.primary : theme.colors.white
-                }
-                size={45}
-              />
-              <h3>Fan Actions</h3>
-            </ListContainer>
-            <Actions isActive={isActionActive}>
-              <Button
-                isActive={isActionActive}
-                onClick={() => history.push('/admin/create-action-page')}
-              >
+            <Button
+              isActive={activeView === 'landing'}
+              onClick={() => history.push('/admin/create-landing-page')}
+            >
+              <ListContainer isActive={isLandingActive}>
                 <Icon
-                  name="FaEdit"
+                  name="FaMagnet"
                   color={
-                    isActionActive ? theme.colors.primary : theme.colors.white
+                    isLandingActive ? theme.colors.primary : theme.colors.white
                   }
-                  size={20}
+                  size={45}
                 />
-                Setup Fan Actions
-              </Button>
-            </Actions>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: 30 }}>
-          <Col>
-            <ListContainer isActive={isLandingActive}>
-              <Icon
-                name="FaMagnet"
-                color={
-                  isLandingActive ? theme.colors.primary : theme.colors.white
-                }
-                size={45}
-              />
-              <h3>Fan Magnet</h3>
-            </ListContainer>
-            <Actions isActive={isLandingActive}>
-              <Button
-                isActive={activeView === 'landing'}
-                onClick={() => history.push('/admin/create-landing-page')}
-              >
+                <h3>Fan Magnet</h3>
+              </ListContainer>
+              <Actions isActive={isLandingActive}>
                 <Icon
                   name="FaEdit"
                   color={
@@ -120,8 +93,37 @@ export const ActionCard = ({ activeView }) => {
                   size={20}
                 />
                 Setup Fan Magnet
-              </Button>
-            </Actions>
+              </Actions>
+            </Button>
+          </Col>
+        </Row>
+        <Row style={{ marginTop: 30 }}>
+          <Col>
+            <Button
+              isActive={isActionActive}
+              onClick={() => history.push('/admin/create-action-page')}
+            >
+              <ListContainer isActive={isActionActive}>
+                <Icon
+                  name="MdSpeed"
+                  color={
+                    isActionActive ? theme.colors.primary : theme.colors.white
+                  }
+                  size={45}
+                />
+                <h3>Tribal Accelerator</h3>
+              </ListContainer>
+              <Actions isActive={isActionActive}>
+                <Icon
+                  name="FaEdit"
+                  color={
+                    isActionActive ? theme.colors.primary : theme.colors.white
+                  }
+                  size={20}
+                />
+                Setup Fan Actions
+              </Actions>
+            </Button>
           </Col>
         </Row>
       </ActionContainer>

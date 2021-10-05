@@ -9,7 +9,7 @@ const checkIconOld = name => {
   let icon;
   switch (name) {
     case 'Ticket':
-      icon = FontAwesome.FaLock;
+      icon = FontAwesome.FaTicketAlt;
       break;
     case 'Trophy':
       icon = FontAwesome.FaTrophy;
