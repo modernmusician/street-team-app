@@ -44,8 +44,8 @@ export const LandingPage = () => {
     history.push(newRoute);
   }
 
-  // here we're defining a default page route as "landing" so if no pageRoute is provided, we'll use that
-  const { artist, page = 'landing' } = useParams();
+  // here we're defining a default page route as "join" so if no pageRoute is provided, we'll use that
+  const { artist, page = 'join' } = useParams();
   // we'll call this query after we set the auth
   const [getPageData , { data: actionPageData, loading: loading, refetch: refetchPageData }] = useLazyQuery(
     gql(getActionPagesByArtistRoute),{
@@ -75,7 +75,7 @@ export const LandingPage = () => {
     console.log(`actionPageData`,actionPageData);
     if (actionPageData) {
       // here we re-route the user if this artist doesn't have a 'landing' route defined... eventually we'll want to use page types here
-      const landingPageData = actionPageData.ArtistByRoute.items[0].actionPages.items.find(item => item.pageRoute==='landing');
+      const landingPageData = actionPageData.ArtistByRoute.items[0].actionPages.items.find(item => item.pageRoute==='join');
       console.log(`landingPageData`,landingPageData);
       if(!landingPageData){
         console.log(`going to secure login page`)
