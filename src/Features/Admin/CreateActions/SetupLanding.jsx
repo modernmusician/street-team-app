@@ -19,7 +19,7 @@ const ActionContainer = styled(Card)({
 });
 
 const CreateActionContainer = styled(Container)({
-  border: '1px solid',
+  border: '1px dashed',
   borderColor: ({ theme }) => theme.colors.gray,
   padding: ({ theme }) => theme.spacing.lg,
   marginBottom: ({ theme, isLast }) => !isLast && theme.spacing.md,
@@ -164,7 +164,7 @@ export const SetupLanding = ({
           <CreateActionContainer>
             <Row>
               <Col xs={10}>
-                <h3>Your Soundcloud Link</h3>
+                <h3 style={{ fontWeight: theme.fontWeights.semibold }}>Your Soundcloud Link</h3>
                 <p>Paste a link to your song on SoundCloud...</p>
                 {error && !landingPageValues?.soundCloud && (
                   <p style={{ color: 'red' }}>Required</p>
@@ -194,7 +194,7 @@ export const SetupLanding = ({
           <CreateActionContainer>
             <Row>
               <Col xs={10}>
-                <h3>Your Free Gift Link</h3>
+                <h3 style={{ fontWeight: theme.fontWeights.semibold }}>Your Free Gift Link</h3>
                 <p>Paste a link to your free gift...</p>
                 {error && !landingPageValues?.gift && (
                   <p style={{ color: 'red' }}>Required</p>
@@ -223,7 +223,12 @@ export const SetupLanding = ({
           </CreateActionContainer>
           <Row style={{ marginTop: theme.spacing.lg }}>
             <Col>
-              <Button onClick={saveLandingPage}>Setup Fan Magnet Page</Button>
+              <Button onClick={saveLandingPage}
+                      style={{ fontWeight: theme.fontWeights.semibold,
+                        fontFamily: theme.fonts.heading
+                      }}>
+                Next Step
+              </Button>
             </Col>
           </Row>
         </CardBody>

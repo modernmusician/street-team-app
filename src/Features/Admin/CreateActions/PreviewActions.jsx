@@ -37,8 +37,8 @@ export const PreviewActions = ({ actionChecked }) => {
           <Row className="mb-3">
             <Col>
               <ActionPage.Header
-                heading="Welcome To The Community!"
-                subHeading="Please take 2 mins to complete the following steps"
+                heading="Increase your rewards!"
+                subHeading="Earn more points to unlock exclusive rewards & benefits"
               />
             </Col>
           </Row>

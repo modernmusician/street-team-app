@@ -182,17 +182,17 @@ export const SetupActions = ({
       <Container>
         <Row>
           <Col>
-            <h2 style={{ fontSize: theme.fontSizes.lg }}>Set Up Fan Actions</h2>
+            <h2 style={{ fontSize: theme.fontSizes.lg }}>Set Up Your Actions</h2>
           </Col>
         </Row>
         <ActionCard>
           <HeaderRow>
             <Row>
               <Col>
-                <h3>Fan Actions</h3>
+                <h3>Tribal Accelerator</h3>
                 <p>
-                  Select &quot;Fan Actions&quot; that someone can take to
-                  support your music and unlock a free gift
+                  Create your &quot;tribal accelerator&quot; that will turn subscribers 
+                  into engaged fans and active supports of your music.
                 </p>
               </Col>
             </Row>
@@ -219,7 +219,13 @@ export const SetupActions = ({
           <Card.Body>
             <Row>
               <Col>
-                <Button onClick={onSubmit}>Save Action Card</Button>
+                <Button onClick={onSubmit} 
+                    style={{ 
+                      fontWeight: theme.fontWeights.semibold,
+                      fontFamily: theme.fonts.heading
+                        }}>
+                        Save Action Card
+                </Button>
               </Col>
             </Row>
           </Card.Body>

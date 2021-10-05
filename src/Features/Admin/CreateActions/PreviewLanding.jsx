@@ -62,7 +62,7 @@ export const PreviewLanding = ({ soundCloudURL }) => {
         <HeaderRow>
           <PageContainer>
             <PageHeader>
-              Listen For 30 Seconds to Unlock a Free Gift!
+              Listen for 30 seconds to unlock a free gift!
             </PageHeader>
             <PlayerContainer>
               {soundCloudURL ? (

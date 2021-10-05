@@ -344,8 +344,8 @@ export const useGetActionPage = () => {
         creatorUserID: userId,
         artistID: artistId,
         pageTitle: 'Almost there!',
-        heading: 'Welcome to the community!',
-        subheading: 'Please take 2 mins to complete the following steps',
+        heading: 'Increase your rewards!',
+        subheading: 'Earn more points to unlock exclusive rewards & benefits',
         pageRoute: 'join',
       };
       addActionPage({ variables: { input: newPageInput } });

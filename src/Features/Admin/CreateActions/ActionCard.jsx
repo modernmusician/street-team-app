@@ -18,7 +18,7 @@ const ListContainer = styled.div(({ theme, isActive }) => {
     alignItems: 'center',
     h3: {
       marginLeft: theme.spacing.sm,
-      color: isActive ? theme.colors.primary : theme.colors.white,
+      color: isActive ? theme.colors.menuPrimary : theme.colors.white,
       fontWeight: theme.fontWeights.bold,
     },
     svg: {
@@ -29,7 +29,7 @@ const ListContainer = styled.div(({ theme, isActive }) => {
 
 const Actions = styled.div(({ theme, isActive }) => {
   return {
-    color: isActive ? theme.colors.primary : theme.colors.white,
+    color: isActive ? theme.colors.menuPrimary : theme.colors.white,
     display: 'flex',
     alignItems: 'center',
     marginLeft: 80,
@@ -78,7 +78,7 @@ export const ActionCard = ({ activeView }) => {
                 <Icon
                   name="FaMagnet"
                   color={
-                    isLandingActive ? theme.colors.primary : theme.colors.white
+                    isLandingActive ? theme.colors.menuPrimary : theme.colors.white
                   }
                   size={45}
                 />
@@ -88,11 +88,11 @@ export const ActionCard = ({ activeView }) => {
                 <Icon
                   name="FaEdit"
                   color={
-                    isLandingActive ? theme.colors.primary : theme.colors.white
+                    isLandingActive ? theme.colors.menuPrimary : theme.colors.white
                   }
                   size={20}
                 />
-                Setup Fan Magnet
+                <h4>Set Up Fan Magnet</h4>
               </Actions>
             </Button>
           </Col>
@@ -107,7 +107,7 @@ export const ActionCard = ({ activeView }) => {
                 <Icon
                   name="MdSpeed"
                   color={
-                    isActionActive ? theme.colors.primary : theme.colors.white
+                    isActionActive ? theme.colors.menuPrimary : theme.colors.white
                   }
                   size={45}
                 />
@@ -117,11 +117,11 @@ export const ActionCard = ({ activeView }) => {
                 <Icon
                   name="FaEdit"
                   color={
-                    isActionActive ? theme.colors.primary : theme.colors.white
+                    isActionActive ? theme.colors.menuPrimary : theme.colors.white
                   }
                   size={20}
                 />
-                Setup Fan Actions
+                <h4>Set Up Your Actions</h4>
               </Actions>
             </Button>
           </Col>

@@ -4,7 +4,8 @@ export const createTheme = theme => {
   return {
     ...baseTheme,
     colors: {
-      primary: '#8479EB',
+      primary: '#614cc3',
+      menuPrimary: '#8479EB',
       primaryTint: '#7857B8',
       primaryShade: '#40207D',
       gray: 'gray',

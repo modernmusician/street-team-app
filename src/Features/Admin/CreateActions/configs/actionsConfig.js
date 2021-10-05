@@ -1,15 +1,15 @@
 export const selectActionsConfig = [
   {
     id: 'vipGroup',
-    label: 'Join the VIP Group',
-    subText: 'Get More Street Team Members...',
+    label: 'Join the Community',
+    subText: 'Get more followers...',
     icon: 'MdGroup',
     inputPlaceholder: 'Enter Street Team Group URL',
   },
   {
     id: 'followMusic',
     label: 'Follow My Music',
-    subText: 'Get More Music Followers...',
+    subText: 'Get more music followers...',
     icon: 'MdLibraryMusic',
     inputPlaceholder: 'Enter Follow Music URL',
   },
@@ -50,8 +50,8 @@ export const apiActionsConfig = {
     backgroundColor: '#FED93E',
     pointValue: 10,
     position: 1,
-    preActionText: 'Join the VIP Group',
-    postActionText: 'VIP Group Joined',
+    preActionText: 'Join the Community',
+    postActionText: 'Community Joined',
     textColor: 'black',
   },
   starterPack: {

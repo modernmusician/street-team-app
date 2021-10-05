@@ -139,13 +139,15 @@ export const LandingPage = () => {
     <PageContainer>
       {currentStep === 1 && (
         <React.Fragment>
-          <PageHeader>{actionPageInfo.heading}</PageHeader>
+          {/* <PageHeader>{actionPageInfo.heading}</PageHeader> */}
+          {/* TODO at some point we'll want this to be configurable */}
+          <PageHeader>Listen for 30 seconds to unlock a free gift!</PageHeader>
           <PlayerContainer>
             <PlayWidget sourceUrl={soundCloudURL} />
           </PlayerContainer>
           <FanMagnetButton
             active={isButtonActive}
-            activeBgColor={continueButtonDetails.backgroundColor || '#807650'}
+            activeBgColor={continueButtonDetails.backgroundColor || '#f5d772'}
             activeColor={continueButtonDetails.textColor || '#202021'}
             inactiveBgColor="#544c2e"
             margin="60px 0 45px"
