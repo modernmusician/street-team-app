@@ -74,7 +74,7 @@ export const LandingPage = () => {
     }
     console.log(`actionPageData`,actionPageData);
     if (actionPageData) {
-      // here we re-route the user if this artist doesn't have a 'landing' route defined... eventually we'll want to use page types here
+      // here we re-route the user if this artist doesn't have a 'join' route defined with a SoundCloudEmbed serviceAction... eventually we'll want to use page types here probably not just routes
       const landingPageData = actionPageData.ArtistByRoute.items[0].actionPages.items.find(item => item.pageRoute==='join');
       console.log(`landingPageData`,landingPageData);
       if(!landingPageData){
@@ -87,6 +87,10 @@ export const LandingPage = () => {
         );
       if (soundCloudAction) {
         setSoundCloudURL(soundCloudAction.targetURL);
+      }
+      else{
+        console.log(`no soundcloud url going to secure login page`)
+        continueToNextStep()
       }
       const continueButton =
         landingPageData?.actionButtons.items.find(
