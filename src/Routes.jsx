@@ -6,11 +6,15 @@ import { ActionsView } from './Features/Enduser/Actions/views/ActionsView';
 import { LandingPage } from './Features/Enduser/Actions/views/LandingPage';
 import { CreateActionPage } from './Features/Admin/CreateActions/views/CreateActionPage';
 import { Login } from './Components/Login/Login';
+import { Demo } from './Features/Admin/Audience/GetData';
 
 export const Routes = () => {
   return (
     <Router>
       <Switch>
+        <Route path="/test">
+          <Demo />
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
