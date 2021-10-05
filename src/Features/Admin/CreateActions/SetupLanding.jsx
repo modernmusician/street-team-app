@@ -95,7 +95,7 @@ export const SetupLanding = ({
 
   const starterPackConfig = {
     actionPageID: actionPageId,
-    buttonIcon: 'Ticket',
+    buttonIcon: 'Gift',
     targetURL: landingPageValues.gift,
     backgroundColor: '#43C052',
     pointValue: 50,

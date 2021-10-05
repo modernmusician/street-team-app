@@ -56,7 +56,7 @@ export const apiActionsConfig = {
   },
   starterPack: {
     // actionPageID: actionPageId,
-    buttonIcon: 'Ticket',
+    buttonIcon: 'Gift',
     // targetURL: inputValues.starterPackUrl,
     backgroundColor: '#43C052',
     pointValue: 50,
