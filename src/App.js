@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes } from './Routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { FanMagnetProvider } from './context/FanMagnetContext';
+import { FanMagnetProvider } from './Context/FanMagnetContext';
 
 // NOTE: the default AWSAppSyncClient uses an outdated apollo-client dependency
 // we're building a custom client instead
@@ -16,9 +16,9 @@ function App() {
   return (
     <ApolloProvider client={SecureClient}>
       <ThemeProvider>
-        <FanMagnetProvider>
+        {/* <FanMagnetProvider> */}
           <Routes />
-        </FanMagnetProvider>
+        {/* </FanMagnetProvider> */}
       </ThemeProvider>
     </ApolloProvider>
   );

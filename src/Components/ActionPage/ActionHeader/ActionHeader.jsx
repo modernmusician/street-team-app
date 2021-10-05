@@ -10,6 +10,7 @@ const HeaderContainer = styled.div({
 
 const Header = styled.h2({
   fontSize: ({ theme }) => theme.fontSizes.lg,
+  fontWeight: ({ theme }) => theme.fontWeights.semibold,
 });
 
 const SubHeader = styled.h3({

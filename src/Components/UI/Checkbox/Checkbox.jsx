@@ -12,7 +12,7 @@ const CheckboxLabel = styled(Form.Check.Label)({
   color: ({ theme }) => theme.colors.white,
   fontSize: ({ theme }) => theme.fontSizes.lg,
   fontFamily: ({ theme }) => theme.fonts.heading,
-  fontWeight: ({ theme }) => theme.fontWeights.medium,
+  fontWeight: ({ theme }) => theme.fontWeights.semibold,
   marginBottom: ({ theme }) => theme.spacing.sm,
 });
 
@@ -23,6 +23,7 @@ const LabelContainer = styled.div({
 const SubText = styled(Form.Text)({
   fontSize: ({ theme }) => theme.fontSizes.sm,
   color: ({ theme }) => theme.colors.white,
+  fontFamily: ({ theme }) => theme.fonts.heading,
   margin: 0,
 });
 

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Spinner } from '../../../../Components/UI/Spinner';
 import { ActionCard } from '../ActionCard';
 import { NavBar } from '../NavBar';
-import { Preview } from '../Preview';
+import { PreviewActions } from '../PreviewActions';
+import { PreviewLanding } from '../PreviewLanding';
 import { SetupActions } from '../SetupActions';
+import { SetupLanding } from '../SetupLanding';
 import { useGetActionPage } from '../hooks/useGetActionPage';
 import { selectActionsConfig } from '../configs/actionsConfig';
 
@@ -16,13 +19,19 @@ const RootContainer = styled(Container)({
   height: '100%',
 });
 
-export const CreateActionPage = () => {
+export const CreateActionPage = ({ type }) => {
   const { loading, actionPageId, artistRoute, actionPageData } =
     useGetActionPage();
+
+  // Action Page
   const [actionChecked, setActionChecked] = useState({});
   const [actionValue, setActionValue] = useState({});
   const [data, setData] = useState(actionPageData);
   const [savedDataRestored, setSavedDataRestored] = useState(false);
+
+  // Landing Page
+  const [landingPageValues, setLandingPageValues] = useState({});
+  const [landingPageIds, setLandingPageIds] = useState({});
 
   const onChangeCheckbox = id => {
     setActionChecked({
@@ -38,9 +47,9 @@ export const CreateActionPage = () => {
     });
   };
 
-  console.log(actionValue, actionChecked);
-
   useEffect(() => {
+    console.log(`initial actionPage data set `, actionPageData);
+    console.log(`initial data is ... `, data);
     if (!data) setData(actionPageData);
   }, [actionPageData]);
 
@@ -52,8 +61,11 @@ export const CreateActionPage = () => {
       Object.keys(actionChecked).length === 0 &&
       !savedDataRestored
     ) {
+      console.log(`initial data is found to be `, data);
       const checked = {};
       const values = {};
+      const landingPage = {};
+      const landingIds = {};
       const buttonsArray = data?.actionButtons?.items;
       for (let i = 0; i < buttonsArray.length; i++) {
         const element = buttonsArray[i];
@@ -66,22 +78,34 @@ export const CreateActionPage = () => {
           values.email = element.targetURL.split('?')[0].split('mailto:')[1];
         }
         // handle the group join button
-        if (buttonsArray[i].buttonIcon === 'Group') {
+        if (element.buttonIcon === 'Group') {
           checked.vipGroup = true;
           values.vipGroup = element.targetURL;
         }
-        if (buttonsArray[i].buttonIcon === 'Ticket') {
+        if (element.buttonIcon === 'Gift') {
           checked.starterPack = true;
-          values.starterPack = buttonsArray[i].targetURL;
+          values.starterPack = element.targetURL;
+          landingPage.gift = element.targetURL;
+          landingIds.gift = element?.id;
+          console.log(`gift element`,element)
         }
-        if (buttonsArray[i].buttonIcon === 'Music') {
+        if (element.buttonIcon === 'Music') {
           checked.followMusic = true;
-          values.followMusic = buttonsArray[i].targetURL;
+          values.followMusic = element.targetURL;
+        }
+        if (element.serviceAction === 'SoundCloudEmbed') {
+          landingPage.soundCloud = element.targetURL;
+          landingIds.soundCloud = element?.id;
+        }
+        if (element.serviceAction === 'ContinueButton') {
+          landingIds.continue = element?.id;
         }
       }
       setActionChecked(checked);
       setActionValue(values);
       setSavedDataRestored(true);
+      setLandingPageValues(landingPage);
+      setLandingPageIds(landingIds);
     }
   }, [data]);
 
@@ -96,39 +120,57 @@ export const CreateActionPage = () => {
       </Container>
     );
 
-  console.log(`actionChecked`, actionChecked, `actionValue`, actionValue, data);
-
   return (
     <div>
       <NavBar />
       <RootContainer fluid>
         <Container fluid>
           <Row>
-            <Col lg={3}>
-              <ActionCard />
+            <Col lg={2.5}>
+              <ActionCard activeView={type} />
+            </Col>
+            <Col lg={4}>
+              {type === 'action' && (
+                <SetupActions
+                  actionPageId={actionPageId}
+                  artistRoute={artistRoute}
+                  actionPageData={data}
+                  actions={selectActionsConfig}
+                  onChangeCheckbox={onChangeCheckbox}
+                  onChangeInput={onChangeInput}
+                  actionChecked={actionChecked}
+                  actionValue={actionValue}
+                  setData={setData}
+                />
+              )}
+              {type === 'landing' && (
+                <SetupLanding
+                  actionPageId={actionPageId}
+                  landingPageValues={landingPageValues}
+                  setLandingPageValues={setLandingPageValues}
+                  landingPageIds={landingPageIds}
+                  setData={setData}
+                />
+              )}
             </Col>
             <Col>
-              <SetupActions
-                actionPageId={actionPageId}
-                artistRoute={artistRoute}
-                actionPageData={data}
-                actions={selectActionsConfig}
-                onChangeCheckbox={onChangeCheckbox}
-                onChangeInput={onChangeInput}
-                actionChecked={actionChecked}
-                actionValue={actionValue}
-                setData={setData}
-              />
-            </Col>
-            <Col>
-              <Preview
-                actionChecked={actionChecked}
-                actionValue={actionValue}
-              />
+              {type === 'action' && (
+                <PreviewActions
+                  actionChecked={actionChecked}
+                  actionValue={actionValue}
+                />
+              )}
+              {type === 'landing' && (
+                <PreviewLanding soundCloudURL={landingPageValues.soundCloud} />
+              )}
             </Col>
           </Row>
         </Container>
       </RootContainer>
     </div>
   );
+};
+
+CreateActionPage.propTypes = {
+  type: PropTypes.string.isRequired,
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row, Container } from 'react-bootstrap';
 import { ActionPage } from '../../../Components/ActionPage';
+import { useTheme } from '../../../Hooks/useTheme';
 import { apiActionsConfig } from './configs/actionsConfig';
 import { compareId } from '../../../utils/sharedUtils';
 
@@ -15,14 +16,15 @@ const filteredActions = actionChecked => {
   return activeActions.sort(compareId('position'));
 };
 
-export const Preview = ({ actionChecked }) => {
+export const PreviewActions = ({ actionChecked }) => {
   const actions = filteredActions(actionChecked);
+  const theme = useTheme();
 
   return (
     <Container>
       <Row>
         <Col>
-          <h2>Preview</h2>
+          <h2 style={{ fontSize: theme.fontSizes.lg }}>Preview</h2>
         </Col>
       </Row>
       <ActionPage style={{ margin: 0 }}>
@@ -35,8 +37,8 @@ export const Preview = ({ actionChecked }) => {
           <Row className="mb-3">
             <Col>
               <ActionPage.Header
-                heading="Welcome To The Community!"
-                subHeading="Please take 2 mins to complete the following steps"
+                heading="Increase your rewards!"
+                subHeading="Earn more points to unlock exclusive rewards & benefits"
               />
             </Col>
           </Row>
@@ -52,10 +54,10 @@ export const Preview = ({ actionChecked }) => {
   );
 };
 
-Preview.propTypes = {
+PreviewActions.propTypes = {
   actionChecked: PropTypes.shape({}),
 };
 
-Preview.defaultProps = {
+PreviewActions.defaultProps = {
   actionChecked: {},
 };
