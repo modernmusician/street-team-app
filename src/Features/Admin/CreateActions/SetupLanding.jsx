@@ -61,7 +61,7 @@ export const SetupLanding = ({
     onCompleted: data => {
       console.log('updateActionButton DATA', data);
       setData(data.updateActionPageButton.actionpage);
-      history.push('/admin/create-action-page');
+      history.push('/admin/create-accelerator');
     },
   });
 
@@ -69,7 +69,7 @@ export const SetupLanding = ({
     onCompleted: data => {
       console.log('addActionPageButton DATA', data);
       setData(data.createActionPageButton.actionpage);
-      history.push('/admin/create-action-page');
+      history.push('/admin/create-accelerator');
     },
   });
 

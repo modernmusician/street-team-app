@@ -72,7 +72,7 @@ export const ActionCard = ({ activeView }) => {
           <Col>
             <Button
               isActive={activeView === 'landing'}
-              onClick={() => history.push('/admin/create-landing-page')}
+              onClick={() => history.push('/admin/create-fan-magnet')}
             >
               <ListContainer isActive={isLandingActive}>
                 <Icon
@@ -101,7 +101,7 @@ export const ActionCard = ({ activeView }) => {
           <Col>
             <Button
               isActive={isActionActive}
-              onClick={() => history.push('/admin/create-action-page')}
+              onClick={() => history.push('/admin/create-accelerator')}
             >
               <ListContainer isActive={isActionActive}>
                 <Icon

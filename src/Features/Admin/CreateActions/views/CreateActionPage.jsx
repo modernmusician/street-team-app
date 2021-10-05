@@ -126,10 +126,10 @@ export const CreateActionPage = ({ type }) => {
       <RootContainer fluid>
         <Container fluid>
           <Row>
-            <Col lg={2.5}>
+            <Col lg={3}>
               <ActionCard activeView={type} />
             </Col>
-            <Col lg={4}>
+            <Col lg={5}>
               {type === 'action' && (
                 <SetupActions
                   actionPageId={actionPageId}

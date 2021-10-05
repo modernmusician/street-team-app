@@ -17,7 +17,17 @@ export const Routes = () => {
         {/* support backwards compatability (to be removed later on) */}
         <Route
           path={[
-            '/admin/create-action-page',
+            '/artist/create',
+            '/admin/create-fan-magnet',
+          ]}
+        >
+          <SecureViewWrapper userRole="admin">
+            <CreateActionPage type="landing" />
+          </SecureViewWrapper>
+        </Route>
+        <Route
+          path={[
+            '/admin/create-accelerator',
             '/artist/secure/create-action-page',
           ]}
         >
@@ -25,16 +35,7 @@ export const Routes = () => {
             <CreateActionPage type="action" />
           </SecureViewWrapper>
         </Route>
-        <Route
-          path={[
-            '/admin/create-landing-page',
-            '/artist/secure/create-landing-page',
-          ]}
-        >
-          <SecureViewWrapper userRole="admin">
-            <CreateActionPage type="landing" />
-          </SecureViewWrapper>
-        </Route>
+
         <Route path="/secure/:artist/:page?">
           <SecureViewWrapper userRole="enduser">
             <ActionsView />
