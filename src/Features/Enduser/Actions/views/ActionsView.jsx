@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/react-hooks';
 
@@ -189,6 +190,7 @@ export const ActionsView = () => {
       const values = [];
       for (let i = 0; i < actionArray.length; i++) {
         const element = actionArray[i];
+        // eslint-disable-next-line max-len
         // if this id is in the enduserSubscription records completed action record, mark it as complete... there's gotta be a better way to do this -SG
         const completed =
           completedActions &&
@@ -248,7 +250,10 @@ export const ActionsView = () => {
       </Container>
     );
 
-  if (actionPageData?.ArtistByRoute?.items?.length === 0) {
+  if (
+    actionPageData?.ArtistByRoute?.items?.[0]?.actionPages?.items?.[0]
+      ?.actionButtons?.items.length === 0
+  ) {
     return (
       <Container fluid>
         <Row>
@@ -262,6 +267,13 @@ export const ActionsView = () => {
 
   const actionPageInfo =
     actionPageData.ArtistByRoute.items[0].actionPages.items[0];
+
+  const actionButtonList = actionPageInfo.actionButtons.items?.filter(item => {
+    return (
+      item.serviceAction !== 'SoundCloudEmbed' &&
+      item.serviceAction !== 'ContinueButton'
+    );
+  });
 
   return (
     <ActionPage>
@@ -280,7 +292,7 @@ export const ActionsView = () => {
           </Col>
         </Row>
         <ActionPage.Buttons
-          data={actionPageInfo.actionButtons.items}
+          data={actionButtonList}
           state={actionValues}
           handleAction={handleAction}
         />

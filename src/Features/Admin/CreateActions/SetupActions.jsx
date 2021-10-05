@@ -1,8 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Card, Modal } from 'react-bootstrap';
 import styled from 'styled-components';
+import { useTheme } from '../../../Hooks/useTheme';
 import { Icon } from '../../../Components/UI/Icon';
 import { Button } from '../../../Components/UI/Button';
 import { gql, useMutation } from '@apollo/react-hooks';
@@ -44,6 +46,7 @@ export const SetupActions = ({
   actionPageId,
   actionPageData,
 }) => {
+  const theme = useTheme();
   const [show, setShow] = useState(false);
 
   const [updateActionButton] = useMutation(gql(updateActionPageButton), {
@@ -65,12 +68,8 @@ export const SetupActions = ({
     // todo this needs to be dynamic by environment (dev, app, etc)
     // TODO eventually this should use both an artist route and a pageRoute
     const route = artistRoute || actionPageId;
-    const currentUrl = window.location.href;
-    // takes the current url root, and adds the artist route to the page 
-    const link = currentUrl.split('/').slice(0, 3).join('/') + '/' + route;
-    // const link = `app.modern-musician.com/${route}`;
+    const link = `app.modern-musician.com/${route}`;
     navigator.clipboard.writeText(link);
-    console.log('copied link to clipboard', link);
   };
 
   const onSubmit = () => {
@@ -109,12 +108,6 @@ export const SetupActions = ({
           });
         }
       }
-      if (!recordExists && !loadingActionPageButton) {
-        // create the button record
-        addActionPageButton({
-          variables: { input: inputVariables },
-        });
-      }
     }
     // handle joinGroupUrl
     if (actionValue?.vipGroup && actionChecked?.vipGroup) {
@@ -132,37 +125,6 @@ export const SetupActions = ({
             element => element.buttonIcon === 'Group'
           );
 
-          if (button) {
-            // update  the button
-            inputVariables.id = button.id;
-            updateActionButton({ variables: { input: inputVariables } });
-            recordExists = true; // don't go on to create a new record
-          }
-        }
-        if (!recordExists && !loadingActionPageButton) {
-          // create the button record
-          addActionPageButton({
-            variables: { input: inputVariables },
-          });
-        }
-      }
-    }
-
-    // handle starterPackUrl
-    if (actionValue?.starterPack && actionChecked?.starterPack) {
-      newTargetUrl = actionValue.starterPack;
-      let recordExists = false;
-      const inputVariables = {
-        ...apiActionsConfig.starterPack,
-        actionPageID: actionPageData.id,
-        targetURL: actionValue.starterPack,
-      };
-      if (actionPageData?.id) {
-        // if the action buttons exist in the pageData, update them
-        if (actionButtons) {
-          const button = actionButtons.find(
-            element => element.buttonIcon === 'Ticket'
-          );
           if (button) {
             // update  the button
             inputVariables.id = button.id;
@@ -220,7 +182,7 @@ export const SetupActions = ({
       <Container>
         <Row>
           <Col>
-            <h2>Set Up Fan Actions</h2>
+            <h2 style={{ fontSize: theme.fontSizes.lg }}>Set Up Fan Actions</h2>
           </Col>
         </Row>
         <ActionCard>

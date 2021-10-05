@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Spinner } from '../../../../Components/UI/Spinner';
@@ -31,7 +30,8 @@ export const CreateActionPage = ({ type }) => {
   const [savedDataRestored, setSavedDataRestored] = useState(false);
 
   // Landing Page
-  const [landingPageValues, setLandingPageValues] = useState('');
+  const [landingPageValues, setLandingPageValues] = useState({});
+  const [landingPageIds, setLandingPageIds] = useState({});
 
   const onChangeCheckbox = id => {
     setActionChecked({
@@ -47,8 +47,6 @@ export const CreateActionPage = ({ type }) => {
     });
   };
 
-  console.log(actionValue, actionChecked);
-
   useEffect(() => {
     if (!data) setData(actionPageData);
   }, [actionPageData]);
@@ -63,6 +61,8 @@ export const CreateActionPage = ({ type }) => {
     ) {
       const checked = {};
       const values = {};
+      const landingPage = {};
+      const landingIds = {};
       const buttonsArray = data?.actionButtons?.items;
       for (let i = 0; i < buttonsArray.length; i++) {
         const element = buttonsArray[i];
@@ -75,22 +75,33 @@ export const CreateActionPage = ({ type }) => {
           values.email = element.targetURL.split('?')[0].split('mailto:')[1];
         }
         // handle the group join button
-        if (buttonsArray[i].buttonIcon === 'Group') {
+        if (element.buttonIcon === 'Group') {
           checked.vipGroup = true;
           values.vipGroup = element.targetURL;
         }
-        if (buttonsArray[i].buttonIcon === 'Ticket') {
+        if (element.buttonIcon === 'Ticket') {
           checked.starterPack = true;
-          values.starterPack = buttonsArray[i].targetURL;
+          values.starterPack = element.targetURL;
+          landingPage.gift = element.targetURL;
+          landingIds.gift = element?.id;
         }
-        if (buttonsArray[i].buttonIcon === 'Music') {
+        if (element.buttonIcon === 'Music') {
           checked.followMusic = true;
-          values.followMusic = buttonsArray[i].targetURL;
+          values.followMusic = element.targetURL;
+        }
+        if (element.serviceAction === 'SoundCloudEmbed') {
+          landingPage.soundCloud = element.targetURL;
+          landingIds.soundCloud = element?.id;
+        }
+        if (element.serviceAction === 'ContinueButton') {
+          landingIds.continue = element?.id;
         }
       }
       setActionChecked(checked);
       setActionValue(values);
       setSavedDataRestored(true);
+      setLandingPageValues(landingPage);
+      setLandingPageIds(landingIds);
     }
   }, [data]);
 
@@ -105,18 +116,16 @@ export const CreateActionPage = ({ type }) => {
       </Container>
     );
 
-  console.log(`actionChecked`, actionChecked, `actionValue`, actionValue, data);
-
   return (
     <div>
       <NavBar />
       <RootContainer fluid>
         <Container fluid>
           <Row>
-            <Col lg={3}>
+            <Col lg={2.5}>
               <ActionCard activeView={type} />
             </Col>
-            <Col>
+            <Col lg={4}>
               {type === 'action' && (
                 <SetupActions
                   actionPageId={actionPageId}
@@ -135,6 +144,7 @@ export const CreateActionPage = ({ type }) => {
                   actionPageId={actionPageId}
                   landingPageValues={landingPageValues}
                   setLandingPageValues={setLandingPageValues}
+                  landingPageIds={landingPageIds}
                 />
               )}
             </Col>

@@ -20,13 +20,6 @@ export const selectActionsConfig = [
     icon: 'MdEmail',
     inputPlaceholder: 'Enter Your Email Address',
   },
-  {
-    id: 'starterPack',
-    label: 'Claim Your Free Started Pack',
-    subText: 'Get More Starter Pack Sales...',
-    icon: 'FaGift',
-    inputPlaceholder: 'Enter Starter Pack URL',
-  },
 ];
 
 // active={isButtonActive}
@@ -68,8 +61,8 @@ export const apiActionsConfig = {
     backgroundColor: '#43C052',
     pointValue: 50,
     position: 4,
-    preActionText: 'Claim Your Free Starter Pack',
-    postActionText: 'Starter Pack Claimed',
+    preActionText: 'Claim Your Free Gift',
+    postActionText: 'Gift Claimed',
     textColor: 'white',
   },
   followMusic: {

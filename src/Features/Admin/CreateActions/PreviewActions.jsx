@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row, Container } from 'react-bootstrap';
 import { ActionPage } from '../../../Components/ActionPage';
+import { useTheme } from '../../../Hooks/useTheme';
 import { apiActionsConfig } from './configs/actionsConfig';
 import { compareId } from '../../../utils/sharedUtils';
 
@@ -17,12 +18,13 @@ const filteredActions = actionChecked => {
 
 export const PreviewActions = ({ actionChecked }) => {
   const actions = filteredActions(actionChecked);
+  const theme = useTheme();
 
   return (
     <Container>
       <Row>
         <Col>
-          <h2>Preview</h2>
+          <h2 style={{ fontSize: theme.fontSizes.lg }}>Preview</h2>
         </Col>
       </Row>
       <ActionPage style={{ margin: 0 }}>

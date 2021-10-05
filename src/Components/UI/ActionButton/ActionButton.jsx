@@ -23,7 +23,7 @@ const PointsContainer = styled.div({
 // eslint-disable-next-line no-unused-vars
 const ActionButtonContainer = styled(({ textColor, ...props }) => (
   <Button {...props} />
-))(({ color, textColor }) => {
+))(({ color, textColor, isDisabled }) => {
   const fontColor = Color(textColor);
 
   return {
@@ -46,13 +46,13 @@ const ActionButtonContainer = styled(({ textColor, ...props }) => (
         background: Color(color).darken(0.1),
       },
     },
-    '&:disabled': {
-      cursor: 'not-allowed',
+    ...(isDisabled && {
       color: fontColor,
+      opacity: 0.35,
       '&:hover': {
         color: fontColor,
       },
-    },
+    }),
   };
 });
 
@@ -109,22 +109,24 @@ export const ActionButton = ({
   id,
   handleAction,
 }) => {
+  const complete = state?.find(item => item.id === id)?.complete;
+
   // All external links should be A tags
   const handleOnClick = () => {
-    handleAction(id);
+    if (!complete) {
+      handleAction(id);
+    }
     if (targetURL) {
       const cleanUrlString = cleanUrl(targetURL);
       window.open(cleanUrlString, '_blank');
     }
   };
 
-  const complete = state?.find(item => item.id === id)?.complete;
-
   return (
     <ActionButtonContainer
       color={backgroundColor}
       textColor={textColor}
-      disabled={complete}
+      isDisabled={complete}
       onClick={handleOnClick}
     >
       <ContentContainer>
