@@ -51,6 +51,7 @@ export const SetupLanding = ({
   setLandingPageValues,
   actionPageId,
   landingPageIds,
+  setData,
 }) => {
   const [error, setError] = useState(false);
   const theme = useTheme();
@@ -59,18 +60,16 @@ export const SetupLanding = ({
   const [updateActionButton] = useMutation(gql(updateActionPageButton), {
     onCompleted: data => {
       console.log('updateActionButton DATA', data);
+      setData(data.updateActionPageButton);
       history.push('/admin/create-action-page');
-      // setData(data.updateActionPageButton);
-      // setShow(true);
     },
   });
 
   const [addActionPageButton] = useMutation(gql(createActionPageButton), {
     onCompleted: data => {
       console.log('addActionPageButton DATA', data);
+      setData(data.createActionPageButton);
       history.push('/admin/create-action-page');
-      // setData(data.updateActionPageButton);
-      // setShow(true);
     },
   });
 
@@ -223,7 +222,7 @@ export const SetupLanding = ({
           </CreateActionContainer>
           <Row style={{ marginTop: theme.spacing.lg }}>
             <Col>
-              <Button onClick={saveLandingPage}>Setup Fan Magnet Page</Button>
+              <Button onClick={saveLandingPage}>Next Step</Button>
             </Col>
           </Row>
         </CardBody>
@@ -244,10 +243,12 @@ SetupLanding.propTypes = {
     continue: PropTypes.string,
   }),
   setLandingPageValues: PropTypes.func,
+  setData: PropTypes.func,
 };
 
 SetupLanding.defaultProps = {
   landingPageValues: {},
   landingPageIds: {},
   setLandingPageValues: () => {},
+  setData: () => {},
 };

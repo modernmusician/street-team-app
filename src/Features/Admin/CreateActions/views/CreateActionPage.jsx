@@ -79,7 +79,7 @@ export const CreateActionPage = ({ type }) => {
           checked.vipGroup = true;
           values.vipGroup = element.targetURL;
         }
-        if (element.buttonIcon === 'Ticket') {
+        if (element.buttonIcon === 'Gift') {
           checked.starterPack = true;
           values.starterPack = element.targetURL;
           landingPage.gift = element.targetURL;
@@ -145,6 +145,7 @@ export const CreateActionPage = ({ type }) => {
                   landingPageValues={landingPageValues}
                   setLandingPageValues={setLandingPageValues}
                   landingPageIds={landingPageIds}
+                  setData={setData}
                 />
               )}
             </Col>
