@@ -51,7 +51,7 @@ export const SetupActions = ({
 
   const [updateActionButton] = useMutation(gql(updateActionPageButton), {
     onCompleted: data => {
-      setData(data.updateActionPageButton);
+      setData(data.updateActionPageButton.actionpage);
       setShow(true);
     },
   });
@@ -59,7 +59,8 @@ export const SetupActions = ({
   const [addActionPageButton, { loading: loadingActionPageButton }] =
     useMutation(gql(createActionPageButton), {
       onCompleted: data => {
-        setData(data.createActionPageButton);
+        console.log('addActionPageButton join DATA', data);
+        setData(data.createActionPageButton.actionpage);
         setShow(true);
       },
     });

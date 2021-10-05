@@ -60,7 +60,7 @@ export const SetupLanding = ({
   const [updateActionButton] = useMutation(gql(updateActionPageButton), {
     onCompleted: data => {
       console.log('updateActionButton DATA', data);
-      setData(data.updateActionPageButton);
+      setData(data.updateActionPageButton.actionpage);
       history.push('/admin/create-action-page');
     },
   });
@@ -68,7 +68,7 @@ export const SetupLanding = ({
   const [addActionPageButton] = useMutation(gql(createActionPageButton), {
     onCompleted: data => {
       console.log('addActionPageButton DATA', data);
-      setData(data.createActionPageButton);
+      setData(data.createActionPageButton.actionpage);
       history.push('/admin/create-action-page');
     },
   });
@@ -105,6 +105,7 @@ export const SetupLanding = ({
   };
 
   const saveLandingPage = () => {
+    console.log(`landPageId values on submit`, landingPageIds);
     const soundCloudURL = landingPageValues?.soundCloud;
     const giftURL = landingPageValues?.gift;
     const soundCloudId = landingPageIds?.soundCloud;

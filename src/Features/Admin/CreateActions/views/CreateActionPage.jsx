@@ -48,6 +48,8 @@ export const CreateActionPage = ({ type }) => {
   };
 
   useEffect(() => {
+    console.log(`initial actionPage data set `, actionPageData);
+    console.log(`initial data is ... `, data);
     if (!data) setData(actionPageData);
   }, [actionPageData]);
 
@@ -59,6 +61,7 @@ export const CreateActionPage = ({ type }) => {
       Object.keys(actionChecked).length === 0 &&
       !savedDataRestored
     ) {
+      console.log(`initial data is found to be `, data);
       const checked = {};
       const values = {};
       const landingPage = {};
@@ -84,6 +87,7 @@ export const CreateActionPage = ({ type }) => {
           values.starterPack = element.targetURL;
           landingPage.gift = element.targetURL;
           landingIds.gift = element?.id;
+          console.log(`gift element`,element)
         }
         if (element.buttonIcon === 'Music') {
           checked.followMusic = true;

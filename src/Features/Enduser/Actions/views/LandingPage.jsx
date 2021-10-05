@@ -75,7 +75,7 @@ export const LandingPage = () => {
     console.log(`actionPageData`,actionPageData);
     if (actionPageData) {
       // here we re-route the user if this artist doesn't have a 'join' route defined with a SoundCloudEmbed serviceAction... eventually we'll want to use page types here probably not just routes
-      const landingPageData = actionPageData.ArtistByRoute.items[0].actionPages.items.find(item => item.pageRoute==='join');
+      const landingPageData = actionPageData.ArtistByRoute.items[0]?.actionPages?.items?.find(item => item.pageRoute==='join');
       console.log(`landingPageData`,landingPageData);
       if(!landingPageData){
         console.log(`going to secure login page`)
