@@ -7,7 +7,7 @@ import { Checkbox } from '../../../Components/UI/Checkbox';
 import { TextField } from '../../../Components/UI/TextField';
 
 const CreateActionContainer = styled(Container)({
-  border: '1px solid',
+  border: '1px dashed',
   borderColor: ({ theme }) => theme.colors.gray,
   padding: ({ theme }) => theme.spacing.lg,
   marginBottom: ({ theme, isLast }) => !isLast && theme.spacing.md,

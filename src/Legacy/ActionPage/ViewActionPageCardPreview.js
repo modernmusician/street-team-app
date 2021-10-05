@@ -84,8 +84,8 @@ const subheading="Please take 2 mins to complete the following steps";
             </Card.Title>
               <div className={joinGroupToggle}>
                 <ActionPointsButtonTyped 
-                  preActionText="Join the VIP Group"
-                  postActionText="Joined the VIP Group"
+                  preActionText="Join the Community"
+                  postActionText="Joined the Community"
                   actionType="joinGroup"
                   pointValue={10}
                   url= ""//{spotifyFollowArtistUrl}

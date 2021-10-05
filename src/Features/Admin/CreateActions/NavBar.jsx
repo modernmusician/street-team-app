@@ -30,7 +30,7 @@ export const NavBar = () => {
         <Logo src={logo} alt="Modern Musician Logo" />
       </Navbar.Brand>
       <Icon name="MdChevronRight" size={45} color="gray" />
-      <Header>Create Your Action Card</Header>
+      <Header>Create Your Fan Funnel</Header>
     </NavBarContainer>
   );
 };

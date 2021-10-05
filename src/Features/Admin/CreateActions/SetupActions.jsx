@@ -1,18 +1,17 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col, Button, Card, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Card, Modal } from 'react-bootstrap';
 import styled from 'styled-components';
+import { useTheme } from '../../../Hooks/useTheme';
 import { Icon } from '../../../Components/UI/Icon';
-import { useGradient } from '../../../Hooks/useGradient';
-// import { apiActionsConfig } from './configs/actionsConfig';
-// import { compareId } from '../../../utils/sharedUtils';
+import { Button } from '../../../Components/UI/Button';
 import { gql, useMutation } from '@apollo/react-hooks';
 import {
   updateActionPageButton,
   createActionPageButton,
 } from '../../../graphql/mutations';
-// import { getActionPage } from '../../../graphql/queries';
 import { apiActionsConfig } from './configs/actionsConfig';
 import { CreateAction } from './CreateAction';
 
@@ -36,26 +35,6 @@ const HeaderRow = styled(Card.Body)(({ theme }) => {
   };
 });
 
-const StyledButton = styled(Button)(({ theme }) => {
-  return {
-    background: theme.colors.yellow,
-    color: theme.colors.black,
-    width: '100%',
-    height: '60px',
-    border: 'none',
-    borderRadius: 0,
-    transition: 'unset !important',
-    '&:hover': {
-      background: useGradient({ color: theme.colors.yellow }),
-      color: theme.colors.black,
-    },
-    '&:focus': {
-      background: useGradient({ color: theme.colors.yellow }),
-      color: theme.colors.black,
-    },
-  };
-});
-
 export const SetupActions = ({
   actions,
   onChangeCheckbox,
@@ -67,11 +46,12 @@ export const SetupActions = ({
   actionPageId,
   actionPageData,
 }) => {
+  const theme = useTheme();
   const [show, setShow] = useState(false);
 
   const [updateActionButton] = useMutation(gql(updateActionPageButton), {
     onCompleted: data => {
-      setData(data.updateActionPageButton);
+      setData(data.updateActionPageButton.actionpage);
       setShow(true);
     },
   });
@@ -79,7 +59,8 @@ export const SetupActions = ({
   const [addActionPageButton, { loading: loadingActionPageButton }] =
     useMutation(gql(createActionPageButton), {
       onCompleted: data => {
-        setData(data.updateActionPageButton);
+        console.log('addActionPageButton join DATA', data);
+        setData(data.createActionPageButton.actionpage);
         setShow(true);
       },
     });
@@ -88,12 +69,8 @@ export const SetupActions = ({
     // todo this needs to be dynamic by environment (dev, app, etc)
     // TODO eventually this should use both an artist route and a pageRoute
     const route = artistRoute || actionPageId;
-    const currentUrl = window.location.href;
-    // takes the current url root, and adds the artist route to the page 
-    const link = currentUrl.split('/').slice(0, 3).join('/') + '/' + route;
-    // const link = `app.modern-musician.com/${route}`;
+    const link = `app.modern-musician.com/${route}`;
     navigator.clipboard.writeText(link);
-    console.log('copied link to clipboard', link);
   };
 
   const onSubmit = () => {
@@ -132,12 +109,6 @@ export const SetupActions = ({
           });
         }
       }
-      if (!recordExists && !loadingActionPageButton) {
-        // create the button record
-        addActionPageButton({
-          variables: { input: inputVariables },
-        });
-      }
     }
     // handle joinGroupUrl
     if (actionValue?.vipGroup && actionChecked?.vipGroup) {
@@ -155,37 +126,6 @@ export const SetupActions = ({
             element => element.buttonIcon === 'Group'
           );
 
-          if (button) {
-            // update  the button
-            inputVariables.id = button.id;
-            updateActionButton({ variables: { input: inputVariables } });
-            recordExists = true; // don't go on to create a new record
-          }
-        }
-        if (!recordExists && !loadingActionPageButton) {
-          // create the button record
-          addActionPageButton({
-            variables: { input: inputVariables },
-          });
-        }
-      }
-    }
-
-    // handle starterPackUrl
-    if (actionValue?.starterPack && actionChecked?.starterPack) {
-      newTargetUrl = actionValue.starterPack;
-      let recordExists = false;
-      const inputVariables = {
-        ...apiActionsConfig.starterPack,
-        actionPageID: actionPageData.id,
-        targetURL: actionValue.starterPack,
-      };
-      if (actionPageData?.id) {
-        // if the action buttons exist in the pageData, update them
-        if (actionButtons) {
-          const button = actionButtons.find(
-            element => element.buttonIcon === 'Ticket'
-          );
           if (button) {
             // update  the button
             inputVariables.id = button.id;
@@ -243,17 +183,17 @@ export const SetupActions = ({
       <Container>
         <Row>
           <Col>
-            <h2>Set Up Fan Actions</h2>
+            <h2 style={{ fontSize: theme.fontSizes.lg }}>Set Up Your Actions</h2>
           </Col>
         </Row>
         <ActionCard>
           <HeaderRow>
             <Row>
               <Col>
-                <h3>Fan Actions</h3>
+                <h3>Tribal Accelerator</h3>
                 <p>
-                  Select &quot;Fan Actions&quot; that someone can take to
-                  support your music and unlock a free gift
+                  Create your &quot;tribal accelerator&quot; that will turn subscribers 
+                  into engaged fans and active supports of your music.
                 </p>
               </Col>
             </Row>
@@ -280,7 +220,13 @@ export const SetupActions = ({
           <Card.Body>
             <Row>
               <Col>
-                <StyledButton onClick={onSubmit}>Save Action Card</StyledButton>
+                <Button onClick={onSubmit} 
+                    style={{ 
+                      fontWeight: theme.fontWeights.semibold,
+                      fontFamily: theme.fonts.heading
+                        }}>
+                        Save Action Card
+                </Button>
               </Col>
             </Row>
           </Card.Body>
@@ -298,7 +244,7 @@ export const SetupActions = ({
         </Modal.Body>
 
         <Modal.Footer>
-          <StyledButton onClick={copyLinkToClipboard}>
+          <Button onClick={copyLinkToClipboard}>
             <Icon
               name="FaCopy"
               color="black"
@@ -306,7 +252,7 @@ export const SetupActions = ({
               style={{ marginRight: 10 }}
             />
             Copy Link To Your Page
-          </StyledButton>
+          </Button>
         </Modal.Footer>
       </Modal>
     </React.Fragment>

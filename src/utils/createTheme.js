@@ -4,14 +4,15 @@ export const createTheme = theme => {
   return {
     ...baseTheme,
     colors: {
-      primary: '#5E30B8',
+      primary: '#614cc3',
+      menuPrimary: '#8479EB',
       primaryTint: '#7857B8',
       primaryShade: '#40207D',
       gray: 'gray',
       gray1: '#484848',
       gray2: '#393939',
       gray3: '#1F1F1F',
-      black: 'black',
+      black: '#1E1E1E',
       white: 'white',
       yellow: '#fed93e',
       ...baseTheme.colors,
