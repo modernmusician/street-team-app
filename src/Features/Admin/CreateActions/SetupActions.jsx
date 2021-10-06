@@ -193,7 +193,7 @@ export const SetupActions = ({
                 <h3>Tribal Accelerator</h3>
                 <p>
                   Create your &quot;tribal accelerator&quot; that will turn subscribers 
-                  into engaged fans and active supports of your music.
+                  into engaged fans and active supporters of your music.
                 </p>
               </Col>
             </Row>
