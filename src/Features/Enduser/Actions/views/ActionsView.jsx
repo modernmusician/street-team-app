@@ -15,6 +15,9 @@ import {
 import { getEnduser } from '../../../../graphql/queries';
 import { getActionPageAndEnduserDetailsByArtistPageRouteAndEnduserID } from '../graphql/getEnduserActionPageData';
 import { ActionPage } from '../../../../Components/ActionPage';
+import {
+  StyledPageContainer,
+} from '../../../../Components/Page';
 import { Spinner } from '../../../../Components/UI/Spinner';
 import { Auth } from 'aws-amplify';
 
@@ -241,6 +244,7 @@ export const ActionsView = () => {
 
   if (loading)
     return (
+      <StyledPageContainer>
       <Container fluid>
         <Row className="justify-content-md-center">
           <Col md="auto" style={{ textAlign: 'center' }}>
@@ -248,20 +252,24 @@ export const ActionsView = () => {
           </Col>
         </Row>
       </Container>
+      </StyledPageContainer>
     );
 
   if (
     actionPageData?.ArtistByRoute?.items?.[0]?.actionPages?.items?.[0]
       ?.actionButtons?.items.length === 0
+      || actionPageData.ArtistByRoute.items.length ===0 
   ) {
     return (
-      <Container fluid>
-        <Row>
-          <Col>
-            <h1>No Actions</h1>
+      <StyledPageContainer>
+        <Container fluid>
+          <Row className="justify-content-md-center">
+            <Col md="auto" style={{ textAlign: 'center' }}>
+            <h1>There's nothing here 😿</h1>
           </Col>
         </Row>
       </Container>
+      </StyledPageContainer>
     );
   }
 
