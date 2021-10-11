@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Navbar } from 'react-bootstrap';
 import { Icon } from '../../../Components/UI/Icon';
@@ -23,14 +24,22 @@ const Header = styled.h2({
   padding: 0,
 });
 
-export const NavBar = () => {
+export const NavBar = ({ headerText }) => {
   return (
     <NavBarContainer sticky="top">
       <Navbar.Brand href="#">
         <Logo src={logo} alt="Modern Musician Logo" />
       </Navbar.Brand>
       <Icon name="MdChevronRight" size={45} color="gray" />
-      <Header>Create Your Fan Funnel</Header>
+      <Header>{headerText}</Header>
     </NavBarContainer>
   );
+};
+
+NavBar.defaultProps = {
+  headerText: 'Create Your Fan Funnel',
+};
+
+NavBar.propTypes = {
+  headerText: PropTypes.string,
 };

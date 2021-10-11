@@ -7,6 +7,7 @@ import { LandingPage } from './Features/Enduser/Actions/views/LandingPage';
 import { CreateActionPage } from './Features/Admin/CreateActions/views/CreateActionPage';
 import { Login } from './Components/Login/Login';
 import { Demo } from './Features/Admin/Audience/GetData';
+import { AudienceView } from './Features/Admin/Audience/views/AudienceView';
 
 export const Routes = () => {
   return (
@@ -18,13 +19,8 @@ export const Routes = () => {
         <Route path="/login">
           <Login />
         </Route>
-        {/* support backwards compatability (to be removed later on) */}
-        <Route
-          path={[
-            '/artist/create',
-            '/admin/create-fan-magnet',
-          ]}
-        >
+        {/* support backwards compatibility (to be removed later on) */}
+        <Route path={['/artist/create', '/admin/create-fan-magnet']}>
           <SecureViewWrapper userRole="admin">
             <CreateActionPage type="landing" />
           </SecureViewWrapper>
@@ -37,6 +33,12 @@ export const Routes = () => {
         >
           <SecureViewWrapper userRole="admin">
             <CreateActionPage type="action" />
+          </SecureViewWrapper>
+        </Route>
+
+        <Route path="/secure/:artist/audience">
+          <SecureViewWrapper userRole="admin">
+            <AudienceView />
           </SecureViewWrapper>
         </Route>
 
