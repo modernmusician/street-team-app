@@ -251,6 +251,7 @@ export const ActionsView = () => {
     );
 
   if (
+    actionPageData?.ArtistByRoute?.items?.length === 0 ||
     actionPageData?.ArtistByRoute?.items?.[0]?.actionPages?.items?.[0]
       ?.actionButtons?.items.length === 0
   ) {

@@ -27,10 +27,7 @@ export const Routes = () => {
           </SecureViewWrapper>
         </Route>
         <Route
-          path={[
-            '/admin/create-accelerator',
-            '/artist/create-accelerator',
-          ]}
+          path={['/admin/create-accelerator', '/artist/create-accelerator']}
         >
           <SecureViewWrapper userRole="admin">
             <CreateActionPage type="action" />
