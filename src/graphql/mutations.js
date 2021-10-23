@@ -28,6 +28,28 @@ export const createArtist = /* GraphQL */ `
         nextToken
       }
       route
+      integrations {
+        items {
+          id
+          artistID
+          serviceName
+          serviceApiKey
+          createdAt
+          updatedAt
+          artist {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -114,6 +136,28 @@ export const updateArtist = /* GraphQL */ `
         nextToken
       }
       route
+      integrations {
+        items {
+          id
+          artistID
+          serviceName
+          serviceApiKey
+          createdAt
+          updatedAt
+          artist {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -200,6 +244,28 @@ export const deleteArtist = /* GraphQL */ `
         nextToken
       }
       route
+      integrations {
+        items {
+          id
+          artistID
+          serviceName
+          serviceApiKey
+          createdAt
+          updatedAt
+          artist {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -256,6 +322,198 @@ export const deleteArtist = /* GraphQL */ `
         }
         nextToken
       }
+    }
+  }
+`;
+export const createArtistIntegrations = /* GraphQL */ `
+  mutation CreateArtistIntegrations(
+    $input: CreateArtistIntegrationsInput!
+    $condition: ModelArtistIntegrationsConditionInput
+  ) {
+    createArtistIntegrations(input: $input, condition: $condition) {
+      id
+      artistID
+      serviceName
+      serviceApiKey
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        actionPages {
+          items {
+            id
+            artistID
+            creatorUserID
+            pictureID
+            pageTitle
+            heading
+            subheading
+            pageRoute
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateArtistIntegrations = /* GraphQL */ `
+  mutation UpdateArtistIntegrations(
+    $input: UpdateArtistIntegrationsInput!
+    $condition: ModelArtistIntegrationsConditionInput
+  ) {
+    updateArtistIntegrations(input: $input, condition: $condition) {
+      id
+      artistID
+      serviceName
+      serviceApiKey
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        actionPages {
+          items {
+            id
+            artistID
+            creatorUserID
+            pictureID
+            pageTitle
+            heading
+            subheading
+            pageRoute
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteArtistIntegrations = /* GraphQL */ `
+  mutation DeleteArtistIntegrations(
+    $input: DeleteArtistIntegrationsInput!
+    $condition: ModelArtistIntegrationsConditionInput
+  ) {
+    deleteArtistIntegrations(input: $input, condition: $condition) {
+      id
+      artistID
+      serviceName
+      serviceApiKey
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        actionPages {
+          items {
+            id
+            artistID
+            creatorUserID
+            pictureID
+            pageTitle
+            heading
+            subheading
+            pageRoute
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      owner
     }
   }
 `;
@@ -806,6 +1064,18 @@ export const createArtistUser = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -914,6 +1184,18 @@ export const updateArtistUser = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -1022,6 +1304,18 @@ export const deleteArtistUser = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -1131,6 +1425,18 @@ export const createActionPage = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -1170,6 +1476,9 @@ export const createActionPage = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -1339,6 +1648,18 @@ export const updateActionPage = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -1378,6 +1699,9 @@ export const updateActionPage = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -1547,6 +1871,18 @@ export const deleteActionPage = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -1586,6 +1922,9 @@ export const deleteActionPage = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -1858,6 +2197,9 @@ export const createEnduserPageSubscription = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -2115,6 +2457,9 @@ export const updateEnduserPageSubscription = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -2372,6 +2717,9 @@ export const deleteEnduserPageSubscription = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -2533,6 +2881,9 @@ export const createActionPageButton = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -2694,6 +3045,9 @@ export const updateActionPageButton = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -2855,6 +3209,9 @@ export const deleteActionPageButton = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -3656,6 +4013,18 @@ export const createEnduserArtistSubscription = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -3810,6 +4179,18 @@ export const updateEnduserArtistSubscription = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -3964,6 +4345,18 @@ export const deleteEnduserArtistSubscription = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -4143,6 +4536,9 @@ export const createEnduserTag = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -4208,6 +4604,9 @@ export const updateEnduserTag = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -4273,6 +4672,9 @@ export const deleteEnduserTag = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner

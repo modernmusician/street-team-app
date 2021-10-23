@@ -1,6 +1,189 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateArtistIntegrations = /* GraphQL */ `
+  subscription OnCreateArtistIntegrations($owner: String!) {
+    onCreateArtistIntegrations(owner: $owner) {
+      id
+      artistID
+      serviceName
+      serviceApiKey
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        actionPages {
+          items {
+            id
+            artistID
+            creatorUserID
+            pictureID
+            pageTitle
+            heading
+            subheading
+            pageRoute
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateArtistIntegrations = /* GraphQL */ `
+  subscription OnUpdateArtistIntegrations($owner: String!) {
+    onUpdateArtistIntegrations(owner: $owner) {
+      id
+      artistID
+      serviceName
+      serviceApiKey
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        actionPages {
+          items {
+            id
+            artistID
+            creatorUserID
+            pictureID
+            pageTitle
+            heading
+            subheading
+            pageRoute
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteArtistIntegrations = /* GraphQL */ `
+  subscription OnDeleteArtistIntegrations($owner: String!) {
+    onDeleteArtistIntegrations(owner: $owner) {
+      id
+      artistID
+      serviceName
+      serviceApiKey
+      createdAt
+      updatedAt
+      artist {
+        id
+        name
+        genre
+        profilePicture
+        tags {
+          items {
+            id
+            tag
+            artistID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+        actionPages {
+          items {
+            id
+            artistID
+            creatorUserID
+            pictureID
+            pageTitle
+            heading
+            subheading
+            pageRoute
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
 export const onCreateEnduserTag = /* GraphQL */ `
   subscription OnCreateEnduserTag {
     onCreateEnduserTag {
@@ -51,6 +234,9 @@ export const onCreateEnduserTag = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -113,6 +299,9 @@ export const onUpdateEnduserTag = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -175,6 +364,9 @@ export const onDeleteEnduserTag = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -487,6 +679,28 @@ export const onCreateArtist = /* GraphQL */ `
         nextToken
       }
       route
+      integrations {
+        items {
+          id
+          artistID
+          serviceName
+          serviceApiKey
+          createdAt
+          updatedAt
+          artist {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -570,6 +784,28 @@ export const onUpdateArtist = /* GraphQL */ `
         nextToken
       }
       route
+      integrations {
+        items {
+          id
+          artistID
+          serviceName
+          serviceApiKey
+          createdAt
+          updatedAt
+          artist {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -653,6 +889,28 @@ export const onDeleteArtist = /* GraphQL */ `
         nextToken
       }
       route
+      integrations {
+        items {
+          id
+          artistID
+          serviceName
+          serviceApiKey
+          createdAt
+          updatedAt
+          artist {
+            id
+            name
+            genre
+            profilePicture
+            route
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -1247,6 +1505,18 @@ export const onCreateArtistUser = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -1352,6 +1622,18 @@ export const onUpdateArtistUser = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -1457,6 +1739,18 @@ export const onDeleteArtistUser = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -1563,6 +1857,18 @@ export const onCreateActionPage = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -1602,6 +1908,9 @@ export const onCreateActionPage = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -1768,6 +2077,18 @@ export const onUpdateActionPage = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -1807,6 +2128,9 @@ export const onUpdateActionPage = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -1973,6 +2297,18 @@ export const onDeleteActionPage = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -2012,6 +2348,9 @@ export const onDeleteActionPage = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -2281,6 +2620,9 @@ export const onCreateEnduserPageSubscription = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -2535,6 +2877,9 @@ export const onUpdateEnduserPageSubscription = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -2789,6 +3134,9 @@ export const onDeleteEnduserPageSubscription = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -2947,6 +3295,9 @@ export const onCreateActionPageButton = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -3105,6 +3456,9 @@ export const onUpdateActionPageButton = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -3263,6 +3617,9 @@ export const onDeleteActionPageButton = /* GraphQL */ `
             nextToken
           }
           route
+          integrations {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
@@ -4043,6 +4400,18 @@ export const onCreateEnduserArtistSubscription = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -4194,6 +4563,18 @@ export const onUpdateEnduserArtistSubscription = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -4345,6 +4726,18 @@ export const onDeleteEnduserArtistSubscription = /* GraphQL */ `
           nextToken
         }
         route
+        integrations {
+          items {
+            id
+            artistID
+            serviceName
+            serviceApiKey
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         owner
