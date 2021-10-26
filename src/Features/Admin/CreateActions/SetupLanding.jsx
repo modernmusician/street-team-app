@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { checkPropTypes } from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/react-hooks';
@@ -57,21 +57,12 @@ export const SetupLanding = ({
   const theme = useTheme();
   const history = useHistory();
 
-  const [updateActionButton] = useMutation(gql(updateActionPageButton), {
-    onCompleted: data => {
-      console.log('updateActionButton DATA', data);
-      setData(data.updateActionPageButton.actionpage);
-      history.push('/admin/create-accelerator');
-    },
-  });
+  const [updateSoundCloud] = useMutation(gql(updateActionPageButton));
+  const [updateGift] = useMutation(gql(updateActionPageButton));
 
-  const [addActionPageButton] = useMutation(gql(createActionPageButton), {
-    onCompleted: data => {
-      console.log('addActionPageButton DATA', data);
-      setData(data.createActionPageButton.actionpage);
-      history.push('/admin/create-accelerator');
-    },
-  });
+  const [addSoundCloud] = useMutation(gql(createActionPageButton));
+  const [addGift] = useMutation(gql(createActionPageButton));
+  const [addContinue] = useMutation(gql(createActionPageButton));
 
   const soundCloudConfig = {
     actionPageID: actionPageId,
@@ -105,38 +96,41 @@ export const SetupLanding = ({
   };
 
   const saveLandingPage = () => {
-    console.log(`landPageId values on submit`, landingPageIds);
     const soundCloudURL = landingPageValues?.soundCloud;
     const giftURL = landingPageValues?.gift;
     const soundCloudId = landingPageIds?.soundCloud;
     const giftId = landingPageIds?.gift;
     const continueId = landingPageIds?.continue;
     if (actionPageId) {
+      console.log(`soundcloudURL`, soundCloudURL,soundCloudId)
+        console.log(`giftId`, giftId, giftURL);
       if (soundCloudURL && giftURL) {
-        setError(false);
-        if (soundCloudId && soundCloudURL) {
-          updateActionButton({
+        if (soundCloudId && giftId && continueId) {
+          const soundCloud = updateSoundCloud({
             variables: { input: { ...soundCloudConfig, id: soundCloudId } },
           });
-        } else if (soundCloudURL) {
-          addActionPageButton({
-            variables: { input: soundCloudConfig },
-          });
-        }
-
-        if (giftId && giftURL) {
-          updateActionButton({
+          const gift = updateGift({
             variables: { input: { ...starterPackConfig, id: giftId } },
           });
-        } else if (giftURL) {
-          addActionPageButton({
-            variables: { input: starterPackConfig },
+          Promise.all([soundCloud, gift]).then(() => {
+            // Change page
+            history.push('/admin/create-accelerator');
+            window.location.reload(); //reload because the data needs to be refetched and I can't figure out why it wont -SG 2021-10-05
           });
-        }
-
-        if (!continueId) {
-          addActionPageButton({
-            variables: { input: continueConfig },
+        } else {
+          const soundCloud = addSoundCloud({
+            variables: { input: { ...soundCloudConfig } },
+          });
+          const gift = addGift({
+            variables: { input: { ...starterPackConfig } },
+          });
+          const cont = addContinue({
+            variables: { input: { ...continueConfig } },
+          });
+          Promise.all([soundCloud, gift, cont]).then(() => {
+            // Change page
+            history.push('/admin/create-accelerator');
+            window.location.reload(); //reload because the data needs to be refetched and I can't figure out why it wont -SG 2021-10-05
           });
         }
       } else {
@@ -223,8 +217,8 @@ export const SetupLanding = ({
           </CreateActionContainer>
           <Row style={{ marginTop: theme.spacing.lg }}>
             <Col>
-              <Button onClick={saveLandingPage}
-                      style={{ fontWeight: theme.fontWeights.semibold,
+              <Button onClick={saveLandingPage} 
+                style={{ fontWeight: theme.fontWeights.semibold,
                         fontFamily: theme.fonts.heading
                       }}>
                 Next Step
