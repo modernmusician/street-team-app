@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Navbar } from 'react-bootstrap';
+import { Navbar, Dropdown } from 'react-bootstrap';
 import { Icon } from '../../../Components/UI/Icon';
 import logo from '../../../assets/mm_square_bright.png';
 
@@ -24,14 +24,103 @@ const Header = styled.h2({
   padding: 0,
 });
 
-export const NavBar = ({ headerText }) => {
+const DropdownButton = styled.button({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  background: ({ theme }) => theme.colors.gray3,
+  borderRadius: 4,
+  border: 'none',
+  '&:hover': {
+    background: ({ theme }) => theme.colors.gray2,
+  },
+});
+
+const DropdownMenu = styled.div({
+  a: {
+    color: ({ theme }) => theme.colors.white,
+  },
+  width: '100%',
+  top: 50,
+  backgroundColor: ({ theme }) => theme.colors.gray1,
+});
+
+const CustomToggle = React.forwardRef(
+  ({ children, onClick, onToggle, isOpen }, ref) => (
+    <DropdownButton
+      type="button"
+      ref={ref}
+      onToggle={onToggle}
+      onClick={e => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      <Icon
+        style={{ marginRight: 15 }}
+        name={isOpen ? 'FaChevronDown' : 'FaChevronRight'}
+        size={45}
+        color="gray"
+      />
+      {children}
+    </DropdownButton>
+  )
+);
+
+CustomToggle.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onToggle: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+};
+
+const CustomMenu = React.forwardRef(
+  ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+    return (
+      <DropdownMenu
+        ref={ref}
+        style={style}
+        className={className}
+        aria-labelledby={labeledBy}
+      >
+        <ul style={{ margin: 0 }} className="list-unstyled">
+          {children}
+        </ul>
+      </DropdownMenu>
+    );
+  }
+);
+
+CustomMenu.propTypes = {
+  children: PropTypes.node.isRequired,
+  style: PropTypes.shape({}).isRequired,
+  className: PropTypes.string.isRequired,
+  'aria-labelledby': PropTypes.string.isRequired,
+};
+
+export const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <NavBarContainer sticky="top">
       <Navbar.Brand href="#">
         <Logo src={logo} alt="Modern Musician Logo" />
       </Navbar.Brand>
-      <Icon name="MdChevronRight" size={45} color="gray" />
-      <Header>{headerText}</Header>
+
+      <Dropdown onToggle={open => setIsOpen(open)}>
+        <Dropdown.Toggle
+          as={CustomToggle}
+          isOpen={isOpen}
+          id="dropdown-custom-components"
+        >
+          <Header>Create Your Fan Funnel</Header>
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu as={CustomMenu}>
+          <Dropdown.Item href="/artist/create"><Icon name="FaFilter" style={{ marginRight: 15 }}/>Your Fan Funnel</Dropdown.Item>
+          <Dropdown.Item href="/artist/audience"><Icon name="FaUsers" style={{ marginRight: 15 }}/>Your Audience</Dropdown.Item>
+          {/* <Dropdown.Item href="#action/3.3">Something</Dropdown.Item> */}
+        </Dropdown.Menu>
+      </Dropdown>
     </NavBarContainer>
   );
 };
