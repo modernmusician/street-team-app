@@ -1,9 +1,10 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Papa from 'papaparse';
 import { Icon } from '../../../../Components/UI';
-import { useTable, useSortBy } from 'react-table';
+import { useTable } from '../../../../Hooks/useTable';
 import { useQuery } from '@apollo/react-hooks';
 import { Container } from 'react-bootstrap';
 import { NavBar } from '../../CreateActions/NavBar';
@@ -66,16 +67,68 @@ const TableHeaderText = styled.span`
   margin-left: 10px;
 `;
 
-function Table({ columns, data }) {
+const ActionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+`;
+
+const SearchLabel = styled.label`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 25px;
+  font-weight: semi-bold;
+  svg {
+    margin: 0px 10px;
+  }
+`;
+
+const ExportButton = styled.button`
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  font-weight: semi-bold;
+  background: none;
+  border: none;
+  svg {
+    margin-left: 10px;
+  }
+`;
+
+const formatTableData = data => {
+  const endUserData =
+    data.getArtistUser.artist.actionPages.items[0].subscribers.items.map(
+      item => {
+        const firstName = item?.enduser?.firstName || '';
+        const lastName = item?.enduser?.lastName || '';
+
+        return {
+          email: item?.enduser?.email,
+          firstName,
+          lastName,
+          name: `${firstName} ${lastName}`,
+          phone: item?.enduser?.phoneNumber || '',
+          points: item?.enduserPageSubscriptionCompletedActions?.items.reduce(
+            (a, b) => {
+              const value = b?.action?.pointValue || 0;
+              return value + a;
+            },
+            0
+          ),
+        };
+      }
+    );
+
+  console.log(endUserData);
+  return endUserData;
+};
+
+function Table({ tableProps }) {
   // Use the state and functions returned from useTable to build your UI
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable(
-      {
-        columns,
-        data,
-      },
-      useSortBy
-    );
+    tableProps;
 
   // Render the UI for your table
   return (
@@ -99,7 +152,7 @@ function Table({ columns, data }) {
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
+        {rows.map(row => {
           prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
@@ -115,11 +168,19 @@ function Table({ columns, data }) {
 }
 
 Table.propTypes = {
-  columns: PropTypes.func.isRequired,
-  data: PropTypes.objectOf(PropTypes.string).isRequired,
+  tableProps: PropTypes.shape({
+    getTableProps: PropTypes.func,
+    getTableBodyProps: PropTypes.func,
+    headerGroups: PropTypes.arrayOf(PropTypes.shape({})),
+    rows: PropTypes.arrayOf(PropTypes.shape({})),
+    prepareRow: PropTypes.func,
+  }).isRequired,
 };
 
 export const AudienceView = () => {
+  const [searchValue, setSearchValue] = useState('');
+  const [tableData, setTableData] = useState([]);
+
   const columns = React.useMemo(
     () => [
       {
@@ -142,6 +203,11 @@ export const AudienceView = () => {
     []
   );
 
+  const {
+    tableProps,
+    filter: { onChangeFilter },
+  } = useTable(columns, tableData);
+
   const { userId } = useCurrentAuthUser();
   const { data, error, loading } = useQuery(getAllSubscribersFromArtistUser, {
     variables: {
@@ -149,29 +215,39 @@ export const AudienceView = () => {
     },
   });
 
-  if (loading || error || !data) return null;
+  useEffect(() => {
+    console.log('tableData', tableData);
+    if (data && !tableData.length) {
+      const formattedData = formatTableData(data);
+      setTableData(formattedData);
+    }
+  }, [data]);
 
-  const endUserData =
-    data.getArtistUser.artist.actionPages.items[0].subscribers.items.map(
-      item => {
-        const firstName = item?.enduser?.firstName || '';
-        const lastName = item?.enduser?.lastName || '';
+  if (loading || error || !data || !tableData.length) return null;
 
-        return {
-          email: item?.enduser?.email,
-          firstName,
-          lastName,
-          name: `${firstName} ${lastName}`,
-          phone: item?.enduser?.phoneNumber || '',
-          points: item?.enduserPageSubscriptionCompletedActions?.items.reduce(
-            (a, b) => a + b,
-            0
-          ),
-        };
-      }
+  const onChangeSearch = e => {
+    const value = e?.target?.value;
+    setSearchValue(value);
+    onChangeFilter(value);
+  };
+
+  const onExport = () => {
+    const csv = Papa.unparse(tableData);
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    const today = new Date();
+
+    link.setAttribute('href', url);
+    link.setAttribute(
+      'download',
+      `Audience-${today.toLocaleDateString('en-US')}`
     );
-
-  console.log(endUserData);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <React.Fragment>
@@ -179,7 +255,20 @@ export const AudienceView = () => {
       <RootContainer fluid>
         <Container fluid>
           <TableContainer>
-            <Table columns={columns} data={endUserData} />
+            <ActionContainer>
+              <ExportButton type="button" onClick={onExport}>
+                Export <Icon name="FaExternalLinkAlt" color="black" size={20} />
+              </ExportButton>
+              <SearchLabel>
+                Search <Icon name="FaSearch" color="black" size={20} />
+                <input
+                  type="text"
+                  value={searchValue}
+                  onChange={onChangeSearch}
+                />
+              </SearchLabel>
+            </ActionContainer>
+            <Table tableProps={tableProps} />
           </TableContainer>
         </Container>
       </RootContainer>
