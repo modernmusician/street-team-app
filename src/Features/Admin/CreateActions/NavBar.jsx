@@ -116,9 +116,9 @@ export const NavBar = () => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu as={CustomMenu}>
-          <Dropdown.Item href="#action/3.1">Action</Dropdown.Item>
-          <Dropdown.Item href="#action/3.2">Another action</Dropdown.Item>
-          <Dropdown.Item href="#action/3.3">Something</Dropdown.Item>
+          <Dropdown.Item href="/artist/create"><Icon name="FaFilter" style={{ marginRight: 15 }}/>Your Fan Funnel</Dropdown.Item>
+          <Dropdown.Item href="/artist/audience"><Icon name="FaUsers" style={{ marginRight: 15 }}/>Your Audience</Dropdown.Item>
+          {/* <Dropdown.Item href="#action/3.3">Something</Dropdown.Item> */}
         </Dropdown.Menu>
       </Dropdown>
     </NavBarContainer>
