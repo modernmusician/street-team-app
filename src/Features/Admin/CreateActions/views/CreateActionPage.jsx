@@ -12,7 +12,7 @@ import { SetupLanding } from '../SetupLanding';
 import { useGetActionPage } from '../hooks/useGetActionPage';
 import { selectActionsConfig } from '../configs/actionsConfig';
 
-const RootContainer = styled(Container)({
+export const RootContainer = styled(Container)({
   background: ({ theme }) => theme.colors.black,
   marginTop: ({ theme }) => theme.spacing.xl,
   marginBottom: ({ theme }) => theme.spacing.xl,
@@ -87,7 +87,7 @@ export const CreateActionPage = ({ type }) => {
           values.starterPack = element.targetURL;
           landingPage.gift = element.targetURL;
           landingIds.gift = element?.id;
-          console.log(`gift element`,element)
+          console.log(`gift element`, element);
         }
         if (element.buttonIcon === 'Music') {
           checked.followMusic = true;
