@@ -7,6 +7,7 @@ import { LandingPage } from './Features/Enduser/Actions/views/LandingPage';
 import { CreateActionPage } from './Features/Admin/CreateActions/views/CreateActionPage';
 import { Login } from './Components/Login/Login';
 import { Demo } from './Features/Admin/Audience/GetData';
+import { AppReview } from './Features/Admin/AppReview/AppReview';
 import { AudienceView } from './Features/Admin/Audience/views/AudienceView';
 /*
 While we're currently supporting backwards compatability, routing should follow these strategies:
@@ -20,6 +21,9 @@ export const Routes = () => {
       <Switch>
         <Route path="/test">
           <Demo />
+        </Route>
+        <Route path="/app-review">
+          <AppReview />
         </Route>
         <Route path="/login">
           <Login />
