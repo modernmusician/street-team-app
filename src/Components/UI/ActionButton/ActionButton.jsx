@@ -14,7 +14,7 @@ const PointsContainer = styled.div({
   alignItems: 'center',
   justifyContent: 'center',
   background: ({ color }) => color,
-  padding: '0px 25px 5px 25px',
+  padding: '0px 25px 0px 25px',
   color: 'inherit',
   fontSize: ({ theme }) => theme.fontSizes.sm,
   minHeight: '100%',
@@ -71,6 +71,7 @@ const Points = styled.p(({ theme }) => {
     fontWeight: theme.fontWeights.bold,
     fontSize: theme.fontSizes.xxl,
     margin: 0,
+    lineHeight: "100%",
     color: 'inherit',
   };
 });
