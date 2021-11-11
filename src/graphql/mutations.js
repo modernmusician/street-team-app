@@ -34,6 +34,7 @@ export const createArtist = /* GraphQL */ `
           artistID
           serviceName
           serviceApiKey
+          serviceAccountId
           createdAt
           updatedAt
           artist {
@@ -83,6 +84,7 @@ export const createArtist = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -142,6 +144,7 @@ export const updateArtist = /* GraphQL */ `
           artistID
           serviceName
           serviceApiKey
+          serviceAccountId
           createdAt
           updatedAt
           artist {
@@ -191,6 +194,7 @@ export const updateArtist = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -250,6 +254,7 @@ export const deleteArtist = /* GraphQL */ `
           artistID
           serviceName
           serviceApiKey
+          serviceAccountId
           createdAt
           updatedAt
           artist {
@@ -299,6 +304,7 @@ export const deleteArtist = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -335,6 +341,7 @@ export const createArtistIntegrations = /* GraphQL */ `
       artistID
       serviceName
       serviceApiKey
+      serviceAccountId
       createdAt
       updatedAt
       artist {
@@ -359,6 +366,7 @@ export const createArtistIntegrations = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -399,6 +407,7 @@ export const updateArtistIntegrations = /* GraphQL */ `
       artistID
       serviceName
       serviceApiKey
+      serviceAccountId
       createdAt
       updatedAt
       artist {
@@ -423,6 +432,7 @@ export const updateArtistIntegrations = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -463,6 +473,7 @@ export const deleteArtistIntegrations = /* GraphQL */ `
       artistID
       serviceName
       serviceApiKey
+      serviceAccountId
       createdAt
       updatedAt
       artist {
@@ -487,6 +498,7 @@ export const deleteArtistIntegrations = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -1046,6 +1058,7 @@ export const createArtistUser = /* GraphQL */ `
       email
       phoneNumber
       artistID
+      facebookLongLivedUserAccessToken
       createdAt
       updatedAt
       artist {
@@ -1070,6 +1083,7 @@ export const createArtistUser = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -1127,6 +1141,7 @@ export const createArtistUser = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -1166,6 +1181,7 @@ export const updateArtistUser = /* GraphQL */ `
       email
       phoneNumber
       artistID
+      facebookLongLivedUserAccessToken
       createdAt
       updatedAt
       artist {
@@ -1190,6 +1206,7 @@ export const updateArtistUser = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -1247,6 +1264,7 @@ export const updateArtistUser = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -1286,6 +1304,7 @@ export const deleteArtistUser = /* GraphQL */ `
       email
       phoneNumber
       artistID
+      facebookLongLivedUserAccessToken
       createdAt
       updatedAt
       artist {
@@ -1310,6 +1329,7 @@ export const deleteArtistUser = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -1367,6 +1387,7 @@ export const deleteArtistUser = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -1431,6 +1452,7 @@ export const createActionPage = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -1465,6 +1487,7 @@ export const createActionPage = /* GraphQL */ `
         email
         phoneNumber
         artistID
+        facebookLongLivedUserAccessToken
         createdAt
         updatedAt
         artist {
@@ -1654,6 +1677,7 @@ export const updateActionPage = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -1688,6 +1712,7 @@ export const updateActionPage = /* GraphQL */ `
         email
         phoneNumber
         artistID
+        facebookLongLivedUserAccessToken
         createdAt
         updatedAt
         artist {
@@ -1877,6 +1902,7 @@ export const deleteActionPage = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -1911,6 +1937,7 @@ export const deleteActionPage = /* GraphQL */ `
         email
         phoneNumber
         artistID
+        facebookLongLivedUserAccessToken
         createdAt
         updatedAt
         artist {
@@ -2215,6 +2242,7 @@ export const createEnduserPageSubscription = /* GraphQL */ `
           email
           phoneNumber
           artistID
+          facebookLongLivedUserAccessToken
           createdAt
           updatedAt
           artist {
@@ -2475,6 +2503,7 @@ export const updateEnduserPageSubscription = /* GraphQL */ `
           email
           phoneNumber
           artistID
+          facebookLongLivedUserAccessToken
           createdAt
           updatedAt
           artist {
@@ -2735,6 +2764,7 @@ export const deleteEnduserPageSubscription = /* GraphQL */ `
           email
           phoneNumber
           artistID
+          facebookLongLivedUserAccessToken
           createdAt
           updatedAt
           artist {
@@ -2899,6 +2929,7 @@ export const createActionPageButton = /* GraphQL */ `
           email
           phoneNumber
           artistID
+          facebookLongLivedUserAccessToken
           createdAt
           updatedAt
           artist {
@@ -3063,6 +3094,7 @@ export const updateActionPageButton = /* GraphQL */ `
           email
           phoneNumber
           artistID
+          facebookLongLivedUserAccessToken
           createdAt
           updatedAt
           artist {
@@ -3227,6 +3259,7 @@ export const deleteActionPageButton = /* GraphQL */ `
           email
           phoneNumber
           artistID
+          facebookLongLivedUserAccessToken
           createdAt
           updatedAt
           artist {
@@ -3434,6 +3467,7 @@ export const createEnduserPageSubscriptionCompletedActions = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -3512,6 +3546,7 @@ export const createEnduserPageSubscriptionCompletedActions = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -3651,6 +3686,7 @@ export const updateEnduserPageSubscriptionCompletedActions = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -3729,6 +3765,7 @@ export const updateEnduserPageSubscriptionCompletedActions = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -3868,6 +3905,7 @@ export const deleteEnduserPageSubscriptionCompletedActions = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -3946,6 +3984,7 @@ export const deleteEnduserPageSubscriptionCompletedActions = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -4019,6 +4058,7 @@ export const createEnduserArtistSubscription = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -4185,6 +4225,7 @@ export const updateEnduserArtistSubscription = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -4351,6 +4392,7 @@ export const deleteEnduserArtistSubscription = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner

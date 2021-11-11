@@ -8,6 +8,7 @@ export const getArtistIntegrations = /* GraphQL */ `
       artistID
       serviceName
       serviceApiKey
+      serviceAccountId
       createdAt
       updatedAt
       artist {
@@ -32,6 +33,7 @@ export const getArtistIntegrations = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -78,6 +80,7 @@ export const listArtistIntegrationss = /* GraphQL */ `
         artistID
         serviceName
         serviceApiKey
+        serviceAccountId
         createdAt
         updatedAt
         artist {
@@ -290,6 +293,7 @@ export const getArtist = /* GraphQL */ `
           artistID
           serviceName
           serviceApiKey
+          serviceAccountId
           createdAt
           updatedAt
           artist {
@@ -339,6 +343,7 @@ export const getArtist = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -394,6 +399,7 @@ export const listArtists = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -461,6 +467,7 @@ export const artistByRoute = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -732,6 +739,7 @@ export const getArtistUser = /* GraphQL */ `
       email
       phoneNumber
       artistID
+      facebookLongLivedUserAccessToken
       createdAt
       updatedAt
       artist {
@@ -756,6 +764,7 @@ export const getArtistUser = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -813,6 +822,7 @@ export const getArtistUser = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -854,6 +864,7 @@ export const listArtistUsers = /* GraphQL */ `
         email
         phoneNumber
         artistID
+        facebookLongLivedUserAccessToken
         createdAt
         updatedAt
         artist {
@@ -932,6 +943,7 @@ export const getActionPage = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -966,6 +978,7 @@ export const getActionPage = /* GraphQL */ `
         email
         phoneNumber
         artistID
+        facebookLongLivedUserAccessToken
         createdAt
         updatedAt
         artist {
@@ -1162,6 +1175,7 @@ export const listActionPages = /* GraphQL */ `
           email
           phoneNumber
           artistID
+          facebookLongLivedUserAccessToken
           createdAt
           updatedAt
           artist {
@@ -1286,6 +1300,7 @@ export const actionPagesByArtist = /* GraphQL */ `
           email
           phoneNumber
           artistID
+          facebookLongLivedUserAccessToken
           createdAt
           updatedAt
           artist {
@@ -1408,6 +1423,7 @@ export const actionPagesByRoute = /* GraphQL */ `
           email
           phoneNumber
           artistID
+          facebookLongLivedUserAccessToken
           createdAt
           updatedAt
           artist {
@@ -1627,6 +1643,7 @@ export const getEnduserPageSubscription = /* GraphQL */ `
           email
           phoneNumber
           artistID
+          facebookLongLivedUserAccessToken
           createdAt
           updatedAt
           artist {
@@ -1830,6 +1847,7 @@ export const listEnduserPageSubscriptions = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -1969,6 +1987,7 @@ export const enduserPageSubscriptionByActionPage = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -2108,6 +2127,7 @@ export const enduserPageSubscriptionByEnduser = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -2201,6 +2221,7 @@ export const getActionPageButton = /* GraphQL */ `
           email
           phoneNumber
           artistID
+          facebookLongLivedUserAccessToken
           createdAt
           updatedAt
           artist {
@@ -2362,6 +2383,7 @@ export const listActionPageButtons = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -2495,6 +2517,7 @@ export const getEnduserPageSubscriptionCompletedActions = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -2573,6 +2596,7 @@ export const getEnduserPageSubscriptionCompletedActions = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner
@@ -2987,6 +3011,7 @@ export const getEnduserArtistSubscription = /* GraphQL */ `
             artistID
             serviceName
             serviceApiKey
+            serviceAccountId
             createdAt
             updatedAt
             owner
@@ -3500,6 +3525,7 @@ export const enduserPageSubscriptionByReferralEnduser = /* GraphQL */ `
             email
             phoneNumber
             artistID
+            facebookLongLivedUserAccessToken
             createdAt
             updatedAt
             owner

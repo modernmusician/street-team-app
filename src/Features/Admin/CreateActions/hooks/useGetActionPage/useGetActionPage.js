@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/react-hooks';
 import { getActionPageByArtistAndPageRoute } from '../../../../../graphql-custom/queries';
 import { getArtistUser } from '../../../../../graphql/queries';
@@ -10,17 +10,20 @@ import {
 } from '../../../../../graphql/mutations';
 import { useCurrentAuthUser } from '../useCurrentAuthUser';
 
+
+
 export const useGetActionPage = () => {
-  const [artistId, setArtistId] = useState();
+  // const [artistId, setArtistId] = useState();
   const [actionPageInfo, setActionPageInfo] = useState();
-  const [actionPageId, setActionPageId] = useState();
-  const [artistRoute, setArtistRoute] = useState();
+  // const [actionPageId, setActionPageId] = useState();
+  // const [artistRoute, setArtistRoute] = useState();
   const [routeIncrement, setRouteIncrement] = useState(0);
   const [error, setError] = useState();
+  const [createActionPageError, setCreateActionPageError] = useState();
 
-  const { userId, artistName } = useCurrentAuthUser();
+  const {userId, artistName} = useCurrentAuthUser();
 
-  const getArtistByEnduser = `query GetArtistUser($id: ID!, $pageRoute: String) {
+  const getArtistByEnduser = `query GetArtistUserActionPageData($id: ID!, $pageRoute: String) {
     getArtistUser(id: $id) {
       id
       username
@@ -86,62 +89,14 @@ export const useGetActionPage = () => {
         }
       }
       owner
-      actionPages {
-        items {
-          id
-          artistID
-          creatorUserID
-          pictureID
-          pageTitle
-          heading
-          subheading
-          pageRoute
-          createdAt
-          updatedAt
-          artist {
-            id
-            name
-            genre
-            profilePicture
-            route
-            createdAt
-            updatedAt
-            owner
-          }
-          creatorUser {
-            id
-            username
-            firstName
-            lastName
-            email
-            phoneNumber
-            artistID
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
-          subscribers {
-            nextToken
-          }
-          actionButtons {
-            nextToken
-          }
-          picture {
-            id
-            publicUrl
-            name
-            owner
-            visibility
-            createdAt
-            updatedAt
-          }
-        }
-        nextToken
-      }
     }
   }
 `;
+
+const onCompletedFunction = (data) => {
+  console.log("completed query");
+  console.log(`available data is now `, data)
+}
 
   const {
     data: userData,
@@ -150,235 +105,206 @@ export const useGetActionPage = () => {
     refetch: refetchUserData,
   } = useQuery(gql(getArtistByEnduser), {
     variables: { id: userId, pageRoute: 'join' },
-  });
-
-  const {
-    data: artistByRouteData,
-    error: artistByRouteError,
-    loading: artistByRouteLoading,
-    refetch: refetchArtistByRoute,
-  } = useQuery(gql(getActionPageByArtistAndPageRoute), {
-    variables: { artistRoute, pageRoute: 'join' },
-  });
-
-  // define mutations
-  const [
-    addUser,
-    {
-      loading: createUserLoading,
-      data: createUserData,
-      error: createUserError,
+    skip: (!userId && !artistName),
+    onCompleted: (userData) => {
+      console.log("completed query");
+      console.log(`available data is now `, userData)
     },
-  ] = useMutation(gql(createArtistUser), {
-    update(cache) {
-      cache.writeQuery({
-        query: gql(getArtistUser),
-        data: { artistuser: addUser },
-      });
-    },
-    refetchQueries: [
-      {
-        query: gql(getArtistUser),
-        variables: { id: userId },
-      },
-    ],
-    awaitRefetchQueries: true,
   });
 
-  const [
-    addArtist,
-    {
-      loading: createArtistLoading,
-      data: createArtistData,
-      error: addArtistError,
-    },
-  ] = useMutation(gql(createArtist), {
-    refetchQueries: [
-      {
-        query: gql(getActionPageByArtistAndPageRoute),
-        variables: { artistRoute, pageRoute: 'join' },
-      },
-    ],
-    awaitRefetchQueries: true,
-  });
-
-  const [
-    addActionPage,
-    {
-      data: createActionPageData,
-      loading: createActionPageLoading,
-      error: addActionPageError,
-    },
-  ] = useMutation(gql(createActionPage), {
-    refetchQueries: [{ query: gql(getArtistUser), variables: { id: userId } }],
-    awaitRefetchQueries: true,
-  });
-
-  // TODO this shouldn't be called until after we find out that an enduser doesn't exist... but for some reason it's been called still
-  const uniqueArtistRoute = () => {
-    if (!artistRoute && artistName) {
-      setArtistRoute(artistName.replace(/[^a-zA-Z0-9-_]/g, '-'));
-      return false;
+  //this function 
+  const createActionPageForUser = async (userId, artistName) => {
+    const params = {artistUserId: userId, artistName: artistName, pageRoute: 'join'} ;
+    //todo this should be done using environment variables, but for now this works -2021-11-11 SG
+    let createUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/dev/create-action-page`
+    if(window.location.href==="app.modern-musician.com"){
+      createUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/production/create-action-page`
     }
-    if (!artistName && !artistRoute) {
-      // if there is no artistRoute set and no artistName passed in, then we're going to just use static default values
-      setArtistRoute('fb');
-    }
-    console.log('artistByRouteData', artistByRouteData);
-    if (artistByRouteData && !artistByRouteLoading && artistRoute) {
-      // find if an artist exists at this route. if it does, try a different route
-      if (artistByRouteData.ArtistByRoute.items.length === 0) {
-        return true;
-      }
-      const artistArray = artistRoute.split('_');
-      console.log(`artistArray`, artistArray);
-      const artistName = artistArray[0];
-      setRouteIncrement(parseInt(routeIncrement) + 1);
-      setArtistRoute(`${artistName}_${routeIncrement.toString()}`);
-      refetchArtistByRoute();
-    }
-    return false;
-  };
-  if (userLoading) {
-    return { loading: true };
+    console.log(params)
+    const pagesData = await fetch(createUrl,
+            { 
+              method: "POST",
+              headers: { "Content-Type": "application/json"},
+              body: JSON.stringify( params ) 
+            }
+          )
+            .then(rsp => rsp.json())
+            .then(json => {
+                if (json.error && json.error.message) {
+                    console.error(json.error.message);
+                    setCreateActionPageError(json.error.message);
+                }
+                else{
+                    console.log(`results are`, json);
+                    refetchUserData();
+                }
+            })
   }
-  const enduserInfo = userData?.getArtistUser;
-  try {
-    // if the enduser does not exist
-    if (!enduserInfo && !userLoading && !createUserLoading && !createUserData) {
-      // create an artist for the new user
-      if (!createArtistLoading && !artistId && !createArtistData) {
-        // split this if statement to avoid continuing to hit this request if we don't need it
-        if (uniqueArtistRoute()) {
-          // route string is defined elsewhere
-          const artistInput = {
-            name: artistName || 'artist',
-            route: artistRoute,
-          };
-          addArtist({
-            variables: { input: artistInput },
-          });
-        }
-      }
-      if (createArtistData && !artistId) {
-        setArtistId(createArtistData.createArtist.id);
-      }
-      if (
-        artistId &&
-        userId &&
-        !createUserData &&
-        !createUserLoading &&
-        !userLoading &&
-        userData &&
-        !userData?.getArtistUser
-      ) {
-        console.log(`1 ----- create a new artist user`);
-        console.log(`userData`, userData);
-        // add new user since it doesn't exist
-        addUser({
-          variables: {
-            input: {
-              id: userId,
-              artistID: artistId,
-            },
-          },
-        });
-        refetchUserData();
-      }
-    }
-    console.log('enduserInfo', enduserInfo);
-    console.log('actionPageId', actionPageId);
-    console.log('artistRoute', artistRoute);
-    // if the enduser doesn't have an artist, add one & then set the artist Id
-    if (
-      enduserInfo &&
-      !enduserInfo.artist &&
-      !createArtistData &&
-      !createArtistLoading
-    ) {
-      console.log(`2 -----`);
-      console.log(`no artist for enduser... create one! `);
-      const artistInput = { name: artistName, route: artistRoute };
-      // addArtist({
-      //   variables: { input: artistInput },
-      // });
-    }
-    if (createArtistData && !artistId) {
-      console.log(`3 -----`);
-      const { id } = createArtistData.createArtist;
-      setArtistId(id);
-      enduserInfo.artistID = id;
-      updateArtistUser(enduserInfo);
-    }
-    if (enduserInfo && !actionPageId && !artistId) {
-      console.log(`4 -----`);
-      setArtistRoute(enduserInfo.artist.route);
-      if (!artistId) {
-        setArtistId(enduserInfo.artistID, 'artistId');
-      }
-      const existingActionPageInfo = enduserInfo.artist.actionPages.items.find(
+
+  useEffect(() => {
+    let responseActionPageData =
+      userData?.getArtistUser?.artist?.actionPages?.items?.find(
         item => item.pageRoute === 'join'
       );
-      if (existingActionPageInfo && !actionPageInfo) {
-        setActionPageInfo(existingActionPageInfo);
-        console.log('existing action page id', existingActionPageInfo.id);
-        setActionPageId(existingActionPageInfo.id);
+      console.log(`response action page data is now---1a`,responseActionPageData);
+      console.log(`userError is now`,userError);
+    if(!responseActionPageData && !userError){
+      try {
+        // if an action page doesn't exist, create one and pull the data again
+        if (!createActionPageError && userId && artistName) {
+          console.log('creating new action page')
+          //this single API endpoint will create the user, artist, and page if necessary
+          createActionPageForUser(userId,artistName);
+        }
+      } catch (err) {
+        console.error(
+          err,
+          userError,
+          createActionPageError,
+          // artistByRouteError,
+          // createUserError,
+          // addArtistError,
+          // addActionPageError
+        );
+        setError(err);
       }
     }
-    if (createActionPageData && !actionPageId) {
-      console.log(`5 ---`, artistId, userId, enduserInfo, actionPageId);
-      setActionPageId(createActionPageData.createActionPage.id);
-    }
+  },[userData, userLoading, userError])
+// this query is getting called a million times and breaking things. 
+  // const {
+  //   data: artistByRouteData,
+  //   error: artistByRouteError,
+  //   loading: artistByRouteLoading,
+  //   refetch: refetchArtistByRoute,
+  // } = useQuery(gql(getActionPageByArtistAndPageRoute), {
+  //   variables: { artistRoute, pageRoute: 'join' },
+  // });
 
-    if (
-      !createActionPageData &&
-      !actionPageId &&
-      !actionPageInfo &&
-      enduserInfo &&
-      !createUserLoading &&
-      !createActionPageLoading &&
-      artistId &&
-      userId
-    ) {
-      const newPageInput = {
-        creatorUserID: userId,
-        artistID: artistId,
-        pageTitle: 'Almost there!',
-        heading: 'Increase your rewards!',
-        subheading: 'Earn more points to unlock exclusive rewards & benefits',
-        pageRoute: 'join',
-      };
-      addActionPage({ variables: { input: newPageInput } });
-    }
-  } catch (err) {
-    console.error(
-      err,
-      userError,
-      artistByRouteError,
-      createUserError,
-      addArtistError,
-      addActionPageError
-    );
-    setError(err);
+  // // define mutations
+  // const [
+  //   addUser,
+  //   {
+  //     loading: createUserLoading,
+  //     data: createUserData,
+  //     error: createUserError,
+  //   },
+  // ] = useMutation(gql(createArtistUser), {
+  //   update(cache) {
+  //     cache.writeQuery({
+  //       query: gql(getArtistUser),
+  //       data: { artistuser: addUser },
+  //     });
+  //   },
+  //   refetchQueries: [
+  //     {
+  //       query: gql(getArtistUser),
+  //       variables: { id: userId },
+  //     },
+  //   ],
+  //   awaitRefetchQueries: true,
+  // });
+
+  // const [
+  //   addArtist,
+  //   {
+  //     loading: createArtistLoading,
+  //     data: createArtistData,
+  //     error: addArtistError,
+  //   },
+  // ] = useMutation(gql(createArtist), {
+  //   refetchQueries: [
+  //     {
+  //       query: gql(getActionPageByArtistAndPageRoute),
+  //       variables: { artistRoute, pageRoute: 'join' },
+  //     },
+  //   ],
+  //   awaitRefetchQueries: true,
+  // });
+
+  // const [
+  //   addActionPage,
+  //   {
+  //     data: createActionPageData,
+  //     loading: createActionPageLoading,
+  //     error: addActionPageError,
+  //   },
+  // ] = useMutation(gql(createActionPage), {
+  //   refetchQueries: [{ query: gql(getArtistUser), variables: { id: userId } }],
+  //   awaitRefetchQueries: true,
+  // });
+
+  // // TODO this shouldn't be called until after we find out that an enduser doesn't exist... but for some reason it's been called still
+  // const uniqueArtistRoute = () => {
+  //   if (!artistRoute && artistName) {
+  //     setArtistRoute(artistName.replace(/[^a-zA-Z0-9-_]/g, '-'));
+  //     return false;
+  //   }
+  //   if (!artistName && !artistRoute) {
+  //     // if there is no artistRoute set and no artistName passed in, then we're going to just use static default values
+  //     setArtistRoute('fb');
+  //   }
+  //   console.log('artistByRouteData', artistByRouteData);
+  //   if (artistByRouteData && !artistByRouteLoading && artistRoute) {
+  //     // find if an artist exists at this route. if it does, try a different route
+  //     if (artistByRouteData.ArtistByRoute.items.length === 0) {
+  //       return true;
+  //     }
+  //     const artistArray = artistRoute.split('_');
+  //     console.log(`artistArray`, artistArray);
+  //     const artistName = artistArray[0];
+  //     setRouteIncrement(parseInt(routeIncrement) + 1);
+  //     setArtistRoute(`${artistName}_${routeIncrement.toString()}`);
+  //     refetchArtistByRoute();
+  //   }
+  //   return false;
+  // };
+
+  let responseActionPageData;
+  let artistId;
+  let actionPageId;
+  let artistRoute;
+
+
+  if (userLoading) {
+    console.log("loading")
+    return { loading: userLoading };
   }
+  if(userError){
+    console.log("error")
+    console.log(userError)
+    return {error: userError};
+  }
+  if(!userData){
+    console.log("no user data found");
+  }
+  // else if (userData) {
+    console.log(`we should have some userData`)
+    const enduserInfo = userData?.data?.getArtistUser;
+    console.log(`user data is: `, userData);
+    responseActionPageData =
+      userData?.getArtistUser?.artist?.actionPages?.items?.find(
+        item => item.pageRoute === 'join'
+      );
+    artistId = userData?.getArtistUser?.artist?.id;
+    artistRoute = userData?.getArtistUser?.artist?.route;
+    actionPageId = responseActionPageData?.id;
 
-  const responseActionPageData =
-    userData?.getArtistUser?.artist?.actionPages?.items?.find(
-      item => item.pageRoute === 'join'
-    );
-  console.log(`userData`, userData);
-  console.log(`respond --- responseActionPageData`, responseActionPageData);
-
+    console.log(`userData`, userData);
+    console.log(`respond --- responseActionPageData`, responseActionPageData);
+  // }
   return {
     loading:
-      userLoading ||
-      artistByRouteLoading ||
-      createUserLoading ||
-      createArtistLoading ||
-      createActionPageLoading,
+      userLoading,
+      // artistByRouteLoading ||
+      // createUserLoading ||
+      // createArtistLoading ||
+      // createActionPageLoading,
     error,
-    actionPageId,
-    artistRoute,
+    actionPageId: actionPageId,
+    artistRoute: artistRoute,
     actionPageData: responseActionPageData,
+    userData,
+    userId,
+    artistId: artistId,
   };
 };

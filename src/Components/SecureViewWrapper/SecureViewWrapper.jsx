@@ -163,7 +163,7 @@ export const SecureViewWrapper = ({ userRole, children }) => {
     <PageContainer pageContentPadding="50px 95px">
       {!showSignupForm && (
         <React.Fragment>
-          <StyledPageHeader>Unlock Your Free Gift</StyledPageHeader>
+          <StyledPageHeader>{userRole ==='admin'? `Login to your account` : `Unlock Your Free Gift`}</StyledPageHeader>
           <StyledButton
             active
             activeBgColor="transparent linear-gradient(90deg, #4363A7 0%, #345BAC 88%, #3357A5 100%) 0% 0% no-repeat padding-box;"
@@ -193,8 +193,11 @@ export const SecureViewWrapper = ({ userRole, children }) => {
           </StyledButton>
           <Terms>
             <a href="https://www.modern-musician.com/terms" target="_blank">
-              By accepting this gift, I acknowledge that I have reviewed and
-              agreed to our Terms of Use, Contest Rules, and Privacy Policy.
+            {userRole ==='admin'?  `By using this platform, I acknowledge that I have reviewed and
+              agreed to our Terms of Use and Privacy Policy`
+              :
+              `By accepting this gift, I acknowledge that I have reviewed and
+              agreed to our Terms of Use, Contest Rules, and Privacy Policy.`}
             </a>
           </Terms>
         </React.Fragment>

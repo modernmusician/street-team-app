@@ -16,8 +16,8 @@ const awsmobile = {
             "profile",
             "aws.cognito.signin.user.admin"
         ],
-        "redirectSignIn": "https://7eb6-174-20-142-170.ngrok.io/login/,https://app.modern-musician.com/login/,https://dev.modern-musician.com/login/",
-        "redirectSignOut": "https://7eb6-174-20-142-170.ngrok.io/login/,https://app.modern-musician.com/login/,https://dev.modern-musician.com/login/",
+        "redirectSignIn": "https://street-team.ngrok.io/login/,https://app.modern-musician.com/login/,https://dev.modern-musician.com/login/",
+        "redirectSignOut": "https://street-team.ngrok.io/login/,https://app.modern-musician.com/login/,https://dev.modern-musician.com/login/",
         "responseType": "token"
     },
     "federationTarget": "COGNITO_USER_AND_IDENTITY_POOLS",

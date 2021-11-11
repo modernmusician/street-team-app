@@ -4,6 +4,7 @@ import { Form } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Input = styled(Form.Control)({
+  width: '100%',
   color: ({ theme }) => theme.colors.white,
   borderRadius: 0,
   borderColor: ({ theme }) => theme.colors.gray,
@@ -12,6 +13,7 @@ const Input = styled(Form.Control)({
   fontSize: ({ theme }) => theme.fontSizes.sm,
   fontFamily: ({ theme }) => theme.fonts.heading,
   fontWeight: ({ theme }) => theme.fontWeights.medium,
+  padding: ({ theme }) => `0 ${theme.fontSizes.xs}`,
   transitions: 'unset',
   '&:hover': {
     background: 'transparent',
@@ -44,41 +46,54 @@ const FormGroup = styled(Form.Group)({
   padding: 0,
 });
 
-export const TextField = ({
+export const SelectList = ({
   label,
   subText,
   placeholder,
   value,
   onChange,
   hideLabel,
+  options,
 }) => {
   return (
     <FormGroup>
-      {!hideLabel && <InputLabel>{label}</InputLabel>}
+      {!hideLabel && <InputLabel>{label}</InputLabel>}{' '}
       <Input
         type="text"
+        as="select"
         aria-label={hideLabel ? label : null}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-      />
+      >
+        {options.map(option => (
+          <option value={option.value}>{option.label}</option>
+        ))}
+      </Input>
       {subText && <SubText className="text-muted">{subText}</SubText>}
     </FormGroup>
   );
 };
 
-TextField.propTypes = {
+SelectList.propTypes = {
   label: PropTypes.string.isRequired,
   subText: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string,
   hideLabel: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string,
+      label: PropTypes.string,
+    })
+  ),
 };
 
-TextField.defaultProps = {
+SelectList.defaultProps = {
   subText: null,
   value: null,
   placeholder: null,
   hideLabel: false,
+  options: [],
 };

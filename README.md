@@ -14,6 +14,10 @@
  npm run start
 
 This should run locally on http://localhost:3000/ by default
+
+## working with the FB integration
+# if you're working on the facebook integration, or need to be using authenticated FB SDK requests, you'll need to use a tool called ngrok to tunnel in
+Request view access to https://docs.google.com/document/d/1mkPqpG5LMIT5IO-VRl8b2j6lx8cI1sRhnVG0_H47L00/ if you need to do this
  
 ## working with the backend
 # if you're working on the backend, you'll need aws-amplify/cli tools

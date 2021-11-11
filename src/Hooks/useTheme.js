@@ -7,7 +7,6 @@ const defaultTheme = createTheme();
 
 export const useTheme = () => {
   const theme = useContext(ThemeContext) || defaultTheme;
-  console.log('theme', theme);
   return {
     ...theme,
   };
