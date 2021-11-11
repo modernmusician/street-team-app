@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Papa from 'papaparse';
-import { Icon } from '../../../../Components/UI';
+import { Icon, Spinner } from '../../../../Components/UI';
 import { useTable } from '../../../../Hooks/useTable';
 import { useQuery } from '@apollo/react-hooks';
 import { Container } from 'react-bootstrap';
@@ -223,7 +223,7 @@ export const AudienceView = () => {
     }
   }, [data]);
 
-  if (loading || error || !data || !tableData.length) return null;
+
 
   const onChangeSearch = e => {
     const value = e?.target?.value;
@@ -249,11 +249,21 @@ export const AudienceView = () => {
     document.body.removeChild(link);
   };
 
+  let statusInfo = <h2>Something went wrong... try refreshing the page</h2>
+  if (loading ) {
+    statusInfo = <Spinner animation="border" role="status" variant="light" />
+  }
+  else if(error || !data || !tableData.length)
+  {
+    statusInfo = <h2>No data found yet. Try visiting your fan page.</h2>
+  }
+
   return (
     <React.Fragment>
       <NavBar headerText="Your Audience" />
       <RootContainer fluid>
         <Container fluid>
+          {tableData?.length ?
           <TableContainer>
             <ActionContainer>
               <ExportButton type="button" onClick={onExport}>
@@ -270,6 +280,9 @@ export const AudienceView = () => {
             </ActionContainer>
             <Table tableProps={tableProps} />
           </TableContainer>
+          :
+          statusInfo
+          }
         </Container>
       </RootContainer>
     </React.Fragment>
