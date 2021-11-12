@@ -13,6 +13,7 @@ import { Button } from '../../../Components/UI/Button';
 import { Icon } from '../../../Components/UI/Icon';
 import { useTheme } from '../../../Hooks/useTheme';
 import { FacebookGrantPagePermissions } from '../../../Components/UI/Integrations/Facebook';
+import { facebookAppId } from '../../../utils/sharedUtils';
 
 const INPUT_KEYS = ['Amplitude', 'ActiveCampaign', 'FacebookPage'];
 
@@ -136,7 +137,7 @@ export const SetupIntegration = ({ userId, artistId, actionPageId }) => {
             },
           ],
         },
-        receiving_app_id: 1889301381171290,
+        receiving_app_id: facebookAppId,
       },
     ]);
     console.log('config', config);

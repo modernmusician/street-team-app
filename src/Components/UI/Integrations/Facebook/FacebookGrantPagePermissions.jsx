@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import { Button } from '../../Button';
 import { SelectList } from '../../SelectList';
 import { useTheme } from '../../../../Hooks/useTheme';
-import { getBackendApiUrl } from '../../../../utils/sharedUtils';
+import { getBackendApiUrl , facebookAppId} from '../../../../utils/sharedUtils';
 // import { ConsoleLogger } from '@aws-amplify/core';
 
 // todo this should be done using environment variables, but for now this works -2021-11-11 SG
 let apiUrl = getBackendApiUrl();
+console.log(`test2`, facebookAppId);
 
 // login with facebook to grant messaging permissions
 // TODO we'll want to read the saved data from the database at some point soon, but for now the user can just re-connect if they feel so inclined.

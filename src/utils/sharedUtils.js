@@ -50,3 +50,7 @@ export const getBackendApiUrl = () => {
   const productionUrl = `https://ntboexei3e.execute-api.us-east-1.amazonaws.com/production`;
   return  isProduction() ? productionUrl  : devUrl;
 }
+
+const productionFacebookAppId = `1889301381171290`;
+const devFacebookAppId = '871609296874018';
+export const facebookAppId = isProduction() ? productionFacebookAppId : devFacebookAppId
