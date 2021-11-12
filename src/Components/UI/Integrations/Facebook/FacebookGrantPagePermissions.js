@@ -5,6 +5,12 @@ import { SelectList } from '../../SelectList';
 import { useTheme } from '../../../../Hooks/useTheme';
 import { ConsoleLogger } from '@aws-amplify/core';
 
+// todo this should be done using environment variables, but for now this works -2021-11-11 SG
+let apiUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/dev`;
+if (window.location.href === 'app.modern-musician.com') {
+  apiUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/production`;
+}
+
 // login with facebook to grant messaging permissions
 // TODO we'll want to read the saved data from the database at some point soon, but for now the user can just re-connect if they feel so inclined.
 export const FacebookGrantPagePermissions = ({ userId, artistId, ...props }) => {
@@ -102,7 +108,7 @@ export const FacebookGrantPagePermissions = ({ userId, artistId, ...props }) => 
         const {userID, accessToken} = authObject;
         try
         {
-            const pagesData = await fetch(`https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/dev/get-available-facebook-pages?accessToken=${accessToken}&userID=${userID}`,
+            const pagesData = await fetch(`${apiUrl}/get-available-facebook-pages?accessToken=${accessToken}&userID=${userID}`,
             { method: "GET",
             headers: { "Content-Type": "application/json" },
             })
@@ -135,7 +141,7 @@ export const FacebookGrantPagePermissions = ({ userId, artistId, ...props }) => 
         const facebookAccessToken = facebookLoginObject.accessToken;
         const facebookUserId = facebookLoginObject.userID;
         console.log(`updating database with these values`, userId,facebookAccessToken,facebookUserId,facebookPageID);
-        const response = await fetch(`https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/dev/store-facebook-page-integration?userId=${userId}&facebookUserAccessToken=${facebookAccessToken}&facebookUserId=${facebookUserId}&artistID=${artistId}&facebookPageId=${facebookPageID}`, 
+        const response = await fetch(`${apiUrl}/store-facebook-page-integration?userId=${userId}&facebookUserAccessToken=${facebookAccessToken}&facebookUserId=${facebookUserId}&artistID=${artistId}&facebookPageId=${facebookPageID}`, 
         {
         method: "GET",
         headers: { "Content-Type": "application/json" },
