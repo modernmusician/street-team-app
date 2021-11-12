@@ -8,7 +8,7 @@ import { ConsoleLogger } from '@aws-amplify/core';
 // todo this should be done using environment variables, but for now this works -2021-11-11 SG
 let apiUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/dev`;
 if (window.location.href === 'app.modern-musician.com') {
-  apiUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/production`;
+  apiUrl = `https://ntboexei3e.execute-api.us-east-1.amazonaws.com/production`;
 }
 
 // login with facebook to grant messaging permissions

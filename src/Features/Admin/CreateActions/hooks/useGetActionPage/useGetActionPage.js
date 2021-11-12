@@ -120,7 +120,7 @@ export const useGetActionPage = () => {
     // todo this should be done using environment variables, but for now this works -2021-11-11 SG
     let createUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/dev/create-action-page`;
     if (window.location.href === 'app.modern-musician.com') {
-      createUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/production/create-action-page`;
+      createUrl = `https://ntboexei3e.execute-api.us-east-1.amazonaws.com/production/create-action-page`;
     }
     console.log(params);
     const pagesData = await fetch(createUrl, {
