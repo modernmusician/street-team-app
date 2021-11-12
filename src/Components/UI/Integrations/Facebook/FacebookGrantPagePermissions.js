@@ -130,8 +130,6 @@ export const FacebookGrantPagePermissions = ({ userId, artistId, ...props }) => 
     const updateDatabase = async (facebookPageID) => {
         console.log(`facebookLoginObjectIs`,facebookLoginObject)
         //TODO this should be a PUT eventually got to change the API first though
-        //https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/dev/store-facebook-page-integration?userId=36e0162d-d582-484e-af0d-f74e719d58d8&facebookUserAccessToken=EAAa2T0GyyFoBAIWZBItkgSxj7PMpW2npvt6Lmb6WsxpqAPX8hTHe92xeUYmZBkyTYyOgZA7NyvQE2O67WW8UyE1hxSmKPzrUvOF5ZB3yz94Q5L62lATvjnMI0Kezbwgk8GLot6iCORo1pLDUIjSMg9K3w6R5jKSobfXrl1xa0KwgZCq0e76qzSGmZBRHLWBZBZCtBxTuCkEt5souSTAjMKi8azdd0ZBV90HYZD&facebookUserId=390630932458613&artistID=c683e4f2-cce2-431b-a03e-f78645ef1cd2&facebookPageId=109361494893159
-
         // these values come from the API response from the fb.login response (response.authResponse)
         try{
         const facebookAccessToken = facebookLoginObject.accessToken;
