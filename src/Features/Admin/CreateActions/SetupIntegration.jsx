@@ -94,25 +94,31 @@ export const SetupIntegration = ({ userId, artistId, actionPageId }) => {
   const [createArtistIntegration] = useMutation(gql(createArtistIntegrations));
 
   const saveIntegrations = () => {
-    for (let i = 0; i < INPUT_KEYS.length; i++) {
-      const key = INPUT_KEYS[i];
-      const config = {
-        variables: {
-          input: {
-            artistID: artistId,
-            serviceName: key,
-            serviceApiKey: formValue[key],
-            ...(activeIntegrations[key]?.id && {
-              id: activeIntegrations[key].id,
-            }),
+    try{
+      for (let i = 0; i < INPUT_KEYS.length; i++) {
+        const key = INPUT_KEYS[i];
+        const config = {
+          variables: {
+            input: {
+              artistID: artistId,
+              serviceName: key,
+              serviceApiKey: formValue[key],
+              ...(activeIntegrations[key]?.id && {
+                id: activeIntegrations[key].id,
+              }),
+            },
           },
-        },
-      };
-      if (activeIntegrations[key]) {
-        updateArtistIntegration(config);
-      } else {
-        createArtistIntegration(config);
+        };
+        if (activeIntegrations[key]) {
+          updateArtistIntegration(config);
+        } else {
+          createArtistIntegration(config);
+        }
       }
+    }
+    catch(err){
+      console.log("something went wrong with saving the integrations")
+      console.error(err);
     }
     setShow(true);
   };
@@ -126,7 +132,7 @@ export const SetupIntegration = ({ userId, artistId, actionPageId }) => {
             {
               content_type: 'text',
               title: "Yeah let's hear it!",
-              payload: `{'pageID': ${actionPageId}}`,
+              payload: `{"pageID": "${actionPageId}","artistId":"${artistId}"}`,
             },
           ],
         },
@@ -256,12 +262,12 @@ export const SetupIntegration = ({ userId, artistId, actionPageId }) => {
       </Container>
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Congrats! Here's Your Facebook Ad Config:</Modal.Title>
+          <Modal.Title>One more thing!</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <p style={{ color: 'black' }}>
-            Click the button below to copy your Facebook Ad integration config:
+            Click the button below to copy your customized JSON code for your Facebook Ad Message Template.
           </p>
         </Modal.Body>
 
