@@ -10,12 +10,12 @@ import {
 import { getArtistUser } from '../../../graphql/queries';
 import { TextField } from '../../../Components/UI/TextField';
 import { Button } from '../../../Components/UI/Button';
-import { SelectList } from '../../../Components/UI/SelectList';
+// import { SelectList } from '../../../Components/UI/SelectList';
 import { Icon } from '../../../Components/UI/Icon';
 import { useTheme } from '../../../Hooks/useTheme';
-import {FacebookGrantPagePermissions} from '../../../Components/UI/Integrations/Facebook/FacebookGrantPagePermissions';
+import { FacebookGrantPagePermissions } from '../../../Components/UI/Integrations/Facebook';
 
-const INPUT_KEYS = ['Amplitude', 'ActiveCampaign'];
+const INPUT_KEYS = ['Amplitude', 'ActiveCampaign', 'FacebookPage'];
 
 const ActionContainer = styled(Card)({
   background: ({ theme }) => theme.colors.gray2,
@@ -52,9 +52,9 @@ const CardBody = styled(Card.Body)(({ theme }) => {
   };
 });
 
-export const SetupIntegration = ({ userId, artistId, ...props }) => {
+export const SetupIntegration = ({ userId, artistId }) => {
   const [activeIntegrations, setActiveIntegrations] = useState();
-  const [facebookPageList, setFacebookPageList] = useState();
+  // const [facebookPageList, setFacebookPageList] = useState();
   const [formValue, setFormValue] = useState({
     Amplitude: '',
     ActiveCampaign: '',
@@ -122,136 +122,123 @@ export const SetupIntegration = ({ userId, artistId, ...props }) => {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <h2 style={{ fontSize: theme.fontSizes.lg }}>Set Up Integrations</h2>
-        </Col>
-      </Row>
-      <ActionContainer>
-        <CardBody>
-          <Col style={{ padding: 0, marginBottom: 25 }}>
-            <h3>Integration</h3>
-            <p>
-              This is where all the magic happens. Set up your external integrations for Facebook Messaging and user tracking 
-            </p>
+    <React.Fragment>
+      <Container>
+        <Row>
+          <Col>
+            <h2 style={{ fontSize: theme.fontSizes.lg }}>
+              Set Up Integrations
+            </h2>
           </Col>
-          <CreateActionContainer>
-            <Row>
-              <Col xs={10}>
-                <h3 style={{ fontWeight: theme.fontWeights.semibold }}>
-                  Your Active Campaign API Key
-                </h3>
-                <p>Paste a copy of your Active Campaign API Key...</p>
-              </Col>
-              <IconContainer>
-                <Icon name="MdOutlineStorefront" color="white" />
-              </IconContainer>
-            </Row>
-            <Row>
-              <Col>
-                <TextField
-                  hideLabel
-                  label="Active Campaign API Key"
-                  value={formValue.ActiveCampaign}
-                  onChange={e =>
-                    setFormValue({
-                      ...formValue,
-                      ActiveCampaign: e.target.value,
-                    })
-                  }
-                  placeholder="Active Campaign API Key..."
-                />
-              </Col>
-            </Row>
-          </CreateActionContainer>
-          <CreateActionContainer>
-            <Row>
-              <Col xs={10}>
-                <h3 style={{ fontWeight: theme.fontWeights.semibold }}>
-                  Your Amplitude API Key
-                </h3>
-                <p>Paste a copy of your Amplitude API Key...</p>
-              </Col>
-              <IconContainer>
-                <Icon name="MdOutlineAutoGraph" color="white" />
-              </IconContainer>
-            </Row>
-            <Row>
-              <Col>
-                <TextField
-                  hideLabel
-                  label="Amplitude API Key"
-                  value={formValue.Amplitude}
-                  onChange={e =>
-                    setFormValue({
-                      ...formValue,
-                      Amplitude: e.target.value,
-                    })
-                  }
-                  placeholder="Amplitude API Key..."
-                />
-              </Col>
-            </Row>
-          </CreateActionContainer>
-          <CreateActionContainer>
-            <Row>
-              <Col xs={10}>
-                <h3 style={{ fontWeight: theme.fontWeights.semibold }}>
-                  Facebook Page
-                </h3>
-                <p>
-                  Select the Facebook page for your Facebook Messenger Campaign...
-                </p>
-              </Col>
-              <IconContainer>
-                <Icon name="MdOutlineContactPage" color="white" />
-              </IconContainer>
-            </Row>
-             {/* {facebookPageList ? <Row>
+        </Row>
+        <ActionContainer>
+          <CardBody>
+            <Col style={{ padding: 0, marginBottom: 25 }}>
+              <h3>Integration</h3>
+              <p>
+                This is where all the magic happens. Set up your external
+                integrations for Facebook Messaging and user tracking
+              </p>
+            </Col>
+            <CreateActionContainer>
+              <Row>
+                <Col xs={10}>
+                  <h3 style={{ fontWeight: theme.fontWeights.semibold }}>
+                    Your Active Campaign API Key
+                  </h3>
+                  <p>Paste a copy of your Active Campaign API Key...</p>
+                </Col>
+                <IconContainer>
+                  <Icon name="MdOutlineStorefront" color="white" />
+                </IconContainer>
+              </Row>
+              <Row>
                 <Col>
-                  <SelectList
+                  <TextField
                     hideLabel
-                    label="Facebook Page"
-                    value={formValue.FacebookPage}
+                    label="Active Campaign API Key"
+                    value={formValue.ActiveCampaign}
                     onChange={e =>
                       setFormValue({
                         ...formValue,
-                        FacebookPage: e.target.value,
+                        ActiveCampaign: e.target.value,
                       })
                     }
-                    placeholder="Facebook Page..."
-                    options={[
-                      { value: 1, label: 'Option 1' },
-                      { value: 2, label: 'Option 2' },
-                      { value: 3, label: 'Option 3' },
-                    ]}
+                    placeholder="Active Campaign API Key..."
                   />
                 </Col>
-              </Row> :  */}
-            <Row> 
+              </Row>
+            </CreateActionContainer>
+            <CreateActionContainer>
+              <Row>
+                <Col xs={10}>
+                  <h3 style={{ fontWeight: theme.fontWeights.semibold }}>
+                    Your Amplitude API Key
+                  </h3>
+                  <p>Paste a copy of your Amplitude API Key...</p>
+                </Col>
+                <IconContainer>
+                  <Icon name="MdOutlineAutoGraph" color="white" />
+                </IconContainer>
+              </Row>
+              <Row>
+                <Col>
+                  <TextField
+                    hideLabel
+                    label="Amplitude API Key"
+                    value={formValue.Amplitude}
+                    onChange={e =>
+                      setFormValue({
+                        ...formValue,
+                        Amplitude: e.target.value,
+                      })
+                    }
+                    placeholder="Amplitude API Key..."
+                  />
+                </Col>
+              </Row>
+            </CreateActionContainer>
+            <CreateActionContainer>
+              <Row>
+                <Col xs={10}>
+                  <h3 style={{ fontWeight: theme.fontWeights.semibold }}>
+                    Facebook Page
+                  </h3>
+                  <p>
+                    Select the Facebook page for your Facebook Messenger
+                    Campaign...
+                  </p>
+                </Col>
+                <IconContainer>
+                  <Icon name="MdOutlineContactPage" color="white" />
+                </IconContainer>
+              </Row>
+              <Row style={{ marginTop: theme.spacing.md }}>
+                <Col>
+                  <FacebookGrantPagePermissions
+                    userId={userId}
+                    artistId={artistId}
+                  />
+                </Col>
+              </Row>
+            </CreateActionContainer>
+            <Row style={{ marginTop: theme.spacing.lg }}>
               <Col>
-              <FacebookGrantPagePermissions userId={userId} artistId={artistId}/>
+                <Button
+                  onClick={saveIntegrations}
+                  style={{
+                    fontWeight: theme.fontWeights.semibold,
+                    fontFamily: theme.fonts.heading,
+                  }}
+                >
+                  Save Integrations
+                </Button>
               </Col>
             </Row>
-            {/* } */}
-          </CreateActionContainer>
-          <Row style={{ marginTop: theme.spacing.lg }}>
-            <Col>
-              <Button
-                onClick={saveIntegrations}
-                style={{
-                  fontWeight: theme.fontWeights.semibold,
-                  fontFamily: theme.fonts.heading,
-                }}
-              >
-                Save Integrations
-              </Button>
-            </Col>
-          </Row>
-        </CardBody>
-      </ActionContainer>
-    </Container>
+          </CardBody>
+        </ActionContainer>
+      </Container>
+    </React.Fragment>
   );
 };
 
