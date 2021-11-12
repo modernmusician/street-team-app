@@ -30,3 +30,23 @@ export const cleanUrl = urlString => {
   }
   return link;
 };
+
+export const isProduction = () => {
+  // build the current url to be used for oauth redirect (should probably use env variables... but this is quicker right now)
+  const currentUrl = window.location.href;
+  // gets the current url root from the href
+  const frontEndUrl = currentUrl.split('/').slice(0, 3).join('/');
+  console.log(`test1`,frontEndUrl);
+  if(frontEndUrl==='https://app.modern-musician.com'){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+export const getBackendApiUrl = () => {
+  const devUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/dev`;
+  const productionUrl = `https://ntboexei3e.execute-api.us-east-1.amazonaws.com/production`;
+  return  isProduction() ? productionUrl  : devUrl;
+}
