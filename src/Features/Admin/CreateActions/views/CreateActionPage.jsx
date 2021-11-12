@@ -161,7 +161,11 @@ export const CreateActionPage = ({ type }) => {
                 />
               )}
               {type === 'integration' && (
-                <SetupIntegration userId={userId} artistId={artistId} />
+                <SetupIntegration
+                  userId={userId}
+                  artistId={artistId}
+                  actionPageId={actionPageId}
+                />
               )}
             </Col>
             <Col>

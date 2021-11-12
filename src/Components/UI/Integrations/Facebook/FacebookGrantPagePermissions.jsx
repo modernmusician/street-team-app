@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 // import { Auth } from 'aws-amplify';
-import { Modal } from 'react-bootstrap';
 import { Button } from '../../Button';
 import { SelectList } from '../../SelectList';
 import { useTheme } from '../../../../Hooks/useTheme';
-import { Icon } from '../../Icon';
 // import { ConsoleLogger } from '@aws-amplify/core';
 
 // login with facebook to grant messaging permissions
@@ -13,19 +11,11 @@ import { Icon } from '../../Icon';
 export const FacebookGrantPagePermissions = ({ userId, artistId }) => {
   const theme = useTheme();
 
-  const [show, setShow] = useState(false);
   const [facebookPages, setFacebookPages] = useState();
   const [facebookLoginObject, setFacebookLoginObject] = useState();
-  const [fbConfig, setFbConfig] = useState();
   const [formValue, setFormValue] = useState({
     FacebookPage: '',
   });
-
-  const copyLinkToClipboard = () => {
-    // todo this needs to be dynamic by environment (dev, app, etc)
-    // TODO eventually this should use both an artist route and a pageRoute
-    navigator.clipboard.writeText(fbConfig);
-  };
 
   const fbAsyncInit = () => {
     // init the fb sdk client
@@ -161,8 +151,6 @@ export const FacebookGrantPagePermissions = ({ userId, artistId }) => {
             console.error(json.error.message);
           } else {
             console.log(json);
-            setFbConfig(json);
-            setShow(true);
           }
         });
     } catch (err) {
@@ -213,29 +201,6 @@ export const FacebookGrantPagePermissions = ({ userId, artistId }) => {
           options={selectOptions}
         />
       )}
-      <Modal show={show} onHide={() => setShow(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Congrats! Here's Your Facebook Ad Config:</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          <p style={{ color: 'black' }}>
-            Click the button below to copy your Facebook Ad integration config:
-          </p>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button onClick={copyLinkToClipboard}>
-            <Icon
-              name="FaCopy"
-              color="black"
-              size={20}
-              style={{ marginRight: 10 }}
-            />
-            Copy Config
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 };

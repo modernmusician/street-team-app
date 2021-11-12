@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Modal } from 'react-bootstrap';
 import { gql, useMutation, useQuery } from '@apollo/react-hooks';
 import {
   updateArtistIntegrations,
@@ -10,7 +10,6 @@ import {
 import { getArtistUser } from '../../../graphql/queries';
 import { TextField } from '../../../Components/UI/TextField';
 import { Button } from '../../../Components/UI/Button';
-// import { SelectList } from '../../../Components/UI/SelectList';
 import { Icon } from '../../../Components/UI/Icon';
 import { useTheme } from '../../../Hooks/useTheme';
 import { FacebookGrantPagePermissions } from '../../../Components/UI/Integrations/Facebook';
@@ -52,9 +51,9 @@ const CardBody = styled(Card.Body)(({ theme }) => {
   };
 });
 
-export const SetupIntegration = ({ userId, artistId }) => {
+export const SetupIntegration = ({ userId, artistId, actionPageId }) => {
   const [activeIntegrations, setActiveIntegrations] = useState();
-  // const [facebookPageList, setFacebookPageList] = useState();
+  const [show, setShow] = useState(false);
   const [formValue, setFormValue] = useState({
     Amplitude: '',
     ActiveCampaign: '',
@@ -91,10 +90,6 @@ export const SetupIntegration = ({ userId, artistId }) => {
     }
   }, [integrations]);
 
-  console.log('SetupIntegration artistData', artistData);
-  console.log('activeIntegrations', activeIntegrations);
-  console.log('formValue', formValue);
-
   const [updateArtistIntegration] = useMutation(gql(updateArtistIntegrations));
   const [createArtistIntegration] = useMutation(gql(createArtistIntegrations));
 
@@ -119,6 +114,27 @@ export const SetupIntegration = ({ userId, artistId }) => {
         createArtistIntegration(config);
       }
     }
+    setShow(true);
+  };
+
+  const copyLinkToClipboard = () => {
+    const config = JSON.stringify([
+      {
+        message: {
+          text: 'thanks for reaching out ✌️\n\n...were you trying to hear my new song?',
+          quick_replies: [
+            {
+              content_type: 'text',
+              title: "Yeah let's hear it!",
+              payload: `{'pageID': ${actionPageId}}`,
+            },
+          ],
+        },
+        receiving_app_id: 1889301381171290,
+      },
+    ]);
+    console.log('config', config);
+    navigator.clipboard.writeText(config);
   };
 
   return (
@@ -238,6 +254,29 @@ export const SetupIntegration = ({ userId, artistId }) => {
           </CardBody>
         </ActionContainer>
       </Container>
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Congrats! Here's Your Facebook Ad Config:</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p style={{ color: 'black' }}>
+            Click the button below to copy your Facebook Ad integration config:
+          </p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button onClick={copyLinkToClipboard}>
+            <Icon
+              name="FaCopy"
+              color="black"
+              size={20}
+              style={{ marginRight: 10 }}
+            />
+            Copy Config
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </React.Fragment>
   );
 };
@@ -245,4 +284,5 @@ export const SetupIntegration = ({ userId, artistId }) => {
 SetupIntegration.propTypes = {
   userId: PropTypes.string.isRequired,
   artistId: PropTypes.string.isRequired,
+  actionPageId: PropTypes.string.isRequired,
 };

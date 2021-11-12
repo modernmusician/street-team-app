@@ -10,8 +10,6 @@ import {
 } from '../../../../../graphql/mutations';
 import { useCurrentAuthUser } from '../useCurrentAuthUser';
 
-
-
 export const useGetActionPage = () => {
   // const [artistId, setArtistId] = useState();
   const [actionPageInfo, setActionPageInfo] = useState();
@@ -21,7 +19,7 @@ export const useGetActionPage = () => {
   const [error, setError] = useState();
   const [createActionPageError, setCreateActionPageError] = useState();
 
-  const {userId, artistName} = useCurrentAuthUser();
+  const { userId, artistName } = useCurrentAuthUser();
 
   const getArtistByEnduser = `query GetArtistUserActionPageData($id: ID!, $pageRoute: String) {
     getArtistUser(id: $id) {
@@ -93,10 +91,10 @@ export const useGetActionPage = () => {
   }
 `;
 
-const onCompletedFunction = (data) => {
-  console.log("completed query");
-  console.log(`available data is now `, data)
-}
+  const onCompletedFunction = data => {
+    console.log('completed query');
+    console.log(`available data is now `, data);
+  };
 
   const {
     data: userData,
@@ -105,62 +103,66 @@ const onCompletedFunction = (data) => {
     refetch: refetchUserData,
   } = useQuery(gql(getArtistByEnduser), {
     variables: { id: userId, pageRoute: 'join' },
-    skip: (!userId && !artistName),
-    onCompleted: (userData) => {
-      console.log("completed query");
-      console.log(`available data is now `, userData)
+    skip: !userId && !artistName,
+    onCompleted: userData => {
+      console.log('completed query');
+      console.log(`available data is now `, userData);
     },
   });
 
-  //this function 
+  // this function
   const createActionPageForUser = async (userId, artistName) => {
-    const params = {artistUserId: userId, artistName: artistName, pageRoute: 'join'} ;
-    //todo this should be done using environment variables, but for now this works -2021-11-11 SG
-    let createUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/dev/create-action-page`
-    if(window.location.href==="app.modern-musician.com"){
-      createUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/production/create-action-page`
+    const params = {
+      artistUserId: userId,
+      artistName,
+      pageRoute: 'join',
+    };
+    // todo this should be done using environment variables, but for now this works -2021-11-11 SG
+    let createUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/dev/create-action-page`;
+    if (window.location.href === 'app.modern-musician.com') {
+      createUrl = `https://qk9qdxpz3f.execute-api.us-east-1.amazonaws.com/production/create-action-page`;
     }
-    console.log(params)
-    const pagesData = await fetch(createUrl,
-            { 
-              method: "POST",
-              headers: { "Content-Type": "application/json"},
-              body: JSON.stringify( params ) 
-            }
-          )
-            .then(rsp => rsp.json())
-            .then(json => {
-                if (json.error && json.error.message) {
-                    console.error(json.error.message);
-                    setCreateActionPageError(json.error.message);
-                }
-                else{
-                    console.log(`results are`, json);
-                    refetchUserData();
-                }
-            })
-  }
+    console.log(params);
+    const pagesData = await fetch(createUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params),
+    })
+      .then(rsp => rsp.json())
+      .then(json => {
+        if (json.error && json.error.message) {
+          console.error(json.error.message);
+          setCreateActionPageError(json.error.message);
+        } else {
+          console.log(`results are`, json);
+          refetchUserData();
+        }
+      });
+  };
 
   useEffect(() => {
-    let responseActionPageData =
+    const responseActionPageData =
       userData?.getArtistUser?.artist?.actionPages?.items?.find(
         item => item.pageRoute === 'join'
       );
-      console.log(`response action page data is now---1a`,responseActionPageData);
-      console.log(`userError is now`,userError);
-    if(!responseActionPageData && !userError){
+    console.log(
+      `response action page data is now---1a`,
+      responseActionPageData
+    );
+    console.log(`userError is now`, userError);
+    if (!responseActionPageData && !userError) {
       try {
         // if an action page doesn't exist, create one and pull the data again
         if (!createActionPageError && userId && artistName) {
-          console.log('creating new action page')
-          //this single API endpoint will create the user, artist, and page if necessary
-          createActionPageForUser(userId,artistName);
+          console.log('creating new action page');
+          // this single API endpoint will create the user, artist, and page if necessary
+          createActionPageForUser(userId, artistName);
         }
       } catch (err) {
         console.error(
           err,
           userError,
-          createActionPageError,
+          createActionPageError
           // artistByRouteError,
           // createUserError,
           // addArtistError,
@@ -169,8 +171,8 @@ const onCompletedFunction = (data) => {
         setError(err);
       }
     }
-  },[userData, userLoading, userError])
-// this query is getting called a million times and breaking things. 
+  }, [userData, userLoading, userError]);
+  // this query is getting called a million times and breaking things.
   // const {
   //   data: artistByRouteData,
   //   error: artistByRouteError,
@@ -264,47 +266,45 @@ const onCompletedFunction = (data) => {
   let actionPageId;
   let artistRoute;
 
-
   if (userLoading) {
-    console.log("loading")
+    console.log('loading');
     return { loading: userLoading };
   }
-  if(userError){
-    console.log("error")
-    console.log(userError)
-    return {error: userError};
+  if (userError) {
+    console.log('error');
+    console.log(userError);
+    return { error: userError };
   }
-  if(!userData){
-    console.log("no user data found");
+  if (!userData) {
+    console.log('no user data found');
   }
   // else if (userData) {
-    console.log(`we should have some userData`)
-    const enduserInfo = userData?.data?.getArtistUser;
-    console.log(`user data is: `, userData);
-    responseActionPageData =
-      userData?.getArtistUser?.artist?.actionPages?.items?.find(
-        item => item.pageRoute === 'join'
-      );
-    artistId = userData?.getArtistUser?.artist?.id;
-    artistRoute = userData?.getArtistUser?.artist?.route;
-    actionPageId = responseActionPageData?.id;
+  console.log(`we should have some userData`);
+  const enduserInfo = userData?.data?.getArtistUser;
+  console.log(`user data is: `, userData);
+  responseActionPageData =
+    userData?.getArtistUser?.artist?.actionPages?.items?.find(
+      item => item.pageRoute === 'join'
+    );
+  artistId = userData?.getArtistUser?.artist?.id;
+  artistRoute = userData?.getArtistUser?.artist?.route;
+  actionPageId = responseActionPageData?.id;
 
-    console.log(`userData`, userData);
-    console.log(`respond --- responseActionPageData`, responseActionPageData);
+  console.log(`userData`, userData);
+  console.log(`respond --- responseActionPageData`, responseActionPageData);
   // }
   return {
-    loading:
-      userLoading,
-      // artistByRouteLoading ||
-      // createUserLoading ||
-      // createArtistLoading ||
-      // createActionPageLoading,
+    loading: userLoading,
+    // artistByRouteLoading ||
+    // createUserLoading ||
+    // createArtistLoading ||
+    // createActionPageLoading,
     error,
-    actionPageId: actionPageId,
-    artistRoute: artistRoute,
+    actionPageId,
+    artistRoute,
     actionPageData: responseActionPageData,
     userData,
     userId,
-    artistId: artistId,
+    artistId,
   };
 };
