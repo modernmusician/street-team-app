@@ -82,5 +82,5 @@
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}}]",
     "breakCircularDependency": false,
     "authProviders": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"implicit\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://7eb6-174-20-142-170.ngrok.io/login/\",\"https://app.modern-musician.com/login/\",\"https://dev.modern-musician.com/login/\"],\"LogoutURLs\":[\"https://7eb6-174-20-142-170.ngrok.io/login/\",\"https://app.modern-musician.com/login/\",\"https://dev.modern-musician.com/login/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"implicit\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://street-team.ngrok.io/login/\",\"https://app.modern-musician.com/login/\",\"https://dev.modern-musician.com/login/\"],\"LogoutURLs\":[\"https://street-team.ngrok.io/login/\",\"https://app.modern-musician.com/login/\",\"https://dev.modern-musician.com/login/\"]}"
 }

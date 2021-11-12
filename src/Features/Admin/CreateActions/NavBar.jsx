@@ -116,19 +116,17 @@ export const NavBar = () => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu as={CustomMenu}>
-          <Dropdown.Item href="/artist/create"><Icon name="FaFilter" style={{ marginRight: 15 }}/>Your Fan Funnel</Dropdown.Item>
-          <Dropdown.Item href="/artist/audience"><Icon name="FaUsers" style={{ marginRight: 15 }}/>Your Audience</Dropdown.Item>
+          <Dropdown.Item href="/artist/create">
+            <Icon name="FaFilter" style={{ marginRight: 15 }} />
+            Your Fan Funnel
+          </Dropdown.Item>
+          <Dropdown.Item href="/artist/audience">
+            <Icon name="FaUsers" style={{ marginRight: 15 }} />
+            Your Audience
+          </Dropdown.Item>
           {/* <Dropdown.Item href="#action/3.3">Something</Dropdown.Item> */}
         </Dropdown.Menu>
       </Dropdown>
     </NavBarContainer>
   );
-};
-
-NavBar.defaultProps = {
-  headerText: 'Create Your Fan Funnel',
-};
-
-NavBar.propTypes = {
-  headerText: PropTypes.string,
 };

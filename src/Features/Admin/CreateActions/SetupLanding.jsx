@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
-import PropTypes, { checkPropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/react-hooks';
@@ -16,6 +16,9 @@ import { useTheme } from '../../../Hooks/useTheme';
 
 const ActionContainer = styled(Card)({
   background: ({ theme }) => theme.colors.gray2,
+  'input, select': {
+    marginTop: ({ theme }) => theme.spacing.md,
+  },
 });
 
 const CreateActionContainer = styled(Container)({
@@ -51,7 +54,6 @@ export const SetupLanding = ({
   setLandingPageValues,
   actionPageId,
   landingPageIds,
-  setData,
 }) => {
   const [error, setError] = useState(false);
   const theme = useTheme();
@@ -102,8 +104,8 @@ export const SetupLanding = ({
     const giftId = landingPageIds?.gift;
     const continueId = landingPageIds?.continue;
     if (actionPageId) {
-      console.log(`soundcloudURL`, soundCloudURL,soundCloudId)
-        console.log(`giftId`, giftId, giftURL);
+      console.log(`soundcloudURL`, soundCloudURL, soundCloudId);
+      console.log(`giftId`, giftId, giftURL);
       if (soundCloudURL && giftURL) {
         if (soundCloudId && giftId && continueId) {
           const soundCloud = updateSoundCloud({
@@ -115,7 +117,7 @@ export const SetupLanding = ({
           Promise.all([soundCloud, gift]).then(() => {
             // Change page
             history.push('/admin/create-accelerator');
-            window.location.reload(); //reload because the data needs to be refetched and I can't figure out why it wont -SG 2021-10-05
+            window.location.reload(); // reload because the data needs to be refetched and I can't figure out why it wont -SG 2021-10-05
           });
         } else {
           const soundCloud = addSoundCloud({
@@ -130,7 +132,7 @@ export const SetupLanding = ({
           Promise.all([soundCloud, gift, cont]).then(() => {
             // Change page
             history.push('/admin/create-accelerator');
-            window.location.reload(); //reload because the data needs to be refetched and I can't figure out why it wont -SG 2021-10-05
+            window.location.reload(); // reload because the data needs to be refetched and I can't figure out why it wont -SG 2021-10-05
           });
         }
       } else {
@@ -158,7 +160,9 @@ export const SetupLanding = ({
           <CreateActionContainer>
             <Row>
               <Col xs={10}>
-                <h3 style={{ fontWeight: theme.fontWeights.semibold }}>Your Soundcloud Link</h3>
+                <h3 style={{ fontWeight: theme.fontWeights.semibold }}>
+                  Your Soundcloud Link
+                </h3>
                 <p>Paste a link to your song on SoundCloud...</p>
                 {error && !landingPageValues?.soundCloud && (
                   <p style={{ color: 'red' }}>Required</p>
@@ -188,7 +192,9 @@ export const SetupLanding = ({
           <CreateActionContainer>
             <Row>
               <Col xs={10}>
-                <h3 style={{ fontWeight: theme.fontWeights.semibold }}>Your Free Gift Link</h3>
+                <h3 style={{ fontWeight: theme.fontWeights.semibold }}>
+                  Your Free Gift Link
+                </h3>
                 <p>Paste a link to your free gift...</p>
                 {error && !landingPageValues?.gift && (
                   <p style={{ color: 'red' }}>Required</p>
@@ -217,10 +223,13 @@ export const SetupLanding = ({
           </CreateActionContainer>
           <Row style={{ marginTop: theme.spacing.lg }}>
             <Col>
-              <Button onClick={saveLandingPage} 
-                style={{ fontWeight: theme.fontWeights.semibold,
-                        fontFamily: theme.fonts.heading
-                      }}>
+              <Button
+                onClick={saveLandingPage}
+                style={{
+                  fontWeight: theme.fontWeights.semibold,
+                  fontFamily: theme.fonts.heading,
+                }}
+              >
                 Next Step
               </Button>
             </Col>
@@ -243,12 +252,10 @@ SetupLanding.propTypes = {
     continue: PropTypes.string,
   }),
   setLandingPageValues: PropTypes.func,
-  setData: PropTypes.func,
 };
 
 SetupLanding.defaultProps = {
   landingPageValues: {},
   landingPageIds: {},
   setLandingPageValues: () => {},
-  setData: () => {},
 };

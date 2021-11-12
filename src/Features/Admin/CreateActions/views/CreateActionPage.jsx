@@ -9,19 +9,26 @@ import { PreviewActions } from '../PreviewActions';
 import { PreviewLanding } from '../PreviewLanding';
 import { SetupActions } from '../SetupActions';
 import { SetupLanding } from '../SetupLanding';
+import { SetupIntegration } from '../SetupIntegration';
 import { useGetActionPage } from '../hooks/useGetActionPage';
 import { selectActionsConfig } from '../configs/actionsConfig';
 
 export const RootContainer = styled(Container)({
   background: ({ theme }) => theme.colors.black,
-  marginTop: ({ theme }) => theme.spacing.xl,
-  marginBottom: ({ theme }) => theme.spacing.xl,
+  paddingTop: ({ theme }) => theme.spacing.xl,
+  paddingBottom: ({ theme }) => theme.spacing.xl,
   height: '100%',
 });
 
 export const CreateActionPage = ({ type }) => {
-  const { loading, actionPageId, artistRoute, actionPageData } =
-    useGetActionPage();
+  const {
+    loading,
+    actionPageId,
+    artistRoute,
+    actionPageData,
+    userId,
+    artistId,
+  } = useGetActionPage();
 
   // Action Page
   const [actionChecked, setActionChecked] = useState({});
@@ -109,7 +116,7 @@ export const CreateActionPage = ({ type }) => {
     }
   }, [data]);
 
-  if (loading)
+  if (loading) {
     return (
       <Container fluid>
         <Row className="justify-content-md-center">
@@ -119,6 +126,7 @@ export const CreateActionPage = ({ type }) => {
         </Row>
       </Container>
     );
+  }
 
   return (
     <div>
@@ -126,7 +134,7 @@ export const CreateActionPage = ({ type }) => {
       <RootContainer fluid>
         <Container fluid>
           <Row>
-            <Col lg={3}>
+            <Col lg={2.5}>
               <ActionCard activeView={type} />
             </Col>
             <Col lg={5}>
@@ -150,6 +158,13 @@ export const CreateActionPage = ({ type }) => {
                   setLandingPageValues={setLandingPageValues}
                   landingPageIds={landingPageIds}
                   setData={setData}
+                />
+              )}
+              {type === 'integration' && (
+                <SetupIntegration
+                  userId={userId}
+                  artistId={artistId}
+                  actionPageId={actionPageId}
                 />
               )}
             </Col>

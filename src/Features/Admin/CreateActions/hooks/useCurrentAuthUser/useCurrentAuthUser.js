@@ -8,8 +8,9 @@ export const useCurrentAuthUser = () => {
     bypassCache: false,
   })
     .then(user => {
+      console.log(`current AuthenticatedUser response`,user)
       setUserId(user.username);
-      setArtistName(user.attributes.name);
+      setArtistName(user?.attributes?.name);
     })
     .catch(err => console.error(err));
 

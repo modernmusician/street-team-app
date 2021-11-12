@@ -48,6 +48,7 @@ type ArtistIntegrations
     artist: Artist @connection(fields: ["artistID"])
     serviceName: String
     serviceApiKey: String
+    serviceAccountId: String
   }
 
 type Enduser
@@ -95,6 +96,7 @@ type ArtistUser
   """
   Artist User manages an Artist Type giving them permissions to access and edit that artists records
   Right now artist users and artists are one-to-one, in the future probably want a single artist user to be able to manage multiple artists
+  Also, in the future we'll want to build out a per user integrations data structure. Right now we're just storing this data on the ArtistUser record
   """
   id: ID!
   username: String
@@ -105,6 +107,7 @@ type ArtistUser
   artistID: ID
   artist: Artist @connection(fields: ["artistID"])
   actionPages: [ActionPage] @connection(keyName: "byCreatorUser", fields: ["id"])
+  facebookLongLivedUserAccessToken: String
 }
 
 "ActionPage Data Types"

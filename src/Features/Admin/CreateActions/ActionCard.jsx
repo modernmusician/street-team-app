@@ -1,16 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { Icon } from '../../../Components/UI/Icon';
 import { useTheme } from '../../../Hooks/useTheme';
-
-const ActionContainer = styled(Card)({
-  background: ({ theme }) => theme.colors.black,
-  padding: ({ theme }) => theme.spacing.md,
-  border: 'none',
-});
 
 const ListContainer = styled.div(({ theme, isActive }) => {
   return {
@@ -33,7 +27,7 @@ const Actions = styled.div(({ theme, isActive }) => {
     display: 'flex',
     alignItems: 'center',
     marginLeft: 80,
-    marginTop: theme.spacing.md,
+    marginTop: theme.spacing.sm,
   };
 });
 
@@ -51,15 +45,50 @@ const Button = styled.button(({ theme }) => {
   };
 });
 
-export const ActionCard = ({ activeView }) => {
+const ActionCardLink = ({ isActive, path, iconName, title, subText }) => {
+  const theme = useTheme();
   const history = useHistory();
+  const color = isActive ? theme.colors.menuPrimary : theme.colors.white;
+  return (
+    <Row style={{ marginBottom: theme.spacing.md }}>
+      <Col>
+        <Button isActive={isActive} onClick={() => history.push(path)}>
+          <ListContainer isActive={isActive}>
+            <Icon name={iconName} color={color} size={45} />
+            <h3>{title}</h3>
+          </ListContainer>
+          <Actions isActive={isActive}>
+            <Icon name="FaEdit" color={color} size={20} />
+            <h4>{subText}</h4>
+          </Actions>
+        </Button>
+      </Col>
+    </Row>
+  );
+};
+
+ActionCardLink.propTypes = {
+  isActive: PropTypes.bool.isRequired,
+  path: PropTypes.string.isRequired,
+  iconName: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  subText: PropTypes.string.isRequired,
+};
+
+const ActionContainer = styled(Card)({
+  background: ({ theme }) => theme.colors.black,
+  border: 'none',
+});
+
+export const ActionCard = ({ activeView }) => {
   const theme = useTheme();
   const isActionActive = activeView === 'action';
   const isLandingActive = activeView === 'landing';
+  const isIntegrationActive = activeView === 'integration';
 
   return (
-    <Container>
-      <Row>
+    <React.Fragment>
+      <Row style={{ marginBottom: theme.spacing.md }}>
         <Col>
           <h2 style={{ fontSize: theme.fontSizes.lg }}>
             Create Your Fan Funnel
@@ -68,66 +97,29 @@ export const ActionCard = ({ activeView }) => {
         </Col>
       </Row>
       <ActionContainer>
-        <Row>
-          <Col>
-            <Button
-              isActive={activeView === 'landing'}
-              onClick={() => history.push('/admin/create-fan-magnet')}
-            >
-              <ListContainer isActive={isLandingActive}>
-                <Icon
-                  name="FaMagnet"
-                  color={
-                    isLandingActive ? theme.colors.menuPrimary : theme.colors.white
-                  }
-                  size={45}
-                />
-                <h3>Fan Magnet</h3>
-              </ListContainer>
-              <Actions isActive={isLandingActive}>
-                <Icon
-                  name="FaEdit"
-                  color={
-                    isLandingActive ? theme.colors.menuPrimary : theme.colors.white
-                  }
-                  size={20}
-                />
-                <h4>Set Up Fan Magnet</h4>
-              </Actions>
-            </Button>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: 30 }}>
-          <Col>
-            <Button
-              isActive={isActionActive}
-              onClick={() => history.push('/admin/create-accelerator')}
-            >
-              <ListContainer isActive={isActionActive}>
-                <Icon
-                  name="MdSpeed"
-                  color={
-                    isActionActive ? theme.colors.menuPrimary : theme.colors.white
-                  }
-                  size={45}
-                />
-                <h3>Tribal Accelerator</h3>
-              </ListContainer>
-              <Actions isActive={isActionActive}>
-                <Icon
-                  name="FaEdit"
-                  color={
-                    isActionActive ? theme.colors.menuPrimary : theme.colors.white
-                  }
-                  size={20}
-                />
-                <h4>Set Up Your Actions</h4>
-              </Actions>
-            </Button>
-          </Col>
-        </Row>
+        <ActionCardLink
+          isActive={isLandingActive}
+          path="/admin/create-fan-magnet"
+          iconName="FaMagnet"
+          title="Fan Magnet"
+          subText="Set Up Fan Magnet"
+        />
+        <ActionCardLink
+          isActive={isActionActive}
+          path="/admin/create-accelerator"
+          iconName="MdSpeed"
+          title="Tribal Accelerator"
+          subText="Set Up Your Actions"
+        />
+        <ActionCardLink
+          isActive={isIntegrationActive}
+          path="/admin/integration"
+          iconName="MdOutlineIntegrationInstructions"
+          title="Integration"
+          subText="Set Up Integrations"
+        />
       </ActionContainer>
-    </Container>
+    </React.Fragment>
   );
 };
 

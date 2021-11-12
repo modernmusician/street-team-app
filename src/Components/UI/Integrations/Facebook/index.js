@@ -1,0 +1,1 @@
+export { FacebookGrantPagePermissions } from './FacebookGrantPagePermissions';

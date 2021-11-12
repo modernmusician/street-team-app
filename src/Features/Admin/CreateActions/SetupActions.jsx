@@ -17,6 +17,9 @@ import { CreateAction } from './CreateAction';
 
 const ActionCard = styled(Card)({
   background: ({ theme }) => theme.colors.gray2,
+  'input, select': {
+    marginTop: ({ theme }) => theme.spacing.md,
+  },
 });
 
 const HeaderRow = styled(Card.Body)(({ theme }) => {
@@ -183,7 +186,9 @@ export const SetupActions = ({
       <Container>
         <Row>
           <Col>
-            <h2 style={{ fontSize: theme.fontSizes.lg }}>Set Up Your Actions</h2>
+            <h2 style={{ fontSize: theme.fontSizes.lg }}>
+              Set Up Your Actions
+            </h2>
           </Col>
         </Row>
         <ActionCard>
@@ -192,8 +197,9 @@ export const SetupActions = ({
               <Col>
                 <h3>Tribal Accelerator</h3>
                 <p>
-                  Create your &quot;tribal accelerator&quot; that will turn subscribers 
-                  into engaged fans and active supporters of your music.
+                  Create your &quot;tribal accelerator&quot; that will turn
+                  subscribers into engaged fans and active supporters of your
+                  music.
                 </p>
               </Col>
             </Row>
@@ -220,12 +226,14 @@ export const SetupActions = ({
           <Card.Body>
             <Row>
               <Col>
-                <Button onClick={onSubmit} 
-                    style={{ 
-                      fontWeight: theme.fontWeights.semibold,
-                      fontFamily: theme.fonts.heading
-                        }}>
-                        Save Action Card
+                <Button
+                  onClick={onSubmit}
+                  style={{
+                    fontWeight: theme.fontWeights.semibold,
+                    fontFamily: theme.fonts.heading,
+                  }}
+                >
+                  Save Action Card
                 </Button>
               </Col>
             </Row>

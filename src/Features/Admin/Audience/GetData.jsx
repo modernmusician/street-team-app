@@ -1,5 +1,6 @@
 import React from 'react';
 import { gql, useQuery } from '@apollo/react-hooks';
+import {AddPageMessagingWithFacebookSignIn} from '../../../Components/Testing/FBLogin'
 
 const getAllSubscribersFromArtistUser = `query getSubscriptionsFromArtistUser($id: ID!) {
     getArtistUser(id: $id) {
@@ -61,6 +62,8 @@ export const Demo = () => {
       variables: { id: '81e14afe-5c56-4cc5-bdc4-59ba5fc66f8d' },
     }
   );
+
+  return <AddPageMessagingWithFacebookSignIn/>
 
   if (loading) {
     return (

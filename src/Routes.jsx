@@ -13,7 +13,7 @@ import { AudienceView } from './Features/Admin/Audience/views/AudienceView';
 While we're currently supporting backwards compatability, routing should follow these strategies:
 -Artist (Admin) pages should start with the route /artist, not use path parameters, be wrapped in <SecureViewWrapper userRole="admin">
 -Fan (Enduser) pages that require auth should start with /secure and be wrapped in <SecureViewWrapper userRole="enduser">
--Enduser landing pages that do not require auth will use the path parameter /:artist 
+-Enduser landing pages that do not require auth will use the path parameter /:artist
 */
 export const Routes = () => {
   return (
@@ -45,6 +45,12 @@ export const Routes = () => {
         >
           <SecureViewWrapper userRole="admin">
             <CreateActionPage type="action" />
+          </SecureViewWrapper>
+        </Route>
+
+        <Route path="/admin/integration">
+          <SecureViewWrapper userRole="admin">
+            <CreateActionPage type="integration" />
           </SecureViewWrapper>
         </Route>
 
